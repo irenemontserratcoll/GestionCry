@@ -1,0 +1,48 @@
+package Controller;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ControllerReservarSalaGrupal {
+    private List<ReservarSalaGrupal> salas;
+
+    public ControllerReservarSalaGrupal() {
+        salas = new ArrayList<>();
+    }
+
+    // Crear una nueva sala grupal
+    public void crearSala(int piso, int numeroSala, int numeroPersonas) {
+        if (numeroPersonas < 2 || numeroPersonas > 8) {
+            throw new IllegalArgumentException("El número de personas debe estar entre 2 y 8.");
+        }
+        ReservarSalaGrupal nuevaSala = new ReservarSalaGrupal(piso, numeroSala, numeroPersonas);
+        salas.add(nuevaSala);
+        System.out.println("Sala grupal creada: " + nuevaSala);
+    }
+
+    // Editar una sala existente
+    public void editarSala(int indice, int piso, int numeroSala, int numeroPersonas) {
+        if (indice < 0 || indice >= salas.size()) {
+            System.out.println("Índice de sala no válido.");
+            return;
+        }
+
+        ReservarSalaGrupal sala = salas.get(indice);
+        sala.setPiso(piso);
+        sala.setNumeroSala(numeroSala);
+        sala.setNumeroPersonas(numeroPersonas);
+
+        System.out.println("Sala grupal actualizada: " + sala);
+    }
+
+    // Mostrar todas las salas grupales
+    public void mostrarSalas() {
+        if (salas.isEmpty()) {
+            System.out.println("No hay salas grupales registradas.");
+        } else {
+            System.out.println("Salas grupales registradas:");
+            for (int i = 0; i < salas.size(); i++) {
+                System.out.println("[" + i + "] " + salas.get(i).toString());
+            }
+        }
+    }
+}
