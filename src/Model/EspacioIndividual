@@ -1,6 +1,6 @@
 package Model;
 
-public class EspacioIndividual {
+public class EspacioIndividual extends Reservas{
     private int piso;
     private int numeroAsiento;
     private String tiempoReservado;

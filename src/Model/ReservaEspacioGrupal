@@ -1,0 +1,16 @@
+public class ReservaEspacioGrupal extends Reserva {
+    private EspacioGrupal espacio;
+
+    public ReservaEspacioGrupal(Long id, Date fechaInicio, Date fechaFin, boolean activa, EspacioGrupal espacio) {
+        super(id, fechaInicio, fechaFin, activa);
+        this.espacio = espacio;
+    }
+
+    public EspacioGrupal getEspacio() {
+        return espacio;
+    }
+
+    public void setEspacio(EspacioGrupal espacio) {
+        this.espacio = espacio;
+    }
+}

@@ -1,6 +1,6 @@
 package Model;
 
-public class ReservarSalaGrupal {
+public class ReservarSalaGrupal extends Reservas{
     private int piso;
     private int numeroSala;
     private int numeroPersonas;
