@@ -1,4 +1,5 @@
 import java.util.Date;
+package Model;
 
 public class Reservas {
     public enum TipoReserva { Model.EspacioIndividual, Model.Sala }
