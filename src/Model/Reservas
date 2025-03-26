@@ -1,0 +1,72 @@
+import java.util.Date;
+
+public class Reservas {
+    public enum TipoReserva { Model.EspacioIndividual, Model.Sala }
+    private int identificador;
+    private Date fechaInicio;
+    private Date fechaFin;
+    private boolean activo;
+    private TipoReserva tipo;
+
+    public Reservas(int identificador, Date fechaInicio, Date fechaFin, boolean activo, TipoReserva tipo) {
+
+        this.identificador = identificador;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.activo = activo;
+        this.tipo = tipo;
+    }
+
+    public int getIdentificador() {
+        return identificador;
+    }
+
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public TipoReserva getTipo() {
+        return tipo;
+    }
+
+    public void setIdentificador(int identificador) {
+        if (identificador <= 0) throw new IllegalArgumentException("El identificador debe ser mayor a 0");
+        this.identificador = identificador;
+    }
+
+    public void setFechaInicio(Date fechaInicio) {
+        if (fechaInicio == null) throw new IllegalArgumentException("La fecha de inicio no puede ser nula");
+        if (this.fechaFin != null && fechaInicio.after(this.fechaFin))
+            throw new IllegalArgumentException("La fecha de inicio no puede ser posterior a la fecha de fin");
+        this.fechaInicio = fechaInicio;
+    }
+
+    public void setFechaFin(Date fechaFin) {
+        if (fechaFin == null) throw new IllegalArgumentException("La fecha de fin no puede ser nula");
+        if (fechaFin.before(this.fechaInicio))
+            throw new IllegalArgumentException("La fecha de fin no puede ser anterior a la fecha de inicio");
+        this.fechaFin = fechaFin;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public void setTipo(TipoReserva tipo) {
+        if (tipo == null) throw new IllegalArgumentException("El tipo de reserva no puede ser nulo");
+        this.tipo = tipo;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + identificador + ", Fecha Inicio: " + fechaInicio + ", Fecha Fin: " + fechaFin + ", Activo: " + activo + ", Tipo: " + tipo;
+    }
+}
