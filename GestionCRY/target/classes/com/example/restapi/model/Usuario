@@ -1,10 +1,7 @@
 package com.example.restapi.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 
 @Entity
 @Table(name = "usuarios") 
@@ -29,6 +26,13 @@ public class Usuario {
         this.correo = correo;
         this.contrasena = contrasena;
     }
+
+    public Usuario(String nombre, String correo, String contrasena) {
+        this.nombre = nombre;
+        this.correo = correo;
+        this.contrasena = contrasena;
+    }
+
 
     // Getters y Setters
     public int getId() {

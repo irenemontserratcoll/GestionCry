@@ -1,21 +1,31 @@
+package com.example.restapi.service;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
+
+import com.example.restapi.model.Usuario;
+import com.example.restapi.repository.RepositorioUsuarios;
 
 @Service
 public class ServicioUsuarios {
 
+    private final RepositorioUsuarios repositorioUsuarios;
+
     @Autowired
-    private RepositorioUsuarios repositorioUsuarios;
+    public ServicioUsuarios(RepositorioUsuarios repositorioUsuarios) {
+        this.repositorioUsuarios = repositorioUsuarios;
+    }
 
     // Method to find a user by email
-    public Optional<Usuario> findByEmail(String correo) {
-        return repositorioUsuarios.findByEmail(correo);
+    public Optional<Usuario> findByCorreo(String correo) {
+        return repositorioUsuarios.findByCorreo(correo);
     }
 
     // Method to find a user by ID
-    public Optional<Usuario> findById(Long id) {
+    public Optional<Usuario> findById(Integer id) {
         return repositorioUsuarios.findById(id);
     }
 
@@ -25,12 +35,12 @@ public class ServicioUsuarios {
     }
 
     // Method to add a new user
-    public Usuario addusuario(Usuario usuario) {
+    public Usuario addUsuario(Usuario usuario) {
         return repositorioUsuarios.save(usuario);
     }
 
     // Method to delete an existing user
-    public void deleteUsuario(Long id) {
-        repositorioUsuarios.deleteById(id);
+    public void deleteUsuario(String correo) {
+        repositorioUsuarios.deleteByCorreo(correo);
     }
 }
