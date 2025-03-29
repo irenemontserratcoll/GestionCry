@@ -1,0 +1,34 @@
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/users")
+public class UsuarioController {
+
+    @Autowired
+    private ServicioUsuarios servicioUsuarios;
+
+    // Endpoint to get all users
+    @GetMapping("/all")
+    public List<Usuario> getAllUsers() {
+        return servicioUsuarios.findAll();
+    }
+
+    // Endpoint to get a user by ID
+    @GetMapping("/{id}")
+    public Usuario getUserById(@PathVariable Long id) {
+        return servicioUsuarios.findById(id).orElse(null);
+    }
+
+    // Endpoint to add a new user
+    @PostMapping("/add")
+    public Usuario addUser(@RequestBody Usuario usuario) {
+        return servicioUsuarios.addusuario(usuario);
+    }
+
+    // Endpoint to delete a user by ID
+    @DeleteMapping("/delete/{id}")
+    public void deleteUser(@PathVariable Long id) {
+        servicioUsuarios.deleteUsuario(id);
+    }
+}

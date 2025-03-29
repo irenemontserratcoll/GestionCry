@@ -1,0 +1,36 @@
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class ServicioUsuarios {
+
+    @Autowired
+    private RepositorioUsuarios repositorioUsuarios;
+
+    // Method to find a user by email
+    public Optional<Usuario> findByEmail(String correo) {
+        return repositorioUsuarios.findByEmail(correo);
+    }
+
+    // Method to find a user by ID
+    public Optional<Usuario> findById(Long id) {
+        return repositorioUsuarios.findById(id);
+    }
+
+    // Method to get all users
+    public List<Usuario> findAll() {
+        return repositorioUsuarios.findAll();
+    }
+
+    // Method to add a new user
+    public Usuario addusuario(Usuario usuario) {
+        return repositorioUsuarios.save(usuario);
+    }
+
+    // Method to delete an existing user
+    public void deleteUsuario(Long id) {
+        repositorioUsuarios.deleteById(id);
+    }
+}
