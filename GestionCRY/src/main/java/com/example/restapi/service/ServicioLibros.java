@@ -31,7 +31,7 @@ public class ServicioLibros {
     }
 
     public Book updateBook(Long id, Book bookDetails) {
-        Optional<Book> optionalBook = bookRepository.findById(id);
+        Optional<Book> optionalBook = repositorioLibros.findById(id);
         if (optionalBook.isPresent()) {
             Book book = optionalBook.get();
             book.setTitle(bookDetails.getTitle());
