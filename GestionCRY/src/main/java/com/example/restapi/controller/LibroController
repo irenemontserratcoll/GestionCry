@@ -38,6 +38,28 @@ public class LibroController {
         Optional<Libro> libro = servicioLibros.findById(id);
         return libro.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
+    //Obtener un libro por título
+    @Operation(summary = "Obtener libro por título", description = "Devuelve un libro específico por su título")
+    @GetMapping("/titulo/{titulo}")
+    public ResponseEntity<Libro> getLibroByTitulo(@PathVariable String titulo) {
+        Optional<Libro> libro = servicioLibros.findByTitulo(titulo);
+        return libro.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+    // Obtener un libro por autor
+    @Operation(summary = "Obtener libro por autor", description = "Devuelve un libro específico por su autor")
+    @GetMapping("/autor/{autor}")
+    public ResponseEntity<Libro> getLibroByAutor(@PathVariable String autor) {
+        Optional<Libro> libro = servicioLibros.findByAutor(autor);
+        return libro.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+    // Obtener un libro por ISBN
+    @Operation(summary = "Obtener libro por ISBN", description = "Devuelve un libro específico por su ISBN")
+    @GetMapping("/isbn/{isbn}")
+    public ResponseEntity<Libro> getLibroByIsbn(@PathVariable String isbn) {
+        Optional<Libro> libro = servicioLibros.findByIsbn(isbn);
+        return libro.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
     // Agregar un nuevo libro
     @Operation(summary = "Agregar nuevo libro", description = "Crea un nuevo libro en el sistema")
     @PostMapping("/add")
