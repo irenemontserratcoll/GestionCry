@@ -1,5 +1,4 @@
-package Model;
-
+package com.example.restapi.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
