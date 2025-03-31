@@ -30,7 +30,7 @@
     <properties>
         <java.version>17</java.version>
         <server.hostname>127.0.0.1</server.hostname>
-        <server.port>8082</server.port>
+        <server.port>8083</server.port>
     </properties>
     <dependencies>
         <!-- Spring Boot Starter -->
