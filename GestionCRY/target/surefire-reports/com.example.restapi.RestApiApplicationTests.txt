@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.example.restapi.RestApiApplicationTests
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.290 s -- in com.example.restapi.RestApiApplicationTests
+=======
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.964 s -- in com.example.restapi.RestApiApplicationTests
+>>>>>>> a4b6c63354eea6c4b9aeaa89a96d066b35f9953f

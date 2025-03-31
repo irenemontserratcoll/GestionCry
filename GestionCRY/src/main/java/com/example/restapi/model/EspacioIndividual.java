@@ -1,5 +1,5 @@
-package Model;
 
+package com.example.restapi.model;
 public class EspacioIndividual {
     private int piso;
     private int numeroAsiento;
