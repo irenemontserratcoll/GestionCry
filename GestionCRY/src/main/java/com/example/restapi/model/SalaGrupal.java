@@ -1,11 +1,11 @@
 package com.example.restapi.model;
 
-public class ReservarSalaGrupal {
+public class SalaGrupal {
     private int piso;
     private int numeroSala;
     private int numeroPersonas;
 
-    public ReservarSalaGrupal(int piso, int numeroSala, int numeroPersonas) {
+    public SalaGrupal(int piso, int numeroSala, int numeroPersonas) {
         this.piso = piso;
         this.numeroSala = numeroSala;
         this.numeroPersonas = numeroPersonas;
