@@ -9,15 +9,15 @@ import java.util.List;
 import com.example.restapi.model.Libro;
 
 @Repository
-public interface RepositorioLibros extends JpaRepository<Book, Long> {
+public interface RepositorioLibros extends JpaRepository<Libro, Long> {
     
-    Optional<Book> findById(Long id);
+    Optional<Libro> findById(Long id);
     
-    Optional<Book> findByTitle(String title);
+    Optional<Libro> findByTitle(String title);
     
-    Optional<Book> findByIsbn(String isbn);
+    Optional<Libro> findByIsbn(String isbn);
     
-    List<Book> findByAuthor(String author);
+    List<Libro> findByAuthor(String author);
     
-    List<Book> findAll(); 
+    List<Libro> findAll(); 
 }
