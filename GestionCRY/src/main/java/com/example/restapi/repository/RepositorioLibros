@@ -12,12 +12,8 @@ import com.example.restapi.model.Libro;
 public interface RepositorioLibros extends JpaRepository<Libro, Long> {
     
     Optional<Libro> findById(Long id);
-    
-    Optional<Libro> findByTitle(String title);
-    
+    Optional<Libro> findByTitle(String titulo);
     Optional<Libro> findByIsbn(String isbn);
-    
-    List<Libro> findByAuthor(String author);
-    
+    List<Libro> findByAuthor(String autor);
     List<Libro> findAll(); 
 }

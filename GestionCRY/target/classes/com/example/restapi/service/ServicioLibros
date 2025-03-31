@@ -1,4 +1,3 @@
-
 package com.example.restapi.service;
 
 import com.example.restapi.model.Libro;
@@ -60,6 +59,4 @@ public class ServicioLibros {
     public void deleteLibro(Long id) {
         repositorioLibros.deleteById(id);
     }
-    //JONAN PARA TI
-    
 }
