@@ -1,19 +1,21 @@
 package com.example.restapi.controller;
 
-import com.example.restapi.model.SalaGrupal;
-<<<<<<< HEAD
-import com.example.restapi.service.ServicioSalaGrupo;
-=======
-import com.example.restapi.service.ServicioSalaGrupal;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
->>>>>>> ffb486f1fef1e46ab472cbd0c63be81dbbfac68c
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.restapi.model.SalaGrupal;
+import com.example.restapi.service.ServicioSalaGrupo;
 
 @RestController
 @RequestMapping("/api/sala-grupal")
@@ -69,3 +71,5 @@ public class SalaGrupalController {
         return ResponseEntity.ok("Sala eliminada exitosamente");
     }
 }
+
+
