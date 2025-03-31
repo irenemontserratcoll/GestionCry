@@ -9,9 +9,9 @@ import java.util.List;
 import com.example.restapi.model.Libro;
 
 @Repository
-public interface RepositorioLibros extends JpaRepository<Libro, Long> {
+public interface RepositorioLibros extends JpaRepository<Libro, Integer> {
     
-    Optional<Libro> findById(Long id);
+    Optional<Libro> findById(Integer id);
     Optional<Libro> findByTitle(String titulo);
     Optional<Libro> findByIsbn(String isbn);
     List<Libro> findByAuthor(String autor);

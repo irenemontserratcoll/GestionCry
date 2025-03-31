@@ -8,7 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.example.restapi.model.EspacioIndividual;
-import com.example.restapi.service.ServicioEspacios;
+import com.example.restapi.service.ServicioEspacioIndividual;
 
 import java.util.List;
 import java.util.Optional;
