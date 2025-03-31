@@ -1,7 +1,13 @@
 package com.example.restapi.controller;
 
 import com.example.restapi.model.SalaGrupal;
+<<<<<<< HEAD
 import com.example.restapi.service.ServicioSalaGrupo;
+=======
+import com.example.restapi.service.ServicioSalaGrupal;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+>>>>>>> ffb486f1fef1e46ab472cbd0c63be81dbbfac68c
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
