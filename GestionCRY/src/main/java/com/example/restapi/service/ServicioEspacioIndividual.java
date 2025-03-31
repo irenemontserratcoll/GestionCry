@@ -1,40 +1,50 @@
 package com.example.restapi.service;
+
+import com.example.restapi.model.EspacioIndividual;
+import com.example.restapi.repository.RepositorioEspacioIndividual;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.example.restapi.model.ReservarSalaGrupal;
-import com.example.restapi.repository.RepositorioSalaGrupo;
-
 @Service
-public class ServicioSalaGrupo {
+public class ServicioEspacioIndividual {
 
-    private final RepositorioSalaGrupo repositorioSalaGrupo;
+    private final RepositorioEspacioIndividual espacioRepository;
 
     @Autowired
-    public ServicioSalaGrupo(RepositorioSalaGrupo repositorioSalaGrupo) {
-        this.repositorioSalaGrupo = repositorioSalaGrupo;
+    public ServicioEspacioIndividual(RepositorioEspacioIndividual espacioRepository) {
+        this.espacioRepository = espacioRepository;
     }
 
-    // Método para obtener todas las reservas de salas grupales
-    public List<ReservarSalaGrupal> findAll() {
-        return repositorioSalaGrupo.findAll();
+    // Obtener todos los espacios
+    public List<EspacioIndividual> findAll() {
+        return espacioRepository.findAll();
     }
 
-    // Método para buscar una reserva por ID
-    public Optional<ReservarSalaGrupal> findById(Integer id) {
-        return repositorioSalaGrupo.findById(id);
+    // Buscar un espacio por piso y número de asiento
+    public Optional<EspacioIndividual> findByPisoAndAsiento(int piso, int numeroAsiento) {
+        return espacioRepository.findByPisoAndNumeroAsiento(piso, numeroAsiento);
     }
 
-    // Método para agregar una nueva reserva
-    public ReservarSalaGrupal addReserva(ReservarSalaGrupal reserva) {
-        return repositorioSalaGrupo.save(reserva);
+    // Agregar un nuevo espacio
+    public void addEspacio(EspacioIndividual espacio) {
+        espacioRepository.save(espacio);
     }
 
-    // Método para eliminar una reserva por ID
-    public void deleteReserva(Integer id) {
-        repositorioSalaGrupo.deleteById(id);
+    // Actualizar un espacio existente
+    public void updateEspacio(EspacioIndividual espacio) {
+        if (espacioRepository.existsByPisoAndNumeroAsiento(espacio.getPiso(), espacio.getNumeroAsiento())) {
+            espacioRepository.save(espacio);
+        } else {
+            throw new RuntimeException("El espacio no existe");
+        }
+    }
+
+    // Eliminar un espacio por piso y número de asiento
+    public void deleteEspacio(int piso, int numeroAsiento) {
+        Optional<EspacioIndividual> espacio = espacioRepository.findByPisoAndNumeroAsiento(piso, numeroAsiento);
+        espacio.ifPresent(espacioRepository::delete);
     }
 }
