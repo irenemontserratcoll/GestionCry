@@ -1,12 +1,13 @@
 package com.example.restapi.service;
 
-import com.example.restapi.model.EspacioIndividual;
-import com.example.restapi.repository.RepositorioEspacioIndividual;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import com.example.restapi.model.EspacioIndividual;
+import com.example.restapi.repository.RepositorioEspacioIndividual;
 
 @Service
 public class ServicioEspacioIndividual {
