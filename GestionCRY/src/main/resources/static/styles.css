@@ -1,101 +1,67 @@
-/* General styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
-    margin: 20px;
-    padding: 0;
+/* Estilos para el contenedor del login */
+.login-container {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-/* Container */
-h2 {
-    color: #222;
-    margin-bottom: 10px;
+/* Estilo del logo */
+.logo {
+    width: 100px;
+    margin-bottom: 15px;
 }
 
-form {
-    margin-bottom: 20px;
-    background: #fff;
-    padding: 15px;
-    display: inline-block;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+/* Estilos para los grupos de entrada */
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
 }
 
-input[type="text"] {
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
     padding: 8px;
-    margin: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
 }
 
-button {
-    padding: 8px 12px;
+/* Estilos para los botones */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-group button {
+    width: 48%;
+    padding: 10px;
     background-color: #007bff;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 5px;
     font-size: 16px;
-    margin-left: 5px;
     transition: background 0.3s ease;
 }
 
-button:hover {
+.button-group button:hover {
     background-color: #0056b3;
 }
 
-/* Table styling */
-table {
-    width: 80%;
-    margin: 0 auto;
-    border-collapse: collapse;
-    background: white;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-th, td {
-    padding: 10px;
-    border: 1px solid #ddd;
-}
-
-th {
-    background-color: #007bff;
-    color: white;
-}
-
-td {
-    text-align: center;
-}
-
-td input {
-    width: 90%;
-}
-
-/* Buttons inside table */
-td button {
-    padding: 6px 10px;
-    font-size: 14px;
-}
-
-/* Delete button */
-button:nth-child(2) {
+/* Estilos específicos para el botón de administrador */
+.button-group button[name="role"][value="admin"] {
     background-color: #dc3545;
 }
 
-button:nth-child(2):hover {
+.button-group button[name="role"][value="admin"]:hover {
     background-color: #a71d2a;
-}
-
-/* Confirm and Cancel buttons */
-button:nth-child(1) {
-    background-color: #28a745;
-}
-
-button:nth-child(1):hover {
-    background-color: #1e7e34;
 }
