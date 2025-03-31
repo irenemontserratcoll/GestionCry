@@ -1,7 +1,7 @@
 package com.example.restapi.controller;
 
-import com.example.restapi.model.ReservarSalaGrupal;
-import com.example.restapi.service.ServicioSalasGrupales;
+import com.example.restapi.model.SalaGrupal;
+import com.example.restapi.service.ServicioSalaGrupal;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

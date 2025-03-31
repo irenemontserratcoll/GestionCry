@@ -48,7 +48,6 @@ public class ServicioOrdenadores {
     public Ordenador addOrdenador(Ordenador ordenador) {
         return repositorioOrdenadores.save(ordenador);
     }
-}
 
     // Eliminar un ordenador por ID
     public void deleteOrdenador(Long id) {
