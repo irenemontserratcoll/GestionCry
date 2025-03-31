@@ -1,21 +1,37 @@
-/* Estilos para el contenedor del login */
+/* General styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Login container */
 .login-container {
-    width: 300px;
-    margin: 50px auto;
-    padding: 20px;
     background: #fff;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    width: 300px;
 }
 
-/* Estilo del logo */
 .logo {
-    width: 100px;
+    width: 80px;
     margin-bottom: 15px;
 }
 
-/* Estilos para los grupos de entrada */
+h2 {
+    color: #222;
+    margin-bottom: 15px;
+}
+
+/* Input fields */
 .input-group {
     margin-bottom: 15px;
     text-align: left;
@@ -23,8 +39,8 @@
 
 .input-group label {
     display: block;
-    font-weight: bold;
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .input-group input {
@@ -35,14 +51,14 @@
     font-size: 16px;
 }
 
-/* Estilos para los botones */
+/* Button styling */
 .button-group {
     display: flex;
     justify-content: space-between;
 }
 
-.button-group button {
-    width: 48%;
+button {
+    flex: 1;
     padding: 10px;
     background-color: #007bff;
     color: white;
@@ -50,18 +66,71 @@
     cursor: pointer;
     border-radius: 5px;
     font-size: 16px;
-    transition: background 0.3s ease;
+    transition: background-color 0.3s ease;
+    margin: 5px;
 }
 
-.button-group button:hover {
+button:hover {
     background-color: #0056b3;
 }
 
-/* Estilos específicos para el botón de administrador */
-.button-group button[name="role"][value="admin"] {
-    background-color: #dc3545;
+/* Admin button */
+button[name="role"][value="admin"] {
+    background-color: #28a745;
 }
 
-.button-group button[name="role"][value="admin"]:hover {
-    background-color: #a71d2a;
+button[name="role"][value="admin"]:hover {
+    background-color: #1e7e34;
+}
+
+/* Apply the logo background to the entire page */
+body {
+    font-family: Arial, sans-serif;
+    color: #061857;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('edificio.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    opacity: 0.8; /* Adjust transparency (0 = fully transparent, 1 = fully opaque) */
+    z-index: -1; /* Place it behind the content */
+}
+body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(4, 4, 92, 0.3); /* Blue overlay with 30% opacity */
+    z-index: -1; /* Place it behind the content but above the image */
+}
+/* Adjust the login container to have a slight transparency */
+.login-container {
+    background: rgba(255, 255, 255, 0.9); /* White with transparency */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+/* Reduce logo size */
+.logo {
+    width: 100px; /* Adjust size */
+    margin-bottom: 15px;
 }

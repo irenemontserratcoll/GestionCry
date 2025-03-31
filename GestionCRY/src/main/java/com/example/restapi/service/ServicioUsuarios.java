@@ -43,4 +43,14 @@ public class ServicioUsuarios {
     public void deleteUsuario(String correo) {
         repositorioUsuarios.deleteByCorreo(correo);
     }
+
+    //Method to do login user
+    public Optional<Usuario> login(String correo, String contrasena) {
+        Optional<Usuario> usuario = repositorioUsuarios.findByCorreo(correo);
+        if (usuario.isPresent() && usuario.get().getContrasena().equals(contrasena)) {
+            return usuario;
+        } else {
+            return Optional.empty();
+        }
+    }
 }

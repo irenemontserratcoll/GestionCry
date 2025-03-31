@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/usuarios")
-@Tag(name = "usuarios", description = "Operaciones relacionadas con la gestión de usuarios")
+@Tag(name = "Usuarios", description = "Operaciones relacionadas con la gestión de usuarios")
 public class UsuarioController {
 
     private final ServicioUsuarios servicioUsuarios;
@@ -63,4 +63,28 @@ public class UsuarioController {
             return new ResponseEntity<>("Error al eliminar el usuario: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    //Endpoint to login
+    @Operation(summary = "Iniciar sesión", description = "Permite a un usuario iniciar sesión en el sistema")
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestParam("Email") String correo, @RequestParam("Password") String contrasena) {
+        Optional<Usuario> usuario = servicioUsuarios.login(correo, contrasena);
+        if (usuario.isPresent()) {
+            return ResponseEntity.ok("Inicio de sesión exitoso. Bienvenido " + usuario.get().getNombre() + "!");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas. Por favor, intente nuevamente.");
+        }
+    }
+
+    //Endpoint to login as admin
+    @Operation(summary = "Iniciar sesión como administrador", description = "Permite a un administrador iniciar sesión en el sistema. Correo: admin. Contrasena: admin")
+    @PostMapping("/login-admin")
+    public ResponseEntity<String> loginAdmin(@RequestParam("Email") String correo, @RequestParam("Password") String contrasena) {
+        if (correo.equals("admin") && contrasena.equals("admin")) {
+            return ResponseEntity.ok("Inicio de sesión exitoso. Bienvenido ");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales de administrador inválidas.");
+        }
+    }
+
 }
