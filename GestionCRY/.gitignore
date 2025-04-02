@@ -1,0 +1,6 @@
+# Ignorar la carpeta target (compilaciones de Maven)
+target/
+
+# Ignorar configuración de Visual Studio Code
+.vscode/
+
