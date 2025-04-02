@@ -1,11 +1,12 @@
 package com.example.restapi.model;
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import java.util.Date;
 
 @Entity
 @Table(name = "reservas")
@@ -14,12 +15,10 @@ public class Reserva {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombreCliente;
-    private String dniCliente;
+    private String emailCliente;
     private Date fechaReserva;
     private String horaReserva;
     private int numPersonas;
-    private String telefonoCliente;
-    private String emailCliente;
 
     // Getters and Setters
     public Long getId() {
@@ -36,14 +35,6 @@ public class Reserva {
 
     public void setNombreCliente(String nombreCliente) {
         this.nombreCliente = nombreCliente;
-    }
-
-    public String getDniCliente() {
-        return dniCliente;
-    }
-
-    public void setDniCliente(String dniCliente) {
-        this.dniCliente = dniCliente;
     }
 
     public Date getFechaReserva() {
@@ -70,13 +61,6 @@ public class Reserva {
         this.numPersonas = numPersonas;
     }
 
-    public String getTelefonoCliente() {
-        return telefonoCliente;
-    }
-
-    public void setTelefonoCliente(String telefonoCliente) {
-        this.telefonoCliente = telefonoCliente;
-    }
 
     public String getEmailCliente() {
         return emailCliente;
@@ -91,11 +75,9 @@ public class Reserva {
         return "Reserva{" +
                 "id=" + id +
                 ", nombreCliente='" + nombreCliente + '\'' +
-                ", dniCliente='" + dniCliente + '\'' +
                 ", fechaReserva=" + fechaReserva +
                 ", horaReserva='" + horaReserva + '\'' +
                 ", numPersonas=" + numPersonas +
-                ", telefonoCliente='" + telefonoCliente + '\'' +
                 ", emailCliente='" + emailCliente + '\'' +
                 '}';
     }
