@@ -3,3 +3,6 @@ target/
 
 # Ignorar configuración de Visual Studio Code
 .vscode/
+
+#Este archivo no debería existir, pero si existe lo ignoramos
+.GestionCRY/
