@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Administración</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            background-color: #f9f9f9;
+            overflow-y: auto; /* Permitir scroll */
+        }
+
+        .content {
+            margin-left: 270px;
+            padding: 30px;
+            flex: 1;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+        }
+
+        h1, h2 {
+            color: #061857;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin: 5px 0;
+            display: block;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="content">
+        <h1>Panel de Administración</h1>
+        
+        <h2 id="salas">Salas Grupales</h2>
+        <form action="/api/sala-grupal" method="get"><button type="submit">Obtener todas las salas</button></form>
+        <form action="/api/sala-grupal/{piso}/{numeroSala}" method="get"><button type="submit">Obtener sala por piso y número</button></form>
+        <form action="/api/sala-grupal" method="post"><button type="submit">Crear sala</button></form>
+        <form action="/api/sala-grupal/{piso}/{numeroSala}" method="put"><button type="submit">Actualizar sala</button></form>
+        <form action="/api/sala-grupal/{piso}/{numeroSala}" method="delete"><button type="submit">Eliminar sala</button></form>
+        
+        <h2 id="libros">Libros</h2>
+        <form action="/api/libros/all" method="get"><button type="submit">Obtener todos los libros</button></form>
+        <form action="/api/libros/{id}" method="get"><button type="submit">Obtener libro por ID</button></form>
+        <form action="/api/libros/add" method="post"><button type="submit">Agregar libro</button></form>
+        <form action="/api/libros/update/{id}" method="put"><button type="submit">Actualizar libro</button></form>
+        <form action="/api/libros/delete/{id}" method="delete"><button type="submit">Eliminar libro</button></form>
+        
+        <h2 id="espacios">Espacios</h2>
+        <form action="/api/espacios/all" method="get"><button type="submit">Obtener todos los espacios</button></form>
+        <form action="/api/espacios/{piso}/{numeroAsiento}" method="get"><button type="submit">Obtener espacio por piso y asiento</button></form>
+        <form action="/api/espacios/add" method="post"><button type="submit">Agregar espacio</button></form>
+        <form action="/api/espacios/update" method="put"><button type="submit">Actualizar espacio</button></form>
+        <form action="/api/espacios/delete/{piso}/{numeroAsiento}" method="delete"><button type="submit">Eliminar espacio</button></form>
+    </div>
+</body>
+</html>

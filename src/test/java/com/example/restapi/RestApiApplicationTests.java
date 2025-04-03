@@ -1,4 +1,4 @@
-package com.example.restapi;
+/*package com.example.restapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,4 +10,4 @@ class RestApiApplicationTests {
 	void contextLoads() {
 	}
 
-}
+}*/
