@@ -65,7 +65,7 @@ public class UsuarioController {
     }
 
     //Endpoint to login
-    @Operation(summary = "Iniciar sesión", description = "Permite a un usuario iniciar sesión en el sistema")
+    @Operation(summary = "Iniciar sesión", description = "Permite a un usuario iniciar sesión en el sistema. Ejemplo. Correo: idoia@gmail.es, contrasena: contrasena")
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestParam("Email") String correo, @RequestParam("Password") String contrasena) {
         Optional<Usuario> usuario = servicioUsuarios.login(correo, contrasena);
