@@ -49,6 +49,17 @@ public class ServicioOrdenadores {
         return repositorioOrdenadores.save(ordenador);
     }
 
+    //Actualizar un libro
+    public Ordenador updateOrdenador(Long id, Ordenador ordenador) {
+        Optional<Ordenador> OrdenadorExistente = repositorioOrdenadores.findById(id);
+        if (OrdenadorExistente.isPresent()) {
+            ordenador.setId(id);
+            return repositorioOrdenadores.save(ordenador);
+        } else {
+            throw new RuntimeException("Ordenador no encontrado con ID: " + id);
+        }
+    }
+
     // Eliminar un ordenador por ID
     public void deleteOrdenador(Long id) {
         repositorioOrdenadores.deleteById(id);
