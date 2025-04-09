@@ -1,3 +1,5 @@
+![workflows status](https://github.com/irenemontserratcoll/GestionCry/actions/workflows/maven.yml/badge.svg)
+
 **GestionCry**
 
 GestionCry es una aplicación desarrollada en Spring Boot que permite gestionar diferentes recursos mediante una API REST. Se trata de una aplicación que permite gestionar los diferentes espacios y recursos de una biblioteca.
