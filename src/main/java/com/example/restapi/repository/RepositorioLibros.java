@@ -1,20 +1,16 @@
 package com.example.restapi.repository;
 
-import org.springframework.stereotype.Repository;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
-import java.util.List;
-
 import com.example.restapi.model.Libro;
-
-@Repository
-public interface RepositorioLibros extends JpaRepository<Libro, Integer> {
-    
+public interface RepositorioLibros extends JpaRepository<Libro, Long> {
     Optional<Libro> findById(Long id);
     Optional<Libro> findByTitulo(String titulo);
     Optional<Libro> findByIsbn(String isbn);
     Optional<Libro> findByAutor(String autor);
-    Optional<Libro> deleteById(Long id);
+    // No es necesario definir deleteById ya que ya está provisto por JpaRepository
     List<Libro> findAll(); 
 }

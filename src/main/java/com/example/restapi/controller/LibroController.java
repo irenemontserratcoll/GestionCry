@@ -1,17 +1,26 @@
 package com.example.restapi.controller;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.restapi.model.Libro;
 import com.example.restapi.service.ServicioLibros;
 
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
-
-import java.util.List;
-import java.util.Optional;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/libros")
@@ -63,14 +72,21 @@ public class LibroController {
     // Agregar un nuevo libro
     @Operation(summary = "Agregar nuevo libro", description = "Crea un nuevo libro en el sistema")
     @PostMapping("/add")
-    public ResponseEntity<String> addLibro(@RequestBody Libro libro) {
+    public ResponseEntity<String> addLibro(
+            @RequestParam("titulo") String titulo,
+            @RequestParam("autor") String autor,
+            @RequestParam("isbn") String isbn) {
         try {
+            // Creación de un nuevo libro sin asignar manualmente el id
+            Libro libro = new Libro(titulo, autor, isbn);
             servicioLibros.addLibro(libro);
             return new ResponseEntity<>("Libro agregado correctamente", HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al agregar el libro: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
+
     // Actualizar un libro
     @Operation(summary = "Actualizar libro", description = "Actualiza un libro existente en el sistema")
     @PutMapping("/update/{id}")
