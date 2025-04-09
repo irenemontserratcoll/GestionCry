@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.restapi.model.EspacioIndividual;
@@ -22,8 +23,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/api/espacios")
-@Tag(name = "espacios", description = "Operaciones relacionadas con la gestión de espacios individuales")
+@RequestMapping("/api/Espacios-Individuales")
+@Tag(name = "Espacios Individuales", description = "Operaciones relacionadas con la gestión de espacios individuales")
 public class EspacioIndividualController {
 
     private final ServicioEspacioIndividual servicioEspacios;
@@ -46,16 +47,25 @@ public class EspacioIndividualController {
         return espacio.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    @Operation(summary = "Agregar nuevo espacio", description = "Crea un nuevo espacio individual en el sistema")
-    @PostMapping("/add")
-    public ResponseEntity<String> addEspacio(@RequestBody EspacioIndividual espacio) {
-        try {
-            servicioEspacios.addEspacio(espacio);
-            return new ResponseEntity<>("Espacio agregado correctamente", HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error al agregar el espacio: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+   @Operation(summary = "Agregar nuevo espacio", description = "Crea un nuevo espacio individual en el sistema")
+@PostMapping("/add")
+public ResponseEntity<String> addEspacio(
+        @RequestParam("piso") int piso,
+        @RequestParam("numeroAsiento") int numeroAsiento) {
+    try {
+        // Se crea la instancia de EspacioIndividual sin asignar manualmente el id,
+        // ya que se autogenera al persistirla.
+        EspacioIndividual espacio = new EspacioIndividual();
+        espacio.setPiso(piso);
+        espacio.setNumeroAsiento(numeroAsiento);
+
+        servicioEspacios.addEspacio(espacio);
+        return new ResponseEntity<>("Espacio agregado correctamente", HttpStatus.CREATED);
+    } catch (Exception e) {
+        return new ResponseEntity<>("Error al agregar el espacio: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+}
+
 
     @Operation(summary = "Actualizar espacio", description = "Modifica un espacio individual existente")
     @PutMapping("/update")

@@ -13,7 +13,7 @@ public class EspacioIndividual {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Genera automáticamente el ID
-    private Long id; // Cambié el tipo de id a Long
+    private Long id; // El tipo de id es Long
 
     @Column(name = "piso", nullable = false) // Columna 'piso', no puede ser nula
     private int piso;
@@ -21,18 +21,14 @@ public class EspacioIndividual {
     @Column(name = "numero_asiento", nullable = false) // Columna 'numero_asiento', no puede ser nula
     private int numeroAsiento;
 
-    @Column(name = "tiempo_reservado") // Columna 'tiempo_reservado', puede ser nula
-    private String tiempoReservado;
-
     // Constructor vacío (requerido por JPA)
     public EspacioIndividual() {
     }
 
-    // Constructor con parámetros
-    public EspacioIndividual(int piso, int numeroAsiento, String tiempoReservado) {
+    // Constructor con parámetros (sin tiempoReservado)
+    public EspacioIndividual(int piso, int numeroAsiento) {
         this.piso = piso;
         this.numeroAsiento = numeroAsiento;
-        this.tiempoReservado = tiempoReservado;
     }
 
     // Getters y Setters
@@ -62,20 +58,10 @@ public class EspacioIndividual {
         this.numeroAsiento = numeroAsiento;
     }
 
-    public String getTiempoReservado() {
-        return tiempoReservado;
-    }
-
-    public void setTiempoReservado(String tiempoReservado) {
-        if (tiempoReservado == null || tiempoReservado.isEmpty())
-            throw new IllegalArgumentException("El tiempo reservado no puede estar vacío");
-        this.tiempoReservado = tiempoReservado;
-    }
-
     // Método toString
     @Override
     public String toString() {
-        return "Piso: " + piso + ", Asiento: " + numeroAsiento + (tiempoReservado != null ? ", Tiempo reservado: " + tiempoReservado : "");
+        return "Piso: " + piso + ", Asiento: " + numeroAsiento;
     }
 
     // Método equals
@@ -88,19 +74,17 @@ public class EspacioIndividual {
             return false;
         }
         EspacioIndividual espacio = (EspacioIndividual) obj;
-        return id.equals(espacio.id) &&
+        return id != null && id.equals(espacio.id) &&
                piso == espacio.piso &&
-               numeroAsiento == espacio.numeroAsiento &&
-               (tiempoReservado != null ? tiempoReservado.equals(espacio.tiempoReservado) : espacio.tiempoReservado == null);
+               numeroAsiento == espacio.numeroAsiento;
     }
 
     // Método hashCode
     @Override
     public int hashCode() {
-        int result = id.hashCode(); // Cambié a Long para hashCode
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + Integer.hashCode(piso);
         result = 31 * result + Integer.hashCode(numeroAsiento);
-        result = 31 * result + (tiempoReservado != null ? tiempoReservado.hashCode() : 0);
         return result;
     }
 }
