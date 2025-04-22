@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import org.springframework.http.MediaType;
@@ -35,28 +37,51 @@ public class ClienteWebController {
     }
 
     public String loginUser(String email, String password){
-    String url = apiBaseUrl + "/api/usuarios/login"; // Endpoint correcto
-    try {
-        MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
-        requestBody.add("Email", email);
-        requestBody.add("Password", password);
+        String url = apiBaseUrl + "/api/usuarios/login"; // Endpoint correcto
+        try {
+            MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
+            requestBody.add("Email", email);
+            requestBody.add("Password", password);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
 
-        ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
+            ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
 
-        if (response.getStatusCode() == HttpStatus.OK) {
-            return "redirect:/adminHome";
-        } else {
-            return "redirect:/index";
+            if (response.getStatusCode() == HttpStatus.OK) {
+                return "redirect:/adminHome";
+            } else {
+                return "redirect:/index";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/index"; 
         }
-    } catch (Exception e) {
-        e.printStackTrace();
-        return "redirect:/index"; 
     }
-}
 
+    @PostMapping("/login-admin")
+    public String loginAdmin(@RequestParam("email") String email, @RequestParam("password") String password) {
+        String url = apiBaseUrl + "/api/usuarios/login-admin"; // Endpoint in UsuarioController
+        try {
+            MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
+            requestBody.add("Email", email);
+            requestBody.add("Password", password);
 
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
+
+            ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
+
+            if (response.getStatusCode() == HttpStatus.OK) {
+                return "redirect:/adminHome"; // Redirect to adminHome.html
+            } else {
+                return "redirect:/index"; // Redirect back to login page
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/index"; // Redirect back to login page on error
+        }
+    }
 }
