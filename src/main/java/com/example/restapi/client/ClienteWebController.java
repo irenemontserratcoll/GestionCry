@@ -61,27 +61,57 @@ public class ClienteWebController {
     }
 
     @PostMapping("/login-admin")
-    public String loginAdmin(@RequestParam("email") String email, @RequestParam("password") String password) {
-        String url = apiBaseUrl + "/api/usuarios/login-admin"; // Endpoint in UsuarioController
+    public String loginAdmin(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
+        String url = apiBaseUrl + "/api/usuarios/login-admin";
         try {
             MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
             requestBody.add("Email", email);
             requestBody.add("Password", password);
-
+    
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
-
+    
             ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
-
+    
             if (response.getStatusCode() == HttpStatus.OK) {
-                return "redirect:/adminHome"; // Redirect to adminHome.html
+                return "redirect:/adminHome";
             } else {
-                return "redirect:/index"; // Redirect back to login page
+                // Capturar el mensaje de error exacto del servidor
+                model.addAttribute("error", response.getBody());
+                return "index";
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/index"; // Redirect back to login page on error
+            model.addAttribute("error", "Error de conexión con el servidor");
+            return "index";
+        }
+    }
+
+    @PostMapping("/login")
+    public String loginUser(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
+        String url = apiBaseUrl + "/api/usuarios/login";
+        try {
+            MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
+            requestBody.add("Email", email);
+            requestBody.add("Password", password);
+    
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
+    
+            ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
+    
+            if (response.getStatusCode() == HttpStatus.OK) {
+                return "redirect:/userHome";
+            } else {
+                model.addAttribute("error", response.getBody());
+                return "index";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("error", "Error de conexión con el servidor");
+            return "index";
         }
     }
 }

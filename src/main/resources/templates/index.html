@@ -9,6 +9,12 @@
     <div class="login-container">
         <img src="/logo.jpeg" alt="Logo" class="logo">
         <h2>Iniciar Sesión</h2>
+        
+        <!-- Error message -->
+        <div th:if="${error}" class="error-message">
+            <p th:text="${error}"></p>
+        </div>
+        
         <form id="loginForm" method="post">
             <div class="input-group">
                 <label for="email">Correo Electrónico:</label>
@@ -22,14 +28,14 @@
             
             <div class="button-group">
                 <button type="button" onclick="submitForm('/login')">Login Usuario</button>
-                <button type="button" onclick="submitForm('/api/usuarios/login-admin')">Login Administrador</button>
+                <button type="button" onclick="submitForm('/login-admin')">Login Administrador</button>
             </div>
         </form>
         
         <script>
             function submitForm(actionUrl) {
                 var form = document.getElementById("loginForm");
-                form.action = actionUrl === '/api/usuarios/login-admin' ? '/login-admin' : '/login';
+                form.action = actionUrl;
                 form.submit();
             }
         </script>
