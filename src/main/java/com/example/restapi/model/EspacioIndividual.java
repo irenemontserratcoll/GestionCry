@@ -1,19 +1,18 @@
 package com.example.restapi.model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
+@DiscriminatorValue("ESPACIOS_INDIVIDUALES") // Valor del discriminador para este tipo de recurso
 @Table(name = "espacios_individuales") // Nombre de la tabla en la base de datos
 public class EspacioIndividual extends RecursoReservable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Genera automáticamente el ID
-    private Long id; // El tipo de id es Long
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY) // Genera automáticamente el ID
+    //private Long id; // El tipo de id es Long
 
     @Column(name = "piso", nullable = false) // Columna 'piso', no puede ser nula
     private int piso;
@@ -32,13 +31,13 @@ public class EspacioIndividual extends RecursoReservable {
     }
 
     // Getters y Setters
-    public Long getId() {
-        return id;
-    }
+    //public Long getId() {
+    //    return id;
+    //}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    //public void setId(Long id) {
+    //    this.id = id;
+    //}
 
     public int getPiso() {
         return piso;
@@ -64,27 +63,24 @@ public class EspacioIndividual extends RecursoReservable {
         return "Piso: " + piso + ", Asiento: " + numeroAsiento;
     }
 
-    // Método equals
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        EspacioIndividual espacio = (EspacioIndividual) obj;
-        return id != null && id.equals(espacio.id) &&
-               piso == espacio.piso &&
-               numeroAsiento == espacio.numeroAsiento;
-    }
+public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null || getClass() != obj.getClass()) return false;
 
-    // Método hashCode
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + Integer.hashCode(piso);
-        result = 31 * result + Integer.hashCode(numeroAsiento);
-        return result;
-    }
+    EspacioIndividual espacio = (EspacioIndividual) obj;
+
+    return getId() != null && getId().equals(espacio.getId()) &&
+           piso == espacio.piso &&
+           numeroAsiento == espacio.numeroAsiento;
+}
+
+@Override
+public int hashCode() {
+    int result = getId() != null ? getId().hashCode() : 0;
+    result = 31 * result + Integer.hashCode(piso);
+    result = 31 * result + Integer.hashCode(numeroAsiento);
+    return result;
+}
+
 }

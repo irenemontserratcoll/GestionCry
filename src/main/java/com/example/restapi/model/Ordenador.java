@@ -1,17 +1,16 @@
 package com.example.restapi.model;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "ordenadores") 
+@DiscriminatorValue("ORDENADORES") // Valor del discriminador para este tipo de recurso
 public class Ordenador extends RecursoReservable{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   // @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     //private Long id;
     private String marca;
     private String modelo;

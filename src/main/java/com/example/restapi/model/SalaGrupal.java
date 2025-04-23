@@ -1,19 +1,18 @@
 package com.example.restapi.model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
+@DiscriminatorValue("SALAS_GRUPALES")
 @Table(name = "salas_grupales") // Nombre de la tabla en la base de datos
 public class SalaGrupal extends RecursoReservable{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Genera automáticamente el ID
-    private Long id; // Identificador de tipo Long
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY) // Genera automáticamente el ID
+    //private Long id; // Identificador de tipo Long
 
     @Column(name = "piso", nullable = false) // Columna 'piso', no puede ser nula
     private int piso;
@@ -77,7 +76,6 @@ public class SalaGrupal extends RecursoReservable{
         return "Piso: " + piso + ", Sala: " + numeroSala + ", Personas: " + numeroPersonas;
     }
 
-    // Método equals
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -87,12 +85,12 @@ public class SalaGrupal extends RecursoReservable{
             return false;
         }
         SalaGrupal sala = (SalaGrupal) obj;
-        return id != null && id.equals(sala.id);
+        return getId() != null && getId().equals(sala.getId());
     }
-
-    // Método hashCode
+    
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return getId() != null ? getId().hashCode() : 0;
     }
+    
 }
