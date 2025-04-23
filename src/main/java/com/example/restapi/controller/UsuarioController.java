@@ -43,8 +43,9 @@ public class UsuarioController {
     // Endpoint to add a new user
     @Operation(summary = "Agregar nuevo usuario", description = "Crea un nuevo usuario en el sistema")
     @PostMapping("/add")
-    public ResponseEntity<String> addUser(@RequestBody Usuario usuario) {
+    public ResponseEntity<String> addUser(@RequestParam("nombre") String nombre,@RequestParam("correo") String correo, @RequestParam("password") String password) {
         try {
+            Usuario usuario = new Usuario(nombre, correo, password);
             servicioUsuarios.addUsuario(usuario);
             return new ResponseEntity<>("Usuario agregado correctamente", HttpStatus.CREATED);
         } catch (Exception e) {

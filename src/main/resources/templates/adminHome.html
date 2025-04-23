@@ -1,76 +1,129 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Administración</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            min-height: 100vh;
-            background-color: #f9f9f9;
-            overflow-y: auto; /* Permitir scroll */
-        }
-
-        .content {
-            margin-left: 270px;
-            padding: 30px;
-            flex: 1;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 900px;
-        }
-
-        h1, h2 {
-            color: #061857;
-        }
-
-        button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            margin: 5px 0;
-            display: block;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <title>Gestión Cry</title>
+    <link rel="stylesheet" th:href="@{/stylesAdmin.css}">
 </head>
 <body>
+    <div class="admin-container">
+
+        <!-- MENSAJES EXITO Y ERROR -->
+        <div th:if="${success}" class="success-message">
+            <p th:text="${success}"></p>
+        </div>
+        <div th:if="${error}" class="error-message">
+            <p th:text="${error}"></p>
+        </div>
+
+        <!-- TITULO -->
+        <img th:src="@{/logo.jpeg}" alt="Logo" class="logo">
+        <h2>Administración Cry</h2>
+
+       <!-- MENU HORIZONTAL --> 
+        <div class="tab-menu">
+            <button class="tab active" onclick="showTab('usuarios')">Usuarios</button>
+            <button class="tab" onclick="showTab('libros')">Libros</button>
+            <button class="tab" onclick="showTab('ordenadores')">Ordenadores</button>
+            <button class="tab" onclick="showTab('espacios-individuales')">Espacios Individuales</button>
+            <button class="tab" onclick="showTab('espacios-grupales')">Espacios Grupales</button>
+        </div>
+
+        <!-- SECCION USUARIOS -->
+        <div id="usuarios" class="tab-content active">
+            <div class="search-form">
+                <input type="text" id="searchInput" placeholder="🔍 Buscar por correo" onkeyup="filterTable()">
+            </div>
+            <div class="table-wrapper">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                </table>
+            
+                <div class="table-scroll">
+                    <table class="styled-table">
+                        <tbody>
+                            <tr th:each="usuario, iterStat : ${usuarios}">
+                                <td th:text="${iterStat.count}"></td>
+                                <td th:text="${usuario.nombre}"></td>
+                                <td th:text="${usuario.correo}"></td>
+                                <td>
+                                    <form action="/delete-user" method="post">
+                                        <input type="hidden" name="correo" th:value="${usuario.correo}" />
+                                        <button type="submit" class="btn-delete">🗑️</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!--Añadir nuevo usuario-->
+            <div class="user-form">
+                <form action="/add-user" method="post">
+                    <input type="text" placeholder="Nombre" name="nombre" required>
+                    <input type="email" placeholder="Correo" name="correo" required>
+                    <input type="password" placeholder="Contraseña" name="password" required>
+                    <button type="submit" class="btn-add">Añadir Usuario</button>
+                </form>
+            </div>
+
+        </div>
+        
+        <!-- SECCION LIBROS -->
+        <div id="libros" class="tab-content">
+            <!-- tabla de libros -->
+        </div>
+        
+        <!-- SECCION ORDENADORES -->
+        <div id="ordenadores" class="tab-content">
+            <!-- tabla de ordenadores -->
+        </div>
+
+        <!-- SECCION ESPACIO INDIVIDUAL -->
+        <div id="espacios-individuales" class="tab-content">
+            <!-- tabla de espacios individuales -->
+        </div>
+        <!-- SECCION ESPACIO GRUPAL -->
+        <div id="espacios-grupales" class="tab-content">
+            <!-- tabla de espacios grupales -->
+        </div>
+
+    <!-- FUNCIONES DE  LA PLANTILLA --> 
+    <script>
+        function showTab(id) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
     
-    <div class="content">
-        <h1>Panel de Administración</h1>
-        
-        <h2 id="salas">Salas Grupales</h2>
-        <form action="/api/sala-grupal" method="get"><button type="submit">Obtener todas las salas</button></form>
-        <form action="/api/sala-grupal/{piso}/{numeroSala}" method="get"><button type="submit">Obtener sala por piso y número</button></form>
-        <form action="/api/sala-grupal" method="post"><button type="submit">Crear sala</button></form>
-        <form action="/api/sala-grupal/{piso}/{numeroSala}" method="put"><button type="submit">Actualizar sala</button></form>
-        <form action="/api/sala-grupal/{piso}/{numeroSala}" method="delete"><button type="submit">Eliminar sala</button></form>
-        
-        <h2 id="libros">Libros</h2>
-        <form action="/api/libros/all" method="get"><button type="submit">Obtener todos los libros</button></form>
-        <form action="/api/libros/{id}" method="get"><button type="submit">Obtener libro por ID</button></form>
-        <form action="/api/libros/add" method="post"><button type="submit">Agregar libro</button></form>
-        <form action="/api/libros/update/{id}" method="put"><button type="submit">Actualizar libro</button></form>
-        <form action="/api/libros/delete/{id}" method="delete"><button type="submit">Eliminar libro</button></form>
-        
-        <h2 id="espacios">Espacios</h2>
-        <form action="/api/espacios/all" method="get"><button type="submit">Obtener todos los espacios</button></form>
-        <form action="/api/espacios/{piso}/{numeroAsiento}" method="get"><button type="submit">Obtener espacio por piso y asiento</button></form>
-        <form action="/api/espacios/add" method="post"><button type="submit">Agregar espacio</button></form>
-        <form action="/api/espacios/update" method="put"><button type="submit">Actualizar espacio</button></form>
-        <form action="/api/espacios/delete/{piso}/{numeroAsiento}" method="delete"><button type="submit">Eliminar espacio</button></form>
-    </div>
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function filterTable() {
+            const input = document.getElementById("searchInput");
+            const filter = input.value.toLowerCase();
+            const table = document.querySelector(".table-scroll table tbody");
+            const rows = table.getElementsByTagName("tr");
+
+            for (let i = 0; i < rows.length; i++) {
+                const correoCell = rows[i].getElementsByTagName("td")[2];
+                if (correoCell) {
+                    const correo = correoCell.textContent || correoCell.innerText;
+                    if (correo.toLowerCase().indexOf(filter) > -1) {
+                        rows[i].style.display = "";
+                    } else {
+                        rows[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 </html>
