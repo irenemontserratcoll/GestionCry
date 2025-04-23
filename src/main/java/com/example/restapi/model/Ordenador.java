@@ -8,11 +8,11 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "ordenadores") 
-public class Ordenador {
+public class Ordenador extends RecursoReservable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    //private Long id;
     private String marca;
     private String modelo;
     private String numeroSerie;
@@ -31,13 +31,13 @@ public class Ordenador {
     }
 
     // Getters y Setters
-    public Long getId() {
-        return id;
-    }
+    //public Long getId() {
+    //    return id;
+    //}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    //public void setId(Long id) {
+    //    this.id = id;
+    //}
 
     public String getMarca() {
         return marca;

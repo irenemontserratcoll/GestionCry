@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "espacios_individuales") // Nombre de la tabla en la base de datos
-public class EspacioIndividual {
+public class EspacioIndividual extends RecursoReservable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Genera automáticamente el ID
