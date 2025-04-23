@@ -12,6 +12,8 @@ public class Usuario {
     private int id;
 
     private String nombre;
+
+    @Column(unique = true)
     private String correo;
     private String contrasena;
 

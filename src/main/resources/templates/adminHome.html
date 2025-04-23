@@ -7,9 +7,20 @@
 </head>
 <body>
     <div class="admin-container">
+
+        <!-- MENSAJES EXITO Y ERROR -->
+        <div th:if="${success}" class="success-message">
+            <p th:text="${success}"></p>
+        </div>
+        <div th:if="${error}" class="error-message">
+            <p th:text="${error}"></p>
+        </div>
+
+        <!-- TITULO -->
         <img th:src="@{/logo.jpeg}" alt="Logo" class="logo">
         <h2>Administración Cry</h2>
 
+       <!-- MENU HORIZONTAL --> 
         <div class="tab-menu">
             <button class="tab active" onclick="showTab('usuarios')">Usuarios</button>
             <button class="tab" onclick="showTab('libros')">Libros</button>
@@ -20,32 +31,50 @@
 
         <!-- SECCION USUARIOS -->
         <div id="usuarios" class="tab-content active">
-            <table class="styled-table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nombre</th>
-                        <th>Correo</th>
-                        <th>Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Juan Pérez</td>
-                        <td>juan@example.com</td>
-                        <td><button class="btn-delete">🗑️</button></td>
-                    </tr>
-                    <!-- Más filas aquí con Thymeleaf si lo deseas -->
-                </tbody>
-            </table>
-        
-            <div class="user-form">
-                <input type="text" placeholder="Nombre" name="nombre" required>
-                <input type="email" placeholder="Correo" name="correo" required>
-                <input type="password" placeholder="Contraseña" name="password" required>
-                <button class="btn-add">Añadir Usuario</button>
+            <div class="search-form">
+                <input type="text" id="searchInput" placeholder="🔍 Buscar por correo" onkeyup="filterTable()">
             </div>
+            <div class="table-wrapper">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                </table>
+            
+                <div class="table-scroll">
+                    <table class="styled-table">
+                        <tbody>
+                            <tr th:each="usuario, iterStat : ${usuarios}">
+                                <td th:text="${iterStat.count}"></td>
+                                <td th:text="${usuario.nombre}"></td>
+                                <td th:text="${usuario.correo}"></td>
+                                <td>
+                                    <form action="/delete-user" method="post">
+                                        <input type="hidden" name="correo" th:value="${usuario.correo}" />
+                                        <button type="submit" class="btn-delete">🗑️</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!--Añadir nuevo usuario-->
+            <div class="user-form">
+                <form action="/add-user" method="post">
+                    <input type="text" placeholder="Nombre" name="nombre" required>
+                    <input type="email" placeholder="Correo" name="correo" required>
+                    <input type="password" placeholder="Contraseña" name="password" required>
+                    <button type="submit" class="btn-add">Añadir Usuario</button>
+                </form>
+            </div>
+
         </div>
         
         <!-- SECCION LIBROS -->
@@ -67,6 +96,7 @@
             <!-- tabla de espacios grupales -->
         </div>
 
+    <!-- FUNCIONES DE  LA PLANTILLA --> 
     <script>
         function showTab(id) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -74,6 +104,25 @@
     
             document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
             event.target.classList.add('active');
+        }
+
+        function filterTable() {
+            const input = document.getElementById("searchInput");
+            const filter = input.value.toLowerCase();
+            const table = document.querySelector(".table-scroll table tbody");
+            const rows = table.getElementsByTagName("tr");
+
+            for (let i = 0; i < rows.length; i++) {
+                const correoCell = rows[i].getElementsByTagName("td")[2];
+                if (correoCell) {
+                    const correo = correoCell.textContent || correoCell.innerText;
+                    if (correo.toLowerCase().indexOf(filter) > -1) {
+                        rows[i].style.display = "";
+                    } else {
+                        rows[i].style.display = "none";
+                    }
+                }
+            }
         }
     </script>
 </body>

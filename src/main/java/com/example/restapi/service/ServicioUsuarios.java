@@ -2,6 +2,7 @@ package com.example.restapi.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,10 +37,15 @@ public class ServicioUsuarios {
 
     // Method to add a new user
     public Usuario addUsuario(Usuario usuario) {
+        Optional<Usuario> usuarioExistente = repositorioUsuarios.findByCorreo(usuario.getCorreo());
+        if (usuarioExistente.isPresent()) {
+            throw new IllegalArgumentException("Ya existe un usuario con ese correo.");
+        }
         return repositorioUsuarios.save(usuario);
     }
 
     // Method to delete an existing user
+    @Transactional
     public void deleteUsuario(String correo) {
         repositorioUsuarios.deleteByCorreo(correo);
     }
