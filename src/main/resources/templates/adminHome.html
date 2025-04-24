@@ -162,8 +162,67 @@
         </div>
         
         <!-- SECCION ESPACIO GRUPAL -->
-        <div id="espacios-grupales" class="tab-content">
-            <!-- tabla de espacios grupales -->
+        <div id="espacios-grupales" class="tab-content active">
+            <!-- Barra de búsqueda -->
+            <div class="search-form">
+                <input type="text" id="searchSalas" placeholder="🔍 Buscar por piso o número de sala" onkeyup="filterSalas()">
+            </div>
+
+            <!-- Tabla de salas grupales -->
+            <div class="table-wrapper">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Piso</th>
+                            <th>Número de Sala</th>
+                            <th>Capacidad</th>
+                            <th>Actualizar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                </table>
+
+                <div class="table-scroll">
+                    <table class="styled-table">
+                        <tbody>
+                            <tr th:each="sala, iterStat : ${salasGrupales}" th:id="'sala-row-' + ${iterStat.index}">
+                                <td th:text="${iterStat.count}"></td>
+                                <td th:text="${sala.piso}"></td>
+                                <td th:text="${sala.numeroSala}"></td>
+                                <td th:text="${sala.capacidad}"></td>
+                                <!-- Formulario para actualizar sala -->
+                                <td>
+                                    <form action="/update-sala" method="post">
+                                        <input type="hidden" name="piso" th:value="${sala.piso}" />
+                                        <input type="hidden" name="numeroSala" th:value="${sala.numeroSala}" />
+                                        <input type="number" name="capacidad" placeholder="Capacidad" th:value="${sala.capacidad}" required>
+                                        <button type="submit" class="btn-update">✏️</button>
+                                    </form>
+                                </td>
+                                <!-- Botón eliminar sala -->
+                                <td>
+                                    <form action="/delete-sala" method="post">
+                                        <input type="hidden" name="piso" th:value="${sala.piso}" />
+                                        <input type="hidden" name="numeroSala" th:value="${sala.numeroSala}" />
+                                        <button type="submit" class="btn-delete">🗑️</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Añadir nueva sala grupal -->
+            <div class="user-form">
+                <form action="/add-sala" method="post">
+                    <input type="number" placeholder="Piso" name="piso" required>
+                    <input type="number" placeholder="Número de Sala" name="numeroSala" required>
+                    <input type="number" placeholder="Capacidad" name="capacidad" required>
+                    <button type="submit" class="btn-add">Añadir Sala</button>
+                </form>
+            </div>
         </div>
         
         <!-- SECCION RESERVAS -->
