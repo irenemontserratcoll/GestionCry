@@ -80,9 +80,66 @@
         
         <!-- SECCION LIBROS -->
         <div id="libros" class="tab-content">
-            <!-- tabla de libros -->
+            <!-- Barra de búsqueda de Libros -->
+            <div class="search-form">
+                <input type="text" id="searchLibros" placeholder="🔍 Buscar por título, autor o ISBN" onkeyup="filterLibros()">
         </div>
-        
+            <!-- tabla de libros -->
+            <div class="table-wrapper">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>ISBN</th>
+                            <th>Actualizar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                </table>
+
+                <div class="table-scroll">
+                    <table class="styled-table">
+                        <tbody>
+                            <tr th:each="libro, iterStat : ${libros}">
+                                <td th:text="${iterStat.count}"></td>
+                                <td th:text="${libro.titulo}"></td>
+                                <td th:text="${libro.autor}"></td>
+                                <td th:text="${libro.isbn}"></td>
+                                <!-- Formulario para actualizar libro -->
+                                <td>
+                                    <form action="/update-libro" method="post">
+                                        <input type="hidden" name="isbn" th:value="${libro.isbn}" />
+                                        <input type="text" name="titulo" placeholder="Título" th:value="${libro.titulo}" required>
+                                        <input type="text" name="autor" placeholder="Autor" th:value="${libro.autor}" required>
+                                        <button type="submit" class="btn-update">✏️</button>
+                                    </form>
+                                </td>
+                                <!-- Botón eliminar libro -->
+                                <td>
+                                    <form action="/delete-libro" method="post">
+                                        <input type="hidden" name="isbn" th:value="${libro.isbn}" />
+                                        <button type="submit" class="btn-delete">🗑️</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Añadir nuevo libro -->
+            <div class="user-form">
+                <form action="/add-libro" method="post">
+                    <input type="text" placeholder="Título" name="titulo" required>
+                    <input type="text" placeholder="Autor" name="autor" required>
+                    <input type="text" placeholder="ISBN" name="isbn" required>
+                    <button type="submit" class="btn-add">Añadir Libro</button>
+                </form>
+            </div>
+        </div>
+
         <!-- SECCION ORDENADORES -->
         <div id="ordenadores" class="tab-content active">
             <!-- Barra de búsqueda -->
@@ -158,11 +215,66 @@
 
         <!-- SECCION ESPACIO INDIVIDUAL -->
         <div id="espacios-individuales" class="tab-content">
+            <!-- Barra de búsqueda -->
+            <div class="search-form">
+                <input type="text" id="searchEspacios" placeholder="🔍 Buscar por piso o número de asiento" onkeyup="filterEspacios()">
+        </div>
             <!-- tabla de espacios individuales -->
+            <div class="table-wrapper">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Piso</th>
+                            <th>Número de Asiento</th>
+                            <th>Actualizar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                </table>
+
+                <div class="table-scroll">
+                    <table class="styled-table">
+                        <tbody>
+                            <tr th:each="espacio, iterStat : ${espaciosIndividuales}">
+                                <td th:text="${iterStat.count}"></td>
+                                <td th:text="${espacio.piso}"></td>
+                                <td th:text="${espacio.numeroAsiento}"></td>
+                                <!-- Formulario para actualizar espacio -->
+                                <td>
+                                    <form action="/update-espacio" method="post">
+                                        <input type="hidden" name="piso" th:value="${espacio.piso}" />
+                                        <input type="hidden" name="numeroAsiento" th:value="${espacio.numeroAsiento}" />
+                                        <button type="submit" class="btn-update">✏️</button>
+                                    </form>
+                                </td>
+                                <!-- Botón eliminar espacio Individual -->
+                                <td>
+                                    <form action="/delete-espacio" method="post">
+                                        <input type="hidden" name="piso" th:value="${espacio.piso}" />
+                                        <input type="hidden" name="numeroAsiento" th:value="${espacio.numeroAsiento}" />
+                                        <button type="submit" class="btn-delete">🗑️</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Añadir nuevo espacio individual -->
+            <div class="user-form">
+                <form action="/add-espacio" method="post">
+                    <input type="number" placeholder="Piso" name="piso" required>
+                    <input type="number" placeholder="Número de Asiento" name="numeroAsiento" required>
+                    <button type="submit" class="btn-add">Añadir Espacio</button>
+                </form>
+            </div>
         </div>
         
         <!-- SECCION ESPACIO GRUPAL -->
         <div id="espacios-grupales" class="tab-content active">
+            
             <!-- Barra de búsqueda -->
             <div class="search-form">
                 <input type="text" id="searchSalas" placeholder="🔍 Buscar por piso o número de sala" onkeyup="filterSalas()">
