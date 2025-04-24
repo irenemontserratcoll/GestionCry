@@ -21,10 +21,10 @@ INSERT IGNORE INTO ordenadores (id, marca, modelo, numero_serie, disponible) VAL
 (3, 'Lenovo', 'ThinkPad X1', 'SN11223344', true);
 
 -- Reservas
-INSERT IGNORE INTO reservas (id, nombre_cliente, email_cliente, fecha_reserva, hora_reserva, num_personas) VALUES
-(1, 'Ana Torres', 'ana@gmail.com', '2025-04-10', '10:00', 2),
-(2, 'Luis Mendoza', 'luis@gmail.com', '2025-04-11', '12:30', 4),
-(3, 'Claudia Vega', 'claudia@gmail.com', '2025-04-12', '09:00', 1);
+INSERT IGNORE INTO reservas (id, nombre_cliente, email_cliente, fecha_reserva, hora_reserva, num_personas, libro_id, ordenador_id, sala_grupal_id, espacio_individual_id) VALUES
+(1, 'Ana Torres', 'ana@gmail.com', '2025-04-10', '10:00', 2, 1, NULL, NULL, NULL), -- Reservó un libro
+(2, 'Luis Mendoza', 'luis@gmail.com', '2025-04-11', '12:30', 4, NULL, 2, NULL, NULL), -- Reservó un ordenador
+(3, 'Claudia Vega', 'claudia@gmail.com', '2025-04-12', '09:00', 1, NULL, NULL, NULL, 3); -- Reservó un espacio individual
 
 -- Salas grupales
 INSERT IGNORE INTO salas_grupales (id, piso, numero_sala, numero_personas) VALUES 
