@@ -12,8 +12,6 @@ import com.example.restapi.model.Usuario;
 @Repository
 public interface RepositorioUsuarios extends JpaRepository<Usuario, Integer> { // Changed int to Integer
     Optional<Usuario> findByCorreo(String correo); // Corrected method name to match the field "correo"
-    Optional<Usuario> findById(Integer id); // Changed int to Integer
-    Optional<Usuario> deleteByCorreo(String correo);
+    void deleteByCorreo(String correo);
     List<Usuario> findAll(); // Find all users
-
 }

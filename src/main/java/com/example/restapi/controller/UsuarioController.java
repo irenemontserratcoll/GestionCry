@@ -32,14 +32,6 @@ public class UsuarioController {
         return servicioUsuarios.findAll();
     }
 
-    // Endpoint to get a user by ID
-    @Operation(summary = "Obtener usuario por ID", description = "Devuelve un usuario específico por su ID")
-    @GetMapping("/{id}")
-    public ResponseEntity<Usuario> getUserById(@PathVariable Integer id) {
-        Optional<Usuario> usuario = servicioUsuarios.findById(id);
-        return usuario.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-    }
-
     // Endpoint to add a new user
     @Operation(summary = "Agregar nuevo usuario", description = "Crea un nuevo usuario en el sistema")
     @PostMapping("/add")

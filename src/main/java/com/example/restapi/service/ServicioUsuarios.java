@@ -25,11 +25,6 @@ public class ServicioUsuarios {
         return repositorioUsuarios.findByCorreo(correo);
     }
 
-    // Method to find a user by ID
-    public Optional<Usuario> findById(Integer id) {
-        return repositorioUsuarios.findById(id);
-    }
-
     // Method to get all users
     public List<Usuario> findAll() {
         return repositorioUsuarios.findAll();
