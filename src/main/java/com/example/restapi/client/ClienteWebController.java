@@ -20,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 import com.example.restapi.model.Reserva;
 import com.example.restapi.model.Usuario;
 import com.example.restapi.model.Ordenador;
+import com.example.restapi.model.SalaGrupal;
 
 @Controller
 public class ClienteWebController {
@@ -67,6 +68,15 @@ public class ClienteWebController {
                 model.addAttribute("ordenadores", responseOrdenadores.getBody());
             } else {
                 model.addAttribute("error", "No se pudieron obtener los ordenadores");
+            }
+
+            // Cargar salas grupales
+            String urlSalasGrupales = apiBaseUrl + "/api/sala-grupal/all";
+            ResponseEntity<SalaGrupal[]> responseSalasGrupales = restTemplate.getForEntity(urlSalasGrupales, SalaGrupal[].class);
+            if (responseSalasGrupales.getStatusCode() == HttpStatus.OK) {
+                model.addAttribute("salasGrupales", responseSalasGrupales.getBody());
+            } else {
+                model.addAttribute("error", "No se pudieron obtener las salas grupales");
             }
 
         } catch (Exception e) {
@@ -315,8 +325,71 @@ public class ClienteWebController {
             model.addAttribute("error", "Error de conexión con la API de ordenadores.");
         }
 
-        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de ordenadores
-        return cargarAdminHomeConUsuarios(model);
+    // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de ordenadores
+    return cargarAdminHomeConUsuarios(model);
+    }
+    
+    @PostMapping("/add-sala-grupal")
+    public String addSalaGrupal(@RequestParam("piso") int piso, @RequestParam("numeroSala") int numeroSala, 
+    @RequestParam("numeroPersonas") int numeroPersonas, Model model) {
+        String url = apiBaseUrl + "/api/salas/add";
+        
+        try {
+            // Crear un objeto tipo SalaGrupal y setear sus valores
+            SalaGrupal salaGrupal = new SalaGrupal();
+            salaGrupal.setPiso(piso);
+            salaGrupal.setNumeroSala(numeroSala);
+            salaGrupal.setNumeroPersonas(numeroPersonas);
+
+            // Crear headers con tipo JSON
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            // Crear entidad con JSON
+            HttpEntity<SalaGrupal> requestEntity = new HttpEntity<>(salaGrupal, headers);
+
+            // Enviar la solicitud
+            ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
+
+            if (response.getStatusCode() == HttpStatus.CREATED) {
+                model.addAttribute("success", "Sala grupal añadida correctamente.");
+            } else {
+                model.addAttribute("error", "Error al añadir la sala grupal: " + response.getBody());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("error", "Error de conexión con el servidor.");
+        }
+    
+    // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de salas grupales
+    return cargarAdminHomeConUsuarios(model);
+    }
+
+    @PostMapping("/delete-sala-grupal")
+    public String deleteSalaGrupal(@RequestParam("piso") int piso, @RequestParam("numeroSala") int numeroSala, Model model) {
+        String url = apiBaseUrl + "/api/salas/delete/" + piso + "/" + numeroSala; // Endpoint en SalaGrupalController
+        try {
+            // Crear la entidad HTTP (puede ser null para DELETE)
+            @SuppressWarnings("null")
+            HttpEntity<Void> requestEntity = new HttpEntity<>(null);
+    
+            // Enviar la solicitud DELETE al SalaGrupalController
+            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity, String.class);
+    
+            // Manejar la respuesta
+            if (response.getStatusCode() == HttpStatus.OK) {
+                model.addAttribute("success", "Sala grupal eliminada correctamente.");
+            } else {
+                model.addAttribute("error", "Error al eliminar la sala grupal: " + response.getBody());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("error", "Error de conexión con el servidor.");
+        }
+        
+    // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de salas grupales
+    return cargarAdminHomeConUsuarios(model);
     }
 
 }
