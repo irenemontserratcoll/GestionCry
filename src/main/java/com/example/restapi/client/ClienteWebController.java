@@ -1,24 +1,24 @@
 package com.example.restapi.client;
 
+import java.util.Date;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.restapi.model.Reserva;
 import com.example.restapi.model.Usuario;
-
-import org.springframework.http.MediaType;
 
 @Controller
 public class ClienteWebController {
@@ -34,25 +34,39 @@ public class ClienteWebController {
         return "index";
     }
 
-    @GetMapping("/adminHome")
-    public String cargarAdminHomeConUsuarios(Model model) {
-        String url = apiBaseUrl + "/api/usuarios/all";
-        try {
-            ResponseEntity<Usuario[]> response = restTemplate.getForEntity(url, Usuario[].class);
-    
-            if (response.getStatusCode() == HttpStatus.OK) {
-                Usuario[] usuarios = response.getBody();
-                model.addAttribute("usuarios", usuarios);
-            } else {
-                model.addAttribute("error", "No se pudieron obtener los usuarios");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            model.addAttribute("error", "Error al conectar con la API");
+@GetMapping("/adminHome")
+public String cargarAdminHomeConUsuarios(Model model) {
+    try {
+        // Cargar usuarios
+        String urlUsuarios = apiBaseUrl + "/api/usuarios/all";
+        ResponseEntity<Usuario[]> responseUsuarios = restTemplate.getForEntity(urlUsuarios, Usuario[].class);
+
+        if (responseUsuarios.getStatusCode() == HttpStatus.OK) {
+            Usuario[] usuarios = responseUsuarios.getBody();
+            model.addAttribute("usuarios", usuarios);
+        } else {
+            model.addAttribute("error", "No se pudieron obtener los usuarios");
         }
-    
-        return "adminHome"; // Vista que ya tenías
+
+        // Cargar reservas
+        String urlReservas = apiBaseUrl + "/api/reservas/all";
+        ResponseEntity<Reserva[]> responseReservas = restTemplate.getForEntity(urlReservas, Reserva[].class);
+
+        if (responseReservas.getStatusCode() == HttpStatus.OK) {
+            Reserva[] reservas = responseReservas.getBody();
+            model.addAttribute("reservas", reservas);
+        } else {
+            model.addAttribute("error", "No se pudieron obtener las reservas");
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        model.addAttribute("error", "Error al conectar con la API");
     }
+
+    return "adminHome"; // Vista que ya tienes
+}
+
     
 
 
@@ -172,4 +186,57 @@ public class ClienteWebController {
         // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de usuarios
         return cargarAdminHomeConUsuarios(model);
     }
+
+    @PostMapping("/add-reserva")
+public String addReserva(
+        @RequestParam("nombreCliente") String nombreCliente,
+        @RequestParam("emailCliente") String emailCliente,
+        @RequestParam("fechaReserva") Date fechaReserva,
+        @RequestParam("horaReserva") String horaReserva,
+        @RequestParam("numPersonas") int numPersonas,
+        @RequestParam(required = false) Integer libroId,
+        @RequestParam(required = false) Integer ordenadorId,
+        @RequestParam(required = false) Integer salaGrupalId,
+        @RequestParam(required = false) Integer espacioIndividualId,
+        Model model) {
+
+    String url = apiBaseUrl + "/api/reservas/add";
+    try {
+        // Crear un objeto tipo Reserva y setear sus valores
+        Reserva reserva = new Reserva();
+        reserva.setNombreCliente(nombreCliente);
+        reserva.setEmailCliente(emailCliente);
+        reserva.setFechaReserva(fechaReserva);
+        reserva.setHoraReserva(horaReserva);
+        reserva.setNumPersonas(numPersonas);
+        reserva.setLibroId(libroId);
+        reserva.setOrdenadorId(ordenadorId);
+        reserva.setSalaGrupalId(salaGrupalId);
+        reserva.setEspacioIndividualId(espacioIndividualId);
+
+        // Crear headers con tipo JSON
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        // Crear entidad con JSON
+        HttpEntity<Reserva> requestEntity = new HttpEntity<>(reserva, headers);
+
+        // Enviar la solicitud
+        ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
+
+        if (response.getStatusCode() == HttpStatus.CREATED) {
+            model.addAttribute("success", "Reserva añadida correctamente.");
+        } else {
+            model.addAttribute("error", "Error al añadir reserva: " + response.getBody());
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        model.addAttribute("error", "Error de conexión con el servidor.");
+    }
+
+    return cargarAdminHomeConUsuarios(model);
+}
+
+
 }

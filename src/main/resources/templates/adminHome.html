@@ -27,6 +27,7 @@
             <button class="tab" onclick="showTab('ordenadores')">Ordenadores</button>
             <button class="tab" onclick="showTab('espacios-individuales')">Espacios Individuales</button>
             <button class="tab" onclick="showTab('espacios-grupales')">Espacios Grupales</button>
+            <button class="tab" onclick="showTab('reservas')">Reservas</button>
         </div>
 
         <!-- SECCION USUARIOS -->
@@ -95,6 +96,67 @@
         <div id="espacios-grupales" class="tab-content">
             <!-- tabla de espacios grupales -->
         </div>
+        <!-- SECCION RESERVAS -->
+<div id="reservas" class="tab-content">
+    <div class="table-wrapper">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Personas</th>
+                    <th>Libro</th>
+                    <th>Ordenador</th>
+                    <th>Sala Grupal</th>
+                    <th>Espacio Individual</th>
+                </tr>
+            </thead>
+        </table>
+
+        <div class="table-scroll">
+            <table class="styled-table">
+                <tbody>
+                    <tr th:each="reserva, iterStat : ${reservas}">
+                        <td th:text="${iterStat.count}"></td>
+                        <td th:text="${reserva.nombreCliente}"></td>
+                        <td th:text="${reserva.emailCliente}"></td>
+                        <td th:text="${reserva.fechaReserva}"></td>
+                        <td th:text="${reserva.horaReserva}"></td>
+                        <td th:text="${reserva.numPersonas}"></td>
+                        <td th:text="${reserva.libro != null ? reserva.libro.titulo : '-'}"></td>
+                        <td th:text="${reserva.ordenador != null ? reserva.ordenador.modelo : '-'}"></td>
+                        <td th:text="${reserva.salaGrupal != null ? reserva.salaGrupal.numeroSala : '-'}"></td>
+                        <td th:text="${reserva.espacioIndividual != null ? reserva.espacioIndividual.numeroAsiento : '-'}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- FORMULARIO PARA AÑADIR NUEVA RESERVA -->
+    <div class="user-form">
+        <h3>Añadir nueva reserva</h3>
+        <form action="/add-reserva" method="post">
+            <input type="text" name="nombreCliente" placeholder="Nombre cliente" required>
+            <input type="email" name="emailCliente" placeholder="Correo cliente" required>
+            <input type="date" name="fechaReserva" required>
+            <input type="time" name="horaReserva" required>
+            <input type="number" name="numPersonas" placeholder="Número de personas" min="1" required>
+
+            <!-- Campos opcionales -->
+            <input type="number" name="libroId" placeholder="ID Libro (opcional)">
+            <input type="number" name="ordenadorId" placeholder="ID Ordenador (opcional)">
+            <input type="number" name="salaGrupalId" placeholder="ID Sala Grupal (opcional)">
+            <input type="number" name="espacioIndividualId" placeholder="ID Espacio Individual (opcional)">
+
+            <button type="submit" class="btn-add">Añadir Reserva</button>
+        </form>
+    </div>
+</div>
+
 
     <!-- FUNCIONES DE  LA PLANTILLA --> 
     <script>

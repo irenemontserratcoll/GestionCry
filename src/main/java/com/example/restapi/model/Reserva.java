@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "reservas")
@@ -39,6 +40,19 @@ public class Reserva {
     @ManyToOne
     @JoinColumn(name = "espacio_individual_id")
     private EspacioIndividual espacioIndividual;
+
+    // Campos auxiliares para recibir IDs
+    @Transient
+    private Integer libroId;
+
+    @Transient
+    private Integer ordenadorId;
+
+    @Transient
+    private Integer salaGrupalId;
+
+    @Transient
+    private Integer espacioIndividualId;
 
     // Getters y Setters
     public Long getId() { return id; }
@@ -71,6 +85,19 @@ public class Reserva {
     public EspacioIndividual getEspacioIndividual() { return espacioIndividual; }
     public void setEspacioIndividual(EspacioIndividual espacioIndividual) { this.espacioIndividual = espacioIndividual; }
 
+    // Auxiliares
+    public Integer getLibroId() { return libroId; }
+    public void setLibroId(Integer libroId) { this.libroId = libroId; }
+
+    public Integer getOrdenadorId() { return ordenadorId; }
+    public void setOrdenadorId(Integer ordenadorId) { this.ordenadorId = ordenadorId; }
+
+    public Integer getSalaGrupalId() { return salaGrupalId; }
+    public void setSalaGrupalId(Integer salaGrupalId) { this.salaGrupalId = salaGrupalId; }
+
+    public Integer getEspacioIndividualId() { return espacioIndividualId; }
+    public void setEspacioIndividualId(Integer espacioIndividualId) { this.espacioIndividualId = espacioIndividualId; }
+
     @Override
     public String toString() {
         return "Reserva{" +
@@ -84,6 +111,10 @@ public class Reserva {
                 ", ordenador=" + (ordenador != null ? ordenador.toString() : "N/A") +
                 ", salaGrupal=" + (salaGrupal != null ? salaGrupal.toString() : "N/A") +
                 ", espacioIndividual=" + (espacioIndividual != null ? espacioIndividual.toString() : "N/A") +
+                ", libroId=" + libroId +
+                ", ordenadorId=" + ordenadorId +
+                ", salaGrupalId=" + salaGrupalId +
+                ", espacioIndividualId=" + espacioIndividualId +
                 '}';
     }
 }
