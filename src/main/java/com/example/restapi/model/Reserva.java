@@ -25,8 +25,20 @@ public class Reserva {
     private int numPersonas;
 
     @ManyToOne
-    @JoinColumn(name = "recurso_id")
-    private RecursoReservable recurso;
+    @JoinColumn(name = "libro_id")
+    private Libro libro;
+
+    @ManyToOne
+    @JoinColumn(name = "ordenador_id")
+    private Ordenador ordenador;
+
+    @ManyToOne
+    @JoinColumn(name = "sala_grupal_id")
+    private SalaGrupal salaGrupal;
+
+    @ManyToOne
+    @JoinColumn(name = "espacio_individual_id")
+    private EspacioIndividual espacioIndividual;
 
     // Getters y Setters
     public Long getId() { return id; }
@@ -47,8 +59,17 @@ public class Reserva {
     public int getNumPersonas() { return numPersonas; }
     public void setNumPersonas(int numPersonas) { this.numPersonas = numPersonas; }
 
-    public RecursoReservable getRecurso() { return recurso; }
-    public void setRecurso(RecursoReservable recurso) { this.recurso = recurso; }
+    public Libro getLibro() { return libro; }
+    public void setLibro(Libro libro) { this.libro = libro; }
+
+    public Ordenador getOrdenador() { return ordenador; }
+    public void setOrdenador(Ordenador ordenador) { this.ordenador = ordenador; }
+
+    public SalaGrupal getSalaGrupal() { return salaGrupal; }
+    public void setSalaGrupal(SalaGrupal salaGrupal) { this.salaGrupal = salaGrupal; }
+
+    public EspacioIndividual getEspacioIndividual() { return espacioIndividual; }
+    public void setEspacioIndividual(EspacioIndividual espacioIndividual) { this.espacioIndividual = espacioIndividual; }
 
     @Override
     public String toString() {
@@ -59,7 +80,10 @@ public class Reserva {
                 ", fechaReserva=" + fechaReserva +
                 ", horaReserva='" + horaReserva + '\'' +
                 ", numPersonas=" + numPersonas +
-                ", recurso=" + (recurso != null ? recurso.toString() : "N/A") +
+                ", libro=" + (libro != null ? libro.toString() : "N/A") +
+                ", ordenador=" + (ordenador != null ? ordenador.toString() : "N/A") +
+                ", salaGrupal=" + (salaGrupal != null ? salaGrupal.toString() : "N/A") +
+                ", espacioIndividual=" + (espacioIndividual != null ? espacioIndividual.toString() : "N/A") +
                 '}';
     }
 }

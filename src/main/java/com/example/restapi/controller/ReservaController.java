@@ -25,7 +25,7 @@ public class ReservaController {
     private ReservaService reservaService;
 
     // Obtener todas las reservas
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Reserva>> obtenerTodasLasReservas() {
         List<Reserva> reservas = reservaService.obtenerTodasLasReservas();
         return new ResponseEntity<>(reservas, HttpStatus.OK);
@@ -40,7 +40,7 @@ public class ReservaController {
     }
 
     // Crear una nueva reserva
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Reserva> crearReserva(@RequestBody Reserva reserva) {
         if (reserva != null) {
             Reserva nuevaReserva = reservaService.crearReserva(reserva);
