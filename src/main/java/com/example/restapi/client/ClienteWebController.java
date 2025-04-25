@@ -2,6 +2,8 @@ package com.example.restapi.client;
 
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -21,8 +23,10 @@ import com.example.restapi.model.Ordenador;
 import com.example.restapi.model.Reserva;
 import com.example.restapi.model.SalaGrupal;
 import com.example.restapi.model.Usuario;
+import com.example.restapi.service.ReservaService;
 
 @Controller
+
 public class ClienteWebController {
     private final String apiBaseUrl = "http://localhost:8083";
     private final RestTemplate restTemplate;
@@ -30,6 +34,10 @@ public class ClienteWebController {
     public ClienteWebController(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
+
+    @Autowired
+    private ReservaService reservaService;
+
 
     @GetMapping("/")
     public String redirectToLogin() {
@@ -397,5 +405,40 @@ public class ClienteWebController {
     // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de salas grupales
     return cargarAdminHomeConUsuarios(model);
     }
+
+    @PostMapping("/reservar")
+    public String reservarRecurso(@RequestParam("nombreCliente") String nombreCliente,
+                              @RequestParam("emailCliente") String emailCliente,
+                              @RequestParam("fechaReserva") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaReserva,
+                              @RequestParam("horaReserva") String horaReserva,
+                              @RequestParam("numPersonas") int numPersonas,
+                              @RequestParam(required = false) Integer libroId,
+                              @RequestParam(required = false) Integer ordenadorId,
+                              @RequestParam(required = false) Integer salaGrupalId,
+                              @RequestParam(required = false) Integer espacioIndividualId,
+                              Model model) {
+    try {
+        Reserva reserva = new Reserva();
+        reserva.setNombreCliente(nombreCliente);
+        reserva.setEmailCliente(emailCliente);
+        reserva.setFechaReserva(fechaReserva);
+        reserva.setHoraReserva(horaReserva);
+        reserva.setNumPersonas(numPersonas);
+        reserva.setLibroId(libroId);
+        reserva.setOrdenadorId(ordenadorId);
+        reserva.setSalaGrupalId(salaGrupalId);
+        reserva.setEspacioIndividualId(espacioIndividualId);
+
+        reservaService.crearReserva(reserva); // 💾 GUARDAR EN LA BBDD
+
+        model.addAttribute("success", "Reserva guardada correctamente.");
+    } catch (Exception e) {
+        e.printStackTrace();
+        model.addAttribute("error", "Error al guardar la reserva.");
+    }
+
+    return "userHome"; // Aquí vuelves a la vista principal del usuario
+}
+
 
 }
