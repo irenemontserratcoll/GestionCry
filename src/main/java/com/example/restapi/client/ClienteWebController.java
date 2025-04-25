@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.restapi.model.Reserva;
-import com.example.restapi.model.Usuario;
 import com.example.restapi.model.Ordenador;
+import com.example.restapi.model.Reserva;
 import com.example.restapi.model.SalaGrupal;
+import com.example.restapi.model.Usuario;
 
 @Controller
 public class ClienteWebController {
@@ -122,13 +122,13 @@ public class ClienteWebController {
             MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
             requestBody.add("Email", email);
             requestBody.add("Password", password);
-    
+
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
-    
+
             ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
-    
+
             if (response.getStatusCode() == HttpStatus.OK) {
                 return "redirect:/userHome";
             } else {
@@ -140,6 +140,12 @@ public class ClienteWebController {
             model.addAttribute("error", "Error de conexión con el servidor");
             return "index";
         }
+    }
+
+    @GetMapping("/userHome")
+    public String userHome(Model model) {
+        // Aquí puedes agregar datos personalizados si lo deseas
+        return "userHome"; // Redirige a la plantilla userHome.html
     }
 
     @PostMapping("/add-user")

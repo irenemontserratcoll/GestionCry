@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservas Cry</title>
+    <link rel="stylesheet" th:href="@{/stylesAdmin.css}">
+</head>
+<body>
+    <div class="admin-container">
+
+        <!-- MENSAJES -->
+        <div th:if="${success}" class="success-message">
+            <p th:text="${success}"></p>
+        </div>
+        <div th:if="${error}" class="error-message">
+            <p th:text="${error}"></p>
+        </div>
+
+        <!-- LOGO Y TÍTULO -->
+        <img th:src="@{/logo.jpeg}" alt="Logo" class="logo">
+        <h2>Reservas Cry</h2>
+
+        <!-- PESTAÑA -->
+        <div class="tab-menu">
+            <button class="tab active" onclick="showTab('reserva')">Reservar</button>
+        </div>
+
+        <!-- FORMULARIO DE RESERVA -->
+        <div id="reserva" class="tab-content active">
+            <div class="user-form">
+                <h3>Realizar una reserva</h3>
+                <form action="/cliente/reservar" method="post">
+                    <input type="text" name="nombreCliente" placeholder="Nombre completo" required>
+                    <input type="email" name="emailCliente" placeholder="Correo electrónico" required>
+                    <input type="date" name="fechaReserva" required>
+                    <input type="time" name="horaReserva" required>
+                    <input type="number" name="numPersonas" placeholder="Número de personas" min="1" required>
+
+                    <label for="tipoRecurso">Seleccionar recurso:</label>
+                    <select name="tipoRecurso" id="tipoRecurso" onchange="mostrarOpciones()" required>
+                        <option value="">-- Seleccione una opción --</option>
+                        <option value="libro">Libro</option>
+                        <option value="ordenador">Ordenador</option>
+                        <option value="salaGrupal">Sala Grupal</option>
+                        <option value="espacioIndividual">Espacio Individual</option>
+                    </select>
+
+                    <div id="opciones-libro" class="opcion-recurso" style="display:none;">
+                        <label for="libroId">Selecciona un libro:</label>
+                        <input type="libroId" name="libroId" required>
+                        </select>
+                    </div>
+
+                    
+                    <button type="submit" class="btn-add">Reservar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(id) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function mostrarOpciones() {
+            const tipo = document.getElementById("tipoRecurso").value;
+            const opciones = document.querySelectorAll('.opcion-recurso');
+            opciones.forEach(op => op.style.display = 'none');
+
+            if (tipo) {
+                document.getElementById('opciones-' + tipo).style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
+<style>
+    /* Estilos para el contenedor principal */
+    .admin-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+    }
+
+    /* Estilos para el logo */
+    .logo {
+        width: 150px;
+        height: auto;
+    }
+
+    /* Estilos para los mensajes de éxito y error */
+    .success-message, .error-message {
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+    }
+    
+    .success-message {
+        background-color: #d4edda;
+        color: #155724;
+    }
+    
+    .error-message {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    /* Estilos para el menú de pestañas */
+    .tab-menu {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .tab {
+        padding: 10px 20px;
+        cursor: pointer;
+        background-color: #f1f1f1;
+        border-radius: 5px 5px 0 0;
+        border-bottom: none;
+    }
+
+    .tab.active {
+        background-color: #fff;
+    }
