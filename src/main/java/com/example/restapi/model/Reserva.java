@@ -43,16 +43,16 @@ public class Reserva {
 
     // Campos auxiliares para recibir IDs
     @Transient
-    private Integer libroId;
+    private Long libroId;
 
     @Transient
-    private Integer ordenadorId;
+    private Long ordenadorId;
 
     @Transient
-    private Integer salaGrupalId;
+    private Long salaGrupalId;
 
     @Transient
-    private Integer espacioIndividualId;
+    private Long espacioIndividualId;
 
     // Getters y Setters
     public Long getId() { return id; }
@@ -86,17 +86,17 @@ public class Reserva {
     public void setEspacioIndividual(EspacioIndividual espacioIndividual) { this.espacioIndividual = espacioIndividual; }
 
     // Auxiliares
-    public Integer getLibroId() { return libroId; }
-    public void setLibroId(Integer libroId) { this.libroId = libroId; }
+    public Long getLibroId() { return libroId; }
+    public void setLibroId(Long libroId) { this.libroId = libroId; }
 
-    public Integer getOrdenadorId() { return ordenadorId; }
-    public void setOrdenadorId(Integer ordenadorId) { this.ordenadorId = ordenadorId; }
+    public Long getOrdenadorId() { return ordenadorId; }
+    public void setOrdenadorId(Long ordenadorId) { this.ordenadorId = ordenadorId; }
 
-    public Integer getSalaGrupalId() { return salaGrupalId; }
-    public void setSalaGrupalId(Integer salaGrupalId) { this.salaGrupalId = salaGrupalId; }
+    public Long getSalaGrupalId() { return salaGrupalId; }
+    public void setSalaGrupalId(Long salaGrupalId) { this.salaGrupalId = salaGrupalId; }
 
-    public Integer getEspacioIndividualId() { return espacioIndividualId; }
-    public void setEspacioIndividualId(Integer espacioIndividualId) { this.espacioIndividualId = espacioIndividualId; }
+    public Long getEspacioIndividualId() { return espacioIndividualId; }
+    public void setEspacioIndividualId(Long espacioIndividualId) { this.espacioIndividualId = espacioIndividualId; }
 
     @Override
     public String toString() {
