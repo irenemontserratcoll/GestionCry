@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.restapi.model.EspacioIndividual;
+import com.example.restapi.model.Libro;
 import com.example.restapi.model.Ordenador;
 import com.example.restapi.model.Reserva;
 import com.example.restapi.model.SalaGrupal;
@@ -79,6 +81,15 @@ public class ClienteWebController {
                 model.addAttribute("error", "No se pudieron obtener los ordenadores");
             }
 
+            //Cargar libros
+            String urlLibros = apiBaseUrl + "/api/libros/all";
+            ResponseEntity<Libro[]> responseLibros = restTemplate.getForEntity(urlLibros, Libro[].class);
+            if (responseLibros.getStatusCode() == HttpStatus.OK) {
+                model.addAttribute("libros", responseLibros.getBody());
+            } else {
+                model.addAttribute("error", "No se pudieron obtener los libros");
+            }
+
             // Cargar salas grupales
             String urlSalasGrupales = apiBaseUrl + "/api/sala-grupal/all";
             ResponseEntity<SalaGrupal[]> responseSalasGrupales = restTemplate.getForEntity(urlSalasGrupales, SalaGrupal[].class);
@@ -87,6 +98,16 @@ public class ClienteWebController {
             } else {
                 model.addAttribute("error", "No se pudieron obtener las salas grupales");
             }
+
+            // Cargar espacios individuales
+            String urlEspaciosIndividuales = apiBaseUrl + "/api/Espacios-Individuales/all";
+            ResponseEntity<EspacioIndividual[]> responseEspaciosIndividuales = restTemplate.getForEntity(urlEspaciosIndividuales, EspacioIndividual[].class);
+            if (responseEspaciosIndividuales.getStatusCode() == HttpStatus.OK) {
+                model.addAttribute("espaciosIndividuales", responseEspaciosIndividuales.getBody());
+            } else {
+                model.addAttribute("error", "No se pudieron obtener los espacios individuales");
+            }
+
 
         } catch (Exception e) {
             e.printStackTrace();

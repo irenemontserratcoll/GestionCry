@@ -302,13 +302,13 @@
                                 <td th:text="${iterStat.count}"></td>
                                 <td th:text="${sala.piso}"></td>
                                 <td th:text="${sala.numeroSala}"></td>
-                                <td th:text="${sala.capacidad}"></td>
+                                <span th:text="${sala.numeroPersonas}"></span>
                                 <!-- Formulario para actualizar sala -->
                                 <td>
                                     <form action="/update-sala" method="post">
                                         <input type="hidden" name="piso" th:value="${sala.piso}" />
                                         <input type="hidden" name="numeroSala" th:value="${sala.numeroSala}" />
-                                        <input type="number" name="capacidad" placeholder="Capacidad" th:value="${sala.capacidad}" required>
+                                        <input type="number" name="capacidad" placeholder="Capacidad" th:value="${sala.numeroPersonas}" required>
                                         <button type="submit" class="btn-update">✏️</button>
                                     </form>
                                 </td>

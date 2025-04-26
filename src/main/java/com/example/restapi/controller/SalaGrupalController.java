@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.restapi.model.Ordenador;
 import com.example.restapi.model.SalaGrupal;
 import com.example.restapi.service.ServicioSalaGrupo;
+
+import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/api/sala-grupal")
@@ -29,7 +32,8 @@ public class SalaGrupalController {
     }
 
     // Obtener todas las salas grupales
-    @GetMapping
+    @Operation(summary = "Obtener todas las salas grupales", description = "Devuelve una lista de todas las salas grupales disponibles")
+    @GetMapping("/all")
     public List<SalaGrupal> getAllSalas() {
         return servicioSalaGrupo.findAll();
     }
