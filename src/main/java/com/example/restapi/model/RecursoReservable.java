@@ -1,17 +1,11 @@
 package com.example.restapi.model;
 
-import jakarta.persistence.DiscriminatorColumn;
-import jakarta.persistence.DiscriminatorType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
+import jakarta.persistence.*;
 
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "recursos_reservables")
 @DiscriminatorColumn(name = "tipo_recurso", discriminatorType = DiscriminatorType.STRING)
 public abstract class RecursoReservable {
     @Id

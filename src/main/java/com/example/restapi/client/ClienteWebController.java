@@ -39,6 +39,7 @@ public class ClienteWebController {
     private ReservaService reservaService;
 
 
+    // REDIRECCIONAMIENTO
     @GetMapping("/")
     public String redirectToLogin() {
         return "index";
@@ -95,6 +96,12 @@ public class ClienteWebController {
     return "adminHome"; // Vista que ya tienes
     }
 
+    @GetMapping("/userHome")
+    public String userHome(Model model) {
+        return "userHome"; // Redirige a la plantilla userHome.html
+    }
+    
+    //LOGIN
     @PostMapping("/login-admin")
     public String loginAdmin(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
         String url = apiBaseUrl + "/api/usuarios/login-admin";
@@ -150,12 +157,7 @@ public class ClienteWebController {
         }
     }
 
-    @GetMapping("/userHome")
-    public String userHome(Model model) {
-        // Aquí puedes agregar datos personalizados si lo deseas
-        return "userHome"; // Redirige a la plantilla userHome.html
-    }
-
+    // USUARIOS ADMIN
     @PostMapping("/add-user")
     public String addUser(@RequestParam("nombre") String nombre, @RequestParam("correo") String correo, 
     @RequestParam("password") String password, Model model) {
@@ -218,6 +220,7 @@ public class ClienteWebController {
     return cargarAdminHomeConUsuarios(model);
     }
 
+    // RESERVAS ADMIN
     @PostMapping("/add-reserva")
     public String addReserva(@RequestParam("nombreCliente") String nombreCliente, @RequestParam("emailCliente") String emailCliente,
     @RequestParam("fechaReserva") Date fechaReserva, @RequestParam("horaReserva") String horaReserva,
@@ -290,6 +293,7 @@ public class ClienteWebController {
         return cargarAdminHomeConUsuarios(model);
     }
 
+    //ORDENADORES ADMIN
     @PostMapping("/add-ordenador")
     public String addOrdenador(@RequestParam("marca") String marca, @RequestParam("modelo") String modelo,
     @RequestParam("numeroSerie") String numeroSerie, @RequestParam("disponible") boolean disponible, Model model) {

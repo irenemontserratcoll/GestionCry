@@ -14,6 +14,11 @@ CREATE TABLE IF NOT EXISTS usuarios (
   contrasena VARCHAR(100) NOT NULL
 );
 
+-- 4) Recursos Reservables (tabla base)
+CREATE TABLE IF NOT EXISTS recursos_reservables (
+  id INT AUTO_INCREMENT PRIMARY KEY
+  );
+
 -- 3) Espacios individuales
 CREATE TABLE IF NOT EXISTS espacios_individuales (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -32,12 +37,15 @@ CREATE TABLE IF NOT EXISTS libros (
 
 -- 5) Ordenadores
 CREATE TABLE IF NOT EXISTS ordenadores (
-  id INT AUTO_INCREMENT PRIMARY KEY,
+  id INT PRIMARY KEY,
   marca VARCHAR(100) NOT NULL,
   modelo VARCHAR(100) NOT NULL,
   numero_serie VARCHAR(100) NOT NULL,
-  disponible BOOLEAN NOT NULL
+  disponible BOOLEAN NOT NULL,
+  CONSTRAINT fk_ordenador_recurso
+    FOREIGN KEY (id) REFERENCES recursos_reservables(id)
 );
+
 
 -- 6) Salas grupales
 CREATE TABLE IF NOT EXISTS salas_grupales (
@@ -46,6 +54,7 @@ CREATE TABLE IF NOT EXISTS salas_grupales (
   numero_sala INT NOT NULL,
   numero_personas INT NOT NULL
 );
+
 
 -- 7) Reservas (¡aquí se crean las FK!)
 CREATE TABLE IF NOT EXISTS reservas (

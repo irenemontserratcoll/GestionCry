@@ -28,6 +28,15 @@ INSERT IGNORE INTO libros (id, titulo, autor, isbn) VALUES
 (5, 'Fahrenheit 451', 'Ray Bradbury', '978-1451673319'),
 (6, 'Orgullo y prejuicio', 'Jane Austen', '978-0141439518');
 
+-- Recursos Reservables
+INSERT IGNORE INTO recursos_reservables (id) VALUES
+(1),
+(2),
+(3),
+(4),
+(5),
+(6);
+
 -- Ordenadores
 INSERT IGNORE INTO ordenadores (id, marca, modelo, numero_serie, disponible) VALUES  
 (1, 'HP', 'EliteBook 840', 'SN12345678', true),
