@@ -221,9 +221,9 @@ public class ClienteWebController {
     @PostMapping("/add-reserva")
     public String addReserva(@RequestParam("nombreCliente") String nombreCliente, @RequestParam("emailCliente") String emailCliente,
     @RequestParam("fechaReserva") Date fechaReserva, @RequestParam("horaReserva") String horaReserva,
-    @RequestParam("numPersonas") int numPersonas, @RequestParam(required = false) Integer libroId,
-    @RequestParam(required = false) Integer ordenadorId, @RequestParam(required = false) Integer salaGrupalId,
-    @RequestParam(required = false) Integer espacioIndividualId, Model model) {
+    @RequestParam("numPersonas") int numPersonas, @RequestParam(required = false) Long libroId,
+    @RequestParam(required = false) Long ordenadorId, @RequestParam(required = false) Long salaGrupalId,
+    @RequestParam(required = false) Long espacioIndividualId, Model model) {
 
         String url = apiBaseUrl + "/api/reservas/add";
         try {
@@ -412,10 +412,10 @@ public class ClienteWebController {
                               @RequestParam("fechaReserva") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaReserva,
                               @RequestParam("horaReserva") String horaReserva,
                               @RequestParam("numPersonas") int numPersonas,
-                              @RequestParam(required = false) Integer libroId,
-                              @RequestParam(required = false) Integer ordenadorId,
-                              @RequestParam(required = false) Integer salaGrupalId,
-                              @RequestParam(required = false) Integer espacioIndividualId,
+                              @RequestParam(required = false) Long libroId,
+                              @RequestParam(required = false) Long ordenadorId,
+                              @RequestParam(required = false) Long salaGrupalId,
+                              @RequestParam(required = false) Long espacioIndividualId,
                               Model model) {
     try {
         Reserva reserva = new Reserva();

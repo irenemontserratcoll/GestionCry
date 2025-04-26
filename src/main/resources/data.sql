@@ -1,6 +1,6 @@
 -- Administrador
 INSERT IGNORE INTO administradores (id, nombre, correo, contrasena) VALUES 
-(1, 'admin', 'admin', 'admin'),
+(1, 'admin', 'admin', 'admin');
 -- Usuarios
 INSERT IGNORE INTO usuarios (id, nombre, correo, contrasena) VALUES  
 (1, 'Idoia', 'idoia@gmail.es', 'pass'),
@@ -14,7 +14,7 @@ INSERT IGNORE INTO usuarios (id, nombre, correo, contrasena) VALUES
 INSERT IGNORE INTO espacios_individuales (id, piso, numero_asiento, tiempo_reservado) VALUES 
 (1, 1, 12, '2 horas'),
 (2, 2, 8, '1 hora'),
-(3, 3, 5, null); -- tiempo_reservado puede ser nulo
+(3, 3, 5, null), -- tiempo_reservado puede ser nulo
 (4, 1, 15, '3 horas'),
 (5, 2, 10, null),
 (6, 3, 7, '30 minutos');
@@ -23,7 +23,7 @@ INSERT IGNORE INTO espacios_individuales (id, piso, numero_asiento, tiempo_reser
 INSERT IGNORE INTO libros (id, titulo, autor, isbn) VALUES  
 (1, '1984', 'George Orwell', '978-0451524935'),
 (2, 'Cien anos de soledad', 'Gabriel Garcia Marquez', '978-0307474728'),
-(3, 'El Principito', 'Antoine de Saint-Exupery', '978-0156012195');
+(3, 'El Principito', 'Antoine de Saint-Exupery', '978-0156012195'),
 (4, 'Don Quijote de la Mancha', 'Miguel de Cervantes', '978-8491050297'),
 (5, 'Fahrenheit 451', 'Ray Bradbury', '978-1451673319'),
 (6, 'Orgullo y prejuicio', 'Jane Austen', '978-0141439518');
@@ -32,7 +32,7 @@ INSERT IGNORE INTO libros (id, titulo, autor, isbn) VALUES
 INSERT IGNORE INTO ordenadores (id, marca, modelo, numero_serie, disponible) VALUES  
 (1, 'HP', 'EliteBook 840', 'SN12345678', true),
 (2, 'Dell', 'XPS 13', 'SN87654321', false),
-(3, 'Lenovo', 'ThinkPad X1', 'SN11223344', true);
+(3, 'Lenovo', 'ThinkPad X1', 'SN11223344', true),
 (4, 'Apple', 'MacBook Air', 'SN55667788', true),
 (5, 'Asus', 'ZenBook 14', 'SN99887766', false),
 (6, 'Acer', 'Swift 3', 'SN44556677', true);
