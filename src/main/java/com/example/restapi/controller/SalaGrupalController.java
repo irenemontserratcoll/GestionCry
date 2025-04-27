@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.restapi.model.Ordenador;
 import com.example.restapi.model.SalaGrupal;
 import com.example.restapi.service.ServicioSalaGrupo;
 
