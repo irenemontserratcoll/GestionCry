@@ -1,0 +1,70 @@
+package com.example.restapi.controller;
+
+import com.example.restapi.model.Reserva;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+
+import static org.hamcrest.Matchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc
+public class ReservaControllerIntegrationTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @Test
+    void testCrearReserva() throws Exception {
+        Reserva reserva = new Reserva();
+        reserva.setNombre("Test Nombre");
+        reserva.setFecha("2025-05-01");
+
+        mockMvc.perform(post("/api/reservas/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(reserva)))
+            .andExpect(status().isCreated())
+            .andExpect(jsonPath("$.nombre", is("Test Nombre")));
+    }
+
+    @Test
+    void testObtenerTodasLasReservas() throws Exception {
+        mockMvc.perform(get("/api/reservas/all"))
+            .andExpect(status().isOk());
+    }
+
+    @Test
+    void testObtenerReservaPorIdNoExistente() throws Exception {
+        mockMvc.perform(get("/api/reservas/9999"))
+            .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void testEliminarReservaNoExistente() throws Exception {
+        mockMvc.perform(delete("/api/reservas/9999"))
+            .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void testModificarReservaNoExistente() throws Exception {
+        Reserva reserva = new Reserva();
+        reserva.setNombre("Nombre");
+        reserva.setFecha("2025-06-01");
+
+        mockMvc.perform(put("/api/reservas/9999")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(reserva)))
+            .andExpect(status().isNotFound());
+    }
+}

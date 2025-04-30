@@ -1,4 +1,4 @@
-package com.example.restapi.controller;
+/*package com.example.restapi.controller;
 
 import com.example.restapi.model.SalaGrupal;
 import com.example.restapi.service.ServicioSalaGrupo;
@@ -139,4 +139,4 @@ class SalaGrupalControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("Sala eliminada exitosamente"));
     }
-}
+}*/

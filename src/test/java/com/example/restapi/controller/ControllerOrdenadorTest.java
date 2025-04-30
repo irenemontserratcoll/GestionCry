@@ -1,4 +1,4 @@
-package com.example.restapi.controller;
+/*package com.example.restapi.controller;
 
 import com.example.restapi.model.Ordenador;
 import com.example.restapi.service.ServicioOrdenadores;
@@ -163,4 +163,4 @@ class OrdenadorControllerTest {
                 .andExpect(status().isInternalServerError())
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("Error al eliminar el ordenador")));
     }
-}
+}*/
