@@ -32,6 +32,8 @@
         <server.hostname>127.0.0.1</server.hostname>
         <server.port>8083</server.port>
         <jacoco.version>0.8.11</jacoco.version>
+        <doxygen.config.file>${basedir}/src/main/resources/Doxyfile</doxygen.config.file>
+
     </properties>
     
     <dependencies>
@@ -108,7 +110,23 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
+            <plugin>
+				<groupId>com.soebes.maven.plugins</groupId>
+				<artifactId>doxygen-maven-plugin</artifactId>
+				<version>1.1.0</version>
+				<executions>
+					<execution>
+						<id>generate-doxygen-site</id>
+						<phase>site</phase> <!-- important: run during site phase -->
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<configurationFile>${doxygen.config.file}</configurationFile>
+				</configuration>
+			</plugin>
             <!-- Exec Maven Plugin -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -120,7 +138,25 @@
                             <goal>java</goal>
                         </goals>
                     </execution>
+                    <execution>
+						<id>copy-doxygen-site-to-docs</id>
+						<phase>post-site</phase> <!-- After doxygen generation too -->
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/docs/doxygen</outputDirectory> <!-- 🔥 target doxygen folder -->
+							<resources>
+								<resource>
+									<directory>${project.build.directory}/doxygen/html</directory> <!-- source -->
+									<filtering>false</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+
                 </executions>
+                
                 <configuration>
                     <mainClass>com.example.restapi.RestApiApplication</mainClass>
                     <arguments>
