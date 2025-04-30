@@ -34,8 +34,8 @@ class SalaGrupalControllerTest {
 
     @BeforeEach
     void setUp() {
-        sala1 = new SalaGrupal(1, 101, true);
-        sala2 = new SalaGrupal(2, 202, false);
+        sala1 = new SalaGrupal(1, 101, 2);
+        sala2 = new SalaGrupal(2, 202, 4);
     }
 
     @Test
