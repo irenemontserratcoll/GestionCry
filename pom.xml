@@ -33,7 +33,6 @@
         <server.port>8083</server.port>
         <jacoco.version>0.8.11</jacoco.version>
         <doxygen.config.file>${basedir}/src/main/resources/Doxyfile</doxygen.config.file>
-
     </properties>
     
     <dependencies>
