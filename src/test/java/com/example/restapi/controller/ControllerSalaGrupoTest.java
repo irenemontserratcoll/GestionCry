@@ -1,142 +1,127 @@
-/*package com.example.restapi.controller;
+package com.example.restapi.controller;
 
 import com.example.restapi.model.SalaGrupal;
 import com.example.restapi.service.ServicioSalaGrupo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
+import org.mockito.*;
+import org.springframework.http.ResponseEntity;
 
-import java.util.Arrays;
-import java.util.Optional;
+import java.util.*;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-@WebMvcTest(SalaGrupalController.class)
-class SalaGrupalControllerTest {
+public class ControllerSalaGrupoTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
+    @Mock
     private ServicioSalaGrupo servicioSalaGrupo;
 
-    private SalaGrupal sala1;
-    private SalaGrupal sala2;
+    @InjectMocks
+    private SalaGrupalController salaGrupalController;
 
     @BeforeEach
     void setUp() {
-        sala1 = new SalaGrupal(1, 101, 2);
-        sala2 = new SalaGrupal(2, 202, 4);
+        MockitoAnnotations.openMocks(this);
+    }
+
+    private SalaGrupal crearSalaEjemplo() {
+        SalaGrupal sala = new SalaGrupal();
+        sala.setPiso(1);
+        sala.setNumeroSala(101);
+        sala.setNumeroPersonas(6);
+        return sala;
     }
 
     @Test
-    void testGetAllSalas() throws Exception {
-        Mockito.when(servicioSalaGrupo.findAll()).thenReturn(Arrays.asList(sala1, sala2));
+    public void testGetAllSalas() {
+        List<SalaGrupal> salas = Collections.singletonList(crearSalaEjemplo());
+        when(servicioSalaGrupo.findAll()).thenReturn(salas);
 
-        mockMvc.perform(get("/api/sala-grupal/all"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(2)));
+        List<SalaGrupal> resultado = salaGrupalController.getAllSalas();
+
+        assertEquals(1, resultado.size());
+        verify(servicioSalaGrupo, times(1)).findAll();
     }
 
     @Test
-    void testGetSalaByPisoAndNumeroSala_Found() throws Exception {
-        Mockito.when(servicioSalaGrupo.findByPisoAndNumeroSala(1, 101)).thenReturn(Optional.of(sala1));
+    public void testGetSalaByPisoAndNumeroSalaExistente() {
+        SalaGrupal sala = crearSalaEjemplo();
+        when(servicioSalaGrupo.findByPisoAndNumeroSala(1, 101)).thenReturn(Optional.of(sala));
 
-        mockMvc.perform(get("/api/sala-grupal/1/101"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.piso").value(1))
-                .andExpect(jsonPath("$.numeroSala").value(101));
+        ResponseEntity<SalaGrupal> response = salaGrupalController.getSalaByPisoAndNumeroSala(1, 101);
+
+        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(101, response.getBody().getNumeroSala());
     }
 
     @Test
-    void testGetSalaByPisoAndNumeroSala_NotFound() throws Exception {
-        Mockito.when(servicioSalaGrupo.findByPisoAndNumeroSala(5, 505)).thenReturn(Optional.empty());
+    public void testGetSalaByPisoAndNumeroSalaNoExistente() {
+        when(servicioSalaGrupo.findByPisoAndNumeroSala(1, 999)).thenReturn(Optional.empty());
 
-        mockMvc.perform(get("/api/sala-grupal/5/505"))
-                .andExpect(status().isNotFound());
+        ResponseEntity<SalaGrupal> response = salaGrupalController.getSalaByPisoAndNumeroSala(1, 999);
+
+        assertEquals(404, response.getStatusCodeValue());
+        assertNull(response.getBody());
     }
 
     @Test
-    void testCreateSala_Success() throws Exception {
-        Mockito.doNothing().when(servicioSalaGrupo).addSala(any(SalaGrupal.class));
+    public void testCreateSala() {
+        SalaGrupal sala = crearSalaEjemplo();
 
-        mockMvc.perform(post("/api/sala-grupal")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                                {
-                                    "piso": 3,
-                                    "numeroSala": 303,
-                                    "disponible": true
-                                }
-                                """))
-                .andExpect(status().isOk())
-                .andExpect(content().string("Sala creada exitosamente"));
+        doNothing().when(servicioSalaGrupo).addSala(sala);
+
+        ResponseEntity<String> response = salaGrupalController.createSala(sala);
+
+        assertEquals(200, response.getStatusCodeValue());
+        assertEquals("Sala creada exitosamente", response.getBody());
+        verify(servicioSalaGrupo, times(1)).addSala(sala);
     }
 
     @Test
-    void testUpdateSala_Success() throws Exception {
-        Mockito.doNothing().when(servicioSalaGrupo).updateSala(any(SalaGrupal.class));
+    public void testUpdateSalaExito() {
+        SalaGrupal sala = crearSalaEjemplo();
 
-        mockMvc.perform(put("/api/sala-grupal/1/101")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                                {
-                                    "piso": 1,
-                                    "numeroSala": 101,
-                                    "disponible": false
-                                }
-                                """))
-                .andExpect(status().isOk())
-                .andExpect(content().string("Sala actualizada exitosamente"));
+        doNothing().when(servicioSalaGrupo).updateSala(sala);
+
+        ResponseEntity<String> response = salaGrupalController.updateSala(1, 101, sala);
+
+        assertEquals(200, response.getStatusCodeValue());
+        assertEquals("Sala actualizada exitosamente", response.getBody());
+        verify(servicioSalaGrupo, times(1)).updateSala(sala);
     }
 
     @Test
-    void testUpdateSala_BadRequest_DifferentPisoOrNumeroSala() throws Exception {
-        mockMvc.perform(put("/api/sala-grupal/1/101")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                                {
-                                    "piso": 2,
-                                    "numeroSala": 202,
-                                    "disponible": true
-                                }
-                                """))
-                .andExpect(status().isBadRequest())
-                .andExpect(content().string("El piso y número de sala no coinciden"));
+    public void testUpdateSalaDatosInconsistentes() {
+        SalaGrupal sala = crearSalaEjemplo();
+        sala.setNumeroSala(999); // diferente del path variable
+
+        ResponseEntity<String> response = salaGrupalController.updateSala(1, 101, sala);
+
+        assertEquals(400, response.getStatusCodeValue());
+        assertTrue(response.getBody().contains("no coinciden"));
+        verify(servicioSalaGrupo, never()).updateSala(any());
     }
 
     @Test
-    void testUpdateSala_NotFound_WhenServiceThrowsException() throws Exception {
-        Mockito.doThrow(new RuntimeException("Sala no encontrada")).when(servicioSalaGrupo).updateSala(any(SalaGrupal.class));
+    public void testUpdateSalaLanzaExcepcion() {
+        SalaGrupal sala = crearSalaEjemplo();
+        doThrow(new RuntimeException("Sala no encontrada")).when(servicioSalaGrupo).updateSala(sala);
 
-        mockMvc.perform(put("/api/sala-grupal/1/101")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                                {
-                                    "piso": 1,
-                                    "numeroSala": 101,
-                                    "disponible": false
-                                }
-                                """))
-                .andExpect(status().isNotFound())
-                .andExpect(content().string("Sala no encontrada"));
+        ResponseEntity<String> response = salaGrupalController.updateSala(1, 101, sala);
+
+        assertEquals(404, response.getStatusCodeValue());
+        assertTrue(response.getBody().contains("Sala no encontrada"));
     }
 
     @Test
-    void testDeleteSala_Success() throws Exception {
-        Mockito.doNothing().when(servicioSalaGrupo).deleteSala(1, 101);
+    public void testDeleteSala() {
+        doNothing().when(servicioSalaGrupo).deleteSala(1, 101);
 
-        mockMvc.perform(delete("/api/sala-grupal/1/101"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("Sala eliminada exitosamente"));
+        ResponseEntity<String> response = salaGrupalController.deleteSala(1, 101);
+
+        assertEquals(200, response.getStatusCodeValue());
+        assertEquals("Sala eliminada exitosamente", response.getBody());
+        verify(servicioSalaGrupo, times(1)).deleteSala(1, 101);
     }
-}*/
+}
