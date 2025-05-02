@@ -80,22 +80,6 @@ public class Usuario {
                 '}';
     }
 
-    // Método equals
-    /*@Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        Usuario usuario = (Usuario) obj;
-        return id == usuario.id &&
-               nombre.equals(usuario.nombre) &&
-               correo.equals(usuario.correo) &&
-               contrasena.equals(usuario.contrasena);
-    }*/
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
