@@ -1,4 +1,3 @@
-/* 
 package com.example.restapi.controller;
 
 import com.example.restapi.model.Ordenador;
@@ -15,6 +14,8 @@ import java.util.Optional;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 public class ControllerOrdenadorTest {
@@ -89,7 +90,8 @@ public class ControllerOrdenadorTest {
 
     @Test
     public void testAddOrdenadorSuccess() {
-        doNothing().when(servicioOrdenadores).addOrdenador(any(Ordenador.class));
+        Ordenador ordenador = crearOrdenadorEjemplo();
+        when(servicioOrdenadores.addOrdenador(any(Ordenador.class))).thenReturn(ordenador);
 
         ResponseEntity<String> response = ordenadorController.addOrdenador("Dell", "Inspiron", "XYZ123", true);
 
@@ -110,9 +112,10 @@ public class ControllerOrdenadorTest {
 
     @Test
     public void testUpdateOrdenadorSuccess() {
-        doNothing().when(servicioOrdenadores).updateOrdenador(eq(1L), any(Ordenador.class));
+        Ordenador ordenador = crearOrdenadorEjemplo();
+        when(servicioOrdenadores.updateOrdenador(eq(1L), any(Ordenador.class))).thenReturn(ordenador);
 
-        ResponseEntity<String> response = ordenadorController.updateOrdenador(1L, crearOrdenadorEjemplo());
+        ResponseEntity<String> response = ordenadorController.updateOrdenador(1L, ordenador);
 
         assertEquals(200, response.getStatusCodeValue());
         assertTrue(response.getBody().contains("Ordenador actualizado correctamente"));
@@ -148,4 +151,3 @@ public class ControllerOrdenadorTest {
         assertTrue(response.getBody().contains("Error al eliminar el ordenador"));
     }
 }
-*/
