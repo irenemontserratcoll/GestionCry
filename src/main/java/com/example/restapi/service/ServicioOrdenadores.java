@@ -40,9 +40,9 @@ public class ServicioOrdenadores {
     }
 
     // Obtener ordenadores disponibles o no disponibles
-    public List<Ordenador> findByDisponible(boolean disponible) {
-        return repositorioOrdenadores.findByDisponible(disponible);
-    }
+    //public List<Ordenador> findByDisponible(boolean disponible) {
+    //    return repositorioOrdenadores.findByDisponible(disponible);
+    //}
 
     // Agregar un nuevo ordenador
     public Ordenador addOrdenador(Ordenador ordenador) {
