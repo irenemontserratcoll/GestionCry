@@ -82,4 +82,20 @@ class EspacioIndividualTest {
 
         assertNotEquals(espacio1, espacio2);
     }
+
+    @Test
+    void testEqualsConObjetoDeOtraClase() {
+        EspacioIndividual espacio = new EspacioIndividual(2, 5);
+        espacio.setId(300L);
+
+        assertNotEquals(espacio, "otro objeto");
+    }
+
+    void testEqualsConIdNulo() {
+        EspacioIndividual espacio1 = new EspacioIndividual(2, 5);
+        EspacioIndividual espacio2 = new EspacioIndividual(2, 5);
+
+        // Ambos tienen ID null, pero los demás campos son iguales
+        assertNotEquals(espacio1, espacio2);
+    }
 }
