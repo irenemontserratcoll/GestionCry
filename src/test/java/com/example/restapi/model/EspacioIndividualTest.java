@@ -98,4 +98,15 @@ class EspacioIndividualTest {
         // Ambos tienen ID null, pero los demás campos son iguales
         assertNotEquals(espacio1, espacio2);
     }
+
+    @Test
+    void testHashCodeConIdNull() {
+        EspacioIndividual espacio = new EspacioIndividual(3, 7);
+        // No seteamos ID, queda como null
+
+        int esperado = 31 * 0 + Integer.hashCode(3);
+        esperado = 31 * esperado + Integer.hashCode(7);
+
+        assertEquals(esperado, espacio.hashCode());
+    }
 }

@@ -97,6 +97,13 @@ class UsuarioTest {
         assertEquals(usuario1.hashCode(), usuario2.hashCode());
     }
 
+    @Test
+    void testEqualsConIdDiferente() {
+        Usuario usuario1 = new Usuario(1, "Nombre", "correo@example.com", "pass");
+        Usuario usuario2 = new Usuario(2, "Nombre", "correo@example.com", "pass");
+
+        assertNotEquals(usuario1, usuario2);
+    }
 
     @Test
     void testToString() {
@@ -107,5 +114,4 @@ class UsuarioTest {
         String expected = "Usuario{id=1, nombre='Marta', correo='marta@example.com', contrasena='123abc'}";
         assertEquals(expected, usuario.toString());
     }
-
 }
