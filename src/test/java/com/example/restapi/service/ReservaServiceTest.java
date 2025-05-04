@@ -19,10 +19,15 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 
+import com.example.restapi.model.EspacioIndividual;
+import com.example.restapi.model.Libro;
+import com.example.restapi.model.Ordenador;
 import com.example.restapi.model.Reserva;
+import com.example.restapi.model.SalaGrupal;
 import com.example.restapi.repository.RepositorioEspacioIndividual;
 import com.example.restapi.repository.RepositorioLibros;
 import com.example.restapi.repository.RepositorioOrdenadores;
@@ -147,5 +152,84 @@ class ReservaServiceTest {
 
         assertNull(resultado);
         verify(reservaRepository, never()).save(any(Reserva.class));
+    }
+
+     @Test
+    void testCargarRecursosRelacionadosTodosNull() {
+        Reserva reserva = new Reserva();
+        reservaService.crearReserva(reserva);
+        // No debe lanzar excepción, test de ruta sin recursos
+        verifyNoInteractions(libroRepository, ordenadorRepository, salaGrupalRepository, espacioIndividualRepository);
+    }
+
+    @Test
+    void testCargarRecursosRelacionadosConIdsPeroNoExisten() {
+        Reserva reserva = new Reserva();
+        reserva.setLibro(new Libro());
+        reserva.getLibro().setId(1L);
+
+        reserva.setOrdenador(new Ordenador());
+        reserva.getOrdenador().setId(2L);
+
+        reserva.setSalaGrupal(new SalaGrupal());
+        reserva.getSalaGrupal().setId(3L);
+
+        reserva.setEspacioIndividual(new EspacioIndividual());
+        reserva.getEspacioIndividual().setId(4L);
+
+        when(libroRepository.findById(1L)).thenReturn(Optional.empty());
+        when(ordenadorRepository.findById(2L)).thenReturn(Optional.empty());
+        when(salaGrupalRepository.findById(3L)).thenReturn(Optional.empty());
+        when(espacioIndividualRepository.findById(4L)).thenReturn(Optional.empty());
+
+        reservaService.crearReserva(reserva);
+
+        assertNull(reserva.getLibro());
+        assertNull(reserva.getOrdenador());
+        assertNull(reserva.getSalaGrupal());
+        assertNull(reserva.getEspacioIndividual());
+    }
+
+    @Test
+    void testCargarRecursosRelacionadosTodosExisten() {
+        Libro libro = new Libro();
+        libro.setId(1L);
+        Ordenador ordenador = new Ordenador();
+        ordenador.setId(2L);
+        SalaGrupal sala = new SalaGrupal();
+        sala.setId(3L);
+        EspacioIndividual espacio = new EspacioIndividual();
+        espacio.setId(4L);
+
+        Reserva reserva = new Reserva();
+        reserva.setLibro(libro);
+        reserva.setOrdenador(ordenador);
+        reserva.setSalaGrupal(sala);
+        reserva.setEspacioIndividual(espacio);
+
+        when(libroRepository.findById(1L)).thenReturn(Optional.of(libro));
+        when(ordenadorRepository.findById(2L)).thenReturn(Optional.of(ordenador));
+        when(salaGrupalRepository.findById(3L)).thenReturn(Optional.of(sala));
+        when(espacioIndividualRepository.findById(4L)).thenReturn(Optional.of(espacio));
+
+        reservaService.crearReserva(reserva);
+
+        assertEquals(libro, reserva.getLibro());
+        assertEquals(ordenador, reserva.getOrdenador());
+        assertEquals(sala, reserva.getSalaGrupal());
+        assertEquals(espacio, reserva.getEspacioIndividual());
+    }
+
+    @Test
+    void testCargarRecursosRelacionadosConRecursosPeroSinId() {
+        Reserva reserva = new Reserva();
+        reserva.setLibro(new Libro());  // ID null
+        reserva.setOrdenador(new Ordenador()); // ID null
+        reserva.setSalaGrupal(new SalaGrupal()); // ID null
+        reserva.setEspacioIndividual(new EspacioIndividual()); // ID null
+
+        reservaService.crearReserva(reserva);
+
+        verifyNoInteractions(libroRepository, ordenadorRepository, salaGrupalRepository, espacioIndividualRepository);
     }
 }
