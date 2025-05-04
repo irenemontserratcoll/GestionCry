@@ -104,5 +104,9 @@ class ReservaTest {
 
         assertTrue(toString.contains("Cliente Test"));
         assertTrue(toString.contains("cliente@test.com"));
+        assertTrue(toString.contains("libro=N/A"));
+        assertTrue(toString.contains("ordenador=N/A"));
+        assertTrue(toString.contains("salaGrupal=N/A"));
+        assertTrue(toString.contains("espacioIndividual=N/A"));
     }
 }
