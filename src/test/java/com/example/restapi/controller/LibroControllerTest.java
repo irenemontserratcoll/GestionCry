@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Collections;
@@ -15,6 +15,8 @@ import java.util.Optional;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
 
@@ -77,6 +79,17 @@ public class LibroControllerTest {
     }
 
     @Test
+    void testGetLibroByTituloNotFound() {
+        String titulo = "Título No Existente";
+        when(servicioLibros.findByTitulo(titulo)).thenReturn(Optional.empty());
+
+        ResponseEntity<Libro> response = libroController.getLibroByTitulo(titulo);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertNull(response.getBody());
+    }
+
+    @Test
     public void testGetLibroByAutor() {
         when(servicioLibros.findByAutor("George Orwell")).thenReturn(Optional.of(libroEjemplo));
 
@@ -87,6 +100,17 @@ public class LibroControllerTest {
     }
 
     @Test
+    void testGetLibroByAutorNotFound() {
+        String autor = "Autor Inexistente";
+        when(servicioLibros.findByAutor(autor)).thenReturn(Optional.empty());
+
+        ResponseEntity<Libro> response = libroController.getLibroByAutor(autor);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertNull(response.getBody());
+    }
+
+    @Test
     public void testGetLibroByIsbn() {
         when(servicioLibros.findByIsbn("1234567890")).thenReturn(Optional.of(libroEjemplo));
 
@@ -94,6 +118,17 @@ public class LibroControllerTest {
 
         assertEquals(200, response.getStatusCodeValue());
         assertEquals("1984", response.getBody().getTitulo());
+    }
+
+    @Test
+    void testGetLibroByIsbnNotFound() {
+        String isbn = "123-456-789";
+        when(servicioLibros.findByIsbn(isbn)).thenReturn(Optional.empty());
+
+        ResponseEntity<Libro> response = libroController.getLibroByIsbn(isbn);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertNull(response.getBody());
     }
 
     @Test
