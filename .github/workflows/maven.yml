@@ -32,4 +32,14 @@ jobs:
     - name: Install Doxygen
       run: |
         sudo apt-get update
-        sudo apt-get install -y doxygen graphviz
+        sudo apt-get install -y doxygen graphviz   
+    - name: Build and analyze
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=irenemontserratcoll_GestionCry        
+    - name: Run Integration Tests
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -Pintegration integration-test org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=unaguil_SpringBootLibraryFork
+    - name: Run Performance Tests
+        run: mvn -Pperformance integration-test
