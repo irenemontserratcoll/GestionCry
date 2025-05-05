@@ -80,21 +80,19 @@ public class Usuario {
                 '}';
     }
 
-    // Método equals
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
         Usuario usuario = (Usuario) obj;
+
         return id == usuario.id &&
-               nombre.equals(usuario.nombre) &&
-               correo.equals(usuario.correo) &&
-               contrasena.equals(usuario.contrasena);
+            (nombre == null ? usuario.nombre == null : nombre.equals(usuario.nombre)) &&
+            (correo == null ? usuario.correo == null : correo.equals(usuario.correo)) &&
+            (contrasena == null ? usuario.contrasena == null : contrasena.equals(usuario.contrasena));
     }
+
 
     // Método hashCode
     @Override

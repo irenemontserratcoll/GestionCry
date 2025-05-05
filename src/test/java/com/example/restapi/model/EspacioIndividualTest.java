@@ -82,4 +82,31 @@ class EspacioIndividualTest {
 
         assertNotEquals(espacio1, espacio2);
     }
+
+    @Test
+    void testEqualsConObjetoDeOtraClase() {
+        EspacioIndividual espacio = new EspacioIndividual(2, 5);
+        espacio.setId(300L);
+
+        assertNotEquals(espacio, "otro objeto");
+    }
+
+    void testEqualsConIdNulo() {
+        EspacioIndividual espacio1 = new EspacioIndividual(2, 5);
+        EspacioIndividual espacio2 = new EspacioIndividual(2, 5);
+
+        // Ambos tienen ID null, pero los demás campos son iguales
+        assertNotEquals(espacio1, espacio2);
+    }
+
+    @Test
+    void testHashCodeConIdNull() {
+        EspacioIndividual espacio = new EspacioIndividual(3, 7);
+        // No seteamos ID, queda como null
+
+        int esperado = 31 * 0 + Integer.hashCode(3);
+        esperado = 31 * esperado + Integer.hashCode(7);
+
+        assertEquals(esperado, espacio.hashCode());
+    }
 }

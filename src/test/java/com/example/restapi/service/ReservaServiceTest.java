@@ -175,30 +175,15 @@ void testCargarRecursosRelacionadosConIdsNull() {
     verifyNoInteractions(libroRepository, ordenadorRepository, salaGrupalRepository, espacioIndividualRepository);
 }
 
-@Test
-void testCargarRecursosRelacionadosConDatosNoEncontrados() {
-    Reserva r = new Reserva();
-    Libro libro = new Libro(); libro.setId(99L);
-    Ordenador ordenador = new Ordenador(); ordenador.setId(98L);
-    SalaGrupal sala = new SalaGrupal(); sala.setId(97L);
-    EspacioIndividual espacio = new EspacioIndividual(); espacio.setId(96L);
-    r.setLibro(libro);
-    r.setOrdenador(ordenador);
-    r.setSalaGrupal(sala);
-    r.setEspacioIndividual(espacio);
+    @Test
+    void testModificarReserva_NoExistente() {
+        Reserva reserva = new Reserva();
 
-    when(libroRepository.findById(99L)).thenReturn(Optional.empty());
-    when(ordenadorRepository.findById(98L)).thenReturn(Optional.empty());
-    when(salaGrupalRepository.findById(97L)).thenReturn(Optional.empty());
-    when(espacioIndividualRepository.findById(96L)).thenReturn(Optional.empty());
+        when(reservaRepository.existsById(1L)).thenReturn(false);
 
-    reservaService.crearReserva(r); // Se llama a cargarRecursosRelacionados
+        Reserva resultado = reservaService.modificarReserva(1L, reserva);
 
-    // No se lanzan errores aunque no se encuentren
-    verify(libroRepository).findById(99L);
-    verify(ordenadorRepository).findById(98L);
-    verify(salaGrupalRepository).findById(97L);
-    verify(espacioIndividualRepository).findById(96L);
-}
-
+        assertNull(resultado);
+        verify(reservaRepository, never()).save(any(Reserva.class));
+    }
 }

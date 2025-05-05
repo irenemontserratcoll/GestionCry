@@ -454,7 +454,7 @@ public class ClienteWebController {
         reserva.setSalaGrupalId(salaGrupalId);
         reserva.setEspacioIndividualId(espacioIndividualId);
 
-        reservaService.crearReserva(reserva); // 💾 GUARDAR EN LA BBDD
+        reservaService.crearReserva(reserva); // Guardar la reserva en la base de datos
 
         model.addAttribute("success", "Reserva guardada correctamente.");
     } catch (Exception e) {

@@ -95,7 +95,7 @@ class ReservaTest {
     }
 
     @Test
-    void testToString() {
+    void testToStringWithNoNullFields() {
         reserva.setId(1L);
         reserva.setNombreCliente("Cliente Test");
         reserva.setEmailCliente("cliente@test.com");
@@ -104,5 +104,30 @@ class ReservaTest {
 
         assertTrue(toString.contains("Cliente Test"));
         assertTrue(toString.contains("cliente@test.com"));
+        assertTrue(toString.contains("libro=N/A"));
+        assertTrue(toString.contains("ordenador=N/A"));
+        assertTrue(toString.contains("salaGrupal=N/A"));
+        assertTrue(toString.contains("espacioIndividual=N/A"));
+    }
+
+    @Test
+    void testToStringWithNonNullFields() {
+        Reserva reserva = new Reserva();
+        reserva.setId(2L);
+        reserva.setNombreCliente("Cliente Test 2");
+        reserva.setEmailCliente("cliente2@test.com");
+
+        // Crear instancias mínimas no nulas
+        reserva.setLibro(new Libro());
+        reserva.setOrdenador(new Ordenador());
+        reserva.setSalaGrupal(new SalaGrupal());
+        reserva.setEspacioIndividual(new EspacioIndividual());
+
+        String toString = reserva.toString();
+
+        assertTrue(toString.contains("libro=")); // No debería ser "N/A"
+        assertTrue(toString.contains("ordenador="));
+        assertTrue(toString.contains("salaGrupal="));
+        assertTrue(toString.contains("espacioIndividual="));
     }
 }

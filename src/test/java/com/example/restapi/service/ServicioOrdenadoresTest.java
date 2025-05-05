@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 class ServicioOrdenadoresTest {
@@ -55,6 +56,19 @@ class ServicioOrdenadoresTest {
     }
 
     @Test
+    void testFindByNumeroSerie() {
+        Ordenador ordenador = new Ordenador();
+        ordenador.setNumeroSerie("XYZ123");
+        when(repositorioOrdenadores.findByNumeroSerie("XYZ123")).thenReturn(Optional.of(ordenador));
+
+        Optional<Ordenador> result = servicioOrdenadores.findByNumeroSerie("XYZ123");
+
+        assertTrue(result.isPresent());
+        assertEquals("XYZ123", result.get().getNumeroSerie());
+        verify(repositorioOrdenadores, times(1)).findByNumeroSerie("XYZ123");
+    }
+
+    @Test
     void testFindAll() {
         Ordenador ordenador1 = new Ordenador();
         Ordenador ordenador2 = new Ordenador();
@@ -93,6 +107,21 @@ class ServicioOrdenadoresTest {
         verify(repositorioOrdenadores, times(1)).save(ordenador);
     }
 
+    @Test
+    void testUpdateOrdenador_NotFound() {
+        Ordenador ordenador = new Ordenador();
+        ordenador.setId(1L);
+        when(repositorioOrdenadores.findById(1L)).thenReturn(Optional.empty());
+
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            servicioOrdenadores.updateOrdenador(1L, ordenador);
+        });
+
+        assertEquals("Ordenador no encontrado con ID: 1", exception.getMessage());
+        verify(repositorioOrdenadores, times(1)).findById(1L);
+        verify(repositorioOrdenadores, never()).save(any(Ordenador.class));
+    }
+    
     @Test
     void testDeleteOrdenador() {
         doNothing().when(repositorioOrdenadores).deleteById(1L);
