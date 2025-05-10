@@ -41,6 +41,7 @@ public class UsuarioController {
             servicioUsuarios.addUsuario(usuario);
             return new ResponseEntity<>("Usuario agregado correctamente", HttpStatus.CREATED);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>("Error al agregar el usuario: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
