@@ -341,7 +341,7 @@
         <div id="reservas" class="tab-content">
             <div class="table-wrapper">
                 <table class="styled-table">
-                    <thead>
+                   <thead>
                         <tr>
                             <th>#</th>
                             <th>Nombre</th>
@@ -353,6 +353,7 @@
                             <th>Ordenador</th>
                             <th>Sala Grupal</th>
                             <th>Espacio Individual</th>
+                            <th>Eliminar</th>
                         </tr>
                     </thead>
                 </table>
@@ -371,6 +372,13 @@
                                 <td th:text="${reserva.ordenador != null ? reserva.ordenador.modelo : '-'}"></td>
                                 <td th:text="${reserva.salaGrupal != null ? reserva.salaGrupal.numeroSala : '-'}"></td>
                                 <td th:text="${reserva.espacioIndividual != null ? reserva.espacioIndividual.numeroAsiento : '-'}"></td>
+                                <td>
+                                    <form th:action="@{/delete-reserva}" method="post"
+                                        onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta reserva?');">
+                                        <input type="hidden" name="id" th:value="${reserva.id}" />
+                                        <button type="submit" class="btn-delete">🗑️</button>
+                                    </form>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
