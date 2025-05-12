@@ -1,5 +1,6 @@
 package com.example.restapi.client;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -242,65 +243,65 @@ public class ClienteWebController {
     }
 
     // RESERVAS ADMIN
-    @PostMapping("/add-reserva")
-    public String addReserva(@RequestParam("nombreCliente") String nombreCliente, @RequestParam("emailCliente") String emailCliente,
-    @RequestParam("fechaReserva") Date fechaReserva, @RequestParam("horaReserva") String horaReserva,
-    @RequestParam("numPersonas") int numPersonas, @RequestParam(required = false) Long libroId,
-    @RequestParam(required = false) Long ordenadorId, @RequestParam(required = false) Long salaGrupalId,
-    @RequestParam(required = false) Long espacioIndividualId, Model model) {
+   @PostMapping("/add-reserva")
+public String addReserva(
+    @RequestParam("nombreCliente") String nombreCliente,
+    @RequestParam("emailCliente") String emailCliente,
+    @RequestParam("fechaReserva") String fechaReservaStr, // <- como String
+    @RequestParam("horaReserva") String horaReserva,
+    @RequestParam("numPersonas") int numPersonas,
+    @RequestParam(required = false) Long libroId,
+    @RequestParam(required = false) Long ordenadorId,
+    @RequestParam(required = false) Long salaGrupalId,
+    @RequestParam(required = false) Long espacioIndividualId,
+    Model model) {
 
-        String url = apiBaseUrl + "/api/reservas/add";
-        try {
-            // Crear un objeto tipo Reserva y setear sus valores
-            Reserva reserva = new Reserva();
-            reserva.setNombreCliente(nombreCliente);
-            reserva.setEmailCliente(emailCliente);
-            reserva.setFechaReserva(fechaReserva);
-            reserva.setHoraReserva(horaReserva);
-            reserva.setNumPersonas(numPersonas);
-            reserva.setLibroId(libroId);
-            reserva.setOrdenadorId(ordenadorId);
-            reserva.setSalaGrupalId(salaGrupalId);
-            reserva.setEspacioIndividualId(espacioIndividualId);
+    String url = apiBaseUrl + "/api/reservas/add";
+    try {
+        // Convertir la fecha manualmente
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date fechaReserva = formatter.parse(fechaReservaStr);
 
-            // Crear headers con tipo JSON
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
+        Reserva reserva = new Reserva();
+        reserva.setNombreCliente(nombreCliente);
+        reserva.setEmailCliente(emailCliente);
+        reserva.setFechaReserva(fechaReserva);
+        reserva.setHoraReserva(horaReserva);
+        reserva.setNumPersonas(numPersonas);
+        reserva.setLibroId(libroId);
+        reserva.setOrdenadorId(ordenadorId);
+        reserva.setSalaGrupalId(salaGrupalId);
+        reserva.setEspacioIndividualId(espacioIndividualId);
 
-            // Crear entidad con JSON
-            HttpEntity<Reserva> requestEntity = new HttpEntity<>(reserva, headers);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
 
-            // Enviar la solicitud
-            ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
+        HttpEntity<Reserva> requestEntity = new HttpEntity<>(reserva, headers);
+        ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
 
-            if (response.getStatusCode() == HttpStatus.CREATED) {
-                model.addAttribute("success", "Reserva añadida correctamente.");
-            } else {
-                model.addAttribute("error", "Error al añadir reserva: " + response.getBody());
-            }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                model.addAttribute("error", "Error de conexión con el servidor.");
-            }
-        
-        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de reservas
-        return cargarAdminHomeConUsuarios(model);
+        if (response.getStatusCode() == HttpStatus.CREATED) {
+            model.addAttribute("success", "Reserva añadida correctamente.");
+        } else {
+            model.addAttribute("error", "Error al añadir reserva: " + response.getBody());
         }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        model.addAttribute("error", "Error al procesar la reserva.");
+    }
+
+    return "redirect:/adminHome"; // mejor que recargar con método
+}
+
 
     @PostMapping("/delete-reserva")
     public String deleteReserva(@RequestParam("id") Long id, Model model) {
-        String url = apiBaseUrl + "/api/reservas/delete/" + id; // Endpoint en ReservaController
+        String url = apiBaseUrl + "/api/reservas/" + id;
         try {
-            // Crear la entidad HTTP (puede ser null para DELETE)
-            @SuppressWarnings("null")
             HttpEntity<Void> requestEntity = new HttpEntity<>(null);
-    
-            // Enviar la solicitud DELETE al ReservaController
             ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity, String.class);
-    
-            // Manejar la respuesta
-            if (response.getStatusCode() == HttpStatus.OK) {
+
+            if (response.getStatusCode().is2xxSuccessful()) {
                 model.addAttribute("success", "Reserva eliminada correctamente.");
             } else {
                 model.addAttribute("error", "Error al eliminar la reserva: " + response.getBody());
@@ -310,9 +311,9 @@ public class ClienteWebController {
             model.addAttribute("error", "Error de conexión con el servidor.");
         }
 
-        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de reservas
-        return cargarAdminHomeConUsuarios(model);
+        return "redirect:/adminHome"; 
     }
+
 
     //ORDENADORES ADMIN
     @PostMapping("/add-ordenador")
