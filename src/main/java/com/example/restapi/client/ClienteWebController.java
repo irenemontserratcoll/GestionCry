@@ -18,6 +18,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.restapi.model.EspacioIndividual;
@@ -27,6 +28,10 @@ import com.example.restapi.model.Reserva;
 import com.example.restapi.model.SalaGrupal;
 import com.example.restapi.model.Usuario;
 import com.example.restapi.service.ReservaService;
+import com.example.restapi.service.ServicioEspacioIndividual;
+import com.example.restapi.service.ServicioLibros;
+import com.example.restapi.service.ServicioOrdenadores;
+import com.example.restapi.service.ServicioSalaGrupo;
 
 @Controller
 
@@ -41,6 +46,17 @@ public class ClienteWebController {
     @Autowired
     private ReservaService reservaService;
 
+    @Autowired
+    private ServicioLibros serivicioLibros;
+    
+    @Autowired
+    private ServicioEspacioIndividual serivicioEspacioIndividual;
+
+    @Autowired
+    private ServicioOrdenadores servicioOrdenadores;
+
+    @Autowired
+    private ServicioSalaGrupo servicioSalaGrupo;
 
     // REDIRECCIONAMIENTO
     @GetMapping("/")
@@ -431,6 +447,25 @@ public String addReserva(
     // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de salas grupales
     return cargarAdminHomeConUsuarios(model);
     }
+
+
+  
+    @GetMapping("/api/recursos")
+    @ResponseBody
+    public ResponseEntity<?> getRecursosPorTipo(@RequestParam String tipo) {
+    switch (tipo.toLowerCase()) {
+        case "libro":
+            return ResponseEntity.ok(serivicioLibros.findAll());
+        case "ordenador":
+            return ResponseEntity.ok(servicioOrdenadores.findAll());
+        case "sala":
+            return ResponseEntity.ok(servicioSalaGrupo.findAll());
+        case "espacio":
+            return ResponseEntity.ok(serivicioEspacioIndividual.findAll());
+        default:
+            return ResponseEntity.badRequest().body("Tipo de recurso no válido");
+    }
+}
 
    @PostMapping("/reservar")
 public String reservarRecurso(

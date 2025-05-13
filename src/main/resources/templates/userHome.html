@@ -30,51 +30,31 @@
             <div class="user-form">
                 <h3>Realizar una reserva</h3>
                 <form action="/reservar" method="post">
-                    <input type="text" name="nombreCliente" placeholder="Nombre completo" required>
-                    <input type="email" name="emailCliente" placeholder="Correo electrónico" required>
-                    <input type="date" name="fechaReserva" required>
-                    <input type="time" name="horaReserva" required>
-                    <input type="number" name="numPersonas" placeholder="Número de personas" min="1" required>
+                <input type="text" name="nombreCliente" placeholder="Nombre completo" required>
+                <input type="email" name="emailCliente" placeholder="Correo electrónico" required>
+                <input type="date" name="fechaReserva" required>
+                <input type="time" name="horaReserva" required>
+                <input type="number" name="numPersonas" placeholder="Número de personas" min="1" required>
 
-                    <label for="tipoRecurso">Seleccionar recurso:</label>
-                    <select name="tipoRecurso" id="tipoRecurso" onchange="mostrarOpciones()" required>
-                        <option value="">-- Seleccione una opción --</option>
-                        <option value="libro">Libro</option>
-                        <option value="ordenador">Ordenador</option>
-                        <option value="salaGrupal">Sala Grupal</option>
-                        <option value="espacioIndividual">Espacio Individual</option>
+                <label for="tipoRecurso">Seleccionar tipo de recurso:</label>
+                <select name="tipoRecurso" id="tipoRecurso" required>
+                    <option value="">-- Seleccione una opción --</option>
+                    <option value="libro">Libro</option>
+                    <option value="ordenador">Ordenador</option>
+                    <option value="sala">Sala Grupal</option>
+                    <option value="espacio">Espacio Individual</option>
+                </select>
+
+                <div id="contenedor-recursos" style="margin-top: 10px; display:none;">
+                    <label for="recursoId">Seleccione un recurso:</label>
+                    <select name="recursoId" id="recursoId" required>
+                        <option value="">-- Seleccione un recurso --</option>
                     </select>
+                </div>
 
-                    <div id="opciones-libro" class="opcion-recurso" style="display:none;">
-                        <label for="libroId">Selecciona un libro:</label>
-                        <select name="libroId" id="libroId">
-                            <option th:each="libro : ${libros}" th:value="${libro.id}" th:text="${libro.titulo}"></option>
-                        </select>
-                    </div>
+                <button type="submit" class="btn-add">Reservar</button>
+            </form>
 
-                    <div id="opciones-ordenador" class="opcion-recurso" style="display:none;">
-                        <label for="ordenadorId">Selecciona un ordenador:</label>
-                        <select name="ordenadorId" id="ordenadorId">
-                            <option th:each="ordenador : ${ordenadores}" th:value="${ordenador.id}" th:text="${ordenador.modelo}"></option>
-                        </select>
-                    </div>
-
-                    <div id="opciones-salaGrupal" class="opcion-recurso" style="display:none;">
-                        <label for="salaGrupalId">Selecciona una sala grupal:</label>
-                        <select name="salaGrupalId" id="salaGrupalId">
-                            <option th:each="sala : ${salasGrupales}" th:value="${sala.id}" th:text="'Sala ' + ${sala.numeroSala}"></option>
-                        </select>
-                    </div>
-
-                    <div id="opciones-espacioIndividual" class="opcion-recurso" style="display:none;">
-                        <label for="espacioIndividualId">Selecciona un espacio individual:</label>
-                        <select name="espacioIndividualId" id="espacioIndividualId">
-                            <option th:each="espacio : ${espaciosIndividuales}" th:value="${espacio.id}" th:text="'Asiento ' + ${espacio.numeroAsiento}"></option>
-                        </select>
-                    </div>
-
-                    <button type="submit" class="btn-add">Reservar</button>
-                </form>
             </div>
         </div>
     </div>
@@ -98,5 +78,70 @@
             }
         }
     </script>
+    <script>
+    document.getElementById("tipoRecurso").addEventListener("change", function () {
+        const tipo = this.value;
+        const recursoSelect = document.getElementById("recursoId");
+        const contenedor = document.getElementById("contenedor-recursos");
+
+        recursoSelect.innerHTML = "<option value=''>Cargando...</option>";
+        contenedor.style.display = "block";
+
+        if (!tipo) {
+            recursoSelect.innerHTML = "<option value=''>-- Seleccione un recurso --</option>";
+            contenedor.style.display = "none";
+            return;
+        }
+
+        fetch(`/api/recursos?tipo=${tipo}`)
+            .then(response => response.json())
+            .then(data => {
+                recursoSelect.innerHTML = "<option value=''>-- Seleccione un recurso --</option>";
+
+                data.forEach(recurso => {
+                    const option = document.createElement("option");
+                    option.value = recurso.id;
+
+                    // Mostrar nombre legible
+                    if (tipo === "libro") option.text = recurso.titulo;
+                    else if (tipo === "ordenador") option.text = recurso.modelo;
+                    else if (tipo === "sala") option.text = "Sala " + recurso.numeroSala;
+                    else if (tipo === "espacio") option.text = "Asiento " + recurso.numeroAsiento;
+                    else option.text = "Recurso " + recurso.id;
+
+                    recursoSelect.appendChild(option);
+                });
+            })
+            .catch(error => {
+                recursoSelect.innerHTML = "<option value=''>Error cargando recursos</option>";
+                console.error(error);
+            });
+    });
+
+    // Antes de enviar el formulario, asignamos el recurso al campo correspondiente
+    document.querySelector("form").addEventListener("submit", function (e) {
+        const tipo = document.getElementById("tipoRecurso").value;
+        const recursoId = document.getElementById("recursoId").value;
+
+        // Borrar cualquier input oculto viejo
+        document.querySelectorAll(".recurso-hidden").forEach(el => el.remove());
+
+        if (tipo && recursoId) {
+            const input = document.createElement("input");
+            input.type = "hidden";
+            input.classList.add("recurso-hidden");
+
+            // Asignar al campo correcto
+            if (tipo === "libro") input.name = "libroId";
+            else if (tipo === "ordenador") input.name = "ordenadorId";
+            else if (tipo === "sala") input.name = "salaGrupalId";
+            else if (tipo === "espacio") input.name = "espacioIndividualId";
+
+            input.value = recursoId;
+            this.appendChild(input);
+        }
+    });
+</script>
+
 </body>
 </html>
