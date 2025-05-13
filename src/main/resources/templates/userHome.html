@@ -47,36 +47,32 @@
 
                     <div id="opciones-libro" class="opcion-recurso" style="display:none;">
                         <label for="libroId">Selecciona un libro:</label>
-                        <input type="libroId" name="libroId" required>
                         <select name="libroId" id="libroId">
                             <option th:each="libro : ${libros}" th:value="${libro.id}" th:text="${libro.titulo}"></option>
                         </select>
                     </div>
-                    
+
                     <div id="opciones-ordenador" class="opcion-recurso" style="display:none;">
                         <label for="ordenadorId">Selecciona un ordenador:</label>
                         <select name="ordenadorId" id="ordenadorId">
                             <option th:each="ordenador : ${ordenadores}" th:value="${ordenador.id}" th:text="${ordenador.modelo}"></option>
                         </select>
                     </div>
-                    
+
                     <div id="opciones-salaGrupal" class="opcion-recurso" style="display:none;">
                         <label for="salaGrupalId">Selecciona una sala grupal:</label>
                         <select name="salaGrupalId" id="salaGrupalId">
                             <option th:each="sala : ${salasGrupales}" th:value="${sala.id}" th:text="'Sala ' + ${sala.numeroSala}"></option>
                         </select>
                     </div>
-                    
+
                     <div id="opciones-espacioIndividual" class="opcion-recurso" style="display:none;">
                         <label for="espacioIndividualId">Selecciona un espacio individual:</label>
                         <select name="espacioIndividualId" id="espacioIndividualId">
                             <option th:each="espacio : ${espaciosIndividuales}" th:value="${espacio.id}" th:text="'Asiento ' + ${espacio.numeroAsiento}"></option>
                         </select>
                     </div>
-                    
 
-
-                    
                     <button type="submit" class="btn-add">Reservar</button>
                 </form>
             </div>
@@ -104,53 +100,3 @@
     </script>
 </body>
 </html>
-<style>
-    /* Estilos para el contenedor principal */
-    .admin-container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        text-align: center;
-    }
-
-    /* Estilos para el logo */
-    .logo {
-        width: 150px;
-        height: auto;
-    }
-
-    /* Estilos para los mensajes de éxito y error */
-    .success-message, .error-message {
-        padding: 10px;
-        margin-bottom: 20px;
-        border-radius: 5px;
-    }
-    
-    .success-message {
-        background-color: #d4edda;
-        color: #155724;
-    }
-    
-    .error-message {
-        background-color: #f8d7da;
-        color: #721c24;
-    }
-
-    /* Estilos para el menú de pestañas */
-    .tab-menu {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 20px;
-    }
-
-    .tab {
-        padding: 10px 20px;
-        cursor: pointer;
-        background-color: #f1f1f1;
-        border-radius: 5px 5px 0 0;
-        border-bottom: none;
-    }
-
-    .tab.active {
-        background-color: #fff;
-    }

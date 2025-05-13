@@ -432,18 +432,22 @@ public String addReserva(
     return cargarAdminHomeConUsuarios(model);
     }
 
-    @PostMapping("/reservar")
-    public String reservarRecurso(@RequestParam("nombreCliente") String nombreCliente,
-                              @RequestParam("emailCliente") String emailCliente,
-                              @RequestParam("fechaReserva") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaReserva,
-                              @RequestParam("horaReserva") String horaReserva,
-                              @RequestParam("numPersonas") int numPersonas,
-                              @RequestParam(required = false) Long libroId,
-                              @RequestParam(required = false) Long ordenadorId,
-                              @RequestParam(required = false) Long salaGrupalId,
-                              @RequestParam(required = false) Long espacioIndividualId,
-                              Model model) {
+   @PostMapping("/reservar")
+public String reservarRecurso(
+    @RequestParam("nombreCliente") String nombreCliente,
+    @RequestParam("emailCliente") String emailCliente,
+    @RequestParam("fechaReserva") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaReserva,
+    @RequestParam("horaReserva") String horaReserva,
+    @RequestParam("numPersonas") int numPersonas,
+    @RequestParam(required = false) Long libroId,
+    @RequestParam(required = false) Long ordenadorId,
+    @RequestParam(required = false) Long salaGrupalId,
+    @RequestParam(required = false) Long espacioIndividualId,
+    Model model) {
+    
+
     try {
+        // Guardar la reserva
         Reserva reserva = new Reserva();
         reserva.setNombreCliente(nombreCliente);
         reserva.setEmailCliente(emailCliente);
@@ -455,16 +459,16 @@ public String addReserva(
         reserva.setSalaGrupalId(salaGrupalId);
         reserva.setEspacioIndividualId(espacioIndividualId);
 
-        reservaService.crearReserva(reserva); // Guardar la reserva en la base de datos
+        reservaService.crearReserva(reserva); // Guardar en la BD
 
+        
         model.addAttribute("success", "Reserva guardada correctamente.");
     } catch (Exception e) {
         e.printStackTrace();
         model.addAttribute("error", "Error al guardar la reserva.");
     }
 
-    return "userHome"; // Aquí vuelves a la vista principal del usuario
+
+    return "userHome"; // Redirige a la página de inicio del usuario
 }
-
-
 }
