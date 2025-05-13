@@ -109,7 +109,12 @@
             <scope>test</scope>
         </dependency>
 
-        
+		<dependency>
+			<groupId>com.github.noconnor</groupId>
+			<artifactId>junitperf-junit5</artifactId>
+			<version>1.37.0</version>
+			<scope>test</scope>
+		</dependency>
 
     </dependencies>
 
