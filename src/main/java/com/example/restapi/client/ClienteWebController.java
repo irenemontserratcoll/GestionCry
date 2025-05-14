@@ -517,6 +517,75 @@ public class ClienteWebController {
         return cargarAdminHomeConUsuarios(model);
     }
 
+    // ESPACIOS INDIVIDUALES ADMIN
+    @PostMapping("/add-espacio-individual")
+    public String addEspacioIndividual(@RequestParam("piso") int piso,
+            @RequestParam("numeroAsiento") int numeroAsiento, Model model) {
+        String url = apiBaseUrl + "/api/espacios/add";
+        try {
+            // Crear un objeto tipo EspacioIndividual y setear sus valores
+            EspacioIndividual espacioIndividual = new EspacioIndividual();
+            espacioIndividual.setPiso(piso);
+            espacioIndividual.setNumeroAsiento(numeroAsiento);
+
+            // Crear headers con tipo JSON
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            // Crear entidad con JSON
+            HttpEntity<EspacioIndividual> requestEntity = new HttpEntity<>(espacioIndividual, headers);
+
+            // Enviar la solicitud
+            ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
+
+            if (response.getStatusCode() == HttpStatus.CREATED) {
+                model.addAttribute("success", "Espacio individual añadido correctamente.");
+            } else {
+                model.addAttribute("error", "Error al añadir el espacio individual: " + response.getBody());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("error", "Error de conexión con el servidor.");
+        }
+
+        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de
+        // espacios
+        // individuales
+        return cargarAdminHomeConUsuarios(model);
+    }
+
+    @PostMapping("/delete-espacio-individual")
+    public String deleteEspacioIndividual(@RequestParam("piso") int piso,
+            @RequestParam("numeroAsiento") int numeroAsiento, Model model) {
+        String url = apiBaseUrl + "/api/espacios/delete/" + piso + "/" + numeroAsiento; // Endpoint en
+                                                                                        // EspacioIndividualController
+        try {
+            // Crear la entidad HTTP (puede ser null para DELETE)
+            @SuppressWarnings("null")
+            HttpEntity<Void> requestEntity = new HttpEntity<>(null);
+
+            // Enviar la solicitud DELETE al EspacioIndividualController
+            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity,
+                    String.class);
+
+            // Manejar la respuesta
+            if (response.getStatusCode() == HttpStatus.OK) {
+                model.addAttribute("success", "Espacio individual eliminado correctamente.");
+            } else {
+                model.addAttribute("error", "Error al eliminar el espacio individual: " + response.getBody());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("error", "Error de conexión con el servidor.");
+        }
+
+        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de
+        // espacios
+        // individuales
+        return cargarAdminHomeConUsuarios(model);
+    }
+
     @GetMapping("/api/recursos")
     @ResponseBody
     public ResponseEntity<?> getRecursosPorTipo(@RequestParam String tipo) {
