@@ -1,0 +1,215 @@
+\doxysection{com.\+example.\+restapi.\+client.\+Cliente\+Web\+Controller Class Reference}
+\hypertarget{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller}{}\label{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller}\index{com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a102aecba31328120b0e27f441668652c}{Cliente\+Web\+Controller}} (Rest\+Template rest\+Template)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a79f258fa1f07415ad5cb94a597360d8f}{redirect\+To\+Login}} ()
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ae8112beb8400b18140a9affa61ca9df5}{cargar\+Admin\+Home\+Con\+Usuarios}} (Model model)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a7c5c01e7611d75083e472d4722f18690}{user\+Home}} (Model model)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a5a104ca4c5094a7e9d1cb3e6a918479f}{login\+Admin}} (@Request\+Param("{}email"{}) String email, @Request\+Param("{}password"{}) String password, Model model)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ac225cefcd80b6d654cf704c0b9178278}{login\+User}} (@Request\+Param("{}email"{}) String email, @Request\+Param("{}password"{}) String password, Model model)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a05ec37fb5ab7009a6a938b5976cce545}{add\+User}} (@Request\+Param("{}nombre"{}) String nombre, @Request\+Param("{}correo"{}) String correo, @Request\+Param("{}password"{}) String password, Model model)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_aff9caabc28fd3f66aa9e80fb887068e4}{delete\+User}} (@Request\+Param("{}correo"{}) String correo, Model model)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_aa4ebd19043697e4f7fb4bf6a6eaf7ad0}{add\+Reserva}} ( @Request\+Param("{}nombre\+Cliente"{}) String nombre\+Cliente, @Request\+Param("{}email\+Cliente"{}) String email\+Cliente, @Request\+Param("{}fecha\+Reserva"{}) String fecha\+Reserva\+Str, @Request\+Param("{}hora\+Reserva"{}) String hora\+Reserva, @Request\+Param("{}num\+Personas"{}) int num\+Personas, @Request\+Param(required=false) Long libro\+Id, @Request\+Param(required=false) Long ordenador\+Id, @Request\+Param(required=false) Long sala\+Grupal\+Id, @Request\+Param(required=false) Long espacio\+Individual\+Id, Model model)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_acb7fabc6bf60389e9f35dcd24bae1eaf}{delete\+Reserva}} (@Request\+Param("{}id"{}) Long id, Model model)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_af6a6de75100959a10747a4a9ed46c81d}{add\+Ordenador}} (@Request\+Param("{}marca"{}) String marca, @Request\+Param("{}modelo"{}) String modelo, @Request\+Param("{}numero\+Serie"{}) String numero\+Serie, @Request\+Param("{}disponible"{}) boolean disponible, Model model)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ad5910c3a32faf3f56704575888dd5237}{delete\+Ordenador}} (@Request\+Param("{}id"{}) Integer id, Model model)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a41f3906b30c759ee06fb238bba5cc9cd}{add\+Sala\+Grupal}} (@Request\+Param("{}piso"{}) int piso, @Request\+Param("{}numero\+Sala"{}) int numero\+Sala, @Request\+Param("{}numero\+Personas"{}) int numero\+Personas, Model model)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ae87abb5807aad6016ee627b772137276}{delete\+Sala\+Grupal}} (@Request\+Param("{}piso"{}) int piso, @Request\+Param("{}numero\+Sala"{}) int numero\+Sala, Model model)
+\item 
+Response\+Entity$<$?$>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_aa5bb1d3a4144e38364f963e641fca495}{get\+Recursos\+Por\+Tipo}} (@Request\+Param String tipo)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a0f892c3203cd9f9c7cb55ac4b3a48a46}{reservar\+Recurso}} ( @Request\+Param("{}nombre\+Cliente"{}) String nombre\+Cliente, @Request\+Param("{}email\+Cliente"{}) String email\+Cliente, @Request\+Param("{}fecha\+Reserva"{}) @Date\+Time\+Format(pattern="{}yyyy-\/MM-\/dd"{}) Date fecha\+Reserva, @Request\+Param("{}hora\+Reserva"{}) String hora\+Reserva, @Request\+Param("{}num\+Personas"{}) int num\+Personas, @Request\+Param(required=false) Long libro\+Id, @Request\+Param(required=false) Long ordenador\+Id, @Request\+Param(required=false) Long sala\+Grupal\+Id, @Request\+Param(required=false) Long espacio\+Individual\+Id, Model model)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_cliente_web_controller_8java_source_l00038}{38}} of file \mbox{\hyperlink{_cliente_web_controller_8java_source}{Cliente\+Web\+Controller.\+java}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a102aecba31328120b0e27f441668652c}\index{com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}!ClienteWebController@{ClienteWebController}}
+\index{ClienteWebController@{ClienteWebController}!com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}}
+\doxysubsubsection{\texorpdfstring{ClienteWebController()}{ClienteWebController()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a102aecba31328120b0e27f441668652c} 
+com.\+example.\+restapi.\+client.\+Cliente\+Web\+Controller.\+Cliente\+Web\+Controller (\begin{DoxyParamCaption}\item[{Rest\+Template}]{rest\+Template}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_cliente_web_controller_8java_source_l00042}{42}} of file \mbox{\hyperlink{_cliente_web_controller_8java_source}{Cliente\+Web\+Controller.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_af6a6de75100959a10747a4a9ed46c81d}\index{com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}!addOrdenador@{addOrdenador}}
+\index{addOrdenador@{addOrdenador}!com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}}
+\doxysubsubsection{\texorpdfstring{addOrdenador()}{addOrdenador()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_af6a6de75100959a10747a4a9ed46c81d} 
+String com.\+example.\+restapi.\+client.\+Cliente\+Web\+Controller.\+add\+Ordenador (\begin{DoxyParamCaption}\item[{@Request\+Param("{}marca"{}) String}]{marca}{, }\item[{@Request\+Param("{}modelo"{}) String}]{modelo}{, }\item[{@Request\+Param("{}numero\+Serie"{}) String}]{numero\+Serie}{, }\item[{@Request\+Param("{}disponible"{}) boolean}]{disponible}{, }\item[{Model}]{model}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_cliente_web_controller_8java_source_l00336}{336}} of file \mbox{\hyperlink{_cliente_web_controller_8java_source}{Cliente\+Web\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_aa4ebd19043697e4f7fb4bf6a6eaf7ad0}\index{com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}!addReserva@{addReserva}}
+\index{addReserva@{addReserva}!com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}}
+\doxysubsubsection{\texorpdfstring{addReserva()}{addReserva()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_aa4ebd19043697e4f7fb4bf6a6eaf7ad0} 
+String com.\+example.\+restapi.\+client.\+Cliente\+Web\+Controller.\+add\+Reserva (\begin{DoxyParamCaption}\item[{@Request\+Param("{}nombre\+Cliente"{}) String}]{nombre\+Cliente}{, }\item[{@Request\+Param("{}email\+Cliente"{}) String}]{email\+Cliente}{, }\item[{@Request\+Param("{}fecha\+Reserva"{}) String}]{fecha\+Reserva\+Str}{, }\item[{@Request\+Param("{}hora\+Reserva"{}) String}]{hora\+Reserva}{, }\item[{@Request\+Param("{}num\+Personas"{}) int}]{num\+Personas}{, }\item[{@Request\+Param(required=false) Long}]{libro\+Id}{, }\item[{@Request\+Param(required=false) Long}]{ordenador\+Id}{, }\item[{@Request\+Param(required=false) Long}]{sala\+Grupal\+Id}{, }\item[{@Request\+Param(required=false) Long}]{espacio\+Individual\+Id}{, }\item[{Model}]{model}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_cliente_web_controller_8java_source_l00263}{263}} of file \mbox{\hyperlink{_cliente_web_controller_8java_source}{Cliente\+Web\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a41f3906b30c759ee06fb238bba5cc9cd}\index{com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}!addSalaGrupal@{addSalaGrupal}}
+\index{addSalaGrupal@{addSalaGrupal}!com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}}
+\doxysubsubsection{\texorpdfstring{addSalaGrupal()}{addSalaGrupal()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a41f3906b30c759ee06fb238bba5cc9cd} 
+String com.\+example.\+restapi.\+client.\+Cliente\+Web\+Controller.\+add\+Sala\+Grupal (\begin{DoxyParamCaption}\item[{@Request\+Param("{}piso"{}) int}]{piso}{, }\item[{@Request\+Param("{}numero\+Sala"{}) int}]{numero\+Sala}{, }\item[{@Request\+Param("{}numero\+Personas"{}) int}]{numero\+Personas}{, }\item[{Model}]{model}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_cliente_web_controller_8java_source_l00389}{389}} of file \mbox{\hyperlink{_cliente_web_controller_8java_source}{Cliente\+Web\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a05ec37fb5ab7009a6a938b5976cce545}\index{com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}!addUser@{addUser}}
+\index{addUser@{addUser}!com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}}
+\doxysubsubsection{\texorpdfstring{addUser()}{addUser()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a05ec37fb5ab7009a6a938b5976cce545} 
+String com.\+example.\+restapi.\+client.\+Cliente\+Web\+Controller.\+add\+User (\begin{DoxyParamCaption}\item[{@Request\+Param("{}nombre"{}) String}]{nombre}{, }\item[{@Request\+Param("{}correo"{}) String}]{correo}{, }\item[{@Request\+Param("{}password"{}) String}]{password}{, }\item[{Model}]{model}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_cliente_web_controller_8java_source_l00200}{200}} of file \mbox{\hyperlink{_cliente_web_controller_8java_source}{Cliente\+Web\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ae8112beb8400b18140a9affa61ca9df5}\index{com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}!cargarAdminHomeConUsuarios@{cargarAdminHomeConUsuarios}}
+\index{cargarAdminHomeConUsuarios@{cargarAdminHomeConUsuarios}!com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}}
+\doxysubsubsection{\texorpdfstring{cargarAdminHomeConUsuarios()}{cargarAdminHomeConUsuarios()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ae8112beb8400b18140a9affa61ca9df5} 
+String com.\+example.\+restapi.\+client.\+Cliente\+Web\+Controller.\+cargar\+Admin\+Home\+Con\+Usuarios (\begin{DoxyParamCaption}\item[{Model}]{model}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_cliente_web_controller_8java_source_l00068}{68}} of file \mbox{\hyperlink{_cliente_web_controller_8java_source}{Cliente\+Web\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ad5910c3a32faf3f56704575888dd5237}\index{com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}!deleteOrdenador@{deleteOrdenador}}
+\index{deleteOrdenador@{deleteOrdenador}!com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}}
+\doxysubsubsection{\texorpdfstring{deleteOrdenador()}{deleteOrdenador()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ad5910c3a32faf3f56704575888dd5237} 
+String com.\+example.\+restapi.\+client.\+Cliente\+Web\+Controller.\+delete\+Ordenador (\begin{DoxyParamCaption}\item[{@Request\+Param("{}id"{}) Integer}]{id}{, }\item[{Model}]{model}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_cliente_web_controller_8java_source_l00368}{368}} of file \mbox{\hyperlink{_cliente_web_controller_8java_source}{Cliente\+Web\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_acb7fabc6bf60389e9f35dcd24bae1eaf}\index{com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}!deleteReserva@{deleteReserva}}
+\index{deleteReserva@{deleteReserva}!com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}}
+\doxysubsubsection{\texorpdfstring{deleteReserva()}{deleteReserva()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_acb7fabc6bf60389e9f35dcd24bae1eaf} 
+String com.\+example.\+restapi.\+client.\+Cliente\+Web\+Controller.\+delete\+Reserva (\begin{DoxyParamCaption}\item[{@Request\+Param("{}id"{}) Long}]{id}{, }\item[{Model}]{model}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_cliente_web_controller_8java_source_l00314}{314}} of file \mbox{\hyperlink{_cliente_web_controller_8java_source}{Cliente\+Web\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ae87abb5807aad6016ee627b772137276}\index{com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}!deleteSalaGrupal@{deleteSalaGrupal}}
+\index{deleteSalaGrupal@{deleteSalaGrupal}!com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}}
+\doxysubsubsection{\texorpdfstring{deleteSalaGrupal()}{deleteSalaGrupal()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ae87abb5807aad6016ee627b772137276} 
+String com.\+example.\+restapi.\+client.\+Cliente\+Web\+Controller.\+delete\+Sala\+Grupal (\begin{DoxyParamCaption}\item[{@Request\+Param("{}piso"{}) int}]{piso}{, }\item[{@Request\+Param("{}numero\+Sala"{}) int}]{numero\+Sala}{, }\item[{Model}]{model}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_cliente_web_controller_8java_source_l00426}{426}} of file \mbox{\hyperlink{_cliente_web_controller_8java_source}{Cliente\+Web\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_aff9caabc28fd3f66aa9e80fb887068e4}\index{com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}!deleteUser@{deleteUser}}
+\index{deleteUser@{deleteUser}!com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}}
+\doxysubsubsection{\texorpdfstring{deleteUser()}{deleteUser()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_aff9caabc28fd3f66aa9e80fb887068e4} 
+String com.\+example.\+restapi.\+client.\+Cliente\+Web\+Controller.\+delete\+User (\begin{DoxyParamCaption}\item[{@Request\+Param("{}correo"{}) String}]{correo}{, }\item[{Model}]{model}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_cliente_web_controller_8java_source_l00236}{236}} of file \mbox{\hyperlink{_cliente_web_controller_8java_source}{Cliente\+Web\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_aa5bb1d3a4144e38364f963e641fca495}\index{com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}!getRecursosPorTipo@{getRecursosPorTipo}}
+\index{getRecursosPorTipo@{getRecursosPorTipo}!com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}}
+\doxysubsubsection{\texorpdfstring{getRecursosPorTipo()}{getRecursosPorTipo()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_aa5bb1d3a4144e38364f963e641fca495} 
+Response\+Entity$<$?$>$ com.\+example.\+restapi.\+client.\+Cliente\+Web\+Controller.\+get\+Recursos\+Por\+Tipo (\begin{DoxyParamCaption}\item[{@Request\+Param String}]{tipo}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_cliente_web_controller_8java_source_l00455}{455}} of file \mbox{\hyperlink{_cliente_web_controller_8java_source}{Cliente\+Web\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a5a104ca4c5094a7e9d1cb3e6a918479f}\index{com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}!loginAdmin@{loginAdmin}}
+\index{loginAdmin@{loginAdmin}!com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}}
+\doxysubsubsection{\texorpdfstring{loginAdmin()}{loginAdmin()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a5a104ca4c5094a7e9d1cb3e6a918479f} 
+String com.\+example.\+restapi.\+client.\+Cliente\+Web\+Controller.\+login\+Admin (\begin{DoxyParamCaption}\item[{@Request\+Param("{}email"{}) String}]{email}{, }\item[{@Request\+Param("{}password"{}) String}]{password}{, }\item[{Model}]{model}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_cliente_web_controller_8java_source_l00144}{144}} of file \mbox{\hyperlink{_cliente_web_controller_8java_source}{Cliente\+Web\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ac225cefcd80b6d654cf704c0b9178278}\index{com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}!loginUser@{loginUser}}
+\index{loginUser@{loginUser}!com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}}
+\doxysubsubsection{\texorpdfstring{loginUser()}{loginUser()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ac225cefcd80b6d654cf704c0b9178278} 
+String com.\+example.\+restapi.\+client.\+Cliente\+Web\+Controller.\+login\+User (\begin{DoxyParamCaption}\item[{@Request\+Param("{}email"{}) String}]{email}{, }\item[{@Request\+Param("{}password"{}) String}]{password}{, }\item[{Model}]{model}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_cliente_web_controller_8java_source_l00172}{172}} of file \mbox{\hyperlink{_cliente_web_controller_8java_source}{Cliente\+Web\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a79f258fa1f07415ad5cb94a597360d8f}\index{com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}!redirectToLogin@{redirectToLogin}}
+\index{redirectToLogin@{redirectToLogin}!com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}}
+\doxysubsubsection{\texorpdfstring{redirectToLogin()}{redirectToLogin()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a79f258fa1f07415ad5cb94a597360d8f} 
+String com.\+example.\+restapi.\+client.\+Cliente\+Web\+Controller.\+redirect\+To\+Login (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_cliente_web_controller_8java_source_l00063}{63}} of file \mbox{\hyperlink{_cliente_web_controller_8java_source}{Cliente\+Web\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a0f892c3203cd9f9c7cb55ac4b3a48a46}\index{com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}!reservarRecurso@{reservarRecurso}}
+\index{reservarRecurso@{reservarRecurso}!com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}}
+\doxysubsubsection{\texorpdfstring{reservarRecurso()}{reservarRecurso()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a0f892c3203cd9f9c7cb55ac4b3a48a46} 
+String com.\+example.\+restapi.\+client.\+Cliente\+Web\+Controller.\+reservar\+Recurso (\begin{DoxyParamCaption}\item[{@Request\+Param("{}nombre\+Cliente"{}) String}]{nombre\+Cliente}{, }\item[{@Request\+Param("{}email\+Cliente"{}) String}]{email\+Cliente}{, }\item[{@Request\+Param("{}fecha\+Reserva"{}) @Date\+Time\+Format(pattern="{}yyyy-\/MM-\/dd"{}) Date}]{fecha\+Reserva}{, }\item[{@Request\+Param("{}hora\+Reserva"{}) String}]{hora\+Reserva}{, }\item[{@Request\+Param("{}num\+Personas"{}) int}]{num\+Personas}{, }\item[{@Request\+Param(required=false) Long}]{libro\+Id}{, }\item[{@Request\+Param(required=false) Long}]{ordenador\+Id}{, }\item[{@Request\+Param(required=false) Long}]{sala\+Grupal\+Id}{, }\item[{@Request\+Param(required=false) Long}]{espacio\+Individual\+Id}{, }\item[{Model}]{model}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_cliente_web_controller_8java_source_l00471}{471}} of file \mbox{\hyperlink{_cliente_web_controller_8java_source}{Cliente\+Web\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a7c5c01e7611d75083e472d4722f18690}\index{com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}!userHome@{userHome}}
+\index{userHome@{userHome}!com.example.restapi.client.ClienteWebController@{com.example.restapi.client.ClienteWebController}}
+\doxysubsubsection{\texorpdfstring{userHome()}{userHome()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a7c5c01e7611d75083e472d4722f18690} 
+String com.\+example.\+restapi.\+client.\+Cliente\+Web\+Controller.\+user\+Home (\begin{DoxyParamCaption}\item[{Model}]{model}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_cliente_web_controller_8java_source_l00138}{138}} of file \mbox{\hyperlink{_cliente_web_controller_8java_source}{Cliente\+Web\+Controller.\+java}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/example/restapi/client/\mbox{\hyperlink{_cliente_web_controller_8java}{Cliente\+Web\+Controller.\+java}}\end{DoxyCompactItemize}

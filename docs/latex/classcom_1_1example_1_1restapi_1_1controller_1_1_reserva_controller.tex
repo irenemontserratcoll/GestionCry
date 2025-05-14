@@ -1,0 +1,80 @@
+\doxysection{com.\+example.\+restapi.\+controller.\+Reserva\+Controller Class Reference}
+\hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller}{}\label{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller}\index{com.example.restapi.controller.ReservaController@{com.example.restapi.controller.ReservaController}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Response\+Entity$<$ List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}} $>$ $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_a04e19bbd43f426683fe804d2ae5415d2}{obtener\+Todas\+Las\+Reservas}} ()
+\item 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_ae334154cb4bae890194e77242e714dd2}{obtener\+Reserva\+Por\+Id}} (@Path\+Variable Long id)
+\item 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_a9364145a3a3c66e12aee0a31297629d4}{crear\+Reserva}} (@Request\+Body \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}} reserva)
+\item 
+Response\+Entity$<$ Void $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_a658258ee2952f0f154d00da36fcab993}{eliminar\+Reserva}} (@Path\+Variable Long id)
+\item 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_aad5f858eb8c6446affa430389fdfe2fb}{modificar\+Reserva}} (@Path\+Variable Long id, @Request\+Body \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}} reserva)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_reserva_controller_8java_source_l00022}{22}} of file \mbox{\hyperlink{_reserva_controller_8java_source}{Reserva\+Controller.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_a9364145a3a3c66e12aee0a31297629d4}\index{com.example.restapi.controller.ReservaController@{com.example.restapi.controller.ReservaController}!crearReserva@{crearReserva}}
+\index{crearReserva@{crearReserva}!com.example.restapi.controller.ReservaController@{com.example.restapi.controller.ReservaController}}
+\doxysubsubsection{\texorpdfstring{crearReserva()}{crearReserva()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_a9364145a3a3c66e12aee0a31297629d4} 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}} $>$ com.\+example.\+restapi.\+controller.\+Reserva\+Controller.\+crear\+Reserva (\begin{DoxyParamCaption}\item[{@Request\+Body \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}}]{reserva}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_reserva_controller_8java_source_l00044}{44}} of file \mbox{\hyperlink{_reserva_controller_8java_source}{Reserva\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_a658258ee2952f0f154d00da36fcab993}\index{com.example.restapi.controller.ReservaController@{com.example.restapi.controller.ReservaController}!eliminarReserva@{eliminarReserva}}
+\index{eliminarReserva@{eliminarReserva}!com.example.restapi.controller.ReservaController@{com.example.restapi.controller.ReservaController}}
+\doxysubsubsection{\texorpdfstring{eliminarReserva()}{eliminarReserva()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_a658258ee2952f0f154d00da36fcab993} 
+Response\+Entity$<$ Void $>$ com.\+example.\+restapi.\+controller.\+Reserva\+Controller.\+eliminar\+Reserva (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_reserva_controller_8java_source_l00054}{54}} of file \mbox{\hyperlink{_reserva_controller_8java_source}{Reserva\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_aad5f858eb8c6446affa430389fdfe2fb}\index{com.example.restapi.controller.ReservaController@{com.example.restapi.controller.ReservaController}!modificarReserva@{modificarReserva}}
+\index{modificarReserva@{modificarReserva}!com.example.restapi.controller.ReservaController@{com.example.restapi.controller.ReservaController}}
+\doxysubsubsection{\texorpdfstring{modificarReserva()}{modificarReserva()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_aad5f858eb8c6446affa430389fdfe2fb} 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}} $>$ com.\+example.\+restapi.\+controller.\+Reserva\+Controller.\+modificar\+Reserva (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{id}{, }\item[{@Request\+Body \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}}]{reserva}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_reserva_controller_8java_source_l00062}{62}} of file \mbox{\hyperlink{_reserva_controller_8java_source}{Reserva\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_ae334154cb4bae890194e77242e714dd2}\index{com.example.restapi.controller.ReservaController@{com.example.restapi.controller.ReservaController}!obtenerReservaPorId@{obtenerReservaPorId}}
+\index{obtenerReservaPorId@{obtenerReservaPorId}!com.example.restapi.controller.ReservaController@{com.example.restapi.controller.ReservaController}}
+\doxysubsubsection{\texorpdfstring{obtenerReservaPorId()}{obtenerReservaPorId()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_ae334154cb4bae890194e77242e714dd2} 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}} $>$ com.\+example.\+restapi.\+controller.\+Reserva\+Controller.\+obtener\+Reserva\+Por\+Id (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_reserva_controller_8java_source_l00036}{36}} of file \mbox{\hyperlink{_reserva_controller_8java_source}{Reserva\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_a04e19bbd43f426683fe804d2ae5415d2}\index{com.example.restapi.controller.ReservaController@{com.example.restapi.controller.ReservaController}!obtenerTodasLasReservas@{obtenerTodasLasReservas}}
+\index{obtenerTodasLasReservas@{obtenerTodasLasReservas}!com.example.restapi.controller.ReservaController@{com.example.restapi.controller.ReservaController}}
+\doxysubsubsection{\texorpdfstring{obtenerTodasLasReservas()}{obtenerTodasLasReservas()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_a04e19bbd43f426683fe804d2ae5415d2} 
+Response\+Entity$<$ List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}} $>$ $>$ com.\+example.\+restapi.\+controller.\+Reserva\+Controller.\+obtener\+Todas\+Las\+Reservas (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_reserva_controller_8java_source_l00029}{29}} of file \mbox{\hyperlink{_reserva_controller_8java_source}{Reserva\+Controller.\+java}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/example/restapi/controller/\mbox{\hyperlink{_reserva_controller_8java}{Reserva\+Controller.\+java}}\end{DoxyCompactItemize}

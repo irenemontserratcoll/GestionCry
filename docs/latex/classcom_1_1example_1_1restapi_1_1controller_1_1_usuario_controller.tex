@@ -1,0 +1,95 @@
+\doxysection{com.\+example.\+restapi.\+controller.\+Usuario\+Controller Class Reference}
+\hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller}{}\label{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller}\index{com.example.restapi.controller.UsuarioController@{com.example.restapi.controller.UsuarioController}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_a666dab0d2b2ed1f697f2e150e549f8bf}{Usuario\+Controller}} (\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_usuarios}{Servicio\+Usuarios}} servicio\+Usuarios)
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_usuario}{Usuario}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_a3387709f64f08953cc7ae5af293909f2}{get\+All\+Users}} ()
+\item 
+Response\+Entity$<$ String $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_a1de9689453ce45062d3680fbdd883645}{add\+User}} (@Request\+Param("{}nombre"{}) String nombre, @Request\+Param("{}correo"{}) String correo, @Request\+Param("{}password"{}) String password)
+\item 
+Response\+Entity$<$ String $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_a05a3126bb49e9f6fc5e69917750081c8}{delete\+User}} (@Path\+Variable String correo)
+\item 
+Response\+Entity$<$ String $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_aae53f19c604cb1ffe35aee13ba2ece65}{login}} (@Request\+Param("{}Email"{}) String correo, @Request\+Param("{}Password"{}) String contrasena)
+\item 
+Response\+Entity$<$ String $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_ac855fd6aaa56be0482ff2d4d8a641121}{login\+Admin}} (@Request\+Param("{}Email"{}) String correo, @Request\+Param("{}Password"{}) String contrasena)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_usuario_controller_8java_source_l00019}{19}} of file \mbox{\hyperlink{_usuario_controller_8java_source}{Usuario\+Controller.\+java}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_a666dab0d2b2ed1f697f2e150e549f8bf}\index{com.example.restapi.controller.UsuarioController@{com.example.restapi.controller.UsuarioController}!UsuarioController@{UsuarioController}}
+\index{UsuarioController@{UsuarioController}!com.example.restapi.controller.UsuarioController@{com.example.restapi.controller.UsuarioController}}
+\doxysubsubsection{\texorpdfstring{UsuarioController()}{UsuarioController()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_a666dab0d2b2ed1f697f2e150e549f8bf} 
+com.\+example.\+restapi.\+controller.\+Usuario\+Controller.\+Usuario\+Controller (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_usuarios}{Servicio\+Usuarios}}}]{servicio\+Usuarios}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_usuario_controller_8java_source_l00024}{24}} of file \mbox{\hyperlink{_usuario_controller_8java_source}{Usuario\+Controller.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_a1de9689453ce45062d3680fbdd883645}\index{com.example.restapi.controller.UsuarioController@{com.example.restapi.controller.UsuarioController}!addUser@{addUser}}
+\index{addUser@{addUser}!com.example.restapi.controller.UsuarioController@{com.example.restapi.controller.UsuarioController}}
+\doxysubsubsection{\texorpdfstring{addUser()}{addUser()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_a1de9689453ce45062d3680fbdd883645} 
+Response\+Entity$<$ String $>$ com.\+example.\+restapi.\+controller.\+Usuario\+Controller.\+add\+User (\begin{DoxyParamCaption}\item[{@Request\+Param("{}nombre"{}) String}]{nombre}{, }\item[{@Request\+Param("{}correo"{}) String}]{correo}{, }\item[{@Request\+Param("{}password"{}) String}]{password}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_usuario_controller_8java_source_l00038}{38}} of file \mbox{\hyperlink{_usuario_controller_8java_source}{Usuario\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_a05a3126bb49e9f6fc5e69917750081c8}\index{com.example.restapi.controller.UsuarioController@{com.example.restapi.controller.UsuarioController}!deleteUser@{deleteUser}}
+\index{deleteUser@{deleteUser}!com.example.restapi.controller.UsuarioController@{com.example.restapi.controller.UsuarioController}}
+\doxysubsubsection{\texorpdfstring{deleteUser()}{deleteUser()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_a05a3126bb49e9f6fc5e69917750081c8} 
+Response\+Entity$<$ String $>$ com.\+example.\+restapi.\+controller.\+Usuario\+Controller.\+delete\+User (\begin{DoxyParamCaption}\item[{@Path\+Variable String}]{correo}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_usuario_controller_8java_source_l00052}{52}} of file \mbox{\hyperlink{_usuario_controller_8java_source}{Usuario\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_a3387709f64f08953cc7ae5af293909f2}\index{com.example.restapi.controller.UsuarioController@{com.example.restapi.controller.UsuarioController}!getAllUsers@{getAllUsers}}
+\index{getAllUsers@{getAllUsers}!com.example.restapi.controller.UsuarioController@{com.example.restapi.controller.UsuarioController}}
+\doxysubsubsection{\texorpdfstring{getAllUsers()}{getAllUsers()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_a3387709f64f08953cc7ae5af293909f2} 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_usuario}{Usuario}} $>$ com.\+example.\+restapi.\+controller.\+Usuario\+Controller.\+get\+All\+Users (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_usuario_controller_8java_source_l00031}{31}} of file \mbox{\hyperlink{_usuario_controller_8java_source}{Usuario\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_aae53f19c604cb1ffe35aee13ba2ece65}\index{com.example.restapi.controller.UsuarioController@{com.example.restapi.controller.UsuarioController}!login@{login}}
+\index{login@{login}!com.example.restapi.controller.UsuarioController@{com.example.restapi.controller.UsuarioController}}
+\doxysubsubsection{\texorpdfstring{login()}{login()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_aae53f19c604cb1ffe35aee13ba2ece65} 
+Response\+Entity$<$ String $>$ com.\+example.\+restapi.\+controller.\+Usuario\+Controller.\+login (\begin{DoxyParamCaption}\item[{@Request\+Param("{}Email"{}) String}]{correo}{, }\item[{@Request\+Param("{}Password"{}) String}]{contrasena}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_usuario_controller_8java_source_l00064}{64}} of file \mbox{\hyperlink{_usuario_controller_8java_source}{Usuario\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_ac855fd6aaa56be0482ff2d4d8a641121}\index{com.example.restapi.controller.UsuarioController@{com.example.restapi.controller.UsuarioController}!loginAdmin@{loginAdmin}}
+\index{loginAdmin@{loginAdmin}!com.example.restapi.controller.UsuarioController@{com.example.restapi.controller.UsuarioController}}
+\doxysubsubsection{\texorpdfstring{loginAdmin()}{loginAdmin()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_ac855fd6aaa56be0482ff2d4d8a641121} 
+Response\+Entity$<$ String $>$ com.\+example.\+restapi.\+controller.\+Usuario\+Controller.\+login\+Admin (\begin{DoxyParamCaption}\item[{@Request\+Param("{}Email"{}) String}]{correo}{, }\item[{@Request\+Param("{}Password"{}) String}]{contrasena}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_usuario_controller_8java_source_l00076}{76}} of file \mbox{\hyperlink{_usuario_controller_8java_source}{Usuario\+Controller.\+java}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/example/restapi/controller/\mbox{\hyperlink{_usuario_controller_8java}{Usuario\+Controller.\+java}}\end{DoxyCompactItemize}

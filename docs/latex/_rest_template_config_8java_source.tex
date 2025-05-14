@@ -1,0 +1,23 @@
+\doxysection{Rest\+Template\+Config.\+java}
+\hypertarget{_rest_template_config_8java_source}{}\label{_rest_template_config_8java_source}\index{src/main/java/com/example/restapi/client/RestTemplateConfig.java@{src/main/java/com/example/restapi/client/RestTemplateConfig.java}}
+\mbox{\hyperlink{_rest_template_config_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_rest_template_config_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.restapi.client;}
+\DoxyCodeLine{\Hypertarget{_rest_template_config_8java_source_l00002}00002\ \textcolor{keyword}{import}\ org.springframework.boot.web.client.RestTemplateBuilder;}
+\DoxyCodeLine{\Hypertarget{_rest_template_config_8java_source_l00003}00003\ \textcolor{keyword}{import}\ org.springframework.context.annotation.Bean;}
+\DoxyCodeLine{\Hypertarget{_rest_template_config_8java_source_l00004}00004\ \textcolor{keyword}{import}\ org.springframework.context.annotation.Configuration;}
+\DoxyCodeLine{\Hypertarget{_rest_template_config_8java_source_l00005}00005\ \textcolor{keyword}{import}\ org.springframework.web.client.RestTemplate;}
+\DoxyCodeLine{\Hypertarget{_rest_template_config_8java_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_rest_template_config_8java_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_rest_template_config_8java_source_l00008}00008\ @Configuration}
+\DoxyCodeLine{\Hypertarget{_rest_template_config_8java_source_l00009}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_rest_template_config}{00009}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_rest_template_config}{RestTemplateConfig}}\ \{}
+\DoxyCodeLine{\Hypertarget{_rest_template_config_8java_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{_rest_template_config_8java_source_l00011}00011\ \ \ \ \ @Bean}
+\DoxyCodeLine{\Hypertarget{_rest_template_config_8java_source_l00012}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_rest_template_config_a9ff7f406ffced322081b531920eff6df}{00012}}\ \ \ \ \ \textcolor{keyword}{public}\ RestTemplate\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_rest_template_config_a9ff7f406ffced322081b531920eff6df}{restTemplate}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_rest_template_config_8java_source_l00013}00013\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ RestTemplateBuilder()}
+\DoxyCodeLine{\Hypertarget{_rest_template_config_8java_source_l00014}00014\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .errorHandler(\textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_rest_template_response_error_handler}{RestTemplateResponseErrorHandler}}())}
+\DoxyCodeLine{\Hypertarget{_rest_template_config_8java_source_l00015}00015\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .build();}
+\DoxyCodeLine{\Hypertarget{_rest_template_config_8java_source_l00016}00016\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_rest_template_config_8java_source_l00017}00017\ \}}
+
+\end{DoxyCode}

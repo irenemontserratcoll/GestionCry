@@ -1,0 +1,94 @@
+\doxysection{Reserva\+Service.\+java}
+\hypertarget{_reserva_service_8java_source}{}\label{_reserva_service_8java_source}\index{src/main/java/com/example/restapi/service/ReservaService.java@{src/main/java/com/example/restapi/service/ReservaService.java}}
+\mbox{\hyperlink{_reserva_service_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00001}\mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1service}{00001}}\ \textcolor{keyword}{package\ }com.example.restapi.service;}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00003}00003\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00004}00004\ \textcolor{keyword}{import}\ java.util.Optional;}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00006}00006\ \textcolor{keyword}{import}\ org.springframework.beans.factory.annotation.Autowired;}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00007}00007\ \textcolor{keyword}{import}\ org.springframework.stereotype.Service;}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00009}00009\ \textcolor{keyword}{import}\ com.example.restapi.model.Reserva;}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00010}00010\ \textcolor{keyword}{import}\ com.example.restapi.repository.RepositorioEspacioIndividual;}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00011}00011\ \textcolor{keyword}{import}\ com.example.restapi.repository.RepositorioLibros;}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00012}00012\ \textcolor{keyword}{import}\ com.example.restapi.repository.RepositorioOrdenadores;}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00013}00013\ \textcolor{keyword}{import}\ com.example.restapi.repository.RepositorioSalaGrupo;}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00014}00014\ \textcolor{keyword}{import}\ com.example.restapi.repository.ReservaRepository;}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00016}00016\ @Service}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00017}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_reserva_service}{00017}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_reserva_service}{ReservaService}}\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00019}00019\ \ \ \ \ @Autowired}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_reserva_repository}{ReservaRepository}}\ reservaRepository;}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00022}00022\ \ \ \ \ @Autowired}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00023}00023\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_libros}{RepositorioLibros}}\ libroRepository;}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00025}00025\ \ \ \ \ @Autowired}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_ordenadores}{RepositorioOrdenadores}}\ ordenadorRepository;}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00028}00028\ \ \ \ \ @Autowired}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_sala_grupo}{RepositorioSalaGrupo}}\ salaGrupalRepository;}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00031}00031\ \ \ \ \ @Autowired}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00032}00032\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_espacio_individual}{RepositorioEspacioIndividual}}\ espacioIndividualRepository;}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00034}00034\ \ \ \ \ \textcolor{comment}{//\ Obtener\ todas\ las\ reservas}}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00035}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_reserva_service_aacf8fa306d1aa300b01db08d2d12280f}{00035}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Reserva>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_reserva_service_aacf8fa306d1aa300b01db08d2d12280f}{obtenerTodasLasReservas}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ reservaRepository.findAll();}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00037}00037\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00039}00039\ \ \ \ \ \textcolor{comment}{//\ Obtener\ una\ reserva\ por\ ID}}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00040}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_reserva_service_ac711a6a58b63c7069292de51caf0d858}{00040}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_reserva_service_ac711a6a58b63c7069292de51caf0d858}{obtenerReservaPorId}}(Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ Optional<Reserva>\ reserva\ =\ reservaRepository.findById(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ reserva.orElse(\textcolor{keyword}{null});}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00043}00043\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00045}00045\ \ \ \ \ \textcolor{comment}{//\ Crear\ una\ nueva\ reserva}}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00046}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_reserva_service_a7b7549b5c6375ee1b63437728988e73d}{00046}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_reserva_service_a7b7549b5c6375ee1b63437728988e73d}{crearReserva}}(\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}\ reserva)\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00047}00047\ \ \ \ \ \ \ \ \ cargarRecursosRelacionados(reserva);}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ reservaRepository.save(reserva);}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00049}00049\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00051}00051\ \ \ \ \ \textcolor{comment}{//\ Eliminar\ una\ reserva}}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00052}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_reserva_service_a8d1707dd3cfa66af66864e60aaaacf2d}{00052}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{boolean}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_reserva_service_a8d1707dd3cfa66af66864e60aaaacf2d}{eliminarReserva}}(Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (reservaRepository.existsById(\textcolor{keywordtype}{id}))\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ reservaRepository.deleteById(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00058}00058\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00060}00060\ \ \ \ \ \textcolor{comment}{//\ Modificar\ una\ reserva}}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00061}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_reserva_service_ad74015773f6cdd964f7ba68daa3c92c5}{00061}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_reserva_service_ad74015773f6cdd964f7ba68daa3c92c5}{modificarReserva}}(Long\ \textcolor{keywordtype}{id},\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}\ reserva)\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (reservaRepository.existsById(\textcolor{keywordtype}{id}))\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a48363173b0549f4f75edded26fab17dc}{setId}}(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ cargarRecursosRelacionados(reserva);}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ reservaRepository.save(reserva);}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00066}00066\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00068}00068\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00070}00070\ \ \ \ \ \textcolor{comment}{//\ Método\ auxiliar\ para\ cargar\ los\ recursos\ por\ ID\ desde\ la\ base\ de\ datos}}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00071}00071\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ cargarRecursosRelacionados(\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}\ reserva)\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a04dbe5ae35c035365f18728f4ca2c170}{getLibro}}()\ !=\ \textcolor{keyword}{null}\ \&\&\ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a04dbe5ae35c035365f18728f4ca2c170}{getLibro}}().\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_recurso_reservable_acbfedb910ba9362dccb1244aeac5f53e}{getId}}()\ !=\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a3f03d2ee01ad1a6a7ce3e437c2a11e0a}{setLibro}}(libroRepository.findById(reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a04dbe5ae35c035365f18728f4ca2c170}{getLibro}}().\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_recurso_reservable_acbfedb910ba9362dccb1244aeac5f53e}{getId}}()).orElse(\textcolor{keyword}{null}));}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00074}00074\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a174284edbcac07bf61fb3cca9369663e}{getOrdenador}}()\ !=\ \textcolor{keyword}{null}\ \&\&\ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a174284edbcac07bf61fb3cca9369663e}{getOrdenador}}().\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a14debae53f913da10acd69c7d2ddd61a}{getId}}()\ !=\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a5117105e8b591fbc1f8c1a1163fbcebf}{setOrdenador}}(ordenadorRepository.findById(reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a174284edbcac07bf61fb3cca9369663e}{getOrdenador}}().\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a14debae53f913da10acd69c7d2ddd61a}{getId}}()).orElse(\textcolor{keyword}{null}));}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00078}00078\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a5ea5c3dd48c5c781cba5ace03a1c7daa}{getSalaGrupal}}()\ !=\ \textcolor{keyword}{null}\ \&\&\ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a5ea5c3dd48c5c781cba5ace03a1c7daa}{getSalaGrupal}}().\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_recurso_reservable_acbfedb910ba9362dccb1244aeac5f53e}{getId}}()\ !=\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a0eec38d1e972755a0efd412db293a4fa}{setSalaGrupal}}(salaGrupalRepository.findById(reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a5ea5c3dd48c5c781cba5ace03a1c7daa}{getSalaGrupal}}().\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_recurso_reservable_acbfedb910ba9362dccb1244aeac5f53e}{getId}}()).orElse(\textcolor{keyword}{null}));}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00082}00082\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00084}00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a09b38046aa6ca90bf0aeac0169da6226}{getEspacioIndividual}}()\ !=\ \textcolor{keyword}{null}\ \&\&\ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a09b38046aa6ca90bf0aeac0169da6226}{getEspacioIndividual}}().\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_recurso_reservable_acbfedb910ba9362dccb1244aeac5f53e}{getId}}()\ !=\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_ac89417fd462fdd83fa61799481fac77a}{setEspacioIndividual}}(espacioIndividualRepository.findById(reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a09b38046aa6ca90bf0aeac0169da6226}{getEspacioIndividual}}().\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_recurso_reservable_acbfedb910ba9362dccb1244aeac5f53e}{getId}}()).orElse(\textcolor{keyword}{null}));}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00086}00086\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00087}00087\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_service_8java_source_l00088}00088\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,102 @@
+\doxysection{Sala\+Grupal.\+java}
+\hypertarget{_sala_grupal_8java_source}{}\label{_sala_grupal_8java_source}\index{src/main/java/com/example/restapi/model/SalaGrupal.java@{src/main/java/com/example/restapi/model/SalaGrupal.java}}
+\mbox{\hyperlink{_sala_grupal_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.restapi.model;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00003}00003\ \textcolor{keyword}{import}\ jakarta.persistence.Column;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00004}00004\ \textcolor{keyword}{import}\ jakarta.persistence.DiscriminatorValue;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00005}00005\ \textcolor{keyword}{import}\ jakarta.persistence.Entity;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00006}00006\ \textcolor{keyword}{import}\ jakarta.persistence.Table;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00008}00008\ @Entity}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00009}00009\ @DiscriminatorValue(\textcolor{stringliteral}{"{}SALAS\_GRUPALES"{}})}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00010}00010\ @Table(name\ =\ \textcolor{stringliteral}{"{}salas\_grupales"{}})\ \textcolor{comment}{//\ Nombre\ de\ la\ tabla\ en\ la\ base\ de\ datos}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00011}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal}{00011}}\ public\ class\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_aa2c952a3ab5a50a2d33fd9ec7b07812b}{SalaGrupal}}\ extends\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_recurso_reservable}{RecursoReservable}}\{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00013}00013\ \ \ \ \ \textcolor{comment}{//@Id}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00014}00014\ \ \ \ \ \textcolor{comment}{//@GeneratedValue(strategy\ =\ GenerationType.IDENTITY)\ //\ Genera\ automáticamente\ el\ ID}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00015}00015\ \ \ \ \ \textcolor{comment}{//private\ Long\ id;\ //\ Identificador\ de\ tipo\ Long}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00017}00017\ \ \ \ \ @Column(name\ =\ \textcolor{stringliteral}{"{}piso"{}},\ nullable\ =\ \textcolor{keyword}{false})\ \textcolor{comment}{//\ Columna\ 'piso',\ no\ puede\ ser\ nula}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{int}\ piso;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00020}00020\ \ \ \ \ @Column(name\ =\ \textcolor{stringliteral}{"{}numero\_sala"{}},\ nullable\ =\ \textcolor{keyword}{false})\ \textcolor{comment}{//\ Columna\ 'numero\_sala',\ no\ puede\ ser\ nula}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00021}00021\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{int}\ numeroSala;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00023}00023\ \ \ \ \ @Column(name\ =\ \textcolor{stringliteral}{"{}numero\_personas"{}},\ nullable\ =\ \textcolor{keyword}{false})\ \textcolor{comment}{//\ Columna\ 'numero\_personas',\ no\ puede\ ser\ nula}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00024}00024\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{int}\ numeroPersonas;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00026}00026\ \ \ \ \ \textcolor{comment}{//\ Constructor\ vacío\ (requerido\ por\ JPA)}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00027}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_aa2c952a3ab5a50a2d33fd9ec7b07812b}{00027}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_aa2c952a3ab5a50a2d33fd9ec7b07812b}{SalaGrupal}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00028}00028\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00030}00030\ \ \ \ \ \textcolor{comment}{//\ Constructor\ con\ parámetros}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00031}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_aa730e3d81f25af5945d273cfb35dced1}{00031}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_aa730e3d81f25af5945d273cfb35dced1}{SalaGrupal}}(\textcolor{keywordtype}{int}\ piso,\ \textcolor{keywordtype}{int}\ numeroSala,\ \textcolor{keywordtype}{int}\ numeroPersonas)\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ this.piso\ =\ piso;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00033}00033\ \ \ \ \ \ \ \ \ this.numeroSala\ =\ numeroSala;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00034}00034\ \ \ \ \ \ \ \ \ this.numeroPersonas\ =\ numeroPersonas;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00035}00035\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00037}00037\ \ \ \ \ \textcolor{comment}{//\ Getters\ y\ Setters}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00038}00038\ \ \ \ \ \textcolor{comment}{//public\ Long\ getId()\ \{}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00039}00039\ \ \ \ \ \textcolor{comment}{//\ \ \ \ return\ id;}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00040}00040\ \ \ \ \ \textcolor{comment}{//\}}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00042}00042\ \ \ \ \ \textcolor{comment}{//public\ void\ setId(Long\ id)\ \{}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00043}00043\ \ \ \ \ \textcolor{comment}{//\ \ \ \ this.id\ =\ id;}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00044}00044\ \ \ \ \ \textcolor{comment}{//\}}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00046}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_a233d9ef357657bae0f01e312e5378d93}{00046}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_a233d9ef357657bae0f01e312e5378d93}{getPiso}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ piso;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00048}00048\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00050}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_a08cc4ebd3a76a703e164eea870d33fc0}{00050}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_a08cc4ebd3a76a703e164eea870d33fc0}{setPiso}}(\textcolor{keywordtype}{int}\ piso)\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (piso\ <=\ 0)\ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}El\ piso\ debe\ ser\ mayor\ a\ 0"{}});}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ this.piso\ =\ piso;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00053}00053\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00055}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_a2e1a3d3c778ec06b7471c2847b357b27}{00055}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_a2e1a3d3c778ec06b7471c2847b357b27}{getNumeroSala}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ numeroSala;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00057}00057\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00059}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_aad3962d0944c6a6e3610a9152bbbe27c}{00059}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_aad3962d0944c6a6e3610a9152bbbe27c}{setNumeroSala}}(\textcolor{keywordtype}{int}\ numeroSala)\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (numeroSala\ <=\ 0)\ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}El\ número\ de\ sala\ debe\ ser\ mayor\ a\ 0"{}});}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00061}00061\ \ \ \ \ \ \ \ \ this.numeroSala\ =\ numeroSala;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00062}00062\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00064}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_ae4cc1ac87f4609097f962a8da4b7c357}{00064}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_ae4cc1ac87f4609097f962a8da4b7c357}{getNumeroPersonas}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ numeroPersonas;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00066}00066\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00068}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_a7b4adf519e3c629026994819e2e3f735}{00068}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_a7b4adf519e3c629026994819e2e3f735}{setNumeroPersonas}}(\textcolor{keywordtype}{int}\ numeroPersonas)\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (numeroPersonas\ <=\ 0)\ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}El\ número\ de\ personas\ debe\ ser\ mayor\ a\ 0"{}});}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00070}00070\ \ \ \ \ \ \ \ \ this.numeroPersonas\ =\ numeroPersonas;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00071}00071\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00073}00073\ \ \ \ \ \textcolor{comment}{//\ Método\ toString}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00074}00074\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00075}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_a75a64fbee522232d9f8238dd2b4c5be6}{00075}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_a75a64fbee522232d9f8238dd2b4c5be6}{toString}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Piso:\ "{}}\ +\ piso\ +\ \textcolor{stringliteral}{"{},\ Sala:\ "{}}\ +\ numeroSala\ +\ \textcolor{stringliteral}{"{},\ Personas:\ "{}}\ +\ numeroPersonas;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00077}00077\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00079}00079\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00080}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_afea0cf0d2019c3a92bb64709ff96754b}{00080}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{boolean}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_afea0cf0d2019c3a92bb64709ff96754b}{equals}}(Object\ obj)\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{this}\ ==\ obj)\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00083}00083\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00084}00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (obj\ ==\ \textcolor{keyword}{null}\ ||\ getClass()\ !=\ obj.getClass())\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00086}00086\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00087}00087\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_aa2c952a3ab5a50a2d33fd9ec7b07812b}{SalaGrupal}}\ sala\ =\ (\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_aa2c952a3ab5a50a2d33fd9ec7b07812b}{SalaGrupal}})\ obj;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_recurso_reservable_acbfedb910ba9362dccb1244aeac5f53e}{getId}}()\ !=\ \textcolor{keyword}{null}\ \&\&\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_recurso_reservable_acbfedb910ba9362dccb1244aeac5f53e}{getId}}().equals(sala.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_recurso_reservable_acbfedb910ba9362dccb1244aeac5f53e}{getId}}());}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00089}00089\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00090}00090\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00091}00091\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00092}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_a2aa250bc861b2d0b055b36f63ce2adc1}{00092}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_a2aa250bc861b2d0b055b36f63ce2adc1}{hashCode}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00093}00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_recurso_reservable_acbfedb910ba9362dccb1244aeac5f53e}{getId}}()\ !=\ \textcolor{keyword}{null}\ ?\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_recurso_reservable_acbfedb910ba9362dccb1244aeac5f53e}{getId}}().hashCode()\ :\ 0;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00094}00094\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00095}00095\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_8java_source_l00096}00096\ \}}
+
+\end{DoxyCode}

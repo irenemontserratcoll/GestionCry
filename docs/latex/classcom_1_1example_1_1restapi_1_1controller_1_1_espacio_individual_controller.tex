@@ -1,0 +1,95 @@
+\doxysection{com.\+example.\+restapi.\+controller.\+Espacio\+Individual\+Controller Class Reference}
+\hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_espacio_individual_controller}{}\label{classcom_1_1example_1_1restapi_1_1controller_1_1_espacio_individual_controller}\index{com.example.restapi.controller.EspacioIndividualController@{com.example.restapi.controller.EspacioIndividualController}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_espacio_individual_controller_a38e584539ee9f7eba05cb43339a41cb1}{Espacio\+Individual\+Controller}} (\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_espacio_individual}{Servicio\+Espacio\+Individual}} servicio\+Espacios)
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual}{Espacio\+Individual}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_espacio_individual_controller_a9117cac1d8cd3668418cc75f291336da}{get\+All\+Espacios}} ()
+\item 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual}{Espacio\+Individual}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_espacio_individual_controller_a84c4c02dc13d48c5b91df7380a3d0605}{get\+Espacio}} (@Path\+Variable int piso, @Path\+Variable int numero\+Asiento)
+\item 
+Response\+Entity$<$ String $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_espacio_individual_controller_a74693a2b903f3b1b67e220ed713f3a1d}{add\+Espacio}} ( @Request\+Param("{}piso"{}) int piso, @Request\+Param("{}numero\+Asiento"{}) int numero\+Asiento)
+\item 
+Response\+Entity$<$ String $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_espacio_individual_controller_a014d08304457aae2ad99957be00a3764}{update\+Espacio}} (@Request\+Body \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual}{Espacio\+Individual}} espacio)
+\item 
+Response\+Entity$<$ String $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_espacio_individual_controller_a444fbd18be4f1313a049dff2a081be75}{delete\+Espacio}} (@Path\+Variable int piso, @Path\+Variable int numero\+Asiento)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_espacio_individual_controller_8java_source_l00028}{28}} of file \mbox{\hyperlink{_espacio_individual_controller_8java_source}{Espacio\+Individual\+Controller.\+java}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_espacio_individual_controller_a38e584539ee9f7eba05cb43339a41cb1}\index{com.example.restapi.controller.EspacioIndividualController@{com.example.restapi.controller.EspacioIndividualController}!EspacioIndividualController@{EspacioIndividualController}}
+\index{EspacioIndividualController@{EspacioIndividualController}!com.example.restapi.controller.EspacioIndividualController@{com.example.restapi.controller.EspacioIndividualController}}
+\doxysubsubsection{\texorpdfstring{EspacioIndividualController()}{EspacioIndividualController()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_espacio_individual_controller_a38e584539ee9f7eba05cb43339a41cb1} 
+com.\+example.\+restapi.\+controller.\+Espacio\+Individual\+Controller.\+Espacio\+Individual\+Controller (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_espacio_individual}{Servicio\+Espacio\+Individual}}}]{servicio\+Espacios}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_espacio_individual_controller_8java_source_l00033}{33}} of file \mbox{\hyperlink{_espacio_individual_controller_8java_source}{Espacio\+Individual\+Controller.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_espacio_individual_controller_a74693a2b903f3b1b67e220ed713f3a1d}\index{com.example.restapi.controller.EspacioIndividualController@{com.example.restapi.controller.EspacioIndividualController}!addEspacio@{addEspacio}}
+\index{addEspacio@{addEspacio}!com.example.restapi.controller.EspacioIndividualController@{com.example.restapi.controller.EspacioIndividualController}}
+\doxysubsubsection{\texorpdfstring{addEspacio()}{addEspacio()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_espacio_individual_controller_a74693a2b903f3b1b67e220ed713f3a1d} 
+Response\+Entity$<$ String $>$ com.\+example.\+restapi.\+controller.\+Espacio\+Individual\+Controller.\+add\+Espacio (\begin{DoxyParamCaption}\item[{@Request\+Param("{}piso"{}) int}]{piso}{, }\item[{@Request\+Param("{}numero\+Asiento"{}) int}]{numero\+Asiento}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_espacio_individual_controller_8java_source_l00052}{52}} of file \mbox{\hyperlink{_espacio_individual_controller_8java_source}{Espacio\+Individual\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_espacio_individual_controller_a444fbd18be4f1313a049dff2a081be75}\index{com.example.restapi.controller.EspacioIndividualController@{com.example.restapi.controller.EspacioIndividualController}!deleteEspacio@{deleteEspacio}}
+\index{deleteEspacio@{deleteEspacio}!com.example.restapi.controller.EspacioIndividualController@{com.example.restapi.controller.EspacioIndividualController}}
+\doxysubsubsection{\texorpdfstring{deleteEspacio()}{deleteEspacio()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_espacio_individual_controller_a444fbd18be4f1313a049dff2a081be75} 
+Response\+Entity$<$ String $>$ com.\+example.\+restapi.\+controller.\+Espacio\+Individual\+Controller.\+delete\+Espacio (\begin{DoxyParamCaption}\item[{@Path\+Variable int}]{piso}{, }\item[{@Path\+Variable int}]{numero\+Asiento}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_espacio_individual_controller_8java_source_l00083}{83}} of file \mbox{\hyperlink{_espacio_individual_controller_8java_source}{Espacio\+Individual\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_espacio_individual_controller_a9117cac1d8cd3668418cc75f291336da}\index{com.example.restapi.controller.EspacioIndividualController@{com.example.restapi.controller.EspacioIndividualController}!getAllEspacios@{getAllEspacios}}
+\index{getAllEspacios@{getAllEspacios}!com.example.restapi.controller.EspacioIndividualController@{com.example.restapi.controller.EspacioIndividualController}}
+\doxysubsubsection{\texorpdfstring{getAllEspacios()}{getAllEspacios()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_espacio_individual_controller_a9117cac1d8cd3668418cc75f291336da} 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual}{Espacio\+Individual}} $>$ com.\+example.\+restapi.\+controller.\+Espacio\+Individual\+Controller.\+get\+All\+Espacios (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_espacio_individual_controller_8java_source_l00039}{39}} of file \mbox{\hyperlink{_espacio_individual_controller_8java_source}{Espacio\+Individual\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_espacio_individual_controller_a84c4c02dc13d48c5b91df7380a3d0605}\index{com.example.restapi.controller.EspacioIndividualController@{com.example.restapi.controller.EspacioIndividualController}!getEspacio@{getEspacio}}
+\index{getEspacio@{getEspacio}!com.example.restapi.controller.EspacioIndividualController@{com.example.restapi.controller.EspacioIndividualController}}
+\doxysubsubsection{\texorpdfstring{getEspacio()}{getEspacio()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_espacio_individual_controller_a84c4c02dc13d48c5b91df7380a3d0605} 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual}{Espacio\+Individual}} $>$ com.\+example.\+restapi.\+controller.\+Espacio\+Individual\+Controller.\+get\+Espacio (\begin{DoxyParamCaption}\item[{@Path\+Variable int}]{piso}{, }\item[{@Path\+Variable int}]{numero\+Asiento}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_espacio_individual_controller_8java_source_l00045}{45}} of file \mbox{\hyperlink{_espacio_individual_controller_8java_source}{Espacio\+Individual\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_espacio_individual_controller_a014d08304457aae2ad99957be00a3764}\index{com.example.restapi.controller.EspacioIndividualController@{com.example.restapi.controller.EspacioIndividualController}!updateEspacio@{updateEspacio}}
+\index{updateEspacio@{updateEspacio}!com.example.restapi.controller.EspacioIndividualController@{com.example.restapi.controller.EspacioIndividualController}}
+\doxysubsubsection{\texorpdfstring{updateEspacio()}{updateEspacio()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_espacio_individual_controller_a014d08304457aae2ad99957be00a3764} 
+Response\+Entity$<$ String $>$ com.\+example.\+restapi.\+controller.\+Espacio\+Individual\+Controller.\+update\+Espacio (\begin{DoxyParamCaption}\item[{@Request\+Body \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual}{Espacio\+Individual}}}]{espacio}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_espacio_individual_controller_8java_source_l00072}{72}} of file \mbox{\hyperlink{_espacio_individual_controller_8java_source}{Espacio\+Individual\+Controller.\+java}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/example/restapi/controller/\mbox{\hyperlink{_espacio_individual_controller_8java}{Espacio\+Individual\+Controller.\+java}}\end{DoxyCompactItemize}

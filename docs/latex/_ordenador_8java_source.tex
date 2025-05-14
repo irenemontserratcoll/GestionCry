@@ -1,0 +1,76 @@
+\doxysection{Ordenador.\+java}
+\hypertarget{_ordenador_8java_source}{}\label{_ordenador_8java_source}\index{src/main/java/com/example/restapi/model/Ordenador.java@{src/main/java/com/example/restapi/model/Ordenador.java}}
+\mbox{\hyperlink{_ordenador_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.restapi.model;}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00003}00003\ \textcolor{keyword}{import}\ jakarta.persistence.*;}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00005}00005\ @Entity}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00006}00006\ @Table(name\ =\ \textcolor{stringliteral}{"{}ordenadores"{}})\ }
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00007}00007\ @DiscriminatorValue(\textcolor{stringliteral}{"{}ORDENADORES"{}})\ \textcolor{comment}{//\ Valor\ del\ discriminador\ para\ este\ tipo\ de\ recurso}}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00008}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador}{00008}}\ public\ class\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a5c4cb8bf7a9036d21abea63fcd137f42}{Ordenador}}\ extends\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_recurso_reservable}{RecursoReservable}}\{}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00010}00010\ \ \ \ \ @Id}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00011}00011\ \ \ \ \ @GeneratedValue(strategy\ =\ GenerationType.IDENTITY)}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00012}00012\ \ \ \ \ \textcolor{keyword}{private}\ Long\ id;}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00013}00013\ \ \ \ \ \textcolor{keyword}{private}\ String\ marca;}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00014}00014\ \ \ \ \ \textcolor{keyword}{private}\ String\ modelo;}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{private}\ String\ numeroSerie;}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00016}00016\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{boolean}\ disponible;}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00018}00018\ \ \ \ \ \textcolor{comment}{//\ Constructor\ sin\ argumentos}}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00019}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a5c4cb8bf7a9036d21abea63fcd137f42}{00019}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a5c4cb8bf7a9036d21abea63fcd137f42}{Ordenador}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00020}00020\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00022}00022\ \ \ \ \ \textcolor{comment}{//\ Constructor\ con\ todos\ los\ atributos}}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00023}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_ab9296cfd7dc4d55b3aeee63eb2a88eec}{00023}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_ab9296cfd7dc4d55b3aeee63eb2a88eec}{Ordenador}}(String\ marca,\ String\ modelo,\ String\ numeroSerie,\ \textcolor{keywordtype}{boolean}\ disponible)\ \{}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00024}00024\ \ \ \ \ \ \ \ \ this.marca\ =\ marca;}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00025}00025\ \ \ \ \ \ \ \ \ this.modelo\ =\ modelo;}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00026}00026\ \ \ \ \ \ \ \ \ this.numeroSerie\ =\ numeroSerie;}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00027}00027\ \ \ \ \ \ \ \ \ this.disponible\ =\ disponible;}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00028}00028\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00030}00030\ \ \ \ \ \textcolor{comment}{//\ Getters\ y\ Setters}}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00031}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a14debae53f913da10acd69c7d2ddd61a}{00031}}\ \ \ \ \ \textcolor{keyword}{public}\ Long\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a14debae53f913da10acd69c7d2ddd61a}{getId}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ id;}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00033}00033\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00035}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a91a761cd27b37e85ffd0448555adffe4}{00035}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a91a761cd27b37e85ffd0448555adffe4}{setId}}(Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ this.id\ =\ id;}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00037}00037\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00039}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_aa9d6a82f7bf8cdd8efb45cdd6df1b9e6}{00039}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_aa9d6a82f7bf8cdd8efb45cdd6df1b9e6}{getMarca}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ marca;}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00041}00041\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00043}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a57f23240a294bab97ea573722d3827cc}{00043}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a57f23240a294bab97ea573722d3827cc}{setMarca}}(String\ marca)\ \{}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ this.marca\ =\ marca;}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00045}00045\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00047}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a211df63f3c8f2d2306b2687511ed410e}{00047}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a211df63f3c8f2d2306b2687511ed410e}{getModelo}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ modelo;}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00049}00049\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00051}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a757041095f5f865d7d8f44e0baeb264b}{00051}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a757041095f5f865d7d8f44e0baeb264b}{setModelo}}(String\ modelo)\ \{}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ this.modelo\ =\ modelo;}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00053}00053\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00055}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a3a02741798cc8d67fcd63bb661d779b6}{00055}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a3a02741798cc8d67fcd63bb661d779b6}{getNumeroSerie}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ numeroSerie;}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00057}00057\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00059}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a9c0cd7406e1128bc6e54f1bd3e782316}{00059}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a9c0cd7406e1128bc6e54f1bd3e782316}{setNumeroSerie}}(String\ numeroSerie)\ \{}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00060}00060\ \ \ \ \ \ \ \ \ this.numeroSerie\ =\ numeroSerie;}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00063}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_abe2ed5ba986c28e4cd508d82f2d82716}{00063}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{boolean}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_abe2ed5ba986c28e4cd508d82f2d82716}{isDisponible}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ disponible;}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00065}00065\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00067}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a21438986725ecada4445d2945278d937}{00067}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a21438986725ecada4445d2945278d937}{setDisponible}}(\textcolor{keywordtype}{boolean}\ disponible)\ \{}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00068}00068\ \ \ \ \ \ \ \ \ this.disponible\ =\ disponible;}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00069}00069\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_ordenador_8java_source_l00070}00070\ \}}
+
+\end{DoxyCode}

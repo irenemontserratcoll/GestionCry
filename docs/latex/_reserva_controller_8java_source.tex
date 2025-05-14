@@ -1,0 +1,73 @@
+\doxysection{Reserva\+Controller.\+java}
+\hypertarget{_reserva_controller_8java_source}{}\label{_reserva_controller_8java_source}\index{src/main/java/com/example/restapi/controller/ReservaController.java@{src/main/java/com/example/restapi/controller/ReservaController.java}}
+\mbox{\hyperlink{_reserva_controller_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.restapi.controller;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00003}00003\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00005}00005\ \textcolor{keyword}{import}\ org.springframework.beans.factory.annotation.Autowired;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00006}00006\ \textcolor{keyword}{import}\ org.springframework.http.HttpStatus;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00007}00007\ \textcolor{keyword}{import}\ org.springframework.http.ResponseEntity;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00008}00008\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.DeleteMapping;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00009}00009\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.GetMapping;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00010}00010\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.PathVariable;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00011}00011\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.PostMapping;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00012}00012\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.PutMapping;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00013}00013\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.RequestBody;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00014}00014\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.RequestMapping;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00015}00015\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.RestController;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00017}00017\ \textcolor{keyword}{import}\ com.example.restapi.model.Reserva;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00018}00018\ \textcolor{keyword}{import}\ com.example.restapi.service.ReservaService;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00020}00020\ @RestController}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00021}00021\ @RequestMapping(\textcolor{stringliteral}{"{}/api/reservas"{}})}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00022}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller}{00022}}\ public\ class\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller}{ReservaController}}\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00024}00024\ \ \ \ \ @Autowired}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_reserva_service}{ReservaService}}\ reservaService;}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00027}00027\ \ \ \ \ \textcolor{comment}{//\ Obtener\ todas\ las\ reservas}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00028}00028\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/all"{}})}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00029}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_a04e19bbd43f426683fe804d2ae5415d2}{00029}}\ \ \ \ \ public\ ResponseEntity<List<\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}>>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_a04e19bbd43f426683fe804d2ae5415d2}{obtenerTodasLasReservas}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ List<Reserva>\ reservas\ =\ reservaService.obtenerTodasLasReservas();}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00031}00031\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ResponseEntity<>(reservas,\ HttpStatus.OK);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00032}00032\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00034}00034\ \ \ \ \ \textcolor{comment}{//\ Obtener\ una\ reserva\ por\ ID}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00035}00035\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/\{id\}"{}})}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00036}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_ae334154cb4bae890194e77242e714dd2}{00036}}\ \ \ \ \ public\ ResponseEntity<\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_ae334154cb4bae890194e77242e714dd2}{obtenerReservaPorId}}(@PathVariable\ Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}\ reserva\ =\ reservaService.obtenerReservaPorId(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ reserva\ !=\ \textcolor{keyword}{null}\ ?\ \textcolor{keyword}{new}\ ResponseEntity<>(reserva,\ HttpStatus.OK)}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ \textcolor{keyword}{new}\ ResponseEntity<>(HttpStatus.NOT\_FOUND);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00040}00040\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00042}00042\ \ \ \ \ \textcolor{comment}{//\ Crear\ una\ nueva\ reserva}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00043}00043\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/add"{}})}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00044}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_a9364145a3a3c66e12aee0a31297629d4}{00044}}\ \ \ \ \ public\ ResponseEntity<\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_a9364145a3a3c66e12aee0a31297629d4}{crearReserva}}(@RequestBody\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}\ reserva)\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (reserva\ !=\ \textcolor{keyword}{null})\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}\ nuevaReserva\ =\ reservaService.crearReserva(reserva);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ResponseEntity<>(nuevaReserva,\ HttpStatus.CREATED);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ResponseEntity<>(HttpStatus.BAD\_REQUEST);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00052}00052\ \ \ \ \ \textcolor{comment}{//\ Eliminar\ una\ reserva}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00053}00053\ \ \ \ \ @DeleteMapping(\textcolor{stringliteral}{"{}/\{id\}"{}})}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00054}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_a658258ee2952f0f154d00da36fcab993}{00054}}\ \ \ \ \ public\ ResponseEntity<Void>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_a658258ee2952f0f154d00da36fcab993}{eliminarReserva}}(@PathVariable\ Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{boolean}\ eliminado\ =\ reservaService.eliminarReserva(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ eliminado\ ?\ \textcolor{keyword}{new}\ ResponseEntity<>(HttpStatus.NO\_CONTENT)}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ \textcolor{keyword}{new}\ ResponseEntity<>(HttpStatus.NOT\_FOUND);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00058}00058\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00060}00060\ \ \ \ \ \textcolor{comment}{//\ Modificar\ una\ reserva}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00061}00061\ \ \ \ \ @PutMapping(\textcolor{stringliteral}{"{}/\{id\}"{}})}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00062}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_aad5f858eb8c6446affa430389fdfe2fb}{00062}}\ \ \ \ \ public\ ResponseEntity<\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_reserva_controller_aad5f858eb8c6446affa430389fdfe2fb}{modificarReserva}}(@PathVariable\ Long\ \textcolor{keywordtype}{id},\ @RequestBody\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}\ reserva)\ \{}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}\ reservaModificada\ =\ reservaService.modificarReserva(\textcolor{keywordtype}{id},\ reserva);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ reservaModificada\ !=\ \textcolor{keyword}{null}\ ?\ \textcolor{keyword}{new}\ ResponseEntity<>(reservaModificada,\ HttpStatus.OK)}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ \textcolor{keyword}{new}\ ResponseEntity<>(HttpStatus.NOT\_FOUND);}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00066}00066\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_reserva_controller_8java_source_l00067}00067\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,69 @@
+\doxysection{Libro.\+java}
+\hypertarget{_libro_8java_source}{}\label{_libro_8java_source}\index{src/main/java/com/example/restapi/model/Libro.java@{src/main/java/com/example/restapi/model/Libro.java}}
+\mbox{\hyperlink{_libro_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.restapi.model;}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00003}00003\ \textcolor{keyword}{import}\ jakarta.persistence.DiscriminatorValue;}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00004}00004\ \textcolor{keyword}{import}\ jakarta.persistence.Entity;}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00005}00005\ \textcolor{keyword}{import}\ jakarta.persistence.Table;}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00007}00007\ @Entity}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00008}00008\ @Table(name\ =\ \textcolor{stringliteral}{"{}libros"{}})\ \textcolor{comment}{//\ Optional:\ Specify\ table\ name\ explicitly}}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00009}00009\ @DiscriminatorValue(\textcolor{stringliteral}{"{}LIBROS"{}})}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00010}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{00010}}\ public\ class\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro_a6e8e1ee4cb3f8fdfbeb2957171c8e86e}{Libro}}\ extends\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_recurso_reservable}{RecursoReservable}}\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00012}00012\ \ \ \ \ \textcolor{comment}{//@Id}}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00013}00013\ \ \ \ \ \textcolor{comment}{//@GeneratedValue(strategy\ =\ GenerationType.IDENTITY)}}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00014}00014\ \ \ \ \ \textcolor{comment}{//private\ Long\ id;}}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00016}00016\ \ \ \ \ \textcolor{keyword}{private}\ String\ titulo;}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{private}\ String\ autor;}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{private}\ String\ isbn;}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00020}00020\ \ \ \ \ \textcolor{comment}{//\ No-\/argument\ constructor}}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00021}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro_a6e8e1ee4cb3f8fdfbeb2957171c8e86e}{00021}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro_a6e8e1ee4cb3f8fdfbeb2957171c8e86e}{Libro}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00022}00022\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00024}00024\ \ \ \ \ \textcolor{comment}{//\ All-\/argument\ constructor\ (optional,\ for\ convenience)}}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00025}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro_a3f8bf1bdc131baed1dcaec68956a2dc7}{00025}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro_a3f8bf1bdc131baed1dcaec68956a2dc7}{Libro}}(String\ titulo,\ String\ autor,\ String\ isbn)\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00026}00026\ \ \ \ \ \ \ \ \ this.titulo\ =\ titulo;}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00027}00027\ \ \ \ \ \ \ \ \ this.autor\ =\ autor;}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00028}00028\ \ \ \ \ \ \ \ \ this.isbn\ =\ isbn;}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00029}00029\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00031}00031\ \ \ \ \ \textcolor{comment}{//\ Getters\ and\ setters}}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00032}00032\ \ \ \ \ \textcolor{comment}{//public\ Long\ getId()\ \{}}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00033}00033\ \ \ \ \ \textcolor{comment}{//\ \ \ \ return\ id;}}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00034}00034\ \ \ \ \ \textcolor{comment}{//\}}}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00036}00036\ \ \ \ \ \textcolor{comment}{//public\ void\ setId(Long\ id)\ \{}}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00037}00037\ \ \ \ \ \textcolor{comment}{//\ \ \ \ this.id\ =\ id;}}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00038}00038\ \ \ \ \ \textcolor{comment}{//\}}}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00040}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro_a5756271eca2ebf42c48e51683fd4dd25}{00040}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro_a5756271eca2ebf42c48e51683fd4dd25}{getTitulo}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ titulo;}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00042}00042\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00044}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro_a41319f42e293b96882ecb3afc3f56799}{00044}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro_a41319f42e293b96882ecb3afc3f56799}{setTitulo}}(String\ titulo)\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ this.titulo\ =\ titulo;}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00046}00046\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00048}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro_a92656df5d9fa310bbd4967277ec4c282}{00048}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro_a92656df5d9fa310bbd4967277ec4c282}{getAutor}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ autor;}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00052}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro_aca0a233dceb642e37c8dc50ba82b0586}{00052}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro_aca0a233dceb642e37c8dc50ba82b0586}{setAutor}}(String\ autor)\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ this.autor\ =\ autor;}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00054}00054\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00056}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro_a90cd52ecb5e7fd58c384796898d3ae1c}{00056}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro_a90cd52ecb5e7fd58c384796898d3ae1c}{getIsbn}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ isbn;}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00058}00058\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00059}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro_add63eb222e5f9486fd4b1a15ed278d99}{00059}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro_add63eb222e5f9486fd4b1a15ed278d99}{setIsbn}}(String\ isbn)\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00060}00060\ \ \ \ \ \ \ \ \ this.isbn\ =\ isbn;}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_libro_8java_source_l00063}00063\ \}}
+
+\end{DoxyCode}

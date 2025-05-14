@@ -1,0 +1,90 @@
+\doxysection{Usuario\+Controller.\+java}
+\hypertarget{_usuario_controller_8java_source}{}\label{_usuario_controller_8java_source}\index{src/main/java/com/example/restapi/controller/UsuarioController.java@{src/main/java/com/example/restapi/controller/UsuarioController.java}}
+\mbox{\hyperlink{_usuario_controller_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.restapi.controller;}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00003}00003\ \textcolor{keyword}{import}\ org.springframework.beans.factory.annotation.Autowired;}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00004}00004\ \textcolor{keyword}{import}\ org.springframework.http.HttpStatus;}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00005}00005\ \textcolor{keyword}{import}\ org.springframework.http.ResponseEntity;}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00006}00006\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.*;}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00007}00007\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.Operation;}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00008}00008\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.tags.Tag;}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00010}00010\ \textcolor{keyword}{import}\ com.example.restapi.model.Usuario;}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00011}00011\ \textcolor{keyword}{import}\ com.example.restapi.service.ServicioUsuarios;}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00013}00013\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00014}00014\ \textcolor{keyword}{import}\ java.util.Optional;}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00016}00016\ @RestController}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00017}00017\ @RequestMapping(\textcolor{stringliteral}{"{}/api/usuarios"{}})}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00018}00018\ @Tag(name\ =\ \textcolor{stringliteral}{"{}Usuarios"{}},\ description\ =\ \textcolor{stringliteral}{"{}Operaciones\ relacionadas\ con\ la\ gestión\ de\ usuarios"{}})}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00019}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller}{00019}}\ public\ class\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_a666dab0d2b2ed1f697f2e150e549f8bf}{UsuarioController}}\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00020}00020\ \textcolor{comment}{//Prueba}}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00021}00021\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_usuarios}{ServicioUsuarios}}\ servicioUsuarios;}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00023}00023\ \ \ \ \ @Autowired}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00024}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_a666dab0d2b2ed1f697f2e150e549f8bf}{00024}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_a666dab0d2b2ed1f697f2e150e549f8bf}{UsuarioController}}(\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_usuarios}{ServicioUsuarios}}\ servicioUsuarios)\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00025}00025\ \ \ \ \ \ \ \ \ this.servicioUsuarios\ =\ servicioUsuarios;}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00026}00026\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00028}00028\ \ \ \ \ \textcolor{comment}{//\ Endpoint\ to\ get\ all\ users}}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00029}00029\ \ \ \ \ @Operation(summary\ =\ \textcolor{stringliteral}{"{}Obtener\ todos\ los\ usuarios"{}},\ description\ =\ \textcolor{stringliteral}{"{}Devuelve\ una\ lista\ de\ todos\ los\ usuarios\ registrados"{}})}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00030}00030\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/all"{}})}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00031}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_a3387709f64f08953cc7ae5af293909f2}{00031}}\ \ \ \ \ public\ List<\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_usuario}{Usuario}}>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_a3387709f64f08953cc7ae5af293909f2}{getAllUsers}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ servicioUsuarios.findAll();}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00033}00033\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00035}00035\ \ \ \ \ \textcolor{comment}{//\ Endpoint\ to\ add\ a\ new\ user}}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00036}00036\ \ \ \ \ @Operation(summary\ =\ \textcolor{stringliteral}{"{}Agregar\ nuevo\ usuario"{}},\ description\ =\ \textcolor{stringliteral}{"{}Crea\ un\ nuevo\ usuario\ en\ el\ sistema"{}})}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00037}00037\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/add"{}})}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00038}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_a1de9689453ce45062d3680fbdd883645}{00038}}\ \ \ \ \ public\ ResponseEntity<String>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_a1de9689453ce45062d3680fbdd883645}{addUser}}(@RequestParam(\textcolor{stringliteral}{"{}nombre"{}})\ String\ nombre,@RequestParam(\textcolor{stringliteral}{"{}correo"{}})\ String\ correo,\ @RequestParam(\textcolor{stringliteral}{"{}password"{}})\ String\ password)\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_usuario}{Usuario}}\ usuario\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_usuario}{Usuario}}(nombre,\ correo,\ password);}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ servicioUsuarios.addUsuario(usuario);}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ResponseEntity<>(\textcolor{stringliteral}{"{}Usuario\ agregado\ correctamente"{}},\ HttpStatus.CREATED);}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ResponseEntity<>(\textcolor{stringliteral}{"{}Error\ al\ agregar\ el\ usuario:\ "{}}\ +\ e.getMessage(),\ HttpStatus.INTERNAL\_SERVER\_ERROR);}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00049}00049\ \ \ \ \ \textcolor{comment}{//\ Endpoint\ to\ delete\ a\ user\ by\ email}}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00050}00050\ \ \ \ \ @Operation(summary\ =\ \textcolor{stringliteral}{"{}Eliminar\ usuario\ por\ correo"{}},\ description\ =\ \textcolor{stringliteral}{"{}Elimina\ un\ usuario\ específico\ por\ su\ correo"{}})}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00051}00051\ \ \ \ \ @DeleteMapping(\textcolor{stringliteral}{"{}/delete/\{correo\}"{}})}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00052}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_a05a3126bb49e9f6fc5e69917750081c8}{00052}}\ \ \ \ \ public\ ResponseEntity<String>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_a05a3126bb49e9f6fc5e69917750081c8}{deleteUser}}(@PathVariable\ String\ correo)\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ servicioUsuarios.deleteUsuario(correo);}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ResponseEntity<>(\textcolor{stringliteral}{"{}Usuario\ eliminado\ correctamente"{}},\ HttpStatus.OK);}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ResponseEntity<>(\textcolor{stringliteral}{"{}Error\ al\ eliminar\ el\ usuario:\ "{}}\ +\ e.getMessage(),\ HttpStatus.INTERNAL\_SERVER\_ERROR);}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00059}00059\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00061}00061\ \ \ \ \ \textcolor{comment}{//Endpoint\ to\ login}}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00062}00062\ \ \ \ \ @Operation(summary\ =\ \textcolor{stringliteral}{"{}Iniciar\ sesión"{}},\ description\ =\ \textcolor{stringliteral}{"{}Permite\ a\ un\ usuario\ iniciar\ sesión\ en\ el\ sistema.\ Ejemplo.\ Correo:\ idoia@gmail.es,\ contrasena:\ contrasena"{}})}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00063}00063\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/login"{}})}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00064}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_aae53f19c604cb1ffe35aee13ba2ece65}{00064}}\ \ \ \ \ public\ ResponseEntity<String>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_aae53f19c604cb1ffe35aee13ba2ece65}{login}}(@RequestParam(\textcolor{stringliteral}{"{}Email"{}})\ String\ correo,\ @RequestParam(\textcolor{stringliteral}{"{}Password"{}})\ String\ contrasena)\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ Optional<Usuario>\ usuario\ =\ servicioUsuarios.login(correo,\ contrasena);}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (usuario.isPresent())\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ return\ ResponseEntity.ok(\textcolor{stringliteral}{"{}Inicio\ de\ sesión\ exitoso.\ Bienvenido\ "{}}\ +\ usuario.get().getNombre()\ +\ \textcolor{stringliteral}{"{}!"{}});}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00068}00068\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ return\ ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(\textcolor{stringliteral}{"{}Credenciales\ inválidas.\ Por\ favor,\ intente\ nuevamente."{}});}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00070}00070\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00071}00071\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00073}00073\ \ \ \ \ \textcolor{comment}{//Endpoint\ to\ login\ as\ admin}}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00074}00074\ \ \ \ \ @Operation(summary\ =\ \textcolor{stringliteral}{"{}Iniciar\ sesión\ como\ administrador"{}},\ description\ =\ \textcolor{stringliteral}{"{}Permite\ a\ un\ administrador\ iniciar\ sesión\ en\ el\ sistema.\ Correo:\ admin.\ Contrasena:\ admin"{}})}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00075}00075\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/login-\/admin"{}})}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00076}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_ac855fd6aaa56be0482ff2d4d8a641121}{00076}}\ \ \ \ \ public\ ResponseEntity<String>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_usuario_controller_ac855fd6aaa56be0482ff2d4d8a641121}{loginAdmin}}(@RequestParam(\textcolor{stringliteral}{"{}Email"{}})\ String\ correo,\ @RequestParam(\textcolor{stringliteral}{"{}Password"{}})\ String\ contrasena)\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (correo.equals(\textcolor{stringliteral}{"{}admin"{}})\ \&\&\ contrasena.equals(\textcolor{stringliteral}{"{}admin"{}}))\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ return\ ResponseEntity.ok(\textcolor{stringliteral}{"{}Inicio\ de\ sesión\ exitoso.\ Bienvenido\ "{}});}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00079}00079\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ return\ ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(\textcolor{stringliteral}{"{}Credenciales\ de\ administrador\ inválidas."{}});}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00081}00081\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00082}00082\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{_usuario_controller_8java_source_l00084}00084\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,80 @@
+\doxysection{Administrador.\+java}
+\hypertarget{_administrador_8java_source}{}\label{_administrador_8java_source}\index{src/main/java/com/example/restapi/model/Administrador.java@{src/main/java/com/example/restapi/model/Administrador.java}}
+\mbox{\hyperlink{_administrador_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00001}\mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{00001}}\ \textcolor{keyword}{package\ }com.example.restapi.model;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00002}00002\ \textcolor{keyword}{import}\ jakarta.persistence.Entity;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00003}00003\ \textcolor{keyword}{import}\ jakarta.persistence.GeneratedValue;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00004}00004\ \textcolor{keyword}{import}\ jakarta.persistence.GenerationType;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00005}00005\ \textcolor{keyword}{import}\ jakarta.persistence.Id;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00006}00006\ \textcolor{keyword}{import}\ jakarta.persistence.Table;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00008}00008\ @Entity}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00009}00009\ @Table(name\ =\ \textcolor{stringliteral}{"{}administradores"{}})\ \textcolor{comment}{//\ Optional:\ Specify\ table\ name\ explicitly}}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00010}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador}{00010}}\ public\ class\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_ad592c0f460871a6f963a5975148fc6ce}{Administrador}}\ \{}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00012}00012\ \ \ \ \ @Id}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00013}00013\ \ \ \ \ @GeneratedValue(strategy\ =\ GenerationType.IDENTITY)}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00014}00014\ \ \ \ \ \textcolor{keyword}{private}\ Long\ id;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00016}00016\ \ \ \ \ \textcolor{keyword}{private}\ String\ nombre;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{private}\ String\ correo;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{private}\ String\ contrasena;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00020}00020\ \ \ \ \ \textcolor{comment}{//\ Constructor\ vacío}}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00021}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_ad592c0f460871a6f963a5975148fc6ce}{00021}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_ad592c0f460871a6f963a5975148fc6ce}{Administrador}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00022}00022\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00024}00024\ \ \ \ \ \textcolor{comment}{//\ Constructor\ con\ parámetros}}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00025}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_add364943cb2d1e6608d998ec086a7d19}{00025}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_add364943cb2d1e6608d998ec086a7d19}{Administrador}}(Long\ \textcolor{keywordtype}{id},\ String\ nombre,\ String\ correo,\ String\ contrasena)\ \{}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00026}00026\ \ \ \ \ \ \ \ \ this.id\ =\ id;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00027}00027\ \ \ \ \ \ \ \ \ this.nombre\ =\ nombre;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00028}00028\ \ \ \ \ \ \ \ \ this.correo\ =\ correo;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ this.contrasena\ =\ contrasena;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00030}00030\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00032}00032\ \ \ \ \ \textcolor{comment}{//\ Getters\ y\ Setters}}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00033}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_ab512711fb702ca39e28841b802df3961}{00033}}\ \ \ \ \ \textcolor{keyword}{public}\ Long\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_ab512711fb702ca39e28841b802df3961}{getId}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ id;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00035}00035\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00037}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_a7c54a2d811d9e48862c235ab56142073}{00037}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_a7c54a2d811d9e48862c235ab56142073}{setId}}(Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ this.id\ =\ id;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00039}00039\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00041}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_a1191c81799c5866452be496e3b53e358}{00041}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_a1191c81799c5866452be496e3b53e358}{getNombre}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ nombre;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00043}00043\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00045}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_a8bde4e9e3ce271aa20c777d2f7dda65a}{00045}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_a8bde4e9e3ce271aa20c777d2f7dda65a}{setNombre}}(String\ nombre)\ \{}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ this.nombre\ =\ nombre;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00049}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_a656e24ad3b3e18c33f126e2aa3910abd}{00049}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_a656e24ad3b3e18c33f126e2aa3910abd}{getCorreo}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ correo;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00051}00051\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00053}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_a524500dc5284e1b55c36f5ffc73a3d8d}{00053}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_a524500dc5284e1b55c36f5ffc73a3d8d}{setCorreo}}(String\ correo)\ \{}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ this.correo\ =\ correo;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00055}00055\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00057}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_a4223dcb53f089bdc26265e89f8f79b28}{00057}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_a4223dcb53f089bdc26265e89f8f79b28}{getContrasena}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ contrasena;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00059}00059\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00061}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_a8ba2e5f7f84e8d8d928f1613410e7ffd}{00061}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_a8ba2e5f7f84e8d8d928f1613410e7ffd}{setContrasena}}(String\ contrasena)\ \{}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00062}00062\ \ \ \ \ \ \ \ \ this.contrasena\ =\ contrasena;}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00063}00063\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00065}00065\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00066}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_ac100c730260abfa7ad28cadfc8b991eb}{00066}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_administrador_ac100c730260abfa7ad28cadfc8b991eb}{toString}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Administrador\{"{}}\ +}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}id="{}}\ +\ \textcolor{keywordtype}{id}\ +}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{},\ nombre='"{}}\ +\ nombre\ +\ \textcolor{charliteral}{'\(\backslash\)''}\ +}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{},\ correo='"{}}\ +\ correo\ +\ \textcolor{charliteral}{'\(\backslash\)''}\ +}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{},\ contrasena='"{}}\ +\ contrasena\ +\ \textcolor{charliteral}{'\(\backslash\)''}\ +}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{charliteral}{'\}'};}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00073}00073\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_administrador_8java_source_l00074}00074\ \}}
+
+\end{DoxyCode}

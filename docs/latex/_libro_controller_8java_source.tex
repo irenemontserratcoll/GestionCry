@@ -1,0 +1,119 @@
+\doxysection{Libro\+Controller.\+java}
+\hypertarget{_libro_controller_8java_source}{}\label{_libro_controller_8java_source}\index{src/main/java/com/example/restapi/controller/LibroController.java@{src/main/java/com/example/restapi/controller/LibroController.java}}
+\mbox{\hyperlink{_libro_controller_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.restapi.controller;}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00003}00003\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00004}00004\ \textcolor{keyword}{import}\ java.util.Optional;}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00006}00006\ \textcolor{keyword}{import}\ org.springframework.beans.factory.annotation.Autowired;}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00007}00007\ \textcolor{keyword}{import}\ org.springframework.http.HttpStatus;}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00008}00008\ \textcolor{keyword}{import}\ org.springframework.http.ResponseEntity;}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00009}00009\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.DeleteMapping;}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00010}00010\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.GetMapping;}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00011}00011\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.PathVariable;}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00012}00012\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.PostMapping;}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00013}00013\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.PutMapping;}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00014}00014\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.RequestBody;}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00015}00015\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.RequestMapping;}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00016}00016\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.RequestParam;}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00017}00017\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.RestController;}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00019}00019\ \textcolor{keyword}{import}\ com.example.restapi.model.Libro;}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00020}00020\ \textcolor{keyword}{import}\ com.example.restapi.service.ServicioLibros;}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00022}00022\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.Operation;}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00023}00023\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.tags.Tag;}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00025}00025\ @RestController}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00026}00026\ @RequestMapping(\textcolor{stringliteral}{"{}/api/libros"{}})}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00027}00027\ @Tag(name\ =\ \textcolor{stringliteral}{"{}libros"{}},\ description\ =\ \textcolor{stringliteral}{"{}Operaciones\ relacionadas\ con\ la\ gestión\ de\ libros"{}})}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00028}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller}{00028}}\ public\ class\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_afdc6cc9f66c57c32b2770a28446dfa3b}{LibroController}}\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00030}00030\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros}{ServicioLibros}}\ servicioLibros;}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00032}00032\ \ \ \ \ @Autowired}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00033}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_afdc6cc9f66c57c32b2770a28446dfa3b}{00033}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_afdc6cc9f66c57c32b2770a28446dfa3b}{LibroController}}(\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros}{ServicioLibros}}\ servicioLibros)\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00034}00034\ \ \ \ \ \ \ \ \ this.servicioLibros\ =\ servicioLibros;}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00036}00036\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00037}00037\ \ \ \ \ \textcolor{comment}{//\ Obtener\ todos\ los\ libros}}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00038}00038\ \ \ \ \ @Operation(summary\ =\ \textcolor{stringliteral}{"{}Obtener\ todos\ los\ libros"{}},\ description\ =\ \textcolor{stringliteral}{"{}Devuelve\ una\ lista\ de\ todos\ los\ libros\ disponibles"{}})\ \ \ }
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00039}00039\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/all"{}})}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00040}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a6d3a9ce0062be03cdd46f9db8eed7fa1}{00040}}\ \ \ \ \ public\ List<\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}}>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a6d3a9ce0062be03cdd46f9db8eed7fa1}{getAllLibros}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ servicioLibros.findAll();}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00042}00042\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00043}00043\ \ \ \ \ \textcolor{comment}{//\ Obtener\ un\ libro\ por\ ID}}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00044}00044\ \ \ \ \ @Operation(summary\ =\ \textcolor{stringliteral}{"{}Obtener\ libro\ por\ ID"{}},\ description\ =\ \textcolor{stringliteral}{"{}Devuelve\ un\ libro\ específico\ por\ su\ ID"{}})\ \ \ }
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00045}00045\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/\{id\}"{}})}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00046}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_ac3e768f5e74632e1bdcd70999dabe10f}{00046}}\ \ \ \ \ public\ ResponseEntity<\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}}>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_ac3e768f5e74632e1bdcd70999dabe10f}{getLibroById}}(@PathVariable\ Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00047}00047\ \ \ \ \ \ \ \ \ Optional<Libro>\ libro\ =\ servicioLibros.findById(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ libro.map(ResponseEntity::ok).orElseGet(()\ -\/>\ ResponseEntity.status(HttpStatus.NOT\_FOUND).build());}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00049}00049\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00050}00050\ \ \ \ \ \textcolor{comment}{//Obtener\ un\ libro\ por\ título}}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00051}00051\ \ \ \ \ @Operation(summary\ =\ \textcolor{stringliteral}{"{}Obtener\ libro\ por\ título"{}},\ description\ =\ \textcolor{stringliteral}{"{}Devuelve\ un\ libro\ específico\ por\ su\ título"{}})}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00052}00052\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/titulo/\{titulo\}"{}})}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00053}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_aaf30acb3981c172c2a8508030a2be141}{00053}}\ \ \ \ \ public\ ResponseEntity<\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}}>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_aaf30acb3981c172c2a8508030a2be141}{getLibroByTitulo}}(@PathVariable\ String\ titulo)\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ Optional<Libro>\ libro\ =\ servicioLibros.findByTitulo(titulo);}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ libro.map(ResponseEntity::ok).orElseGet(()\ -\/>\ ResponseEntity.status(HttpStatus.NOT\_FOUND).build());}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00056}00056\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00057}00057\ \ \ \ \ \textcolor{comment}{//\ Obtener\ un\ libro\ por\ autor}}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00058}00058\ \ \ \ \ @Operation(summary\ =\ \textcolor{stringliteral}{"{}Obtener\ libro\ por\ autor"{}},\ description\ =\ \textcolor{stringliteral}{"{}Devuelve\ un\ libro\ específico\ por\ su\ autor"{}})}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00059}00059\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/autor/\{autor\}"{}})}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00060}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a29c547b9b13a3fce4b79e6bf3e5e717c}{00060}}\ \ \ \ \ public\ ResponseEntity<\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}}>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a29c547b9b13a3fce4b79e6bf3e5e717c}{getLibroByAutor}}(@PathVariable\ String\ autor)\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00061}00061\ \ \ \ \ \ \ \ \ Optional<Libro>\ libro\ =\ servicioLibros.findByAutor(autor);}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ libro.map(ResponseEntity::ok).orElseGet(()\ -\/>\ ResponseEntity.status(HttpStatus.NOT\_FOUND).build());}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00063}00063\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00064}00064\ \ \ \ \ \textcolor{comment}{//\ Obtener\ un\ libro\ por\ ISBN}}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00065}00065\ \ \ \ \ @Operation(summary\ =\ \textcolor{stringliteral}{"{}Obtener\ libro\ por\ ISBN"{}},\ description\ =\ \textcolor{stringliteral}{"{}Devuelve\ un\ libro\ específico\ por\ su\ ISBN"{}})}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00066}00066\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/isbn/\{isbn\}"{}})}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00067}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a60b46b13224bf2f72c7a34e8a06c4584}{00067}}\ \ \ \ \ public\ ResponseEntity<\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}}>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a60b46b13224bf2f72c7a34e8a06c4584}{getLibroByIsbn}}(@PathVariable\ String\ isbn)\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00068}00068\ \ \ \ \ \ \ \ \ Optional<Libro>\ libro\ =\ servicioLibros.findByIsbn(isbn);}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ libro.map(ResponseEntity::ok).orElseGet(()\ -\/>\ ResponseEntity.status(HttpStatus.NOT\_FOUND).build());}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00070}00070\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00072}00072\ \ \ \ \ \textcolor{comment}{//\ Agregar\ un\ nuevo\ libro}}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00073}00073\ \ \ \ \ @Operation(summary\ =\ \textcolor{stringliteral}{"{}Agregar\ nuevo\ libro"{}},\ description\ =\ \textcolor{stringliteral}{"{}Crea\ un\ nuevo\ libro\ en\ el\ sistema"{}})}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00074}00074\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/add"{}})}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00075}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a0ce0f150d6c7230ca1939927532797d1}{00075}}\ \ \ \ \ public\ ResponseEntity<String>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a0ce0f150d6c7230ca1939927532797d1}{addLibro}}(}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ @RequestParam(\textcolor{stringliteral}{"{}titulo"{}})\ String\ titulo,}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ @RequestParam(\textcolor{stringliteral}{"{}autor"{}})\ String\ autor,}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ @RequestParam(\textcolor{stringliteral}{"{}isbn"{}})\ String\ isbn)\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Creación\ de\ un\ nuevo\ libro\ sin\ asignar\ manualmente\ el\ id}}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}}\ libro\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}}(titulo,\ autor,\ isbn);}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ servicioLibros.addLibro(libro);}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ResponseEntity<>(\textcolor{stringliteral}{"{}Libro\ agregado\ correctamente"{}},\ HttpStatus.CREATED);}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00084}00084\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ResponseEntity<>(\textcolor{stringliteral}{"{}Error\ al\ agregar\ el\ libro:\ "{}}\ +\ e.getMessage(),\ HttpStatus.INTERNAL\_SERVER\_ERROR);}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00086}00086\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00087}00087\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00088}00088\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00090}00090\ \ \ \ \ \textcolor{comment}{//\ Actualizar\ un\ libro}}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00091}00091\ \ \ \ \ @Operation(summary\ =\ \textcolor{stringliteral}{"{}Actualizar\ libro"{}},\ description\ =\ \textcolor{stringliteral}{"{}Actualiza\ un\ libro\ existente\ en\ el\ sistema"{}})}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00092}00092\ \ \ \ \ @PutMapping(\textcolor{stringliteral}{"{}/update/\{id\}"{}})}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00093}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_ae6258c7f80f9993d90a827800227e7ef}{00093}}\ \ \ \ \ public\ ResponseEntity<String>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_ae6258c7f80f9993d90a827800227e7ef}{updateLibro}}(@PathVariable\ Long\ \textcolor{keywordtype}{id},\ @RequestBody\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}}\ libro)\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00094}00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ servicioLibros.updateLibro(\textcolor{keywordtype}{id},\ libro);}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ResponseEntity<>(\textcolor{stringliteral}{"{}Libro\ actualizado\ correctamente"{}},\ HttpStatus.OK);}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00097}00097\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ResponseEntity<>(\textcolor{stringliteral}{"{}Error\ al\ actualizar\ el\ libro:\ "{}}\ +\ e.getMessage(),\ HttpStatus.INTERNAL\_SERVER\_ERROR);}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00099}00099\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00100}00100\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00101}00101\ \ \ \ \ \textcolor{comment}{//\ Eliminar\ un\ libro\ \ }}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00102}00102\ \ \ \ \ @Operation(summary\ =\ \textcolor{stringliteral}{"{}Eliminar\ libro"{}},\ description\ =\ \textcolor{stringliteral}{"{}Elimina\ un\ libro\ existente\ del\ sistema"{}})}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00103}00103\ \ \ \ \ @DeleteMapping(\textcolor{stringliteral}{"{}/delete/\{id\}"{}})}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00104}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a6d6d021dee1816c1eac543d9352943c8}{00104}}\ \ \ \ \ public\ ResponseEntity<String>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a6d6d021dee1816c1eac543d9352943c8}{deleteLibro}}(@PathVariable\ Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ servicioLibros.deleteLibro(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ResponseEntity<>(\textcolor{stringliteral}{"{}Libro\ eliminado\ correctamente"{}},\ HttpStatus.OK);}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00108}00108\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ ResponseEntity<>(\textcolor{stringliteral}{"{}Error\ al\ eliminar\ el\ libro:\ "{}}\ +\ e.getMessage(),\ HttpStatus.INTERNAL\_SERVER\_ERROR);}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00110}00110\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00111}00111\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00112}00112\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_libro_controller_8java_source_l00113}00113\ \}}
+
+\end{DoxyCode}

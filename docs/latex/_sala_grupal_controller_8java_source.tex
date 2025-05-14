@@ -1,0 +1,84 @@
+\doxysection{Sala\+Grupal\+Controller.\+java}
+\hypertarget{_sala_grupal_controller_8java_source}{}\label{_sala_grupal_controller_8java_source}\index{src/main/java/com/example/restapi/controller/SalaGrupalController.java@{src/main/java/com/example/restapi/controller/SalaGrupalController.java}}
+\mbox{\hyperlink{_sala_grupal_controller_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.restapi.controller;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00003}00003\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00004}00004\ \textcolor{keyword}{import}\ java.util.Optional;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00006}00006\ \textcolor{keyword}{import}\ org.springframework.beans.factory.annotation.Autowired;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00007}00007\ \textcolor{keyword}{import}\ org.springframework.http.ResponseEntity;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00008}00008\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.DeleteMapping;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00009}00009\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.GetMapping;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00010}00010\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.PathVariable;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00011}00011\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.PostMapping;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00012}00012\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.PutMapping;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00013}00013\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.RequestBody;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00014}00014\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.RequestMapping;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00015}00015\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.RestController;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00017}00017\ \textcolor{keyword}{import}\ com.example.restapi.model.SalaGrupal;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00018}00018\ \textcolor{keyword}{import}\ com.example.restapi.service.ServicioSalaGrupo;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00020}00020\ \textcolor{keyword}{import}\ io.swagger.v3.oas.annotations.Operation;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00022}00022\ @RestController}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00023}00023\ @RequestMapping(\textcolor{stringliteral}{"{}/api/sala-\/grupal"{}})}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00024}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_sala_grupal_controller}{00024}}\ public\ class\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_sala_grupal_controller_a583e59eda8ad64f6ed178a5f15c9307c}{SalaGrupalController}}\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_sala_grupo}{ServicioSalaGrupo}}\ servicioSalaGrupo;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00028}00028\ \ \ \ \ @Autowired}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00029}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_sala_grupal_controller_a583e59eda8ad64f6ed178a5f15c9307c}{00029}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_sala_grupal_controller_a583e59eda8ad64f6ed178a5f15c9307c}{SalaGrupalController}}(\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_sala_grupo}{ServicioSalaGrupo}}\ servicioSalaGrupal)\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ this.servicioSalaGrupo\ =\ servicioSalaGrupal;}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00031}00031\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00033}00033\ \ \ \ \ \textcolor{comment}{//\ Obtener\ todas\ las\ salas\ grupales}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00034}00034\ \ \ \ \ @Operation(summary\ =\ \textcolor{stringliteral}{"{}Obtener\ todas\ las\ salas\ grupales"{}},\ description\ =\ \textcolor{stringliteral}{"{}Devuelve\ una\ lista\ de\ todas\ las\ salas\ grupales\ disponibles"{}})}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00035}00035\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/all"{}})}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00036}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_sala_grupal_controller_a1ca2ab9569159f04fd72d0eb92d506dd}{00036}}\ \ \ \ \ public\ List<\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal}{SalaGrupal}}>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_sala_grupal_controller_a1ca2ab9569159f04fd72d0eb92d506dd}{getAllSalas}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ servicioSalaGrupo.findAll();}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00038}00038\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00040}00040\ \ \ \ \ \textcolor{comment}{//\ Obtener\ una\ sala\ grupal\ por\ piso\ y\ número\ de\ sala}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00041}00041\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/\{piso\}/\{numeroSala\}"{}})}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00042}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_sala_grupal_controller_a6c91b158bfbc9cbf67a1bccf5867dd9a}{00042}}\ \ \ \ \ public\ ResponseEntity<\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal}{SalaGrupal}}>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_sala_grupal_controller_a6c91b158bfbc9cbf67a1bccf5867dd9a}{getSalaByPisoAndNumeroSala}}(}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ @PathVariable\ \textcolor{keywordtype}{int}\ piso,\ @PathVariable\ \textcolor{keywordtype}{int}\ numeroSala)\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00044}00044\ \ \ \ \ \ \ \ \ Optional<SalaGrupal>\ salaGrupal\ =\ servicioSalaGrupo.findByPisoAndNumeroSala(piso,\ numeroSala);}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ salaGrupal.map(ResponseEntity::ok).orElseGet(()\ -\/>\ ResponseEntity.notFound().build());}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00046}00046\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00048}00048\ \ \ \ \ \textcolor{comment}{//\ Crear\ una\ nueva\ sala\ grupal}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00049}00049\ \ \ \ \ @PostMapping}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00050}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_sala_grupal_controller_a8105654228213a132b1351609a94911f}{00050}}\ \ \ \ \ \textcolor{keyword}{public}\ ResponseEntity<String>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_sala_grupal_controller_a8105654228213a132b1351609a94911f}{createSala}}(@RequestBody\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal}{SalaGrupal}}\ salaGrupal)\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00051}00051\ \ \ \ \ \ \ \ \ servicioSalaGrupo.addSala(salaGrupal);}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.ok(\textcolor{stringliteral}{"{}Sala\ creada\ exitosamente"{}});}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00053}00053\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00055}00055\ \ \ \ \ \textcolor{comment}{//\ Actualizar\ una\ sala\ grupal\ existente}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00056}00056\ \ \ \ \ @PutMapping(\textcolor{stringliteral}{"{}/\{piso\}/\{numeroSala\}"{}})}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00057}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_sala_grupal_controller_a5a17dae49b94a1862c2561c8631b231c}{00057}}\ \ \ \ \ public\ ResponseEntity<String>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_sala_grupal_controller_a5a17dae49b94a1862c2561c8631b231c}{updateSala}}(@PathVariable\ \textcolor{keywordtype}{int}\ piso,\ @PathVariable\ \textcolor{keywordtype}{int}\ numeroSala,}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @RequestBody\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal}{SalaGrupal}}\ salaGrupal)\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (piso\ !=\ salaGrupal.getPiso()\ ||\ numeroSala\ !=\ salaGrupal.getNumeroSala())\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ return\ ResponseEntity.badRequest().body(\textcolor{stringliteral}{"{}El\ piso\ y\ número\ de\ sala\ no\ coinciden"{}});}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00061}00061\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ servicioSalaGrupo.updateSala(salaGrupal);}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ return\ ResponseEntity.ok(\textcolor{stringliteral}{"{}Sala\ actualizada\ exitosamente"{}});}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ \}\ catch\ (RuntimeException\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.status(404).body(e.getMessage());}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00067}00067\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00068}00068\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00070}00070\ \ \ \ \ \textcolor{comment}{//\ Eliminar\ una\ sala\ grupal\ por\ piso\ y\ número\ de\ sala}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00071}00071\ \ \ \ \ @DeleteMapping(\textcolor{stringliteral}{"{}/\{piso\}/\{numeroSala\}"{}})}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00072}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_sala_grupal_controller_aa6cee3e5ea471fe09e4e1d328824f1fc}{00072}}\ \ \ \ \ public\ ResponseEntity<String>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_sala_grupal_controller_aa6cee3e5ea471fe09e4e1d328824f1fc}{deleteSala}}(@PathVariable\ \textcolor{keywordtype}{int}\ piso,\ @PathVariable\ \textcolor{keywordtype}{int}\ numeroSala)\ \{}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00073}00073\ \ \ \ \ \ \ \ \ servicioSalaGrupo.deleteSala(piso,\ numeroSala);}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.ok(\textcolor{stringliteral}{"{}Sala\ eliminada\ exitosamente"{}});}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00075}00075\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00076}00076\ \}}
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{_sala_grupal_controller_8java_source_l00078}00078\ }
+
+\end{DoxyCode}

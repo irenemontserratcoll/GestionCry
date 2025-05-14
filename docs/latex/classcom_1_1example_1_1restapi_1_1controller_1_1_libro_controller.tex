@@ -1,0 +1,131 @@
+\doxysection{com.\+example.\+restapi.\+controller.\+Libro\+Controller Class Reference}
+\hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller}{}\label{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller}\index{com.example.restapi.controller.LibroController@{com.example.restapi.controller.LibroController}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_afdc6cc9f66c57c32b2770a28446dfa3b}{Libro\+Controller}} (\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros}{Servicio\+Libros}} servicio\+Libros)
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a6d3a9ce0062be03cdd46f9db8eed7fa1}{get\+All\+Libros}} ()
+\item 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_ac3e768f5e74632e1bdcd70999dabe10f}{get\+Libro\+By\+Id}} (@Path\+Variable Long id)
+\item 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_aaf30acb3981c172c2a8508030a2be141}{get\+Libro\+By\+Titulo}} (@Path\+Variable String titulo)
+\item 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a29c547b9b13a3fce4b79e6bf3e5e717c}{get\+Libro\+By\+Autor}} (@Path\+Variable String autor)
+\item 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a60b46b13224bf2f72c7a34e8a06c4584}{get\+Libro\+By\+Isbn}} (@Path\+Variable String isbn)
+\item 
+Response\+Entity$<$ String $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a0ce0f150d6c7230ca1939927532797d1}{add\+Libro}} ( @Request\+Param("{}titulo"{}) String titulo, @Request\+Param("{}autor"{}) String autor, @Request\+Param("{}isbn"{}) String isbn)
+\item 
+Response\+Entity$<$ String $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_ae6258c7f80f9993d90a827800227e7ef}{update\+Libro}} (@Path\+Variable Long id, @Request\+Body \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}} libro)
+\item 
+Response\+Entity$<$ String $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a6d6d021dee1816c1eac543d9352943c8}{delete\+Libro}} (@Path\+Variable Long id)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_libro_controller_8java_source_l00028}{28}} of file \mbox{\hyperlink{_libro_controller_8java_source}{Libro\+Controller.\+java}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_afdc6cc9f66c57c32b2770a28446dfa3b}\index{com.example.restapi.controller.LibroController@{com.example.restapi.controller.LibroController}!LibroController@{LibroController}}
+\index{LibroController@{LibroController}!com.example.restapi.controller.LibroController@{com.example.restapi.controller.LibroController}}
+\doxysubsubsection{\texorpdfstring{LibroController()}{LibroController()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_afdc6cc9f66c57c32b2770a28446dfa3b} 
+com.\+example.\+restapi.\+controller.\+Libro\+Controller.\+Libro\+Controller (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros}{Servicio\+Libros}}}]{servicio\+Libros}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_libro_controller_8java_source_l00033}{33}} of file \mbox{\hyperlink{_libro_controller_8java_source}{Libro\+Controller.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a0ce0f150d6c7230ca1939927532797d1}\index{com.example.restapi.controller.LibroController@{com.example.restapi.controller.LibroController}!addLibro@{addLibro}}
+\index{addLibro@{addLibro}!com.example.restapi.controller.LibroController@{com.example.restapi.controller.LibroController}}
+\doxysubsubsection{\texorpdfstring{addLibro()}{addLibro()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a0ce0f150d6c7230ca1939927532797d1} 
+Response\+Entity$<$ String $>$ com.\+example.\+restapi.\+controller.\+Libro\+Controller.\+add\+Libro (\begin{DoxyParamCaption}\item[{@Request\+Param("{}titulo"{}) String}]{titulo}{, }\item[{@Request\+Param("{}autor"{}) String}]{autor}{, }\item[{@Request\+Param("{}isbn"{}) String}]{isbn}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_libro_controller_8java_source_l00075}{75}} of file \mbox{\hyperlink{_libro_controller_8java_source}{Libro\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a6d6d021dee1816c1eac543d9352943c8}\index{com.example.restapi.controller.LibroController@{com.example.restapi.controller.LibroController}!deleteLibro@{deleteLibro}}
+\index{deleteLibro@{deleteLibro}!com.example.restapi.controller.LibroController@{com.example.restapi.controller.LibroController}}
+\doxysubsubsection{\texorpdfstring{deleteLibro()}{deleteLibro()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a6d6d021dee1816c1eac543d9352943c8} 
+Response\+Entity$<$ String $>$ com.\+example.\+restapi.\+controller.\+Libro\+Controller.\+delete\+Libro (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_libro_controller_8java_source_l00104}{104}} of file \mbox{\hyperlink{_libro_controller_8java_source}{Libro\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a6d3a9ce0062be03cdd46f9db8eed7fa1}\index{com.example.restapi.controller.LibroController@{com.example.restapi.controller.LibroController}!getAllLibros@{getAllLibros}}
+\index{getAllLibros@{getAllLibros}!com.example.restapi.controller.LibroController@{com.example.restapi.controller.LibroController}}
+\doxysubsubsection{\texorpdfstring{getAllLibros()}{getAllLibros()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a6d3a9ce0062be03cdd46f9db8eed7fa1} 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}} $>$ com.\+example.\+restapi.\+controller.\+Libro\+Controller.\+get\+All\+Libros (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_libro_controller_8java_source_l00040}{40}} of file \mbox{\hyperlink{_libro_controller_8java_source}{Libro\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a29c547b9b13a3fce4b79e6bf3e5e717c}\index{com.example.restapi.controller.LibroController@{com.example.restapi.controller.LibroController}!getLibroByAutor@{getLibroByAutor}}
+\index{getLibroByAutor@{getLibroByAutor}!com.example.restapi.controller.LibroController@{com.example.restapi.controller.LibroController}}
+\doxysubsubsection{\texorpdfstring{getLibroByAutor()}{getLibroByAutor()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a29c547b9b13a3fce4b79e6bf3e5e717c} 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}} $>$ com.\+example.\+restapi.\+controller.\+Libro\+Controller.\+get\+Libro\+By\+Autor (\begin{DoxyParamCaption}\item[{@Path\+Variable String}]{autor}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_libro_controller_8java_source_l00060}{60}} of file \mbox{\hyperlink{_libro_controller_8java_source}{Libro\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_ac3e768f5e74632e1bdcd70999dabe10f}\index{com.example.restapi.controller.LibroController@{com.example.restapi.controller.LibroController}!getLibroById@{getLibroById}}
+\index{getLibroById@{getLibroById}!com.example.restapi.controller.LibroController@{com.example.restapi.controller.LibroController}}
+\doxysubsubsection{\texorpdfstring{getLibroById()}{getLibroById()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_ac3e768f5e74632e1bdcd70999dabe10f} 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}} $>$ com.\+example.\+restapi.\+controller.\+Libro\+Controller.\+get\+Libro\+By\+Id (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_libro_controller_8java_source_l00046}{46}} of file \mbox{\hyperlink{_libro_controller_8java_source}{Libro\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a60b46b13224bf2f72c7a34e8a06c4584}\index{com.example.restapi.controller.LibroController@{com.example.restapi.controller.LibroController}!getLibroByIsbn@{getLibroByIsbn}}
+\index{getLibroByIsbn@{getLibroByIsbn}!com.example.restapi.controller.LibroController@{com.example.restapi.controller.LibroController}}
+\doxysubsubsection{\texorpdfstring{getLibroByIsbn()}{getLibroByIsbn()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_a60b46b13224bf2f72c7a34e8a06c4584} 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}} $>$ com.\+example.\+restapi.\+controller.\+Libro\+Controller.\+get\+Libro\+By\+Isbn (\begin{DoxyParamCaption}\item[{@Path\+Variable String}]{isbn}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_libro_controller_8java_source_l00067}{67}} of file \mbox{\hyperlink{_libro_controller_8java_source}{Libro\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_aaf30acb3981c172c2a8508030a2be141}\index{com.example.restapi.controller.LibroController@{com.example.restapi.controller.LibroController}!getLibroByTitulo@{getLibroByTitulo}}
+\index{getLibroByTitulo@{getLibroByTitulo}!com.example.restapi.controller.LibroController@{com.example.restapi.controller.LibroController}}
+\doxysubsubsection{\texorpdfstring{getLibroByTitulo()}{getLibroByTitulo()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_aaf30acb3981c172c2a8508030a2be141} 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}} $>$ com.\+example.\+restapi.\+controller.\+Libro\+Controller.\+get\+Libro\+By\+Titulo (\begin{DoxyParamCaption}\item[{@Path\+Variable String}]{titulo}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_libro_controller_8java_source_l00053}{53}} of file \mbox{\hyperlink{_libro_controller_8java_source}{Libro\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_ae6258c7f80f9993d90a827800227e7ef}\index{com.example.restapi.controller.LibroController@{com.example.restapi.controller.LibroController}!updateLibro@{updateLibro}}
+\index{updateLibro@{updateLibro}!com.example.restapi.controller.LibroController@{com.example.restapi.controller.LibroController}}
+\doxysubsubsection{\texorpdfstring{updateLibro()}{updateLibro()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_libro_controller_ae6258c7f80f9993d90a827800227e7ef} 
+Response\+Entity$<$ String $>$ com.\+example.\+restapi.\+controller.\+Libro\+Controller.\+update\+Libro (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{id}{, }\item[{@Request\+Body \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}}}]{libro}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_libro_controller_8java_source_l00093}{93}} of file \mbox{\hyperlink{_libro_controller_8java_source}{Libro\+Controller.\+java}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/example/restapi/controller/\mbox{\hyperlink{_libro_controller_8java}{Libro\+Controller.\+java}}\end{DoxyCompactItemize}

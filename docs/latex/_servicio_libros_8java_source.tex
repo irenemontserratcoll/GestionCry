@@ -1,0 +1,69 @@
+\doxysection{Servicio\+Libros.\+java}
+\hypertarget{_servicio_libros_8java_source}{}\label{_servicio_libros_8java_source}\index{src/main/java/com/example/restapi/service/ServicioLibros.java@{src/main/java/com/example/restapi/service/ServicioLibros.java}}
+\mbox{\hyperlink{_servicio_libros_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.restapi.service;}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00003}00003\ \textcolor{keyword}{import}\ com.example.restapi.model.Libro;}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00004}00004\ \textcolor{keyword}{import}\ com.example.restapi.repository.RepositorioLibros;}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00006}00006\ \textcolor{keyword}{import}\ org.springframework.beans.factory.annotation.Autowired;}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00007}00007\ \textcolor{keyword}{import}\ org.springframework.stereotype.Service;}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00009}00009\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00010}00010\ \textcolor{keyword}{import}\ java.util.Optional;}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00012}00012\ @Service}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00013}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros}{00013}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros_a9cf8a2406124f82b968113df13fcb844}{ServicioLibros}}\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_libros}{RepositorioLibros}}\ repositorioLibros;}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00017}00017\ \ \ \ \ @Autowired}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00018}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros_a9cf8a2406124f82b968113df13fcb844}{00018}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros_a9cf8a2406124f82b968113df13fcb844}{ServicioLibros}}(\mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_libros}{RepositorioLibros}}\ repositorioLibros)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00019}00019\ \ \ \ \ \ \ \ \ this.repositorioLibros\ =\ repositorioLibros;}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00020}00020\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00021}00021\ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00022}00022\ \ \ \ \ \textcolor{comment}{//\ Obtener\ todos\ los\ libros}}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00023}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros_a08ecb64c6b5fc2ae0d3872f7336b1895}{00023}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Libro>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros_a08ecb64c6b5fc2ae0d3872f7336b1895}{findAll}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ repositorioLibros.findAll();}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00025}00025\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00027}00027\ \ \ \ \ \textcolor{comment}{//\ Obtener\ un\ libro\ por\ ID}}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00028}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros_a164be8d8857394b99d8d8a30e90f9773}{00028}}\ \ \ \ \ \textcolor{keyword}{public}\ Optional<Libro>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros_a164be8d8857394b99d8d8a30e90f9773}{findById}}(Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ repositorioLibros.findById(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00030}00030\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00032}00032\ \ \ \ \ \textcolor{comment}{//\ Obtener\ un\ libro\ por\ título}}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00033}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros_aa9d7f5e1780c2de595a3d565aa908ddf}{00033}}\ \ \ \ \ \textcolor{keyword}{public}\ Optional<Libro>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros_aa9d7f5e1780c2de595a3d565aa908ddf}{findByTitulo}}(String\ titulo)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ repositorioLibros.findByTitulo(titulo);}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00035}00035\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00036}00036\ \ \ \ \ \textcolor{comment}{//\ Obtener\ un\ libro\ por\ autor}}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00037}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros_aefe2348f6a940c31963e85ad061b0aff}{00037}}\ \ \ \ \ \textcolor{keyword}{public}\ Optional<Libro>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros_aefe2348f6a940c31963e85ad061b0aff}{findByAutor}}(String\ autor)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ repositorioLibros.findByAutor(autor);}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00039}00039\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00040}00040\ \ \ \ \ \textcolor{comment}{//\ Obtener\ un\ libro\ por\ ISBN}}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00041}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros_a33320477a6624d795bd1a0315cb32350}{00041}}\ \ \ \ \ \textcolor{keyword}{public}\ Optional<Libro>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros_a33320477a6624d795bd1a0315cb32350}{findByIsbn}}(String\ isbn)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ repositorioLibros.findByIsbn(isbn);}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00043}00043\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00044}00044\ \ \ \ \ \textcolor{comment}{//Crear\ un\ nuevo\ libro}}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00045}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros_a421cff1d4be3c9b66c1165f081ef2d23}{00045}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros_a421cff1d4be3c9b66c1165f081ef2d23}{addLibro}}(\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}}\ libro)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ repositorioLibros.save(libro);}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00048}00048\ \ \ \ \ \textcolor{comment}{//Actualizar\ un\ libro}}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00049}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros_a75e8a7d0e8bd62392ae4cf0e36de5224}{00049}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros_a75e8a7d0e8bd62392ae4cf0e36de5224}{updateLibro}}(Long\ \textcolor{keywordtype}{id},\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}}\ libro)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00050}00050\ \ \ \ \ \ \ \ \ Optional<Libro>\ libroExistente\ =\ repositorioLibros.findById(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (libroExistente.isPresent())\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ libro.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_recurso_reservable_a20bc96f3596b0e084bbe1db72e90ed60}{setId}}(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ repositorioLibros.save(libro);}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ RuntimeException(\textcolor{stringliteral}{"{}Libro\ no\ encontrado\ con\ ID:\ "{}}\ +\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00057}00057\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00058}00058\ \ \ \ \ \textcolor{comment}{//Eliminar\ un\ libro}}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00059}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros_a3708e3ec85747d0d471503827029f151}{00059}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros_a3708e3ec85747d0d471503827029f151}{deleteLibro}}(Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00060}00060\ \ \ \ \ \ \ \ \ repositorioLibros.deleteById(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_servicio_libros_8java_source_l00063}00063\ \}}
+
+\end{DoxyCode}

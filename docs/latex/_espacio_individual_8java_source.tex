@@ -1,0 +1,92 @@
+\doxysection{Espacio\+Individual.\+java}
+\hypertarget{_espacio_individual_8java_source}{}\label{_espacio_individual_8java_source}\index{src/main/java/com/example/restapi/model/EspacioIndividual.java@{src/main/java/com/example/restapi/model/EspacioIndividual.java}}
+\mbox{\hyperlink{_espacio_individual_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.restapi.model;}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00003}00003\ \textcolor{keyword}{import}\ jakarta.persistence.Column;}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00004}00004\ \textcolor{keyword}{import}\ jakarta.persistence.DiscriminatorValue;}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00005}00005\ \textcolor{keyword}{import}\ jakarta.persistence.Entity;}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00006}00006\ \textcolor{keyword}{import}\ jakarta.persistence.Table;}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00008}00008\ @Entity}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00009}00009\ @DiscriminatorValue(\textcolor{stringliteral}{"{}ESPACIOS\_INDIVIDUALES"{}})\ \textcolor{comment}{//\ Valor\ del\ discriminador\ para\ este\ tipo\ de\ recurso}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00010}00010\ @Table(name\ =\ \textcolor{stringliteral}{"{}espacios\_individuales"{}})\ \textcolor{comment}{//\ Nombre\ de\ la\ tabla\ en\ la\ base\ de\ datos}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00011}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual}{00011}}\ public\ class\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual_afd8f42d9b93683f21df19f00fa25f398}{EspacioIndividual}}\ extends\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_recurso_reservable}{RecursoReservable}}\ \{}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00013}00013\ \ \ \ \ \textcolor{comment}{//@Id}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00014}00014\ \ \ \ \ \textcolor{comment}{//@GeneratedValue(strategy\ =\ GenerationType.IDENTITY)\ //\ Genera\ automáticamente\ el\ ID}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00015}00015\ \ \ \ \ \textcolor{comment}{//private\ Long\ id;\ //\ El\ tipo\ de\ id\ es\ Long}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00017}00017\ \ \ \ \ @Column(name\ =\ \textcolor{stringliteral}{"{}piso"{}},\ nullable\ =\ \textcolor{keyword}{false})\ \textcolor{comment}{//\ Columna\ 'piso',\ no\ puede\ ser\ nula}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00018}00018\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{int}\ piso;}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00020}00020\ \ \ \ \ @Column(name\ =\ \textcolor{stringliteral}{"{}numero\_asiento"{}},\ nullable\ =\ \textcolor{keyword}{false})\ \textcolor{comment}{//\ Columna\ 'numero\_asiento',\ no\ puede\ ser\ nula}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00021}00021\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{int}\ numeroAsiento;}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00023}00023\ \ \ \ \ \textcolor{comment}{//\ Constructor\ vacío\ (requerido\ por\ JPA)}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00024}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual_afd8f42d9b93683f21df19f00fa25f398}{00024}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual_afd8f42d9b93683f21df19f00fa25f398}{EspacioIndividual}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00025}00025\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00027}00027\ \ \ \ \ \textcolor{comment}{//\ Constructor\ con\ parámetros\ (sin\ tiempoReservado)}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00028}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual_a1926ff18b095dba97bf42696a9b8e3f9}{00028}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual_a1926ff18b095dba97bf42696a9b8e3f9}{EspacioIndividual}}(\textcolor{keywordtype}{int}\ piso,\ \textcolor{keywordtype}{int}\ numeroAsiento)\ \{}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ this.piso\ =\ piso;}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ this.numeroAsiento\ =\ numeroAsiento;}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00031}00031\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00033}00033\ \ \ \ \ \textcolor{comment}{//\ Getters\ y\ Setters}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00034}00034\ \ \ \ \ \textcolor{comment}{//public\ Long\ getId()\ \{}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00035}00035\ \ \ \ \ \textcolor{comment}{//\ \ \ \ return\ id;}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00036}00036\ \ \ \ \ \textcolor{comment}{//\}}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00038}00038\ \ \ \ \ \textcolor{comment}{//public\ void\ setId(Long\ id)\ \{}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00039}00039\ \ \ \ \ \textcolor{comment}{//\ \ \ \ this.id\ =\ id;}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00040}00040\ \ \ \ \ \textcolor{comment}{//\}}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00042}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual_acf4e4ede4ef8d520e3bc2611e2086bfd}{00042}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual_acf4e4ede4ef8d520e3bc2611e2086bfd}{getPiso}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ piso;}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00044}00044\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00046}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual_a340512ce43adf3539580e358456feeb0}{00046}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual_a340512ce43adf3539580e358456feeb0}{setPiso}}(\textcolor{keywordtype}{int}\ piso)\ \{}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (piso\ <=\ 0)\ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}El\ piso\ debe\ ser\ mayor\ a\ 0"{}});}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00048}00048\ \ \ \ \ \ \ \ \ this.piso\ =\ piso;}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00049}00049\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00051}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual_ac0746211a381a10b14de414ceb4f3dd4}{00051}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual_ac0746211a381a10b14de414ceb4f3dd4}{getNumeroAsiento}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ numeroAsiento;}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00053}00053\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00055}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual_aadb1f158a5f02345d2679680bd20ba3e}{00055}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual_aadb1f158a5f02345d2679680bd20ba3e}{setNumeroAsiento}}(\textcolor{keywordtype}{int}\ numeroAsiento)\ \{}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (numeroAsiento\ <=\ 0)\ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}El\ número\ de\ asiento\ debe\ ser\ mayor\ a\ 0"{}});}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ this.numeroAsiento\ =\ numeroAsiento;}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00058}00058\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00060}00060\ \ \ \ \ \textcolor{comment}{//\ Método\ toString}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00061}00061\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00062}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual_a6994cdc195b30d69b399215a76d80397}{00062}}\ \ \ \ \ \textcolor{keyword}{public}\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual_a6994cdc195b30d69b399215a76d80397}{toString}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Piso:\ "{}}\ +\ piso\ +\ \textcolor{stringliteral}{"{},\ Asiento:\ "{}}\ +\ numeroAsiento;}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00064}00064\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00066}00066\ \ \ \ \ @Override}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00067}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual_a74258226820785782f899464af92e9b7}{00067}}\ \textcolor{keyword}{public}\ \textcolor{keywordtype}{boolean}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual_a74258226820785782f899464af92e9b7}{equals}}(Object\ obj)\ \{}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00068}00068\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{this}\ ==\ obj)\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{if}\ (obj\ ==\ \textcolor{keyword}{null}\ ||\ getClass()\ !=\ obj.getClass())\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00071}00071\ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual_afd8f42d9b93683f21df19f00fa25f398}{EspacioIndividual}}\ espacio\ =\ (\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual_afd8f42d9b93683f21df19f00fa25f398}{EspacioIndividual}})\ obj;}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00073}00073\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_recurso_reservable_acbfedb910ba9362dccb1244aeac5f53e}{getId}}()\ !=\ \textcolor{keyword}{null}\ \&\&\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_recurso_reservable_acbfedb910ba9362dccb1244aeac5f53e}{getId}}().equals(espacio.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_recurso_reservable_acbfedb910ba9362dccb1244aeac5f53e}{getId}}())\ \&\&}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ piso\ ==\ espacio.piso\ \&\&}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ numeroAsiento\ ==\ espacio.numeroAsiento;}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00076}00076\ \}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00078}00078\ @Override}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00079}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual_a188b8b777111dce45669a03de7bd42af}{00079}}\ \textcolor{keyword}{public}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual_a188b8b777111dce45669a03de7bd42af}{hashCode}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00080}00080\ \ \ \ \ \textcolor{keywordtype}{int}\ result\ =\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_recurso_reservable_acbfedb910ba9362dccb1244aeac5f53e}{getId}}()\ !=\ \textcolor{keyword}{null}\ ?\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_recurso_reservable_acbfedb910ba9362dccb1244aeac5f53e}{getId}}().hashCode()\ :\ 0;}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00081}00081\ \ \ \ \ result\ =\ 31\ *\ result\ +\ Integer.hashCode(piso);}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00082}00082\ \ \ \ \ result\ =\ 31\ *\ result\ +\ Integer.hashCode(numeroAsiento);}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00083}00083\ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00084}00084\ \}}
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{_espacio_individual_8java_source_l00086}00086\ \}}
+
+\end{DoxyCode}

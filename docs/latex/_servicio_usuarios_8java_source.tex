@@ -1,0 +1,63 @@
+\doxysection{Servicio\+Usuarios.\+java}
+\hypertarget{_servicio_usuarios_8java_source}{}\label{_servicio_usuarios_8java_source}\index{src/main/java/com/example/restapi/service/ServicioUsuarios.java@{src/main/java/com/example/restapi/service/ServicioUsuarios.java}}
+\mbox{\hyperlink{_servicio_usuarios_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.restapi.service;}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00003}00003\ \textcolor{keyword}{import}\ org.springframework.beans.factory.annotation.Autowired;}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00004}00004\ \textcolor{keyword}{import}\ org.springframework.stereotype.Service;}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00005}00005\ \textcolor{keyword}{import}\ org.springframework.transaction.annotation.Transactional;}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00007}00007\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00008}00008\ \textcolor{keyword}{import}\ java.util.Optional;}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00010}00010\ \textcolor{keyword}{import}\ com.example.restapi.model.Usuario;}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00011}00011\ \textcolor{keyword}{import}\ com.example.restapi.repository.RepositorioUsuarios;}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00013}00013\ @Service}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00014}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_usuarios}{00014}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_usuarios_aef9603edb959ad20d033d9102e176e05}{ServicioUsuarios}}\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00016}00016\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_usuarios}{RepositorioUsuarios}}\ repositorioUsuarios;}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00018}00018\ \ \ \ \ @Autowired}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00019}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_usuarios_aef9603edb959ad20d033d9102e176e05}{00019}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_usuarios_aef9603edb959ad20d033d9102e176e05}{ServicioUsuarios}}(\mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_usuarios}{RepositorioUsuarios}}\ repositorioUsuarios)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00020}00020\ \ \ \ \ \ \ \ \ this.repositorioUsuarios\ =\ repositorioUsuarios;}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00021}00021\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00023}00023\ \ \ \ \ \textcolor{comment}{//\ Method\ to\ find\ a\ user\ by\ email}}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00024}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_usuarios_a3154913896b8b366cff0033c29183851}{00024}}\ \ \ \ \ \textcolor{keyword}{public}\ Optional<Usuario>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_usuarios_a3154913896b8b366cff0033c29183851}{findByCorreo}}(String\ correo)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00025}00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ repositorioUsuarios.findByCorreo(correo);}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00026}00026\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00028}00028\ \ \ \ \ \textcolor{comment}{//\ Method\ to\ get\ all\ users}}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00029}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_usuarios_a54e347e167b4b87541e2e254af834f54}{00029}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Usuario>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_usuarios_a54e347e167b4b87541e2e254af834f54}{findAll}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00030}00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ repositorioUsuarios.findAll();}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00031}00031\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00033}00033\ \ \ \ \ \textcolor{comment}{//\ Method\ to\ add\ a\ new\ user}}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00034}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_usuarios_ab676af96dd822ebdb54000c6a725dce7}{00034}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_usuario}{Usuario}}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_usuarios_ab676af96dd822ebdb54000c6a725dce7}{addUsuario}}(\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_usuario}{Usuario}}\ usuario)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00035}00035\ \ \ \ \ \ \ \ \ Optional<Usuario>\ usuarioExistente\ =\ repositorioUsuarios.findByCorreo(usuario.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_usuario_a077d1f952914615fce0562a9751e30f4}{getCorreo}}());}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (usuarioExistente.isPresent())\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ IllegalArgumentException(\textcolor{stringliteral}{"{}Ya\ existe\ un\ usuario\ con\ ese\ correo."{}});}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00038}00038\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ repositorioUsuarios.save(usuario);}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00040}00040\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00042}00042\ \ \ \ \ \textcolor{comment}{//\ Method\ to\ delete\ an\ existing\ user}}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00043}00043\ \ \ \ \ @Transactional}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00044}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_usuarios_af11457a7542ce10040eb94e1f04ad9b6}{00044}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_usuarios_af11457a7542ce10040eb94e1f04ad9b6}{deleteUsuario}}(String\ correo)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00045}00045\ \ \ \ \ \ \ \ \ repositorioUsuarios.deleteByCorreo(correo);}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00046}00046\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00048}00048\ \ \ \ \ \textcolor{comment}{//Method\ to\ do\ login\ user}}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00049}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_usuarios_a34526dfe5c75d03b68a11b50a84ee1a5}{00049}}\ \ \ \ \ \textcolor{keyword}{public}\ Optional<Usuario>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_usuarios_a34526dfe5c75d03b68a11b50a84ee1a5}{login}}(String\ correo,\ String\ contrasena)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00050}00050\ \ \ \ \ \ \ \ \ Optional<Usuario>\ usuario\ =\ repositorioUsuarios.findByCorreo(correo);}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (usuario.isPresent()\ \&\&\ usuario.get().getContrasena().equals(contrasena))\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ usuario;}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00053}00053\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Optional.empty();}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00056}00056\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_usuarios_8java_source_l00057}00057\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,515 @@
+\doxysection{Cliente\+Web\+Controller.\+java}
+\hypertarget{_cliente_web_controller_8java_source}{}\label{_cliente_web_controller_8java_source}\index{src/main/java/com/example/restapi/client/ClienteWebController.java@{src/main/java/com/example/restapi/client/ClienteWebController.java}}
+\mbox{\hyperlink{_cliente_web_controller_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00001}\mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1client}{00001}}\ \textcolor{keyword}{package\ }com.example.restapi.client;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00003}00003\ \textcolor{keyword}{import}\ java.text.SimpleDateFormat;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00004}00004\ \textcolor{keyword}{import}\ java.util.Date;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00006}00006\ \textcolor{keyword}{import}\ org.springframework.beans.factory.annotation.Autowired;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00007}00007\ \textcolor{keyword}{import}\ org.springframework.format.annotation.DateTimeFormat;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00008}00008\ \textcolor{keyword}{import}\ org.springframework.http.HttpEntity;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00009}00009\ \textcolor{keyword}{import}\ org.springframework.http.HttpHeaders;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00010}00010\ \textcolor{keyword}{import}\ org.springframework.http.HttpMethod;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00011}00011\ \textcolor{keyword}{import}\ org.springframework.http.HttpStatus;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00012}00012\ \textcolor{keyword}{import}\ org.springframework.http.MediaType;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00013}00013\ \textcolor{keyword}{import}\ org.springframework.http.ResponseEntity;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00014}00014\ \textcolor{keyword}{import}\ org.springframework.stereotype.Controller;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00015}00015\ \textcolor{keyword}{import}\ org.springframework.ui.Model;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00016}00016\ \textcolor{keyword}{import}\ org.springframework.util.LinkedMultiValueMap;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00017}00017\ \textcolor{keyword}{import}\ org.springframework.util.MultiValueMap;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00018}00018\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.GetMapping;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00019}00019\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.PostMapping;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00020}00020\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.RequestParam;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00021}00021\ \textcolor{keyword}{import}\ org.springframework.web.bind.annotation.ResponseBody;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00022}00022\ \textcolor{keyword}{import}\ org.springframework.web.client.RestTemplate;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00024}00024\ \textcolor{keyword}{import}\ com.example.restapi.model.EspacioIndividual;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00025}00025\ \textcolor{keyword}{import}\ com.example.restapi.model.Libro;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00026}00026\ \textcolor{keyword}{import}\ com.example.restapi.model.Ordenador;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00027}00027\ \textcolor{keyword}{import}\ com.example.restapi.model.Reserva;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00028}00028\ \textcolor{keyword}{import}\ com.example.restapi.model.SalaGrupal;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00029}00029\ \textcolor{keyword}{import}\ com.example.restapi.model.Usuario;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00030}00030\ \textcolor{keyword}{import}\ com.example.restapi.service.ReservaService;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00031}00031\ \textcolor{keyword}{import}\ com.example.restapi.service.ServicioEspacioIndividual;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00032}00032\ \textcolor{keyword}{import}\ com.example.restapi.service.ServicioLibros;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00033}00033\ \textcolor{keyword}{import}\ com.example.restapi.service.ServicioOrdenadores;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00034}00034\ \textcolor{keyword}{import}\ com.example.restapi.service.ServicioSalaGrupo;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00036}00036\ @Controller}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00038}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller}{00038}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a102aecba31328120b0e27f441668652c}{ClienteWebController}}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00039}00039\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ String\ apiBaseUrl\ =\ \textcolor{stringliteral}{"{}http://localhost:8083"{}};}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00040}00040\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ RestTemplate\ restTemplate;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00042}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a102aecba31328120b0e27f441668652c}{00042}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a102aecba31328120b0e27f441668652c}{ClienteWebController}}(RestTemplate\ restTemplate)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00043}00043\ \ \ \ \ \ \ \ \ this.restTemplate\ =\ restTemplate;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00044}00044\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00046}00046\ \ \ \ \ @Autowired}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00047}00047\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_reserva_service}{ReservaService}}\ reservaService;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00049}00049\ \ \ \ \ @Autowired}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00050}00050\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_libros}{ServicioLibros}}\ serivicioLibros;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00051}00051\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00052}00052\ \ \ \ \ @Autowired}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00053}00053\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_espacio_individual}{ServicioEspacioIndividual}}\ serivicioEspacioIndividual;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00055}00055\ \ \ \ \ @Autowired}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00056}00056\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_ordenadores}{ServicioOrdenadores}}\ servicioOrdenadores;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00058}00058\ \ \ \ \ @Autowired}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00059}00059\ \ \ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_sala_grupo}{ServicioSalaGrupo}}\ servicioSalaGrupo;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00061}00061\ \ \ \ \ \textcolor{comment}{//\ REDIRECCIONAMIENTO}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00062}00062\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/"{}})}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00063}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a79f258fa1f07415ad5cb94a597360d8f}{00063}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a79f258fa1f07415ad5cb94a597360d8f}{redirectToLogin}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}index"{}};}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00065}00065\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00067}00067\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/adminHome"{}})}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00068}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ae8112beb8400b18140a9affa61ca9df5}{00068}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ae8112beb8400b18140a9affa61ca9df5}{cargarAdminHomeConUsuarios}}(Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}})\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Cargar\ usuarios}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ String\ urlUsuarios\ =\ apiBaseUrl\ +\ \textcolor{stringliteral}{"{}/api/usuarios/all"{}};}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ ResponseEntity<Usuario[]>\ responseUsuarios\ =\ restTemplate.getForEntity(urlUsuarios,\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_usuario}{Usuario}}[].\textcolor{keyword}{class});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (responseUsuarios.getStatusCode()\ ==\ HttpStatus.OK)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_usuario}{Usuario}}[]\ usuarios\ =\ responseUsuarios.getBody();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}usuarios"{}},\ usuarios);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}No\ se\ pudieron\ obtener\ los\ usuarios"{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Cargar\ reservas}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ String\ urlReservas\ =\ apiBaseUrl\ +\ \textcolor{stringliteral}{"{}/api/reservas/all"{}};}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ ResponseEntity<Reserva[]>\ responseReservas\ =\ restTemplate.getForEntity(urlReservas,\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}[].\textcolor{keyword}{class});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (responseReservas.getStatusCode()\ ==\ HttpStatus.OK)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}[]\ reservas\ =\ responseReservas.getBody();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}reservas"{}},\ reservas);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}No\ se\ pudieron\ obtener\ las\ reservas"{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Cargar\ ordenadores}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ String\ urlOrdenadores\ =\ apiBaseUrl\ +\ \textcolor{stringliteral}{"{}/api/ordenadores/all"{}};}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ ResponseEntity<Ordenador[]>\ responseOrdenadores\ =\ restTemplate.getForEntity(urlOrdenadores,\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador}{Ordenador}}[].\textcolor{keyword}{class});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (responseOrdenadores.getStatusCode()\ ==\ HttpStatus.OK)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}ordenadores"{}},\ responseOrdenadores.getBody());}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}No\ se\ pudieron\ obtener\ los\ ordenadores"{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Cargar\ libros}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ String\ urlLibros\ =\ apiBaseUrl\ +\ \textcolor{stringliteral}{"{}/api/libros/all"{}};}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ ResponseEntity<Libro[]>\ responseLibros\ =\ restTemplate.getForEntity(urlLibros,\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_libro}{Libro}}[].\textcolor{keyword}{class});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (responseLibros.getStatusCode()\ ==\ HttpStatus.OK)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}libros"{}},\ responseLibros.getBody());}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}No\ se\ pudieron\ obtener\ los\ libros"{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Cargar\ salas\ grupales}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ String\ urlSalasGrupales\ =\ apiBaseUrl\ +\ \textcolor{stringliteral}{"{}/api/sala-\/grupal/all"{}};}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ ResponseEntity<SalaGrupal[]>\ responseSalasGrupales\ =\ restTemplate.getForEntity(urlSalasGrupales,\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal}{SalaGrupal}}[].\textcolor{keyword}{class});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (responseSalasGrupales.getStatusCode()\ ==\ HttpStatus.OK)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}salasGrupales"{}},\ responseSalasGrupales.getBody());}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}No\ se\ pudieron\ obtener\ las\ salas\ grupales"{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Cargar\ espacios\ individuales}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ String\ urlEspaciosIndividuales\ =\ apiBaseUrl\ +\ \textcolor{stringliteral}{"{}/api/Espacios-\/Individuales/all"{}};}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ ResponseEntity<EspacioIndividual[]>\ responseEspaciosIndividuales\ =\ restTemplate.getForEntity(urlEspaciosIndividuales,\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_espacio_individual}{EspacioIndividual}}[].\textcolor{keyword}{class});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (responseEspaciosIndividuales.getStatusCode()\ ==\ HttpStatus.OK)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}espaciosIndividuales"{}},\ responseEspaciosIndividuales.getBody());}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}No\ se\ pudieron\ obtener\ los\ espacios\ individuales"{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00129}00129\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}Error\ al\ conectar\ con\ la\ API"{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00132}00132\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00133}00133\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00134}00134\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}adminHome"{}};\ \textcolor{comment}{//\ Vista\ que\ ya\ tienes}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00135}00135\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00137}00137\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/userHome"{}})}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00138}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a7c5c01e7611d75083e472d4722f18690}{00138}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a7c5c01e7611d75083e472d4722f18690}{userHome}}(Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}})\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00139}00139\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}userHome"{}};\ \textcolor{comment}{//\ Redirige\ a\ la\ plantilla\ userHome.html}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00140}00140\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00141}00141\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00142}00142\ \ \ \ \ \textcolor{comment}{//LOGIN}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00143}00143\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/login-\/admin"{}})}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00144}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a5a104ca4c5094a7e9d1cb3e6a918479f}{00144}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a5a104ca4c5094a7e9d1cb3e6a918479f}{loginAdmin}}(@RequestParam(\textcolor{stringliteral}{"{}email"{}})\ String\ email,\ @RequestParam(\textcolor{stringliteral}{"{}password"{}})\ String\ password,\ Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}})\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00145}00145\ \ \ \ \ \ \ \ \ String\ url\ =\ apiBaseUrl\ +\ \textcolor{stringliteral}{"{}/api/usuarios/login-\/admin"{}};}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00146}00146\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ MultiValueMap<String,\ String>\ requestBody\ =\ \textcolor{keyword}{new}\ LinkedMultiValueMap<>();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ requestBody.add(\textcolor{stringliteral}{"{}Email"{}},\ email);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ requestBody.add(\textcolor{stringliteral}{"{}Password"{}},\ password);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00150}00150\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ HttpHeaders\ headers\ =\ \textcolor{keyword}{new}\ HttpHeaders();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ headers.setContentType(MediaType.APPLICATION\_FORM\_URLENCODED);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ HttpEntity<MultiValueMap<String,\ String>>\ requestEntity\ =\ \textcolor{keyword}{new}\ HttpEntity<>(requestBody,\ headers);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00154}00154\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ ResponseEntity<String>\ response\ =\ restTemplate.postForEntity(url,\ requestEntity,\ String.class);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00156}00156\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (response.getStatusCode()\ ==\ HttpStatus.OK)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/adminHome"{}};}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Capturar\ el\ mensaje\ de\ error\ exacto\ del\ servidor}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ response.getBody());}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}index"{}};}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00164}00164\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}Error\ de\ conexión\ con\ el\ servidor"{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}index"{}};}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00168}00168\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00169}00169\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00171}00171\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/login"{}})}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00172}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ac225cefcd80b6d654cf704c0b9178278}{00172}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ac225cefcd80b6d654cf704c0b9178278}{loginUser}}(@RequestParam(\textcolor{stringliteral}{"{}email"{}})\ String\ email,\ @RequestParam(\textcolor{stringliteral}{"{}password"{}})\ String\ password,\ Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}})\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00173}00173\ \ \ \ \ \ \ \ \ String\ url\ =\ apiBaseUrl\ +\ \textcolor{stringliteral}{"{}/api/usuarios/login"{}};}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00174}00174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ MultiValueMap<String,\ String>\ requestBody\ =\ \textcolor{keyword}{new}\ LinkedMultiValueMap<>();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ requestBody.add(\textcolor{stringliteral}{"{}Email"{}},\ email);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ requestBody.add(\textcolor{stringliteral}{"{}Password"{}},\ password);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00178}00178\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ HttpHeaders\ headers\ =\ \textcolor{keyword}{new}\ HttpHeaders();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ headers.setContentType(MediaType.APPLICATION\_FORM\_URLENCODED);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ HttpEntity<MultiValueMap<String,\ String>>\ requestEntity\ =\ \textcolor{keyword}{new}\ HttpEntity<>(requestBody,\ headers);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ ResponseEntity<String>\ response\ =\ restTemplate.postForEntity(url,\ requestEntity,\ String.class);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (response.getStatusCode()\ ==\ HttpStatus.OK)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/userHome"{}};}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ response.getBody());}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}index"{}};}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00191}00191\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}Error\ de\ conexión\ con\ el\ servidor"{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}index"{}};}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00195}00195\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00196}00196\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00198}00198\ \ \ \ \ \textcolor{comment}{//\ USUARIOS\ ADMIN}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00199}00199\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/add-\/user"{}})}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00200}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a05ec37fb5ab7009a6a938b5976cce545}{00200}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a05ec37fb5ab7009a6a938b5976cce545}{addUser}}(@RequestParam(\textcolor{stringliteral}{"{}nombre"{}})\ String\ nombre,\ @RequestParam(\textcolor{stringliteral}{"{}correo"{}})\ String\ correo,\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00201}00201\ \ \ \ \ @RequestParam(\textcolor{stringliteral}{"{}password"{}})\ String\ password,\ Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}})\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00202}00202\ \ \ \ \ \ \ \ \ String\ url\ =\ apiBaseUrl\ +\ \textcolor{stringliteral}{"{}/api/usuarios/add"{}};\ \textcolor{comment}{//\ Endpoint\ en\ UsuarioController}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00203}00203\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Crear\ el\ cuerpo\ de\ la\ solicitud\ como\ parámetros\ de\ formulario}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ MultiValueMap<String,\ String>\ requestBody\ =\ \textcolor{keyword}{new}\ LinkedMultiValueMap<>();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ requestBody.add(\textcolor{stringliteral}{"{}nombre"{}},\ nombre);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ requestBody.add(\textcolor{stringliteral}{"{}correo"{}},\ correo);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ requestBody.add(\textcolor{stringliteral}{"{}password"{}},\ password);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Configurar\ los\ encabezados}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ HttpHeaders\ headers\ =\ \textcolor{keyword}{new}\ HttpHeaders();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ headers.setContentType(MediaType.APPLICATION\_FORM\_URLENCODED);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Crear\ la\ entidad\ HTTP}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ HttpEntity<MultiValueMap<String,\ String>>\ requestEntity\ =\ \textcolor{keyword}{new}\ HttpEntity<>(requestBody,\ headers);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Enviar\ la\ solicitud\ POST\ al\ UsuarioController}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ ResponseEntity<String>\ response\ =\ restTemplate.postForEntity(url,\ requestEntity,\ String.class);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Manejar\ la\ respuesta}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (response.getStatusCode()\ ==\ HttpStatus.CREATED)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}success"{}},\ \textcolor{stringliteral}{"{}Usuario\ agregado\ correctamente."{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}Error\ al\ agregar\ el\ usuario:\ "{}}\ +\ response.getBody());}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00226}00226\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}Error\ de\ conexión\ con\ el\ servidor."{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00229}00229\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00230}00230\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00231}00231\ \ \ \ \ \textcolor{comment}{//\ Llamar\ al\ método\ cargarAdminHomeConUsuarios\ para\ recargar\ la\ lista\ de\ usuarios}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00232}00232\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ae8112beb8400b18140a9affa61ca9df5}{cargarAdminHomeConUsuarios}}(\mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00233}00233\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00234}00234\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00235}00235\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/delete-\/user"{}})}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00236}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_aff9caabc28fd3f66aa9e80fb887068e4}{00236}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_aff9caabc28fd3f66aa9e80fb887068e4}{deleteUser}}(@RequestParam(\textcolor{stringliteral}{"{}correo"{}})\ String\ correo,\ Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}})\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00237}00237\ \ \ \ \ \ \ \ \ String\ url\ =\ apiBaseUrl\ +\ \textcolor{stringliteral}{"{}/api/usuarios/delete/"{}}\ +\ correo;\ \textcolor{comment}{//\ Endpoint\ en\ UsuarioController}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00238}00238\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Crear\ la\ entidad\ HTTP\ (puede\ ser\ null\ para\ DELETE)}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ @SuppressWarnings(\textcolor{stringliteral}{"{}null"{}})}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ HttpEntity<Void>\ requestEntity\ =\ \textcolor{keyword}{new}\ HttpEntity<>(\textcolor{keyword}{null});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00242}00242\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Enviar\ la\ solicitud\ DELETE\ al\ UsuarioController}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ ResponseEntity<String>\ response\ =\ restTemplate.exchange(url,\ HttpMethod.DELETE,\ requestEntity,\ String.class);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00245}00245\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Manejar\ la\ respuesta}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (response.getStatusCode()\ ==\ HttpStatus.OK)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}success"{}},\ \textcolor{stringliteral}{"{}Usuario\ eliminado\ correctamente."{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}Error\ al\ eliminar\ el\ usuario:\ "{}}\ +\ response.getBody());}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00251}00251\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00252}00252\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}Error\ de\ conexión\ con\ el\ servidor."{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00255}00255\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00256}00256\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00257}00257\ \ \ \ \ \textcolor{comment}{//\ Llamar\ al\ método\ cargarAdminHomeConUsuarios\ para\ recargar\ la\ lista\ de\ usuarios}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00258}00258\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ae8112beb8400b18140a9affa61ca9df5}{cargarAdminHomeConUsuarios}}(\mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00259}00259\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00261}00261\ \ \ \ \ \textcolor{comment}{//\ RESERVAS\ ADMIN}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00262}00262\ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/add-\/reserva"{}})}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00263}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_aa4ebd19043697e4f7fb4bf6a6eaf7ad0}{00263}}\ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_aa4ebd19043697e4f7fb4bf6a6eaf7ad0}{addReserva}}(}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00264}00264\ \ \ \ \ @RequestParam(\textcolor{stringliteral}{"{}nombreCliente"{}})\ String\ nombreCliente,}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00265}00265\ \ \ \ \ @RequestParam(\textcolor{stringliteral}{"{}emailCliente"{}})\ String\ emailCliente,}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00266}00266\ \ \ \ \ @RequestParam(\textcolor{stringliteral}{"{}fechaReserva"{}})\ String\ fechaReservaStr,\ \textcolor{comment}{//\ <-\/\ como\ String}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00267}00267\ \ \ \ \ @RequestParam(\textcolor{stringliteral}{"{}horaReserva"{}})\ String\ horaReserva,}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00268}00268\ \ \ \ \ @RequestParam(\textcolor{stringliteral}{"{}numPersonas"{}})\ \textcolor{keywordtype}{int}\ numPersonas,}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00269}00269\ \ \ \ \ @RequestParam(required\ =\ false)\ Long\ libroId,}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00270}00270\ \ \ \ \ @RequestParam(required\ =\ false)\ Long\ ordenadorId,}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00271}00271\ \ \ \ \ @RequestParam(required\ =\ false)\ Long\ salaGrupalId,}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00272}00272\ \ \ \ \ @RequestParam(required\ =\ false)\ Long\ espacioIndividualId,}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00273}00273\ \ \ \ \ Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}})\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00275}00275\ \ \ \ \ String\ url\ =\ apiBaseUrl\ +\ \textcolor{stringliteral}{"{}/api/reservas/add"{}};}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00276}00276\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00277}00277\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Convertir\ la\ fecha\ manualmente}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00278}00278\ \ \ \ \ \ \ \ \ SimpleDateFormat\ formatter\ =\ \textcolor{keyword}{new}\ SimpleDateFormat(\textcolor{stringliteral}{"{}yyyy-\/MM-\/dd"{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00279}00279\ \ \ \ \ \ \ \ \ Date\ fechaReserva\ =\ formatter.parse(fechaReservaStr);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00280}00280\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00281}00281\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}\ reserva\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00282}00282\ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_ab78b58650bf6be0d7fc98a1beb3299b6}{setNombreCliente}}(nombreCliente);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00283}00283\ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_ab1052f118469b227ed151e6a6e3be13e}{setEmailCliente}}(emailCliente);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00284}00284\ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_afd516e4601cfcc8c0c4ce2d70151c891}{setFechaReserva}}(fechaReserva);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00285}00285\ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a09b595dbef83708f6300a832da5b0902}{setHoraReserva}}(horaReserva);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00286}00286\ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a923408b6722f48dbaa6e5c3b85fe96d7}{setNumPersonas}}(numPersonas);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00287}00287\ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_ae67282691303dd9445b283d5835941ee}{setLibroId}}(libroId);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00288}00288\ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a8353a0de51cf1d21d3c65e8e83e7fe93}{setOrdenadorId}}(ordenadorId);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00289}00289\ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a3af13515ea9055f70e650873de386239}{setSalaGrupalId}}(salaGrupalId);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00290}00290\ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a8e268331abf2b1f9c0138b189f866985}{setEspacioIndividualId}}(espacioIndividualId);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00291}00291\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00292}00292\ \ \ \ \ \ \ \ \ HttpHeaders\ headers\ =\ \textcolor{keyword}{new}\ HttpHeaders();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00293}00293\ \ \ \ \ \ \ \ \ headers.setContentType(MediaType.APPLICATION\_JSON);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00294}00294\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00295}00295\ \ \ \ \ \ \ \ \ HttpEntity<Reserva>\ requestEntity\ =\ \textcolor{keyword}{new}\ HttpEntity<>(reserva,\ headers);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00296}00296\ \ \ \ \ \ \ \ \ ResponseEntity<String>\ response\ =\ restTemplate.postForEntity(url,\ requestEntity,\ String.class);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00297}00297\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00298}00298\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (response.getStatusCode()\ ==\ HttpStatus.CREATED)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}success"{}},\ \textcolor{stringliteral}{"{}Reserva\ añadida\ correctamente."{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00300}00300\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}Error\ al\ añadir\ reserva:\ "{}}\ +\ response.getBody());}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00302}00302\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00303}00303\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00304}00304\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00305}00305\ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00306}00306\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}Error\ al\ procesar\ la\ reserva."{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00307}00307\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00308}00308\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00309}00309\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/adminHome"{}};\ \textcolor{comment}{//\ mejor\ que\ recargar\ con\ método}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00310}00310\ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00312}00312\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00313}00313\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/delete-\/reserva"{}})}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00314}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_acb7fabc6bf60389e9f35dcd24bae1eaf}{00314}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_acb7fabc6bf60389e9f35dcd24bae1eaf}{deleteReserva}}(@RequestParam(\textcolor{stringliteral}{"{}id"{}})\ Long\ \textcolor{keywordtype}{id},\ Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}})\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00315}00315\ \ \ \ \ \ \ \ \ String\ url\ =\ apiBaseUrl\ +\ \textcolor{stringliteral}{"{}/api/reservas/"{}}\ +\ id;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00316}00316\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \ \ HttpEntity<Void>\ requestEntity\ =\ \textcolor{keyword}{new}\ HttpEntity<>(\textcolor{keyword}{null});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ ResponseEntity<String>\ response\ =\ restTemplate.exchange(url,\ HttpMethod.DELETE,\ requestEntity,\ String.class);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00319}00319\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00320}00320\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (response.getStatusCode().is2xxSuccessful())\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00321}00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}success"{}},\ \textcolor{stringliteral}{"{}Reserva\ eliminada\ correctamente."{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00322}00322\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00323}00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}Error\ al\ eliminar\ la\ reserva:\ "{}}\ +\ response.getBody());}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00325}00325\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}Error\ de\ conexión\ con\ el\ servidor."{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00328}00328\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00329}00329\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00330}00330\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}redirect:/adminHome"{}};\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00331}00331\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00332}00332\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00333}00333\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00334}00334\ \ \ \ \ \textcolor{comment}{//ORDENADORES\ ADMIN}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00335}00335\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/add-\/ordenador"{}})}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00336}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_af6a6de75100959a10747a4a9ed46c81d}{00336}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_af6a6de75100959a10747a4a9ed46c81d}{addOrdenador}}(@RequestParam(\textcolor{stringliteral}{"{}marca"{}})\ String\ marca,\ @RequestParam(\textcolor{stringliteral}{"{}modelo"{}})\ String\ modelo,}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00337}00337\ \ \ \ \ @RequestParam(\textcolor{stringliteral}{"{}numeroSerie"{}})\ String\ numeroSerie,\ @RequestParam(\textcolor{stringliteral}{"{}disponible"{}})\ \textcolor{keywordtype}{boolean}\ disponible,\ Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}})\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00338}00338\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00339}00339\ \ \ \ \ \ \ \ \ String\ url\ =\ apiBaseUrl\ +\ \textcolor{stringliteral}{"{}/api/ordenadores/add"{}};}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00340}00340\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00341}00341\ \ \ \ \ \ \ \ \ \ \ \ \ MultiValueMap<String,\ String>\ requestBody\ =\ \textcolor{keyword}{new}\ LinkedMultiValueMap<>();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ requestBody.add(\textcolor{stringliteral}{"{}marca"{}},\ marca);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \ \ requestBody.add(\textcolor{stringliteral}{"{}modelo"{}},\ modelo);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \ \ requestBody.add(\textcolor{stringliteral}{"{}numeroSerie"{}},\ numeroSerie);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00345}00345\ \ \ \ \ \ \ \ \ \ \ \ \ requestBody.add(\textcolor{stringliteral}{"{}disponible"{}},\ String.valueOf(disponible));}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00346}00346\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \ \ HttpHeaders\ headers\ =\ \textcolor{keyword}{new}\ HttpHeaders();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \ \ headers.setContentType(MediaType.APPLICATION\_FORM\_URLENCODED);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ \ \ HttpEntity<MultiValueMap<String,\ String>>\ requestEntity\ =\ \textcolor{keyword}{new}\ HttpEntity<>(requestBody,\ headers);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00350}00350\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00351}00351\ \ \ \ \ \ \ \ \ \ \ \ \ ResponseEntity<String>\ response\ =\ restTemplate.postForEntity(url,\ requestEntity,\ String.class);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00352}00352\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00353}00353\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (response.getStatusCode()\ ==\ HttpStatus.CREATED)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00354}00354\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}success"{}},\ \textcolor{stringliteral}{"{}Ordenador\ añadido\ correctamente."{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00355}00355\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00356}00356\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}Error\ al\ añadir\ el\ ordenador:\ "{}}\ +\ response.getBody());}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00357}00357\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00358}00358\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00359}00359\ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00360}00360\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}Error\ de\ conexión\ con\ la\ API\ de\ ordenadores."{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00361}00361\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00362}00362\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00363}00363\ \ \ \ \ \textcolor{comment}{//\ Llamar\ al\ método\ cargarAdminHomeConUsuarios\ para\ recargar\ la\ lista\ de\ ordenadores}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00364}00364\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ae8112beb8400b18140a9affa61ca9df5}{cargarAdminHomeConUsuarios}}(\mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00365}00365\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00366}00366\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00367}00367\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/delete-\/ordenador"{}})}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00368}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ad5910c3a32faf3f56704575888dd5237}{00368}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ad5910c3a32faf3f56704575888dd5237}{deleteOrdenador}}(@RequestParam(\textcolor{stringliteral}{"{}id"{}})\ Integer\ \textcolor{keywordtype}{id},\ Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}})\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00369}00369\ \ \ \ \ \ \ \ \ String\ url\ =\ apiBaseUrl\ +\ \textcolor{stringliteral}{"{}/api/ordenadores/delete/"{}}\ +\ id;}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00370}00370\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00371}00371\ \ \ \ \ \ \ \ \ \ \ \ \ HttpEntity<Void>\ requestEntity\ =\ \textcolor{keyword}{new}\ HttpEntity<>(\textcolor{keyword}{null});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00372}00372\ \ \ \ \ \ \ \ \ \ \ \ \ ResponseEntity<String>\ response\ =\ restTemplate.exchange(url,\ HttpMethod.DELETE,\ requestEntity,\ String.class);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00373}00373\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00374}00374\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (response.getStatusCode()\ ==\ HttpStatus.OK)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00375}00375\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}success"{}},\ \textcolor{stringliteral}{"{}Ordenador\ eliminado\ correctamente."{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00376}00376\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00377}00377\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}Error\ al\ eliminar\ el\ ordenador:\ "{}}\ +\ response.getBody());}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00378}00378\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00379}00379\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00380}00380\ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00381}00381\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}Error\ de\ conexión\ con\ la\ API\ de\ ordenadores."{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00382}00382\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00383}00383\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00384}00384\ \ \ \ \ \textcolor{comment}{//\ Llamar\ al\ método\ cargarAdminHomeConUsuarios\ para\ recargar\ la\ lista\ de\ ordenadores}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00385}00385\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ae8112beb8400b18140a9affa61ca9df5}{cargarAdminHomeConUsuarios}}(\mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00386}00386\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00387}00387\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00388}00388\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/add-\/sala-\/grupal"{}})}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00389}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a41f3906b30c759ee06fb238bba5cc9cd}{00389}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a41f3906b30c759ee06fb238bba5cc9cd}{addSalaGrupal}}(@RequestParam(\textcolor{stringliteral}{"{}piso"{}})\ \textcolor{keywordtype}{int}\ piso,\ @RequestParam(\textcolor{stringliteral}{"{}numeroSala"{}})\ \textcolor{keywordtype}{int}\ numeroSala,\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00390}00390\ \ \ \ \ @RequestParam(\textcolor{stringliteral}{"{}numeroPersonas"{}})\ \textcolor{keywordtype}{int}\ numeroPersonas,\ Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}})\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00391}00391\ \ \ \ \ \ \ \ \ String\ url\ =\ apiBaseUrl\ +\ \textcolor{stringliteral}{"{}/api/salas/add"{}};}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00392}00392\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00393}00393\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00394}00394\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Crear\ un\ objeto\ tipo\ SalaGrupal\ y\ setear\ sus\ valores}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00395}00395\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal}{SalaGrupal}}\ salaGrupal\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal}{SalaGrupal}}();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00396}00396\ \ \ \ \ \ \ \ \ \ \ \ \ salaGrupal.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_a08cc4ebd3a76a703e164eea870d33fc0}{setPiso}}(piso);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00397}00397\ \ \ \ \ \ \ \ \ \ \ \ \ salaGrupal.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_aad3962d0944c6a6e3610a9152bbbe27c}{setNumeroSala}}(numeroSala);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00398}00398\ \ \ \ \ \ \ \ \ \ \ \ \ salaGrupal.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_sala_grupal_a7b4adf519e3c629026994819e2e3f735}{setNumeroPersonas}}(numeroPersonas);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00399}00399\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00400}00400\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Crear\ headers\ con\ tipo\ JSON}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00401}00401\ \ \ \ \ \ \ \ \ \ \ \ \ HttpHeaders\ headers\ =\ \textcolor{keyword}{new}\ HttpHeaders();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00402}00402\ \ \ \ \ \ \ \ \ \ \ \ \ headers.setContentType(MediaType.APPLICATION\_JSON);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00403}00403\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00404}00404\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Crear\ entidad\ con\ JSON}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00405}00405\ \ \ \ \ \ \ \ \ \ \ \ \ HttpEntity<SalaGrupal>\ requestEntity\ =\ \textcolor{keyword}{new}\ HttpEntity<>(salaGrupal,\ headers);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00406}00406\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00407}00407\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Enviar\ la\ solicitud}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00408}00408\ \ \ \ \ \ \ \ \ \ \ \ \ ResponseEntity<String>\ response\ =\ restTemplate.postForEntity(url,\ requestEntity,\ String.class);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00409}00409\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00410}00410\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (response.getStatusCode()\ ==\ HttpStatus.CREATED)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00411}00411\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}success"{}},\ \textcolor{stringliteral}{"{}Sala\ grupal\ añadida\ correctamente."{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00412}00412\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00413}00413\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}Error\ al\ añadir\ la\ sala\ grupal:\ "{}}\ +\ response.getBody());}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00414}00414\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00415}00415\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00416}00416\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00417}00417\ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00418}00418\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}Error\ de\ conexión\ con\ el\ servidor."{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00419}00419\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00420}00420\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00421}00421\ \ \ \ \ \textcolor{comment}{//\ Llamar\ al\ método\ cargarAdminHomeConUsuarios\ para\ recargar\ la\ lista\ de\ salas\ grupales}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00422}00422\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ae8112beb8400b18140a9affa61ca9df5}{cargarAdminHomeConUsuarios}}(\mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00423}00423\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00424}00424\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00425}00425\ \ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/delete-\/sala-\/grupal"{}})}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00426}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ae87abb5807aad6016ee627b772137276}{00426}}\ \ \ \ \ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ae87abb5807aad6016ee627b772137276}{deleteSalaGrupal}}(@RequestParam(\textcolor{stringliteral}{"{}piso"{}})\ \textcolor{keywordtype}{int}\ piso,\ @RequestParam(\textcolor{stringliteral}{"{}numeroSala"{}})\ \textcolor{keywordtype}{int}\ numeroSala,\ Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}})\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00427}00427\ \ \ \ \ \ \ \ \ String\ url\ =\ apiBaseUrl\ +\ \textcolor{stringliteral}{"{}/api/salas/delete/"{}}\ +\ piso\ +\ \textcolor{stringliteral}{"{}/"{}}\ +\ numeroSala;\ \textcolor{comment}{//\ Endpoint\ en\ SalaGrupalController}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00428}00428\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00429}00429\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Crear\ la\ entidad\ HTTP\ (puede\ ser\ null\ para\ DELETE)}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00430}00430\ \ \ \ \ \ \ \ \ \ \ \ \ @SuppressWarnings(\textcolor{stringliteral}{"{}null"{}})}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00431}00431\ \ \ \ \ \ \ \ \ \ \ \ \ HttpEntity<Void>\ requestEntity\ =\ \textcolor{keyword}{new}\ HttpEntity<>(\textcolor{keyword}{null});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00432}00432\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00433}00433\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Enviar\ la\ solicitud\ DELETE\ al\ SalaGrupalController}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00434}00434\ \ \ \ \ \ \ \ \ \ \ \ \ ResponseEntity<String>\ response\ =\ restTemplate.exchange(url,\ HttpMethod.DELETE,\ requestEntity,\ String.class);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00435}00435\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00436}00436\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Manejar\ la\ respuesta}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00437}00437\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (response.getStatusCode()\ ==\ HttpStatus.OK)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00438}00438\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}success"{}},\ \textcolor{stringliteral}{"{}Sala\ grupal\ eliminada\ correctamente."{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00439}00439\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00440}00440\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}Error\ al\ eliminar\ la\ sala\ grupal:\ "{}}\ +\ response.getBody());}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00441}00441\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00442}00442\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00443}00443\ \ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00444}00444\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}Error\ de\ conexión\ con\ el\ servidor."{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00445}00445\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00446}00446\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00447}00447\ \ \ \ \ \textcolor{comment}{//\ Llamar\ al\ método\ cargarAdminHomeConUsuarios\ para\ recargar\ la\ lista\ de\ salas\ grupales}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00448}00448\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_ae8112beb8400b18140a9affa61ca9df5}{cargarAdminHomeConUsuarios}}(\mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00449}00449\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00450}00450\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00451}00451\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00452}00452\ \ \ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00453}00453\ \ \ \ \ @GetMapping(\textcolor{stringliteral}{"{}/api/recursos"{}})}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00454}00454\ \ \ \ \ @ResponseBody}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00455}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_aa5bb1d3a4144e38364f963e641fca495}{00455}}\ \ \ \ \ \textcolor{keyword}{public}\ ResponseEntity<?>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_aa5bb1d3a4144e38364f963e641fca495}{getRecursosPorTipo}}(@RequestParam\ String\ tipo)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00456}00456\ \ \ \ \ \textcolor{keywordflow}{switch}\ (tipo.toLowerCase())\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00457}00457\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}libro"{}}:}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00458}00458\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.ok(serivicioLibros.findAll());}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00459}00459\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}ordenador"{}}:}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00460}00460\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.ok(servicioOrdenadores.findAll());}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00461}00461\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}sala"{}}:}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00462}00462\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.ok(servicioSalaGrupo.findAll());}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00463}00463\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}espacio"{}}:}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00464}00464\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.ok(serivicioEspacioIndividual.findAll());}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00465}00465\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00466}00466\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ResponseEntity.badRequest().body(\textcolor{stringliteral}{"{}Tipo\ de\ recurso\ no\ válido"{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00467}00467\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00468}00468\ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00469}00469\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00470}00470\ \ \ \ @PostMapping(\textcolor{stringliteral}{"{}/reservar"{}})}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00471}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a0f892c3203cd9f9c7cb55ac4b3a48a46}{00471}}\ public\ String\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1client_1_1_cliente_web_controller_a0f892c3203cd9f9c7cb55ac4b3a48a46}{reservarRecurso}}(}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00472}00472\ \ \ \ \ @RequestParam(\textcolor{stringliteral}{"{}nombreCliente"{}})\ String\ nombreCliente,}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00473}00473\ \ \ \ \ @RequestParam(\textcolor{stringliteral}{"{}emailCliente"{}})\ String\ emailCliente,}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00474}00474\ \ \ \ \ @RequestParam(\textcolor{stringliteral}{"{}fechaReserva"{}})\ @DateTimeFormat(pattern\ =\ \textcolor{stringliteral}{"{}yyyy-\/MM-\/dd"{}})\ Date\ fechaReserva,}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00475}00475\ \ \ \ \ @RequestParam(\textcolor{stringliteral}{"{}horaReserva"{}})\ String\ horaReserva,}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00476}00476\ \ \ \ \ @RequestParam(\textcolor{stringliteral}{"{}numPersonas"{}})\ \textcolor{keywordtype}{int}\ numPersonas,}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00477}00477\ \ \ \ \ @RequestParam(required\ =\ false)\ Long\ libroId,}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00478}00478\ \ \ \ \ @RequestParam(required\ =\ false)\ Long\ ordenadorId,}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00479}00479\ \ \ \ \ @RequestParam(required\ =\ false)\ Long\ salaGrupalId,}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00480}00480\ \ \ \ \ @RequestParam(required\ =\ false)\ Long\ espacioIndividualId,}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00481}00481\ \ \ \ \ Model\ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}})\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00482}00482\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00483}00483\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00484}00484\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00485}00485\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Guardar\ la\ reserva}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00486}00486\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}\ reserva\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva}{Reserva}}();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00487}00487\ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_ab78b58650bf6be0d7fc98a1beb3299b6}{setNombreCliente}}(nombreCliente);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00488}00488\ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_ab1052f118469b227ed151e6a6e3be13e}{setEmailCliente}}(emailCliente);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00489}00489\ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_afd516e4601cfcc8c0c4ce2d70151c891}{setFechaReserva}}(fechaReserva);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00490}00490\ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a09b595dbef83708f6300a832da5b0902}{setHoraReserva}}(horaReserva);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00491}00491\ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a923408b6722f48dbaa6e5c3b85fe96d7}{setNumPersonas}}(numPersonas);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00492}00492\ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_ae67282691303dd9445b283d5835941ee}{setLibroId}}(libroId);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00493}00493\ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a8353a0de51cf1d21d3c65e8e83e7fe93}{setOrdenadorId}}(ordenadorId);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00494}00494\ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a3af13515ea9055f70e650873de386239}{setSalaGrupalId}}(salaGrupalId);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00495}00495\ \ \ \ \ \ \ \ \ reserva.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_reserva_a8e268331abf2b1f9c0138b189f866985}{setEspacioIndividualId}}(espacioIndividualId);}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00496}00496\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00497}00497\ \ \ \ \ \ \ \ \ reservaService.crearReserva(reserva);\ \textcolor{comment}{//\ Guardar\ en\ la\ BD}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00498}00498\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00499}00499\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00500}00500\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}success"{}},\ \textcolor{stringliteral}{"{}Reserva\ guardada\ correctamente."{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00501}00501\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (Exception\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00502}00502\ \ \ \ \ \ \ \ \ e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00503}00503\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacecom_1_1example_1_1restapi_1_1model}{model}}.addAttribute(\textcolor{stringliteral}{"{}error"{}},\ \textcolor{stringliteral}{"{}Error\ al\ guardar\ la\ reserva."{}});}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00504}00504\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00505}00505\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00506}00506\ }
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00507}00507\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}userHome"{}};\ \textcolor{comment}{//\ Redirige\ a\ la\ página\ de\ inicio\ del\ usuario}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00508}00508\ \}}
+\DoxyCodeLine{\Hypertarget{_cliente_web_controller_8java_source_l00509}00509\ \}}
+
+\end{DoxyCode}

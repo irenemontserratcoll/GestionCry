@@ -1,0 +1,73 @@
+\doxysection{Servicio\+Ordenadores.\+java}
+\hypertarget{_servicio_ordenadores_8java_source}{}\label{_servicio_ordenadores_8java_source}\index{src/main/java/com/example/restapi/service/ServicioOrdenadores.java@{src/main/java/com/example/restapi/service/ServicioOrdenadores.java}}
+\mbox{\hyperlink{_servicio_ordenadores_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.restapi.service;}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00003}00003\ \textcolor{keyword}{import}\ org.springframework.beans.factory.annotation.Autowired;}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00004}00004\ \textcolor{keyword}{import}\ org.springframework.stereotype.Service;}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00006}00006\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00007}00007\ \textcolor{keyword}{import}\ java.util.Optional;}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00009}00009\ \textcolor{keyword}{import}\ com.example.restapi.model.Ordenador;}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00010}00010\ \textcolor{keyword}{import}\ com.example.restapi.repository.RepositorioOrdenadores;}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00012}00012\ @Service}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00013}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_ordenadores}{00013}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_ordenadores_ac3c69e09482e31c8de5b80e6010ea043}{ServicioOrdenadores}}\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{final}\ \mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_ordenadores}{RepositorioOrdenadores}}\ repositorioOrdenadores;}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00017}00017\ \ \ \ \ @Autowired}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00018}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_ordenadores_ac3c69e09482e31c8de5b80e6010ea043}{00018}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_ordenadores_ac3c69e09482e31c8de5b80e6010ea043}{ServicioOrdenadores}}(\mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_ordenadores}{RepositorioOrdenadores}}\ repositorioOrdenadores)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00019}00019\ \ \ \ \ \ \ \ \ this.repositorioOrdenadores\ =\ repositorioOrdenadores;}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00020}00020\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00022}00022\ \ \ \ \ \textcolor{comment}{//\ Obtener\ un\ ordenador\ por\ ID}}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00023}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_ordenadores_a8306bb457f98529a580e7f91b8db2f59}{00023}}\ \ \ \ \ \textcolor{keyword}{public}\ Optional<Ordenador>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_ordenadores_a8306bb457f98529a580e7f91b8db2f59}{findById}}(Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ repositorioOrdenadores.findById(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00025}00025\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00027}00027\ \ \ \ \ \textcolor{comment}{//\ Obtener\ un\ ordenador\ por\ marca}}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00028}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_ordenadores_a2c9b231e3a08155fe27e813c8ef885a0}{00028}}\ \ \ \ \ \textcolor{keyword}{public}\ Optional<Ordenador>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_ordenadores_a2c9b231e3a08155fe27e813c8ef885a0}{findByMarca}}(String\ marca)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ repositorioOrdenadores.findByMarca(marca);}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00030}00030\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00032}00032\ \ \ \ \ \textcolor{comment}{//\ Obtener\ un\ ordenador\ por\ número\ de\ serie}}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00033}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_ordenadores_a74559b12d8bcdaa26a7ad3caca379d3c}{00033}}\ \ \ \ \ \textcolor{keyword}{public}\ Optional<Ordenador>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_ordenadores_a74559b12d8bcdaa26a7ad3caca379d3c}{findByNumeroSerie}}(String\ numeroSerie)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ repositorioOrdenadores.findByNumeroSerie(numeroSerie);}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00035}00035\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00037}00037\ \ \ \ \ \textcolor{comment}{//\ Obtener\ todos\ los\ ordenadores}}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00038}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_ordenadores_a4496ff487287f203a078b81813aaa860}{00038}}\ \ \ \ \ \textcolor{keyword}{public}\ List<Ordenador>\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_ordenadores_a4496ff487287f203a078b81813aaa860}{findAll}}()\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ repositorioOrdenadores.findAll();}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00040}00040\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00042}00042\ \ \ \ \ \textcolor{comment}{//\ Obtener\ ordenadores\ disponibles\ o\ no\ disponibles}}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00043}00043\ \ \ \ \ \textcolor{comment}{//public\ List<Ordenador>\ findByDisponible(boolean\ disponible)\ \{}}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00044}00044\ \ \ \ \ \textcolor{comment}{//\ \ \ \ return\ repositorioOrdenadores.findByDisponible(disponible);}}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00045}00045\ \ \ \ \ \textcolor{comment}{//\}}}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00047}00047\ \ \ \ \ \textcolor{comment}{//\ Agregar\ un\ nuevo\ ordenador}}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00048}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_ordenadores_ae43c952efa557a7f0a3b209b1558fff2}{00048}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador}{Ordenador}}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_ordenadores_ae43c952efa557a7f0a3b209b1558fff2}{addOrdenador}}(\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador}{Ordenador}}\ ordenador)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ repositorioOrdenadores.save(ordenador);}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00052}00052\ \ \ \ \ \textcolor{comment}{//Actualizar\ un\ libro}}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00053}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_ordenadores_a487c7f59b3616caa1764980f55771c8d}{00053}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador}{Ordenador}}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_ordenadores_a487c7f59b3616caa1764980f55771c8d}{updateOrdenador}}(Long\ \textcolor{keywordtype}{id},\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador}{Ordenador}}\ ordenador)\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00054}00054\ \ \ \ \ \ \ \ \ Optional<Ordenador>\ OrdenadorExistente\ =\ repositorioOrdenadores.findById(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (OrdenadorExistente.isPresent())\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ ordenador.\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador_a91a761cd27b37e85ffd0448555adffe4}{setId}}(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ repositorioOrdenadores.save(ordenador);}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00058}00058\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ RuntimeException(\textcolor{stringliteral}{"{}Ordenador\ no\ encontrado\ con\ ID:\ "{}}\ +\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00060}00060\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00063}00063\ \ \ \ \ \textcolor{comment}{//\ Eliminar\ un\ ordenador\ por\ ID}}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00064}\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_ordenadores_a5cbe965c72744a56f2a34c8f3ff5dc02}{00064}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_ordenadores_a5cbe965c72744a56f2a34c8f3ff5dc02}{deleteOrdenador}}(Long\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00065}00065\ \ \ \ \ \ \ \ \ repositorioOrdenadores.deleteById(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00066}00066\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_servicio_ordenadores_8java_source_l00067}00067\ \}}
+
+\end{DoxyCode}

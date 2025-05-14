@@ -1,0 +1,107 @@
+\doxysection{com.\+example.\+restapi.\+controller.\+Ordenador\+Controller Class Reference}
+\hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller}{}\label{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller}\index{com.example.restapi.controller.OrdenadorController@{com.example.restapi.controller.OrdenadorController}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller_adcba6975a5a50f4affc7c6d6065fa5d8}{Ordenador\+Controller}} (\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_ordenadores}{Servicio\+Ordenadores}} servicio\+Ordenadores)
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador}{Ordenador}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller_a896d861855e3c15e6282a3e712cc3c4e}{get\+All\+Ordenadores}} ()
+\item 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador}{Ordenador}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller_af22f8450a56afa41eb0d6cd7dd9089ea}{get\+Ordenador\+By\+Id}} (@Path\+Variable Long id)
+\item 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador}{Ordenador}} $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller_a72e7a6428bd2258c99cab71f675ff0eb}{get\+Ordenador\+By\+Numero\+Serie}} (@Path\+Variable String numero\+Serie)
+\item 
+Response\+Entity$<$ String $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller_a9c41c366e1623bb6185334594be705d8}{add\+Ordenador}} ( @Request\+Param("{}marca"{}) String marca, @Request\+Param("{}modelo"{}) String modelo, @Request\+Param("{}numero\+Serie"{}) String numero\+Serie, @Request\+Param("{}disponible"{}) boolean disponible)
+\item 
+Response\+Entity$<$ String $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller_ac9ee791d0f8cd4f3d6321f08d6a8d153}{update\+Ordenador}} (@Path\+Variable Long id, @Request\+Body \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador}{Ordenador}} ordenador)
+\item 
+Response\+Entity$<$ String $>$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller_a357799f7f9ae4e300256d63c434f63bb}{delete\+Ordenador}} (@Path\+Variable Long id)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{_ordenador_controller_8java_source_l00028}{28}} of file \mbox{\hyperlink{_ordenador_controller_8java_source}{Ordenador\+Controller.\+java}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller_adcba6975a5a50f4affc7c6d6065fa5d8}\index{com.example.restapi.controller.OrdenadorController@{com.example.restapi.controller.OrdenadorController}!OrdenadorController@{OrdenadorController}}
+\index{OrdenadorController@{OrdenadorController}!com.example.restapi.controller.OrdenadorController@{com.example.restapi.controller.OrdenadorController}}
+\doxysubsubsection{\texorpdfstring{OrdenadorController()}{OrdenadorController()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller_adcba6975a5a50f4affc7c6d6065fa5d8} 
+com.\+example.\+restapi.\+controller.\+Ordenador\+Controller.\+Ordenador\+Controller (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1service_1_1_servicio_ordenadores}{Servicio\+Ordenadores}}}]{servicio\+Ordenadores}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_ordenador_controller_8java_source_l00033}{33}} of file \mbox{\hyperlink{_ordenador_controller_8java_source}{Ordenador\+Controller.\+java}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller_a9c41c366e1623bb6185334594be705d8}\index{com.example.restapi.controller.OrdenadorController@{com.example.restapi.controller.OrdenadorController}!addOrdenador@{addOrdenador}}
+\index{addOrdenador@{addOrdenador}!com.example.restapi.controller.OrdenadorController@{com.example.restapi.controller.OrdenadorController}}
+\doxysubsubsection{\texorpdfstring{addOrdenador()}{addOrdenador()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller_a9c41c366e1623bb6185334594be705d8} 
+Response\+Entity$<$ String $>$ com.\+example.\+restapi.\+controller.\+Ordenador\+Controller.\+add\+Ordenador (\begin{DoxyParamCaption}\item[{@Request\+Param("{}marca"{}) String}]{marca}{, }\item[{@Request\+Param("{}modelo"{}) String}]{modelo}{, }\item[{@Request\+Param("{}numero\+Serie"{}) String}]{numero\+Serie}{, }\item[{@Request\+Param("{}disponible"{}) boolean}]{disponible}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_ordenador_controller_8java_source_l00063}{63}} of file \mbox{\hyperlink{_ordenador_controller_8java_source}{Ordenador\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller_a357799f7f9ae4e300256d63c434f63bb}\index{com.example.restapi.controller.OrdenadorController@{com.example.restapi.controller.OrdenadorController}!deleteOrdenador@{deleteOrdenador}}
+\index{deleteOrdenador@{deleteOrdenador}!com.example.restapi.controller.OrdenadorController@{com.example.restapi.controller.OrdenadorController}}
+\doxysubsubsection{\texorpdfstring{deleteOrdenador()}{deleteOrdenador()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller_a357799f7f9ae4e300256d63c434f63bb} 
+Response\+Entity$<$ String $>$ com.\+example.\+restapi.\+controller.\+Ordenador\+Controller.\+delete\+Ordenador (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_ordenador_controller_8java_source_l00092}{92}} of file \mbox{\hyperlink{_ordenador_controller_8java_source}{Ordenador\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller_a896d861855e3c15e6282a3e712cc3c4e}\index{com.example.restapi.controller.OrdenadorController@{com.example.restapi.controller.OrdenadorController}!getAllOrdenadores@{getAllOrdenadores}}
+\index{getAllOrdenadores@{getAllOrdenadores}!com.example.restapi.controller.OrdenadorController@{com.example.restapi.controller.OrdenadorController}}
+\doxysubsubsection{\texorpdfstring{getAllOrdenadores()}{getAllOrdenadores()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller_a896d861855e3c15e6282a3e712cc3c4e} 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador}{Ordenador}} $>$ com.\+example.\+restapi.\+controller.\+Ordenador\+Controller.\+get\+All\+Ordenadores (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_ordenador_controller_8java_source_l00040}{40}} of file \mbox{\hyperlink{_ordenador_controller_8java_source}{Ordenador\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller_af22f8450a56afa41eb0d6cd7dd9089ea}\index{com.example.restapi.controller.OrdenadorController@{com.example.restapi.controller.OrdenadorController}!getOrdenadorById@{getOrdenadorById}}
+\index{getOrdenadorById@{getOrdenadorById}!com.example.restapi.controller.OrdenadorController@{com.example.restapi.controller.OrdenadorController}}
+\doxysubsubsection{\texorpdfstring{getOrdenadorById()}{getOrdenadorById()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller_af22f8450a56afa41eb0d6cd7dd9089ea} 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador}{Ordenador}} $>$ com.\+example.\+restapi.\+controller.\+Ordenador\+Controller.\+get\+Ordenador\+By\+Id (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_ordenador_controller_8java_source_l00047}{47}} of file \mbox{\hyperlink{_ordenador_controller_8java_source}{Ordenador\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller_a72e7a6428bd2258c99cab71f675ff0eb}\index{com.example.restapi.controller.OrdenadorController@{com.example.restapi.controller.OrdenadorController}!getOrdenadorByNumeroSerie@{getOrdenadorByNumeroSerie}}
+\index{getOrdenadorByNumeroSerie@{getOrdenadorByNumeroSerie}!com.example.restapi.controller.OrdenadorController@{com.example.restapi.controller.OrdenadorController}}
+\doxysubsubsection{\texorpdfstring{getOrdenadorByNumeroSerie()}{getOrdenadorByNumeroSerie()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller_a72e7a6428bd2258c99cab71f675ff0eb} 
+Response\+Entity$<$ \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador}{Ordenador}} $>$ com.\+example.\+restapi.\+controller.\+Ordenador\+Controller.\+get\+Ordenador\+By\+Numero\+Serie (\begin{DoxyParamCaption}\item[{@Path\+Variable String}]{numero\+Serie}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_ordenador_controller_8java_source_l00055}{55}} of file \mbox{\hyperlink{_ordenador_controller_8java_source}{Ordenador\+Controller.\+java}}.
+
+\Hypertarget{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller_ac9ee791d0f8cd4f3d6321f08d6a8d153}\index{com.example.restapi.controller.OrdenadorController@{com.example.restapi.controller.OrdenadorController}!updateOrdenador@{updateOrdenador}}
+\index{updateOrdenador@{updateOrdenador}!com.example.restapi.controller.OrdenadorController@{com.example.restapi.controller.OrdenadorController}}
+\doxysubsubsection{\texorpdfstring{updateOrdenador()}{updateOrdenador()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1restapi_1_1controller_1_1_ordenador_controller_ac9ee791d0f8cd4f3d6321f08d6a8d153} 
+Response\+Entity$<$ String $>$ com.\+example.\+restapi.\+controller.\+Ordenador\+Controller.\+update\+Ordenador (\begin{DoxyParamCaption}\item[{@Path\+Variable Long}]{id}{, }\item[{@Request\+Body \mbox{\hyperlink{classcom_1_1example_1_1restapi_1_1model_1_1_ordenador}{Ordenador}}}]{ordenador}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_ordenador_controller_8java_source_l00080}{80}} of file \mbox{\hyperlink{_ordenador_controller_8java_source}{Ordenador\+Controller.\+java}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/example/restapi/controller/\mbox{\hyperlink{_ordenador_controller_8java}{Ordenador\+Controller.\+java}}\end{DoxyCompactItemize}

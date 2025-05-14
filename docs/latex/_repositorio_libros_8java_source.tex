@@ -1,0 +1,22 @@
+\doxysection{Repositorio\+Libros.\+java}
+\hypertarget{_repositorio_libros_8java_source}{}\label{_repositorio_libros_8java_source}\index{src/main/java/com/example/restapi/repository/RepositorioLibros.java@{src/main/java/com/example/restapi/repository/RepositorioLibros.java}}
+\mbox{\hyperlink{_repositorio_libros_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_repositorio_libros_8java_source_l00001}00001\ \textcolor{keyword}{package\ }com.example.restapi.repository;}
+\DoxyCodeLine{\Hypertarget{_repositorio_libros_8java_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_repositorio_libros_8java_source_l00003}00003\ \textcolor{keyword}{import}\ java.util.List;}
+\DoxyCodeLine{\Hypertarget{_repositorio_libros_8java_source_l00004}00004\ \textcolor{keyword}{import}\ java.util.Optional;}
+\DoxyCodeLine{\Hypertarget{_repositorio_libros_8java_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_repositorio_libros_8java_source_l00006}00006\ \textcolor{keyword}{import}\ org.springframework.data.jpa.repository.JpaRepository;}
+\DoxyCodeLine{\Hypertarget{_repositorio_libros_8java_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_repositorio_libros_8java_source_l00008}00008\ \textcolor{keyword}{import}\ com.example.restapi.model.Libro;}
+\DoxyCodeLine{\Hypertarget{_repositorio_libros_8java_source_l00009}\mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_libros}{00009}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{interface\ }\mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_libros}{RepositorioLibros}}\ \textcolor{keyword}{extends}\ JpaRepository<Libro,\ Long>\ \{}
+\DoxyCodeLine{\Hypertarget{_repositorio_libros_8java_source_l00010}\mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_libros_aeb013fcbcade092d56736926d8715284}{00010}}\ \ \ \ \ Optional<Libro>\ \mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_libros_aeb013fcbcade092d56736926d8715284}{findById}}(Long\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{_repositorio_libros_8java_source_l00011}\mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_libros_a3833bab6f4ba8d548412018e2ed9f12c}{00011}}\ \ \ \ \ Optional<Libro>\ \mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_libros_a3833bab6f4ba8d548412018e2ed9f12c}{findByTitulo}}(String\ titulo);}
+\DoxyCodeLine{\Hypertarget{_repositorio_libros_8java_source_l00012}\mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_libros_acfd0b339f64cb26eef3d4b2c005ea207}{00012}}\ \ \ \ \ Optional<Libro>\ \mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_libros_acfd0b339f64cb26eef3d4b2c005ea207}{findByIsbn}}(String\ isbn);}
+\DoxyCodeLine{\Hypertarget{_repositorio_libros_8java_source_l00013}\mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_libros_a0bfeafb225e999a327f46b3020409baa}{00013}}\ \ \ \ \ Optional<Libro>\ \mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_libros_a0bfeafb225e999a327f46b3020409baa}{findByAutor}}(String\ autor);}
+\DoxyCodeLine{\Hypertarget{_repositorio_libros_8java_source_l00014}00014\ \ \ \ \ \textcolor{comment}{//\ No\ es\ necesario\ definir\ deleteById\ ya\ que\ ya\ está\ provisto\ por\ JpaRepository}}
+\DoxyCodeLine{\Hypertarget{_repositorio_libros_8java_source_l00015}\mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_libros_a19671738d27da3815813c2912e59058a}{00015}}\ \ \ \ \ List<Libro>\ \mbox{\hyperlink{interfacecom_1_1example_1_1restapi_1_1repository_1_1_repositorio_libros_a19671738d27da3815813c2912e59058a}{findAll}}();\ }
+\DoxyCodeLine{\Hypertarget{_repositorio_libros_8java_source_l00016}00016\ \}}
+
+\end{DoxyCode}
