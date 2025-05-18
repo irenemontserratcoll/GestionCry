@@ -58,26 +58,4 @@ public class Ordenador extends RecursoReservable {
         this.disponible = disponible;
     }
 
-    public static void buscarOrdenador(List<Ordenador> ordenadores, String criterio) {
-        boolean encontrado = false;
-
-        for (Ordenador ordenador : ordenadores) {
-            if (ordenador.getMarca().equalsIgnoreCase(criterio) ||
-                    ordenador.getModelo().equalsIgnoreCase(criterio) ||
-                    ordenador.getNumeroSerie().equalsIgnoreCase(criterio) ||
-                    String.valueOf(ordenador.isDisponible()).equalsIgnoreCase(criterio)) {
-                System.out.println("Ordenador encontrado:");
-                System.out.println("Marca: " + ordenador.getMarca());
-                System.out.println("Modelo: " + ordenador.getModelo());
-                System.out.println("Número de Serie: " + ordenador.getNumeroSerie());
-                System.out.println("Disponible: " + ordenador.isDisponible());
-                System.out.println("-----------");
-                encontrado = true;
-            }
-        }
-
-        if (!encontrado) {
-            System.out.println("No se ha encontrado ningún ordenador con ese criterio.");
-        }
-    }
 }
