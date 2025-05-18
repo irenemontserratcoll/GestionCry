@@ -2,125 +2,99 @@ package com.example.restapi.controller;
 
 import com.example.restapi.model.EspacioIndividual;
 import com.example.restapi.service.ServicioEspacioIndividual;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
 
-import org.springframework.http.ResponseEntity;
-
+import java.util.Arrays;
 import java.util.Optional;
-import java.util.List;
-import java.util.Collections;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-import org.mockito.MockitoAnnotations;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@WebMvcTest(EspacioIndividualController.class)
 public class EspacioIndividualControllerTest {
 
-    @InjectMocks
-    private EspacioIndividualController espacioController;
+    @Autowired
+    private MockMvc mockMvc;
 
-    @Mock
-    private ServicioEspacioIndividual servicioEspacio;
+    @MockBean
+    private ServicioEspacioIndividual servicioEspacios;
 
-    private EspacioIndividual espacioEjemplo;
+    private EspacioIndividual espacio1;
+    private EspacioIndividual espacio2;
 
     @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
-        espacioEjemplo = new EspacioIndividual();
-        espacioEjemplo.setPiso(2);
-        espacioEjemplo.setNumeroAsiento(5);
+    public void setup() {
+        espacio1 = new EspacioIndividual(1, 10);
+        espacio1.setId(1L);
+        espacio2 = new EspacioIndividual(2, 15);
+        espacio2.setId(2L);
     }
 
     @Test
-    public void testGetAllEspacios() {
-        when(servicioEspacio.findAll()).thenReturn(Collections.singletonList(espacioEjemplo));
+    public void testGetAllEspacios() throws Exception {
+        Mockito.when(servicioEspacios.findAll()).thenReturn(Arrays.asList(espacio1, espacio2));
 
-        List<EspacioIndividual> espacios = espacioController.getAllEspacios();
-
-        assertEquals(1, espacios.size());
-        assertEquals(2, espacios.get(0).getPiso());
-        verify(servicioEspacio, times(1)).findAll();
+        mockMvc.perform(get("/api/Espacios-Individuales/all"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].piso").value(1))
+                .andExpect(jsonPath("$[1].numeroAsiento").value(15));
     }
 
     @Test
-    public void testGetEspacioExistente() {
-        when(servicioEspacio.findByPisoAndAsiento(2, 5)).thenReturn(Optional.of(espacioEjemplo));
+    public void testGetEspacioByPisoAndAsiento_found() throws Exception {
+        Mockito.when(servicioEspacios.findByPisoAndAsiento(1, 10)).thenReturn(Optional.of(espacio1));
 
-        ResponseEntity<EspacioIndividual> response = espacioController.getEspacio(2, 5);
-
-        assertEquals(200, response.getStatusCodeValue());
-        assertEquals(5, response.getBody().getNumeroAsiento());
+        mockMvc.perform(get("/api/Espacios-Individuales/1/10"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.piso").value(1))
+                .andExpect(jsonPath("$.numeroAsiento").value(10));
     }
 
     @Test
-    public void testGetEspacioNoExistente() {
-        when(servicioEspacio.findByPisoAndAsiento(3, 1)).thenReturn(Optional.empty());
+    public void testGetEspacioByPisoAndAsiento_notFound() throws Exception {
+        Mockito.when(servicioEspacios.findByPisoAndAsiento(3, 20)).thenReturn(Optional.empty());
 
-        ResponseEntity<EspacioIndividual> response = espacioController.getEspacio(3, 1);
-
-        assertEquals(404, response.getStatusCodeValue());
-        assertNull(response.getBody());
+        mockMvc.perform(get("/api/Espacios-Individuales/3/20"))
+                .andExpect(status().isNotFound());
     }
 
     @Test
-    public void testAddEspacioExitoso() {
-        ResponseEntity<String> response = espacioController.addEspacio(2, 5);
+    public void testAddEspacio() throws Exception {
+        Mockito.doNothing().when(servicioEspacios).addEspacio(any(EspacioIndividual.class));
 
-        assertEquals(201, response.getStatusCodeValue());
-        assertEquals("Espacio agregado correctamente", response.getBody());
-        verify(servicioEspacio, times(1)).addEspacio(any(EspacioIndividual.class));
+        mockMvc.perform(post("/api/Espacios-Individuales/add")
+                .param("piso", "3")
+                .param("numeroAsiento", "12"))
+                .andExpect(status().isCreated())
+                .andExpect(content().string("Espacio agregado correctamente"));
     }
 
     @Test
-    public void testAddEspacioConExcepcion() {
-        doThrow(new RuntimeException("Error")).when(servicioEspacio).addEspacio(any(EspacioIndividual.class));
+    public void testUpdateEspacio() throws Exception {
+        Mockito.doNothing().when(servicioEspacios).updateEspacio(eq(espacio1));
 
-        ResponseEntity<String> response = espacioController.addEspacio(2, 5);
-
-        assertEquals(500, response.getStatusCodeValue());
-        assertTrue(response.getBody().contains("Error al agregar el espacio"));
+        mockMvc.perform(put("/api/Espacios-Individuales/update")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"id\":1,\"piso\":2,\"numeroAsiento\":12}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Espacio actualizado correctamente"));
     }
 
     @Test
-    public void testUpdateEspacioExitoso() {
-        ResponseEntity<String> response = espacioController.updateEspacio(espacioEjemplo);
+    public void testDeleteEspacio() throws Exception {
+        Mockito.doNothing().when(servicioEspacios).deleteEspacio(1L);
 
-        assertEquals(200, response.getStatusCodeValue());
-        assertEquals("Espacio actualizado correctamente", response.getBody());
-        verify(servicioEspacio, times(1)).updateEspacio(espacioEjemplo);
-    }
-
-    @Test
-    public void testUpdateEspacioConExcepcion() {
-        doThrow(new RuntimeException("Error")).when(servicioEspacio).updateEspacio(any(EspacioIndividual.class));
-
-        ResponseEntity<String> response = espacioController.updateEspacio(espacioEjemplo);
-
-        assertEquals(500, response.getStatusCodeValue());
-        assertTrue(response.getBody().contains("Error al actualizar el espacio"));
-    }
-
-    @Test
-    public void testDeleteEspacioExitoso() {
-        ResponseEntity<String> response = espacioController.deleteEspacio(2, 5);
-
-        assertEquals(200, response.getStatusCodeValue());
-        assertEquals("Espacio eliminado correctamente", response.getBody());
-        verify(servicioEspacio, times(1)).deleteEspacio(2, 5);
-    }
-
-    @Test
-    public void testDeleteEspacioConExcepcion() {
-        doThrow(new RuntimeException("Error")).when(servicioEspacio).deleteEspacio(2, 5);
-
-        ResponseEntity<String> response = espacioController.deleteEspacio(2, 5);
-
-        assertEquals(500, response.getStatusCodeValue());
-        assertTrue(response.getBody().contains("Error al eliminar el espacio"));
+        mockMvc.perform(delete("/api/Espacios-Individuales/delete/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Espacio eliminado correctamente"));
     }
 }

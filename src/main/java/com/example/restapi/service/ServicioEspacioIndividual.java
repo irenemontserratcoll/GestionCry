@@ -34,12 +34,19 @@ public class ServicioEspacioIndividual {
         espacioRepository.save(espacio);
     }
 
-    // Actualizar un espacio existente
     public void updateEspacio(EspacioIndividual espacio) {
-        if (espacioRepository.existsByPisoAndNumeroAsiento(espacio.getPiso(), espacio.getNumeroAsiento())) {
-            espacioRepository.save(espacio);
+        Optional<EspacioIndividual> espacioExistente = espacioRepository.findById(espacio.getId());
+        if (espacioExistente.isPresent()) {
+            EspacioIndividual espacioAActualizar = espacioExistente.get();
+
+            // Actualiza las propiedades que quieres modificar
+            espacioAActualizar.setPiso(espacio.getPiso());
+            espacioAActualizar.setNumeroAsiento(espacio.getNumeroAsiento());
+
+            // Guarda el espacio actualizado
+            espacioRepository.save(espacioAActualizar);
         } else {
-            throw new RuntimeException("El espacio no existe");
+            throw new RuntimeException("El espacio con ID " + espacio.getId() + " no existe");
         }
     }
 
