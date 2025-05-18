@@ -345,19 +345,28 @@ public class ClienteWebController {
             @RequestParam(value = "disponible", required = false) String disponibleParam,
             Model model) {
 
-        boolean disponible = disponibleParam != null; // checkbox = null si no está marcado
+        boolean disponible = disponibleParam != null;
 
-        Ordenador ordenador = new Ordenador(marca, modelo, numeroSerie, disponible);
+        String url = apiBaseUrl + "/api/ordenadores/add";
 
         try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            params.add("marca", marca);
+            params.add("modelo", modelo);
+            params.add("numeroSerie", numeroSerie);
+            if (disponible) {
+                params.add("disponible", "true"); // checkbox marcado
+            }
+            // Si no está marcado, no añadimos el parámetro (como en el API)
+
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            HttpEntity<Ordenador> requestEntity = new HttpEntity<>(ordenador, headers);
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-            ResponseEntity<String> response = restTemplate.postForEntity(apiBaseUrl + "/api/ordenadores/add",
-                    requestEntity, String.class);
+            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
 
-            if (response.getStatusCode().is2xxSuccessful()) {
+            ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
+
+            if (response.getStatusCode() == HttpStatus.CREATED) {
                 model.addAttribute("success", "Ordenador agregado correctamente.");
             } else {
                 model.addAttribute("error", "Error al agregar el ordenador: " + response.getBody());

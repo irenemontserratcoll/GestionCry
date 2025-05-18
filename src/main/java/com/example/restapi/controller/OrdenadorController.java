@@ -1,30 +1,22 @@
 package com.example.restapi.controller;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.example.restapi.model.Ordenador;
 import com.example.restapi.service.ServicioOrdenadores;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/ordenadores")
-@Tag(name = "ordenadores", description = "Operaciones relacionadas con la gestión de ordenadores")
+@Tag(name = "Ordenadores", description = "Operaciones relacionadas con la gestión de ordenadores")
 public class OrdenadorController {
 
     private final ServicioOrdenadores servicioOrdenadores;
@@ -34,27 +26,18 @@ public class OrdenadorController {
         this.servicioOrdenadores = servicioOrdenadores;
     }
 
-    // Obtener todos los ordenadores
-    @Operation(summary = "Obtener todos los ordenadores", description = "Devuelve una lista de todos los ordenadores disponibles")
+    @Operation(summary = "Obtener todos los ordenadores", description = "Devuelve una lista de todos los ordenadores")
     @GetMapping("/all")
     public List<Ordenador> getAllOrdenadores() {
         return servicioOrdenadores.findAll();
     }
 
-    // Obtener un ordenador por ID
-    @Operation(summary = "Obtener ordenador por ID", description = "Devuelve un ordenador específico por su ID")
+    @Operation(summary = "Buscar ordenador por ID", description = "Devuelve un ordenador según su ID")
     @GetMapping("/{id}")
     public ResponseEntity<Ordenador> getOrdenadorById(@PathVariable Long id) {
         Optional<Ordenador> ordenador = servicioOrdenadores.findById(id);
-        return ordenador.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-    }
-
-    // Obtener un ordenador por número de serie
-    @Operation(summary = "Obtener ordenador por número de serie", description = "Devuelve un ordenador específico por su número de serie")
-    @GetMapping("/numeroSerie/{numeroSerie}")
-    public ResponseEntity<Ordenador> getOrdenadorByNumeroSerie(@PathVariable String numeroSerie) {
-        Optional<Ordenador> ordenador = servicioOrdenadores.findByNumeroSerie(numeroSerie);
-        return ordenador.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+        return ordenador.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @Operation(summary = "Agregar nuevo ordenador", description = "Crea un nuevo ordenador en el sistema")
@@ -63,14 +46,9 @@ public class OrdenadorController {
             @RequestParam("marca") String marca,
             @RequestParam("modelo") String modelo,
             @RequestParam("numeroSerie") String numeroSerie,
-            @RequestParam("disponible") boolean disponible) {
+            @RequestParam(value = "disponible", required = false, defaultValue = "false") boolean disponible) {
         try {
-            Ordenador ordenador = new Ordenador();
-            ordenador.setMarca(marca);
-            ordenador.setModelo(modelo);
-            ordenador.setNumeroSerie(numeroSerie);
-            ordenador.setDisponible(disponible);
-
+            Ordenador ordenador = new Ordenador(marca, modelo, numeroSerie, disponible);
             servicioOrdenadores.addOrdenador(ordenador);
             return new ResponseEntity<>("Ordenador agregado correctamente", HttpStatus.CREATED);
         } catch (Exception e) {
@@ -79,21 +57,7 @@ public class OrdenadorController {
         }
     }
 
-    // Actualizar un ordenador
-    @Operation(summary = "Actualizar ordenador", description = "Actualiza un ordenador existente en el sistema")
-    @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateOrdenador(@PathVariable Long id, @RequestBody Ordenador ordenador) {
-        try {
-            servicioOrdenadores.updateOrdenador(id, ordenador);
-            return new ResponseEntity<>("Ordenador actualizado correctamente", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error al actualizar el ordenador: " + e.getMessage(),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    // Eliminar un ordenador
-    @Operation(summary = "Eliminar ordenador", description = "Elimina un ordenador existente del sistema")
+    @Operation(summary = "Eliminar ordenador por ID", description = "Elimina un ordenador específico por su ID")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteOrdenador(@PathVariable Long id) {
         try {
@@ -101,6 +65,24 @@ public class OrdenadorController {
             return new ResponseEntity<>("Ordenador eliminado correctamente", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al eliminar el ordenador: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Operation(summary = "Actualizar ordenador por ID", description = "Actualiza un ordenador existente")
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateOrdenador(
+            @PathVariable Long id,
+            @RequestParam("marca") String marca,
+            @RequestParam("modelo") String modelo,
+            @RequestParam("numeroSerie") String numeroSerie,
+            @RequestParam(value = "disponible", required = false, defaultValue = "false") boolean disponible) {
+        try {
+            Ordenador ordenador = new Ordenador(marca, modelo, numeroSerie, disponible);
+            servicioOrdenadores.updateOrdenador(id, ordenador);
+            return new ResponseEntity<>("Ordenador actualizado correctamente", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error al actualizar el ordenador: " + e.getMessage(),
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
