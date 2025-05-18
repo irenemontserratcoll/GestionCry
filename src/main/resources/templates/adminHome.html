@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Gestión Cry</title>
     <link rel="stylesheet" th:href="@{/stylesAdmin.css}">
 </head>
+
 <body>
     <div class="admin-container">
 
@@ -20,7 +22,7 @@
         <img th:src="@{/logo.jpeg}" alt="Logo" class="logo">
         <h2>Administración Cry</h2>
 
-       <!-- MENU HORIZONTAL --> 
+        <!-- MENU HORIZONTAL -->
         <div class="tab-menu">
             <button class="tab active" onclick="showTab('usuarios')">Usuarios</button>
             <button class="tab" onclick="showTab('libros')">Libros</button>
@@ -46,7 +48,7 @@
                         </tr>
                     </thead>
                 </table>
-            
+
                 <div class="table-scroll">
                     <table class="styled-table">
                         <tbody>
@@ -76,13 +78,14 @@
                 </form>
             </div>
         </div>
-        
+
         <!-- SECCION LIBROS -->
         <div id="libros" class="tab-content">
             <!-- Barra de búsqueda de Libros -->
             <div class="search-form">
-                <input type="text" id="searchLibros" placeholder="🔍 Buscar por título, autor o ISBN" onkeyup="filterLibros()">
-        </div>
+                <input type="text" id="searchLibros" placeholder="🔍 Buscar por título, autor o ISBN"
+                    onkeyup="filterLibros()">
+            </div>
             <!-- tabla de libros -->
             <div class="table-wrapper">
                 <table class="styled-table">
@@ -111,8 +114,10 @@
                                     <form action="/update-libro" method="post">
                                         <input type="hidden" name="id" th:value="${libro.id}" />
                                         <input type="hidden" name="isbn" th:value="${libro.isbn}" />
-                                        <input type="text" name="titulo" placeholder="Título" th:value="${libro.titulo}" required>
-                                        <input type="text" name="autor" placeholder="Autor" th:value="${libro.autor}" required>
+                                        <input type="text" name="titulo" placeholder="Título" th:value="${libro.titulo}"
+                                            required>
+                                        <input type="text" name="autor" placeholder="Autor" th:value="${libro.autor}"
+                                            required>
                                         <button type="submit" class="btn-update">✏️</button>
                                     </form>
                                 </td>
@@ -128,7 +133,7 @@
                     </table>
                 </div>
             </div>
-            
+
             <!-- Añadir nuevo libro -->
             <div class="user-form">
                 <form action="/add-libro" method="post">
@@ -143,7 +148,8 @@
         <!-- SECCION ORDENADORES -->
         <div id="ordenadores" class="tab-content">
             <div class="search-form">
-                <input type="text" id="searchOrdenadoresInput" placeholder="🔍 Buscar por marca, modelo o número de serie" onkeyup="filterOrdenadoresTable()">
+                <input type="text" id="searchOrdenadoresInput"
+                    placeholder="🔍 Buscar por marca, modelo o número de serie" onkeyup="filterOrdenadoresTable()">
             </div>
 
             <div class="table-wrapper">
@@ -183,7 +189,7 @@
 
             <!-- Añadir nuevo ordenador -->
             <div class="user-form">
-               <form action="/update-ordenador" method="post">
+                <form action="/update-ordenador" method="post">
                     <input type="hidden" name="id" th:value="${ordenador.id}" />
                     <input type="text" name="marca" th:value="${ordenador.marca}" required>
                     <input type="text" name="modelo" th:value="${ordenador.modelo}" required>
@@ -201,8 +207,9 @@
         <div id="espacios-individuales" class="tab-content">
             <!-- Barra de búsqueda -->
             <div class="search-form">
-                <input type="text" id="searchEspacios" placeholder="🔍 Buscar por piso o número de asiento" onkeyup="filterEspacios()">
-        </div>
+                <input type="text" id="searchEspacios" placeholder="🔍 Buscar por piso o número de asiento"
+                    onkeyup="filterEspacios()">
+            </div>
             <!-- tabla de espacios individuales -->
             <div class="table-wrapper">
                 <table class="styled-table">
@@ -255,13 +262,14 @@
                 </form>
             </div>
         </div>
-        
+
         <!-- SECCION ESPACIO GRUPAL -->
         <div id="espacios-grupales" class="tab-content">
-            
+
             <!-- Barra de búsqueda -->
             <div class="search-form">
-                <input type="text" id="searchSalas" placeholder="🔍 Buscar por piso o número de sala" onkeyup="filterSalasTable()">
+                <input type="text" id="searchSalas" placeholder="🔍 Buscar por piso o número de sala"
+                    onkeyup="filterSalasTable()">
             </div>
 
             <!-- Tabla de salas grupales -->
@@ -292,7 +300,8 @@
                                     <form action="/update-sala" method="post">
                                         <input type="hidden" name="piso" th:value="${sala.piso}" />
                                         <input type="hidden" name="numeroSala" th:value="${sala.numeroSala}" />
-                                        <input type="number" name="capacidad" placeholder="Capacidad" th:value="${sala.numeroPersonas}" required>
+                                        <input type="number" name="capacidad" placeholder="Capacidad"
+                                            th:value="${sala.numeroPersonas}" required>
                                         <button type="submit" class="btn-update">✏️</button>
                                     </form>
                                 </td>
@@ -320,12 +329,12 @@
                 </form>
             </div>
         </div>
-        
+
         <!-- SECCION RESERVAS -->
         <div id="reservas" class="tab-content">
             <div class="table-wrapper">
                 <table class="styled-table">
-                   <thead>
+                    <thead>
                         <tr>
                             <th>#</th>
                             <th>Nombre</th>
@@ -355,7 +364,9 @@
                                 <td th:text="${reserva.libro != null ? reserva.libro.titulo : '-'}"></td>
                                 <td th:text="${reserva.ordenador != null ? reserva.ordenador.modelo : '-'}"></td>
                                 <td th:text="${reserva.salaGrupal != null ? reserva.salaGrupal.numeroSala : '-'}"></td>
-                                <td th:text="${reserva.espacioIndividual != null ? reserva.espacioIndividual.numeroAsiento : '-'}"></td>
+                                <td
+                                    th:text="${reserva.espacioIndividual != null ? reserva.espacioIndividual.numeroAsiento : '-'}">
+                                </td>
                                 <td>
                                     <form th:action="@{/delete-reserva}" method="post"
                                         onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta reserva?');">
@@ -390,78 +401,104 @@
             </div>
         </div>
 
-    <!-- FUNCIONES DE  LA PLANTILLA --> 
-    <script>
-        function showTab(id) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-    
-            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-            event.target.classList.add('active');
-        }
+        <!-- FUNCIONES DE  LA PLANTILLA -->
+        <script>
+            function showTab(id) {
+                document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+                document.getElementById(id).classList.add('active');
 
-        function filterTable() {
-            const input = document.getElementById("searchInput");
-            const filter = input.value.toLowerCase();
-            const table = document.querySelector(".table-scroll table tbody");
-            const rows = table.getElementsByTagName("tr");
+                document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+                event.target.classList.add('active');
+            }
 
-            for (let i = 0; i < rows.length; i++) {
-                const correoCell = rows[i].getElementsByTagName("td")[2];
-                if (correoCell) {
-                    const correo = correoCell.textContent || correoCell.innerText;
-                    if (correo.toLowerCase().indexOf(filter) > -1) {
+            function filterTable() {
+                const input = document.getElementById("searchInput");
+                const filter = input.value.toLowerCase();
+                const table = document.querySelector(".table-scroll table tbody");
+                const rows = table.getElementsByTagName("tr");
+
+                for (let i = 0; i < rows.length; i++) {
+                    const correoCell = rows[i].getElementsByTagName("td")[2];
+                    if (correoCell) {
+                        const correo = correoCell.textContent || correoCell.innerText;
+                        if (correo.toLowerCase().indexOf(filter) > -1) {
+                            rows[i].style.display = "";
+                        } else {
+                            rows[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+            function filterLibros() {
+                const input = document.getElementById("searchLibros");
+                const filter = input.value.toLowerCase();
+                const table = document.querySelector("#libros .table-scroll table tbody");
+                const rows = table.getElementsByTagName("tr");
+
+                for (let i = 0; i < rows.length; i++) {
+                    const tituloCell = rows[i].getElementsByTagName("td")[1];
+                    const autorCell = rows[i].getElementsByTagName("td")[2];
+                    const isbnCell = rows[i].getElementsByTagName("td")[3];
+
+                    const titulo = tituloCell ? tituloCell.textContent.toLowerCase() : "";
+                    const autor = autorCell ? autorCell.textContent.toLowerCase() : "";
+                    const isbn = isbnCell ? isbnCell.textContent.toLowerCase() : "";
+
+                    if (titulo.indexOf(filter) > -1 || autor.indexOf(filter) > -1 || isbn.indexOf(filter) > -1) {
                         rows[i].style.display = "";
                     } else {
                         rows[i].style.display = "none";
                     }
                 }
             }
-        }
-        function filterLibros() {
-            const input = document.getElementById("searchLibros");
-            const filter = input.value.toLowerCase();
-            const table = document.querySelector("#libros .table-scroll table tbody");
-            const rows = table.getElementsByTagName("tr");
+            function filterOrdenadores() {
+                const input = document.getElementById("searchOrdenadoresInput");
+                const filter = input.value.toLowerCase();
+                const table = document.querySelector("#ordenadores .table-scroll table tbody");
+                const rows = table.getElementsByTagName("tr");
 
-            for (let i = 0; i < rows.length; i++) {
-                const tituloCell = rows[i].getElementsByTagName("td")[1];
-                const autorCell = rows[i].getElementsByTagName("td")[2];
-                const isbnCell = rows[i].getElementsByTagName("td")[3];
-        
-                const titulo = tituloCell ? tituloCell.textContent.toLowerCase() : "";
-                const autor = autorCell ? autorCell.textContent.toLowerCase() : "";
-                const isbn = isbnCell ? isbnCell.textContent.toLowerCase() : "";
+                for (let i = 0; i < rows.length; i++) {
+                    const marcaCell = rows[i].getElementsByTagName("td")[1];
+                    const modeloCell = rows[i].getElementsByTagName("td")[2];
+                    const numeroSerieCell = rows[i].getElementsByTagName("td")[3];
 
-                if (titulo.indexOf(filter) > -1 || autor.indexOf(filter) > -1 || isbn.indexOf(filter) > -1) {
-            rows[i].style.display = "";
-        } else {
-            rows[i].style.display = "none";
-        }
-    }
-}
-function filterOrdenadores() {
-    const input = document.getElementById("searchOrdenadoresInput");
-    const filter = input.value.toLowerCase();
-    const table = document.querySelector("#ordenadores .table-scroll table tbody");
-    const rows = table.getElementsByTagName("tr");
+                    const marca = marcaCell ? marcaCell.textContent.toLowerCase() : "";
+                    const modelo = modeloCell ? modeloCell.textContent.toLowerCase() : "";
+                    const numeroSerie = numeroSerieCell ? numeroSerieCell.textContent.toLowerCase() : "";
 
-    for (let i = 0; i < rows.length; i++) {
-        const marcaCell = rows[i].getElementsByTagName("td")[1];
-        const modeloCell = rows[i].getElementsByTagName("td")[2];
-        const numeroSerieCell = rows[i].getElementsByTagName("td")[3];
+                    if (marca.indexOf(filter) > -1 || modelo.indexOf(filter) > -1 || numeroSerie.indexOf(filter) > -1) {
+                        rows[i].style.display = "";
+                    } else {
+                        rows[i].style.display = "none";
+                    }
+                }
+            }
+            function showTab(tabId) {
+                // Ocultar todas las secciones
+                const tabs = document.querySelectorAll('.tab-content');
+                tabs.forEach(tab => {
+                    tab.classList.remove('active');
+                });
 
-        const marca = marcaCell ? marcaCell.textContent.toLowerCase() : "";
-        const modelo = modeloCell ? modeloCell.textContent.toLowerCase() : "";
-        const numeroSerie = numeroSerieCell ? numeroSerieCell.textContent.toLowerCase() : "";
+                // Quitar la clase active de todos los botones
+                const buttons = document.querySelectorAll('.tab-menu .tab');
+                buttons.forEach(btn => {
+                    btn.classList.remove('active');
+                });
 
-        if (marca.indexOf(filter) > -1 || modelo.indexOf(filter) > -1 || numeroSerie.indexOf(filter) > -1) {
-            rows[i].style.display = "";
-        } else {
-            rows[i].style.display = "none";
-        }
-    }
-}
-    </script>
+                // Mostrar la sección seleccionada
+                const activeTab = document.getElementById(tabId);
+                if (activeTab) {
+                    activeTab.classList.add('active');
+                }
+
+                // Poner active al botón correspondiente
+                const activeButton = Array.from(buttons).find(btn => btn.textContent.toLowerCase().includes(tabId.replace('-', '')));
+                if (activeButton) {
+                    activeButton.classList.add('active');
+                }
+            }
+        </script>
 </body>
+
 </html>
