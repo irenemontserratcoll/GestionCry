@@ -47,25 +47,25 @@ public class EspacioIndividualController {
         return espacio.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-   @Operation(summary = "Agregar nuevo espacio", description = "Crea un nuevo espacio individual en el sistema")
-@PostMapping("/add")
-public ResponseEntity<String> addEspacio(
-        @RequestParam("piso") int piso,
-        @RequestParam("numeroAsiento") int numeroAsiento) {
-    try {
-        // Se crea la instancia de EspacioIndividual sin asignar manualmente el id,
-        // ya que se autogenera al persistirla.
-        EspacioIndividual espacio = new EspacioIndividual();
-        espacio.setPiso(piso);
-        espacio.setNumeroAsiento(numeroAsiento);
+    @Operation(summary = "Agregar nuevo espacio", description = "Crea un nuevo espacio individual en el sistema")
+    @PostMapping("/add")
+    public ResponseEntity<String> addEspacio(
+            @RequestParam("piso") int piso,
+            @RequestParam("numeroAsiento") int numeroAsiento) {
+        try {
+            // Se crea la instancia de EspacioIndividual sin asignar manualmente el id,
+            // ya que se autogenera al persistirla.
+            EspacioIndividual espacio = new EspacioIndividual();
+            espacio.setPiso(piso);
+            espacio.setNumeroAsiento(numeroAsiento);
 
-        servicioEspacios.addEspacio(espacio);
-        return new ResponseEntity<>("Espacio agregado correctamente", HttpStatus.CREATED);
-    } catch (Exception e) {
-        return new ResponseEntity<>("Error al agregar el espacio: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            servicioEspacios.addEspacio(espacio);
+            return new ResponseEntity<>("Espacio agregado correctamente", HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error al agregar el espacio: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-}
-
 
     @Operation(summary = "Actualizar espacio", description = "Modifica un espacio individual existente")
     @PutMapping("/update")
@@ -74,18 +74,20 @@ public ResponseEntity<String> addEspacio(
             servicioEspacios.updateEspacio(espacio);
             return new ResponseEntity<>("Espacio actualizado correctamente", HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error al actualizar el espacio: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error al actualizar el espacio: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @Operation(summary = "Eliminar espacio", description = "Elimina un espacio individual por su piso y número de asiento")
-    @DeleteMapping("/delete/{piso}/{numeroAsiento}")
-    public ResponseEntity<String> deleteEspacio(@PathVariable int piso, @PathVariable int numeroAsiento) {
+    @Operation(summary = "Eliminar espacio", description = "Elimina un espacio individual del sistema")
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteEspacio(@RequestParam int piso, @RequestParam int numeroAsiento) {
         try {
             servicioEspacios.deleteEspacio(piso, numeroAsiento);
             return new ResponseEntity<>("Espacio eliminado correctamente", HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error al eliminar el espacio: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error al eliminar el espacio: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

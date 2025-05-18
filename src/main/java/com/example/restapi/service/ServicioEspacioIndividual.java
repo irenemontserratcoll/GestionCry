@@ -48,7 +48,8 @@ public class ServicioEspacioIndividual {
         if (espacio.isPresent()) {
             espacioRepository.delete(espacio.get());
         } else {
-            throw new RuntimeException("El espacio con piso " + piso + " y asiento " + numeroAsiento + " no existe.");
+            System.out.println("Espacio no encontrado para eliminar: Piso " + piso + ", Asiento " + numeroAsiento);
+            throw new RuntimeException("Espacio no encontrado");
         }
     }
 }
