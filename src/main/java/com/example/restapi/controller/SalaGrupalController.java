@@ -74,5 +74,3 @@ public class SalaGrupalController {
         return ResponseEntity.ok("Sala eliminada exitosamente");
     }
 }
-
-

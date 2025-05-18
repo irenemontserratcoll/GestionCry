@@ -337,7 +337,6 @@ public class ClienteWebController {
     }
 
     // ORDENADORES ADMIN
-    // ORDENADORES ADMIN
     @PostMapping("/add-ordenador")
     public String addOrdenador(
             @RequestParam("marca") String marca,
@@ -375,8 +374,8 @@ public class ClienteWebController {
     }
 
     @PostMapping("/delete-ordenador")
-    public String deleteOrdenador(@RequestParam("id") Integer id, Model model) {
-        String url = apiBaseUrl + "/api/ordenadores/delete/" + id;
+    public String deleteOrdenador(@RequestParam("numeroSerie") String numeroSerie, Model model) {
+        String url = apiBaseUrl + "/api/ordenadores/delete/" + numeroSerie;
         try {
             HttpEntity<Void> requestEntity = new HttpEntity<>(null);
             ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity,
@@ -392,8 +391,7 @@ public class ClienteWebController {
             model.addAttribute("error", "Error de conexión con la API de ordenadores.");
         }
 
-        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de ordenadores
-        return cargarAdminHomeConUsuarios(model);
+        return "redirect:/adminHome";
     }
 
     // ESPACIOS GRUPALES ADMIN
