@@ -601,7 +601,6 @@ public class ClienteWebController {
     }
 
     // ESPACIOS INDIVIDUALES ADMIN
-    // ESPACIOS INDIVIDUALES ADMIN
     @PostMapping("/add-espacio-individual")
     public String addEspacioIndividual(
             @RequestParam("piso") int piso,

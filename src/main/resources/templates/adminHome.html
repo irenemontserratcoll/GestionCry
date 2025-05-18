@@ -257,7 +257,7 @@
                                 </td>
                                 <!-- Botón eliminar espacio Individual -->
                                 <td>
-                                    <form action="/delete-espacio" method="post">
+                                    <form action="/delete-espacio-individual" method="post">
                                         <input type="hidden" name="piso" th:value="${espacio.piso}" />
                                         <input type="hidden" name="numeroAsiento" th:value="${espacio.numeroAsiento}" />
                                         <button type="submit" class="btn-delete">🗑️</button>
@@ -271,7 +271,7 @@
 
             <!-- Añadir nuevo espacio individual -->
             <div class="user-form">
-                <form action="/add-espacio" method="post">
+                <form action="/add-espacio-individual" method="post">
                     <input type="number" placeholder="Piso" name="piso" required>
                     <input type="number" placeholder="Número de Asiento" name="numeroAsiento" required>
                     <button type="submit" class="btn-add">Añadir Espacio</button>
