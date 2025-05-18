@@ -1,45 +1,41 @@
 package com.example.restapi.model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "libros")
-public class Libro {
+@Table(name = "libros") // Optional: Specify table name explicitly
+@DiscriminatorValue("LIBROS")
+public class Libro extends RecursoReservable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //private Long id;
 
-    @NotBlank(message = "El título es obligatorio")
     private String titulo;
-
-    @NotBlank(message = "El autor es obligatorio")
     private String autor;
-
-    @NotBlank(message = "El ISBN es obligatorio")
     private String isbn;
 
-    // Constructores
-
+    // No-argument constructor
     public Libro() {
     }
 
+    // All-argument constructor (optional, for convenience)
     public Libro(String titulo, String autor, String isbn) {
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
     }
 
-    // Getters y Setters
+    // Getters and setters
+    //public Long getId() {
+    //    return id;
+    //}
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    //public void setId(Long id) {
+    //    this.id = id;
+    //}
 
     public String getTitulo() {
         return titulo;
@@ -60,8 +56,8 @@ public class Libro {
     public String getIsbn() {
         return isbn;
     }
-
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
+
 }
