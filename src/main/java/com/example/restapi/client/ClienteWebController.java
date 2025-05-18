@@ -260,8 +260,7 @@ public class ClienteWebController {
             model.addAttribute("error", "Error de conexión con el servidor.");
         }
 
-        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de
-        // usuarios
+        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de usuarios
         return cargarAdminHomeConUsuarios(model);
     }
 
@@ -338,38 +337,41 @@ public class ClienteWebController {
     }
 
     // ORDENADORES ADMIN
+    // ORDENADORES ADMIN
     @PostMapping("/add-ordenador")
-    public String addOrdenador(@RequestParam("marca") String marca, @RequestParam("modelo") String modelo,
-            @RequestParam("numeroSerie") String numeroSerie, @RequestParam("disponible") boolean disponible,
+    public String addOrdenador(
+            @RequestParam("marca") String marca,
+            @RequestParam("modelo") String modelo,
+            @RequestParam("numeroSerie") String numeroSerie,
+            @RequestParam("disponible") boolean disponible,
             Model model) {
 
         String url = apiBaseUrl + "/api/ordenadores/add";
         try {
-            MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
-            requestBody.add("marca", marca);
-            requestBody.add("modelo", modelo);
-            requestBody.add("numeroSerie", numeroSerie);
-            requestBody.add("disponible", String.valueOf(disponible));
+            Ordenador ordenador = new Ordenador();
+            ordenador.setMarca(marca);
+            ordenador.setModelo(modelo);
+            ordenador.setNumeroSerie(numeroSerie);
+            ordenador.setDisponible(disponible);
 
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
+            headers.setContentType(MediaType.APPLICATION_JSON);
 
+            HttpEntity<Ordenador> requestEntity = new HttpEntity<>(ordenador, headers);
             ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
 
             if (response.getStatusCode() == HttpStatus.CREATED) {
                 model.addAttribute("success", "Ordenador añadido correctamente.");
             } else {
-                model.addAttribute("error", "Error al añadir el ordenador: " + response.getBody());
+                model.addAttribute("error", "Error al añadir ordenador: " + response.getBody());
             }
+
         } catch (Exception e) {
             e.printStackTrace();
-            model.addAttribute("error", "Error de conexión con la API de ordenadores.");
+            model.addAttribute("error", "Error al procesar el ordenador.");
         }
 
-        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de
-        // ordenadores
-        return cargarAdminHomeConUsuarios(model);
+        return "redirect:/adminHome";
     }
 
     @PostMapping("/delete-ordenador")
@@ -390,16 +392,19 @@ public class ClienteWebController {
             model.addAttribute("error", "Error de conexión con la API de ordenadores.");
         }
 
-        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de
-        // ordenadores
+        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de ordenadores
         return cargarAdminHomeConUsuarios(model);
     }
 
+    // ESPACIOS GRUPALES ADMIN
     @PostMapping("/add-sala-grupal")
-    public String addSalaGrupal(@RequestParam("piso") int piso, @RequestParam("numeroSala") int numeroSala,
-            @RequestParam("numeroPersonas") int numeroPersonas, Model model) {
+    public String addSalaGrupal(
+            @RequestParam("piso") int piso, 
+            @RequestParam("numeroSala") int numeroSala,
+            @RequestParam("numeroPersonas") int numeroPersonas, 
+            Model model) {
+        
         String url = apiBaseUrl + "/api/salas/add";
-
         try {
             // Crear un objeto tipo SalaGrupal y setear sus valores
             SalaGrupal salaGrupal = new SalaGrupal();
@@ -428,14 +433,16 @@ public class ClienteWebController {
             model.addAttribute("error", "Error de conexión con el servidor.");
         }
 
-        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de salas
-        // grupales
+        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de salas grupales
         return cargarAdminHomeConUsuarios(model);
     }
 
     @PostMapping("/delete-sala-grupal")
-    public String deleteSalaGrupal(@RequestParam("piso") int piso, @RequestParam("numeroSala") int numeroSala,
+    public String deleteSalaGrupal(
+            @RequestParam("piso") int piso, 
+            @RequestParam("numeroSala") int numeroSala,
             Model model) {
+        
         String url = apiBaseUrl + "/api/salas/delete/" + piso + "/" + numeroSala; // Endpoint en SalaGrupalController
         try {
             // Crear la entidad HTTP (puede ser null para DELETE)
@@ -457,15 +464,19 @@ public class ClienteWebController {
             model.addAttribute("error", "Error de conexión con el servidor.");
         }
 
-        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de salas
-        // grupales
+        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de salas grupales
         return cargarAdminHomeConUsuarios(model);
     }
 
+    // LIBROS ADMIN
     @PostMapping("/add-libro")
-
-    public String addLibro(@RequestParam("titulo") String titulo, @RequestParam("autor") String autor,
-            @RequestParam("isbn") String isbn, @RequestParam("disponible") boolean disponible, Model model) {
+    public String addLibro(
+            @RequestParam("titulo") String titulo, 
+            @RequestParam("autor") String autor,
+            @RequestParam("isbn") String isbn, 
+            @RequestParam("disponible") boolean disponible, 
+            Model model) {
+        
         String url = apiBaseUrl + "/api/libros/add";
         try {
             MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
@@ -495,8 +506,10 @@ public class ClienteWebController {
     }
 
     @PostMapping("/delete-libro")
-
-    public String deleteLibro(@RequestParam("id") Long id, Model model) {
+    public String deleteLibro(
+            @RequestParam("id") Long id, 
+            Model model) {
+        
         String url = apiBaseUrl + "/api/libros/delete/" + id;
         try {
             HttpEntity<Void> requestEntity = new HttpEntity<>(null);
@@ -549,17 +562,17 @@ public class ClienteWebController {
             model.addAttribute("error", "Error de conexión con el servidor.");
         }
 
-        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de
-        // espacios
-        // individuales
+        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de espacios individuales
         return cargarAdminHomeConUsuarios(model);
     }
 
     @PostMapping("/delete-espacio-individual")
-    public String deleteEspacioIndividual(@RequestParam("piso") int piso,
-            @RequestParam("numeroAsiento") int numeroAsiento, Model model) {
-        String url = apiBaseUrl + "/api/espacios/delete/" + piso + "/" + numeroAsiento; // Endpoint en
-                                                                                        // EspacioIndividualController
+    public String deleteEspacioIndividual(
+            @RequestParam("piso") int piso,
+            @RequestParam("numeroAsiento") int numeroAsiento, 
+            Model model) {
+        
+        String url = apiBaseUrl + "/api/espacios/delete/" + piso + "/" + numeroAsiento; // Endpoint en                                                                                // EspacioIndividualController
         try {
             // Crear la entidad HTTP (puede ser null para DELETE)
             @SuppressWarnings("null")
@@ -586,6 +599,7 @@ public class ClienteWebController {
         return cargarAdminHomeConUsuarios(model);
     }
 
+    // RESERVAS RECURSOS
     @GetMapping("/api/recursos")
     @ResponseBody
     public ResponseEntity<?> getRecursosPorTipo(@RequestParam String tipo) {
