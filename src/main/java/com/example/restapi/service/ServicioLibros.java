@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.transaction.annotation.Transactional;
+
 @Service
 public class ServicioLibros {
 
@@ -18,7 +20,7 @@ public class ServicioLibros {
     public ServicioLibros(RepositorioLibros repositorioLibros) {
         this.repositorioLibros = repositorioLibros;
     }
-     
+
     // Obtener todos los libros
     public List<Libro> findAll() {
         return repositorioLibros.findAll();
@@ -33,31 +35,39 @@ public class ServicioLibros {
     public Optional<Libro> findByTitulo(String titulo) {
         return repositorioLibros.findByTitulo(titulo);
     }
+
     // Obtener un libro por autor
     public Optional<Libro> findByAutor(String autor) {
         return repositorioLibros.findByAutor(autor);
     }
+
     // Obtener un libro por ISBN
     public Optional<Libro> findByIsbn(String isbn) {
         return repositorioLibros.findByIsbn(isbn);
     }
-    //Crear un nuevo libro
+
+    @Transactional
     public Libro addLibro(Libro libro) {
+        libro.setId(null); // Añade esta línea para asegurarte que el libro es nuevo
         return repositorioLibros.save(libro);
     }
-    //Actualizar un libro
+
+    @Transactional
     public Libro updateLibro(Long id, Libro libro) {
-        Optional<Libro> libroExistente = repositorioLibros.findById(id);
-        if (libroExistente.isPresent()) {
-            libro.setId(id);
-            return repositorioLibros.save(libro);
+        return repositorioLibros.findById(id).map(libroDB -> {
+            libroDB.setTitulo(libro.getTitulo());
+            libroDB.setAutor(libro.getAutor());
+            libroDB.setIsbn(libro.getIsbn());
+            return repositorioLibros.save(libroDB);
+        }).orElseThrow(() -> new RuntimeException("Libro no encontrado con ID: " + id));
+    }
+
+    @Transactional
+    public void deleteLibro(Long id) {
+        if (repositorioLibros.existsById(id)) {
+            repositorioLibros.deleteById(id);
         } else {
             throw new RuntimeException("Libro no encontrado con ID: " + id);
         }
     }
-    //Eliminar un libro
-    public void deleteLibro(Long id) {
-        repositorioLibros.deleteById(id);
-    }
-
 }
