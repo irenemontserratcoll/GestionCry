@@ -75,7 +75,6 @@
                     <button type="submit" class="btn-add">Añadir Usuario</button>
                 </form>
             </div>
-
         </div>
         
         <!-- SECCION LIBROS -->
@@ -142,12 +141,10 @@
 
         <!-- SECCION ORDENADORES -->
         <div id="ordenadores" class="tab-content">
-            <!-- Barra de búsqueda -->
             <div class="search-form">
-                <input type="text" id="searchComputers" placeholder="🔍 Buscar por marca, modelo o número de serie" onkeyup="filterComputers()">
+                <input type="text" id="searchOrdenadoresInput" placeholder="🔍 Buscar por marca, modelo o número de serie" onkeyup="filterOrdenadoresTable()">
             </div>
 
-            <!-- Tabla de ordenadores -->
             <div class="table-wrapper">
                 <table class="styled-table">
                     <thead>
@@ -157,35 +154,20 @@
                             <th>Modelo</th>
                             <th>Número de Serie</th>
                             <th>Disponible</th>
-                            <th>Actualizar</th>
                             <th>Eliminar</th>
                         </tr>
                     </thead>
                 </table>
 
                 <div class="table-scroll">
-                    <table class="styled-table">
+                    <table class="styled-table" id="ordenadoresTable">
                         <tbody>
                             <tr th:each="ordenador, iterStat : ${ordenadores}">
                                 <td th:text="${iterStat.count}"></td>
                                 <td th:text="${ordenador.marca}"></td>
                                 <td th:text="${ordenador.modelo}"></td>
                                 <td th:text="${ordenador.numeroSerie}"></td>
-                                <td th:text="${ordenador.disponible ? 'Sí' : 'No'}"></td>
-                                <!-- Formulario para actualizar -->
-                                <td>
-                                    <form action="/update-ordenador" method="post">
-                                        <input type="hidden" name="numeroSerie" th:value="${ordenador.numeroSerie}" />
-                                        <input type="text" name="marca" placeholder="Marca" th:value="${ordenador.marca}" required>
-                                        <input type="text" name="modelo" placeholder="Modelo" th:value="${ordenador.modelo}" required>
-                                        <select name="disponible">
-                                            <option value="true" th:selected="${ordenador.disponible}">Sí</option>
-                                            <option value="false" th:selected="${!ordenador.disponible}">No</option>
-                                        </select>
-                                        <button type="submit" class="btn-update">✏️</button>
-                                    </form>
-                                </td>
-                                <!-- Botón eliminar -->
+                                <td th:text="${ordenador.disponible} ? 'Sí' : 'No'"></td>
                                 <td>
                                     <form action="/delete-ordenador" method="post">
                                         <input type="hidden" name="numeroSerie" th:value="${ordenador.numeroSerie}" />
@@ -206,7 +188,7 @@
                     <input type="text" placeholder="Número de Serie" name="numeroSerie" required>
                     <select name="disponible" required>
                         <option value="true">Disponible</option>
-                        <option value="false">No disponible</option>
+                        <option value="false">No Disponible</option>
                     </select>
                     <button type="submit" class="btn-add">Añadir Ordenador</button>
                 </form>
@@ -277,7 +259,7 @@
             
             <!-- Barra de búsqueda -->
             <div class="search-form">
-                <input type="text" id="searchSalas" placeholder="🔍 Buscar por piso o número de sala" onkeyup="filterSalas()">
+                <input type="text" id="searchSalas" placeholder="🔍 Buscar por piso o número de sala" onkeyup="filterSalasTable()">
             </div>
 
             <!-- Tabla de salas grupales -->
@@ -405,7 +387,6 @@
                 </form>
             </div>
         </div>
-
 
     <!-- FUNCIONES DE  LA PLANTILLA --> 
     <script>
