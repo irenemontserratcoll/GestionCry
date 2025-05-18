@@ -382,11 +382,22 @@ public class ClienteWebController {
 
     @PostMapping("/delete-ordenador")
     public String deleteOrdenador(@RequestParam("numeroSerie") String numeroSerie, Model model) {
-        String url = apiBaseUrl + "/api/ordenadores/delete/" + numeroSerie;
+        String url = apiBaseUrl + "/api/ordenadores/delete-ordenador";
+
         try {
-            HttpEntity<Void> requestEntity = new HttpEntity<>(null);
-            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity,
-                    String.class);
+            // Crear los parámetros del formulario
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            params.add("numeroSerie", numeroSerie);
+
+            // Configurar headers
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+            // Crear la entidad con headers y parámetros
+            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
+
+            // Enviar la petición POST
+            ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
 
             if (response.getStatusCode() == HttpStatus.OK) {
                 model.addAttribute("success", "Ordenador eliminado correctamente.");
@@ -398,8 +409,7 @@ public class ClienteWebController {
             model.addAttribute("error", "Error de conexión con la API de ordenadores.");
         }
 
-        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de
-        // ordenadores
+        // Recargar la vista con la lista actualizada de ordenadores y usuarios
         return cargarAdminHomeConUsuarios(model);
     }
 

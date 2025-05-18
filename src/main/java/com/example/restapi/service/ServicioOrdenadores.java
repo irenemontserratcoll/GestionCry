@@ -49,7 +49,7 @@ public class ServicioOrdenadores {
         return repositorioOrdenadores.save(ordenador);
     }
 
-    // Actualizar un libro
+    // Actualizar un ordenador existente
     public Ordenador updateOrdenador(Long id, Ordenador ordenador) {
         Optional<Ordenador> OrdenadorExistente = repositorioOrdenadores.findById(id);
         if (OrdenadorExistente.isPresent()) {
