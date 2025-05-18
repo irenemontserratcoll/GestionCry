@@ -183,16 +183,17 @@
 
             <!-- Añadir nuevo ordenador -->
             <div class="user-form">
-                <form action="/add-ordenador" method="post">
-                    <input type="text" placeholder="Marca" name="marca" required>
-                    <input type="text" placeholder="Modelo" name="modelo" required>
-                    <input type="text" placeholder="Número de Serie" name="numeroSerie" required>
-                    <select name="disponible" required>
-                        <option value="true">Disponible</option>
-                        <option value="false">No Disponible</option>
-                    </select>
-                    <button type="submit" class="btn-add">Añadir Ordenador</button>
-                </form>
+               <form action="/update-ordenador" method="post">
+    <input type="hidden" name="id" th:value="${ordenador.id}" />
+    <input type="text" name="marca" th:value="${ordenador.marca}" required>
+    <input type="text" name="modelo" th:value="${ordenador.modelo}" required>
+    <input type="text" name="numeroSerie" th:value="${ordenador.numeroSerie}" required>
+    <select name="disponible" required>
+        <option value="true" th:selected="${ordenador.disponible} == true">Disponible</option>
+        <option value="false" th:selected="${ordenador.disponible} == false">No Disponible</option>
+    </select>
+    <button type="submit">Actualizar Ordenador</button>
+</form>
             </div>
         </div>
 
@@ -433,6 +434,28 @@
                 const isbn = isbnCell ? isbnCell.textContent.toLowerCase() : "";
 
                 if (titulo.indexOf(filter) > -1 || autor.indexOf(filter) > -1 || isbn.indexOf(filter) > -1) {
+            rows[i].style.display = "";
+        } else {
+            rows[i].style.display = "none";
+        }
+    }
+}
+function filterOrdenadores() {
+    const input = document.getElementById("searchOrdenadoresInput");
+    const filter = input.value.toLowerCase();
+    const table = document.querySelector("#ordenadores .table-scroll table tbody");
+    const rows = table.getElementsByTagName("tr");
+
+    for (let i = 0; i < rows.length; i++) {
+        const marcaCell = rows[i].getElementsByTagName("td")[1];
+        const modeloCell = rows[i].getElementsByTagName("td")[2];
+        const numeroSerieCell = rows[i].getElementsByTagName("td")[3];
+
+        const marca = marcaCell ? marcaCell.textContent.toLowerCase() : "";
+        const modelo = modeloCell ? modeloCell.textContent.toLowerCase() : "";
+        const numeroSerie = numeroSerieCell ? numeroSerieCell.textContent.toLowerCase() : "";
+
+        if (marca.indexOf(filter) > -1 || modelo.indexOf(filter) > -1 || numeroSerie.indexOf(filter) > -1) {
             rows[i].style.display = "";
         } else {
             rows[i].style.display = "none";

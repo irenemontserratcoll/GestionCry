@@ -403,6 +403,27 @@ public class ClienteWebController {
         return cargarAdminHomeConUsuarios(model);
     }
 
+    @PostMapping("/update-ordenador")
+    public String updateOrdenador(
+            @RequestParam("id") Long id,
+            @RequestParam("marca") String marca,
+            @RequestParam("modelo") String modelo,
+            @RequestParam("numeroSerie") String numeroSerie,
+            @RequestParam(value = "disponible", required = false) String disponibleParam,
+            Model model) {
+
+        boolean disponible = disponibleParam != null; // checkbox o similar
+
+        Ordenador ordenador = new Ordenador(marca, modelo, numeroSerie, disponible);
+        try {
+            servicioOrdenadores.updateOrdenador(id, ordenador);
+            return "redirect:/adminHome?success=Actualizado+correctamente";
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al actualizar: " + e.getMessage());
+            return "adminHome"; // o la vista que uses
+        }
+    }
+
     // ESPACIOS GRUPALES ADMIN
     @PostMapping("/add-sala-grupal")
     public String addSalaGrupal(

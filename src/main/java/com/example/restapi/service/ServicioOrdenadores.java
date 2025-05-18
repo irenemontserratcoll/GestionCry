@@ -40,16 +40,16 @@ public class ServicioOrdenadores {
     }
 
     // Obtener ordenadores disponibles o no disponibles
-    //public List<Ordenador> findByDisponible(boolean disponible) {
-    //    return repositorioOrdenadores.findByDisponible(disponible);
-    //}
+    // public List<Ordenador> findByDisponible(boolean disponible) {
+    // return repositorioOrdenadores.findByDisponible(disponible);
+    // }
 
     // Agregar un nuevo ordenador
     public Ordenador addOrdenador(Ordenador ordenador) {
         return repositorioOrdenadores.save(ordenador);
     }
 
-    //Actualizar un libro
+    // Actualizar un libro
     public Ordenador updateOrdenador(Long id, Ordenador ordenador) {
         Optional<Ordenador> OrdenadorExistente = repositorioOrdenadores.findById(id);
         if (OrdenadorExistente.isPresent()) {
@@ -63,5 +63,14 @@ public class ServicioOrdenadores {
     // Eliminar un ordenador por ID
     public void deleteOrdenador(Long id) {
         repositorioOrdenadores.deleteById(id);
+    }
+
+    public void deleteByNumeroSerie(String numeroSerie) {
+        Optional<Ordenador> ordenadorOpt = repositorioOrdenadores.findByNumeroSerie(numeroSerie);
+        if (ordenadorOpt.isPresent()) {
+            repositorioOrdenadores.delete(ordenadorOpt.get());
+        } else {
+            throw new RuntimeException("Ordenador no encontrado con número de serie: " + numeroSerie);
+        }
     }
 }
