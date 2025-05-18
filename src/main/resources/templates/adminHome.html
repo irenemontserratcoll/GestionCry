@@ -161,6 +161,7 @@
                             <th>Modelo</th>
                             <th>Número de Serie</th>
                             <th>Disponible</th>
+                            <th>Actualizar</th>
                             <th>Eliminar</th>
                         </tr>
                     </thead>
@@ -251,9 +252,9 @@
                                 <td>
                                     <form action="/update-espacio-individual" method="post">
                                         <input type="hidden" name="id" th:value="${espacio.id}" />
-                                        <input type="text" name="piso" placeholder="Piso"
+                                        <input type="number" name="piso" placeholder="Piso"
                                             th:value="${espacio.piso}" required />
-                                        <input type="text" name="numeroAsiento" placeholder="Número de Asiento"
+                                        <input type="number" name="numeroAsiento" placeholder="Número de Asiento"
                                             th:value="${espacio.numeroAsiento}" required />
                                         <button type="submit" class="btn-update">✏️</button>
                                     </form>
@@ -316,10 +317,11 @@
                                 <!-- Formulario para actualizar sala -->
                                 <td>
                                     <form action="/update-sala" method="post">
-                                        <input type="hidden" name="piso" th:value="${sala.piso}" />
-                                        <input type="hidden" name="numeroSala" th:value="${sala.numeroSala}" />
-                                        <input type="number" name="capacidad" placeholder="Capacidad"
-                                            th:value="${sala.numeroPersonas}" required>
+                                        <input type="number" name="piso" placeholder="Piso"
+                                            th:value="${sala.piso}" required>
+                                        <input type="number" name="numeroSala" placeholder="Número de Sala"
+                                            th:value="${sala.numeroSala}" required>
+                                        <input type="hidden" name="capacidad" th:value="${sala.numeroPersonas}" />
                                         <button type="submit" class="btn-update">✏️</button>
                                     </form>
                                 </td>
