@@ -417,6 +417,28 @@
                 }
             }
         }
+        function filterLibros() {
+            const input = document.getElementById("searchLibros");
+            const filter = input.value.toLowerCase();
+            const table = document.querySelector("#libros .table-scroll table tbody");
+            const rows = table.getElementsByTagName("tr");
+
+            for (let i = 0; i < rows.length; i++) {
+                const tituloCell = rows[i].getElementsByTagName("td")[1];
+                const autorCell = rows[i].getElementsByTagName("td")[2];
+                const isbnCell = rows[i].getElementsByTagName("td")[3];
+        
+                const titulo = tituloCell ? tituloCell.textContent.toLowerCase() : "";
+                const autor = autorCell ? autorCell.textContent.toLowerCase() : "";
+                const isbn = isbnCell ? isbnCell.textContent.toLowerCase() : "";
+
+                if (titulo.indexOf(filter) > -1 || autor.indexOf(filter) > -1 || isbn.indexOf(filter) > -1) {
+            rows[i].style.display = "";
+        } else {
+            rows[i].style.display = "none";
+        }
+    }
+}
     </script>
 </body>
 </html>
