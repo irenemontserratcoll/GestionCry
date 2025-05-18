@@ -6,15 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.restapi.model.EspacioIndividual;
 import com.example.restapi.repository.RepositorioEspacioIndividual;
@@ -29,9 +21,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class EspacioIndividualController {
 
     private final ServicioEspacioIndividual servicioEspacios;
-
-    @Autowired
-    private RepositorioEspacioIndividual repositorioEspacioIndividual;
 
     @Autowired
     public EspacioIndividualController(ServicioEspacioIndividual servicioEspacios) {
@@ -57,8 +46,6 @@ public class EspacioIndividualController {
             @RequestParam("piso") int piso,
             @RequestParam("numeroAsiento") int numeroAsiento) {
         try {
-            // Se crea la instancia de EspacioIndividual sin asignar manualmente el id,
-            // ya que se autogenera al persistirla.
             EspacioIndividual espacio = new EspacioIndividual();
             espacio.setPiso(piso);
             espacio.setNumeroAsiento(numeroAsiento);
@@ -72,9 +59,17 @@ public class EspacioIndividualController {
     }
 
     @Operation(summary = "Actualizar espacio", description = "Modifica un espacio individual existente")
-    @PutMapping("/update")
-    public ResponseEntity<String> updateEspacio(@RequestBody EspacioIndividual espacio) {
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateEspacio(
+            @PathVariable Long id,
+            @RequestParam("piso") int piso,
+            @RequestParam("numeroAsiento") int numeroAsiento) {
         try {
+            EspacioIndividual espacio = new EspacioIndividual();
+            espacio.setId(id);
+            espacio.setPiso(piso);
+            espacio.setNumeroAsiento(numeroAsiento);
+
             servicioEspacios.updateEspacio(espacio);
             return new ResponseEntity<>("Espacio actualizado correctamente", HttpStatus.OK);
         } catch (Exception e) {
@@ -86,21 +81,11 @@ public class EspacioIndividualController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteEspacio(@PathVariable Long id) {
         try {
-            servicioEspacios.deleteEspacio(id); // Llamamos a eliminar por ID
+            servicioEspacios.deleteEspacio(id);
             return new ResponseEntity<>("Espacio eliminado correctamente", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al eliminar el espacio: " + e.getMessage(),
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-
-    // Método para eliminar espacio individual por ID
-    @DeleteMapping("/api/espacios-individuales/{id}")
-    public ResponseEntity<?> eliminarEspacioIndividual(@PathVariable Long id) {
-        if (!repositorioEspacioIndividual.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-        repositorioEspacioIndividual.deleteById(id);
-        return ResponseEntity.ok().build();
     }
 }

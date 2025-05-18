@@ -641,7 +641,7 @@ public class ClienteWebController {
     @PostMapping("/delete-espacio-individual")
     public String deleteEspacioIndividual(@RequestParam("id") Long id, Model model) {
         try {
-            String url = apiBaseUrl + "/api/espacios-individuales/" + id;
+            String url = apiBaseUrl + "/api/Espacios-Individuales/" + id; // <- usa mayúsculas igual que en el backend
             restTemplate.delete(url);
             model.addAttribute("success", "Espacio eliminado correctamente.");
         } catch (Exception e) {
@@ -649,7 +649,7 @@ public class ClienteWebController {
             model.addAttribute("error", "Error al eliminar el espacio.");
         }
 
-        return "redirect:/adminHome"; // 🔁 asegurarse de redirigir, no devolver vista vacía
+        return "redirect:/adminHome";
     }
 
     @PostMapping("/update-espacio-individual")
