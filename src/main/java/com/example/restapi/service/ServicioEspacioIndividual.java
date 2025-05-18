@@ -43,17 +43,7 @@ public class ServicioEspacioIndividual {
         }
     }
 
-    public void deleteEspacio(int piso, int numeroAsiento) {
-        Optional<EspacioIndividual> espacio = espacioRepository.findByPisoAndNumeroAsiento(piso, numeroAsiento);
-        if (espacio.isPresent()) {
-            espacioRepository.delete(espacio.get());
-        } else {
-            System.out.println("Espacio no encontrado para eliminar: Piso " + piso + ", Asiento " + numeroAsiento);
-            throw new RuntimeException("Espacio no encontrado");
-        }
-    }
-
-    public void deleteById(Long id) {
+    public void deleteEspacio(Long id) {
         if (espacioRepository.existsById(id)) {
             espacioRepository.deleteById(id);
         } else {

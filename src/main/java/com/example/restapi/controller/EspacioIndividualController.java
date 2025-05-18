@@ -83,11 +83,10 @@ public class EspacioIndividualController {
         }
     }
 
-    @Operation(summary = "Eliminar espacio", description = "Elimina un espacio individual del sistema")
-    @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteEspacio(@RequestParam int piso, @RequestParam int numeroAsiento) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteEspacio(@PathVariable Long id) {
         try {
-            servicioEspacios.deleteEspacio(piso, numeroAsiento);
+            servicioEspacios.deleteEspacio(id); // Llamamos a eliminar por ID
             return new ResponseEntity<>("Espacio eliminado correctamente", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al eliminar el espacio: " + e.getMessage(),
