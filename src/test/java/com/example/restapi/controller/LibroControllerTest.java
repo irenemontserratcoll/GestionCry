@@ -2,117 +2,103 @@ package com.example.restapi.controller;
 
 import com.example.restapi.model.Libro;
 import com.example.restapi.service.ServicioLibros;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.*;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.mockito.Mockito;
 
-import java.util.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
 
-class LibroControllerTest {
+import java.util.Arrays;
+import java.util.Optional;
 
-    @Mock
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+@WebMvcTest(LibroController.class)
+public class LibroControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockBean
     private ServicioLibros servicioLibros;
 
-    @InjectMocks
-    private LibroController libroController;
+    private Libro libro1;
+    private Libro libro2;
 
     @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
+    public void setup() {
+        libro1 = new Libro("Titulo1", "Autor1", "ISBN1");
+        libro1.setId(1L);
+        libro2 = new Libro("Titulo2", "Autor2", "ISBN2");
+        libro2.setId(2L);
     }
 
     @Test
-    void testGetAllBooks() {
-        List<Libro> libros = List.of(new Libro("Libro1", "Autor1", "123"));
-        when(servicioLibros.findAll()).thenReturn(libros);
+    public void testGetAllBooks() throws Exception {
+        Mockito.when(servicioLibros.findAll()).thenReturn(Arrays.asList(libro1, libro2));
 
-        List<Libro> result = libroController.getAllBooks();
-
-        assertEquals(1, result.size());
-        assertEquals("Libro1", result.get(0).getTitulo());
+        mockMvc.perform(get("/api/libros/all"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].titulo").value("Titulo1"))
+                .andExpect(jsonPath("$[1].autor").value("Autor2"));
     }
 
     @Test
-    void testGetLibroById_Existente() {
-        Libro libro = new Libro("Libro2", "Autor2", "456");
-        when(servicioLibros.findById(1L)).thenReturn(Optional.of(libro));
+    public void testGetLibroById_found() throws Exception {
+        Mockito.when(servicioLibros.findById(1L)).thenReturn(Optional.of(libro1));
 
-        ResponseEntity<Libro> response = libroController.getLibroById(1L);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals("Libro2", response.getBody().getTitulo());
+        mockMvc.perform(get("/api/libros/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.isbn").value("ISBN1"));
     }
 
     @Test
-    void testGetLibroById_NoExistente() {
-        when(servicioLibros.findById(1L)).thenReturn(Optional.empty());
+    public void testGetLibroById_notFound() throws Exception {
+        Mockito.when(servicioLibros.findById(3L)).thenReturn(Optional.empty());
 
-        ResponseEntity<Libro> response = libroController.getLibroById(1L);
-
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        mockMvc.perform(get("/api/libros/3"))
+                .andExpect(status().isNotFound());
     }
 
     @Test
-    void testAddLibro_Success() {
-        ResponseEntity<String> response = libroController.addLibro("Nuevo Libro", "AutorX", "999");
+    public void testAddLibro() throws Exception {
+        Mockito.doNothing().when(servicioLibros).addLibro(any(Libro.class));
 
-        assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertTrue(response.getBody().contains("Libro agregado"));
-        verify(servicioLibros, times(1)).addLibro(any(Libro.class));
+        mockMvc.perform(post("/api/libros")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"titulo\":\"Nuevo Libro\",\"autor\":\"Nuevo Autor\",\"isbn\":\"NuevoISBN\"}"))
+                .andExpect(status().isCreated())
+                .andExpect(content().string("Libro agregado correctamente"));
     }
 
     @Test
-    void testAddLibro_Error() {
-        doThrow(new RuntimeException("Error")).when(servicioLibros).addLibro(any(Libro.class));
+    public void testUpdateLibro() throws Exception {
+        Mockito.doNothing().when(servicioLibros).updateLibro(eq(1L), any(Libro.class));
 
-        ResponseEntity<String> response = libroController.addLibro("ErrorLibro", "AutorError", "000");
-
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-        assertTrue(response.getBody().contains("Error"));
+        mockMvc.perform(put("/api/libros/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(
+                        "{\"titulo\":\"Libro Actualizado\",\"autor\":\"Autor Actualizado\",\"isbn\":\"ISBNActualizado\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Libro actualizado correctamente"));
     }
 
     @Test
-    void testDeleteLibro_Success() {
-        doNothing().when(servicioLibros).deleteLibro(1L);
+    public void testDeleteLibro() throws Exception {
+        Mockito.doNothing().when(servicioLibros).deleteLibro(1L);
 
-        ResponseEntity<String> response = libroController.deleteLibro(1L);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertTrue(response.getBody().contains("eliminado"));
-    }
-
-    @Test
-    void testDeleteLibro_Error() {
-        doThrow(new RuntimeException("No se pudo borrar")).when(servicioLibros).deleteLibro(1L);
-
-        ResponseEntity<String> response = libroController.deleteLibro(1L);
-
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-        assertTrue(response.getBody().contains("Error"));
-    }
-
-    @Test
-    void testUpdateLibro_Success() {
-        doNothing().when(servicioLibros).updateLibro(eq(1L), any(Libro.class));
-
-        ResponseEntity<String> response = libroController.updateLibro(1L, "Actualizado", "AutorA", "777");
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertTrue(response.getBody().contains("actualizado"));
-    }
-
-    @Test
-    void testUpdateLibro_Error() {
-        doThrow(new RuntimeException("Fallo al actualizar")).when(servicioLibros).updateLibro(eq(1L), any(Libro.class));
-
-        ResponseEntity<String> response = libroController.updateLibro(1L, "Fail", "AutorF", "888");
-
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-        assertTrue(response.getBody().contains("Error"));
+        mockMvc.perform(delete("/api/libros/delete/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Libro eliminado correctamente"));
     }
 }

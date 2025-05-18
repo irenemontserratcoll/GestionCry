@@ -78,87 +78,67 @@
         </div>
         
         <!-- SECCION LIBROS -->
-<div id="libros" class="tab-content">
-    <!-- Barra de búsqueda de Libros -->
-    <div class="search-form">
-        <input type="text" id="searchLibros" placeholder="🔍 Buscar por título, autor o ISBN" onkeyup="filterLibros()">
-    </div>
-
-    <!-- tabla de libros -->
-    <div class="table-wrapper">
-        <table class="styled-table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Título</th>
-                    <th>Autor</th>
-                    <th>ISBN</th>
-                    <th>Actualizar</th>
-                    <th>Eliminar</th>
-                </tr>
-            </thead>
-        </table>
-
-        <div class="table-scroll">
-            <table class="styled-table" id="librosTable">
-                <tbody>
-                    <tr th:each="libro, iterStat : ${libros}">
-                        <td th:text="${iterStat.count}"></td>
-                        <td th:text="${libro.titulo}"></td>
-                        <td th:text="${libro.autor}"></td>
-                        <td th:text="${libro.isbn}"></td>
-                        <!-- Formulario para actualizar libro -->
-                        <td>
-                            <form action="/update-libro" method="post">
-                                <input type="hidden" name="isbn" th:value="${libro.isbn}" />
-                                <input type="text" name="titulo" placeholder="Título" th:value="${libro.titulo}" required>
-                                <input type="text" name="autor" placeholder="Autor" th:value="${libro.autor}" required>
-                                <button type="submit" class="btn-update">✏️</button>
-                            </form>
-                        </td>
-                        <!-- Botón eliminar libro -->
-                        <td>
-                            <form action="/delete-libro" method="post">
-                                <input type="hidden" name="isbn" th:value="${libro.isbn}" />
-                                <button type="submit" class="btn-delete">🗑️</button>
-                            </form>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div id="libros" class="tab-content">
+            <!-- Barra de búsqueda de Libros -->
+            <div class="search-form">
+                <input type="text" id="searchLibros" placeholder="🔍 Buscar por título, autor o ISBN" onkeyup="filterLibros()">
         </div>
-    </div>
-    
-    <!-- Añadir nuevo libro -->
-    <div class="user-form">
-        <form action="/add-libro" method="post">
-            <input type="text" placeholder="Título" name="titulo" required>
-            <input type="text" placeholder="Autor" name="autor" required>
-            <input type="text" placeholder="ISBN" name="isbn" required>
-            <button type="submit" class="btn-add">Añadir Libro</button>
-        </form>
-    </div>
-</div>
-<script>
-    function libros() {
-      // código para filtrar la tabla
-      let input = document.getElementById("buscador");
-      let filter = input.value.toUpperCase();
-      let table = document.getElementById("tablaLibros");
-      let tr = table.getElementsByTagName("tr");
-      for (let i = 1; i < tr.length; i++) { // empieza en 1 para saltar encabezado
-        let td = tr[i].getElementsByTagName("td")[0];
-        if (td) {
-          let txtValue = td.textContent || td.innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = "";
-          } else {
-            tr[i].style.display = "none";
-          }
-        }
-      }
-    }
-  </script>
+            <!-- tabla de libros -->
+            <div class="table-wrapper">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>ISBN</th>
+                            <th>Actualizar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                </table>
+
+                <div class="table-scroll">
+                    <table class="styled-table">
+                        <tbody>
+                            <tr th:each="libro, iterStat : ${libros}">
+                                <td th:text="${iterStat.count}"></td>
+                                <td th:text="${libro.titulo}"></td>
+                                <td th:text="${libro.autor}"></td>
+                                <td th:text="${libro.isbn}"></td>
+                                <!-- Formulario para actualizar libro -->
+                                <td>
+                                    <form action="/update-libro" method="post">
+                                    <input type="hidden" name="id" th:value="${libro.id}" />
+                                    <input type="text" name="titulo" placeholder="Título" th:value="${libro.titulo}" required>
+                                    <input type="text" name="autor" placeholder="Autor" th:value="${libro.autor}" required>
+                                    <input type="text" name="isbn" placeholder="ISBN" th:value="${libro.isbn}" required>
+                                    <button type="submit" class="btn-update">✏️</button>
+                                    </form>
+                                </td>
+                                <!-- Botón eliminar libro -->
+                                <td>
+                                    <form action="/delete-libro" method="post">
+                                        <input type="hidden" name="isbn" th:value="${libro.id}" />
+                                        <button type="submit" class="btn-delete">🗑️</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Añadir nuevo libro -->
+            <div class="user-form">
+                <form action="/add-libro" method="post">
+                    <input type="text" placeholder="Título" name="titulo" required>
+                    <input type="text" placeholder="Autor" name="autor" required>
+                    <input type="text" placeholder="ISBN" name="isbn" required>
+                    <button type="submit" class="btn-add">Añadir Libro</button>
+                </form>
+            </div>
+        </div>
 
         <!-- SECCION ORDENADORES -->
         <div id="ordenadores" class="tab-content">

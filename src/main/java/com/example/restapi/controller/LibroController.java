@@ -27,7 +27,7 @@ public class LibroController {
     }
 
     @Operation(summary = "Obtener todos los libros", description = "Devuelve una lista de todos los libros")
-    @GetMapping("/all")
+    @GetMapping
     public List<Libro> getAllBooks() {
         return servicioLibros.findAll();
     }
@@ -41,47 +41,35 @@ public class LibroController {
     }
 
     @Operation(summary = "Agregar nuevo libro", description = "Crea un nuevo libro en el sistema")
-    @PostMapping("/add")
-    public ResponseEntity<String> addLibro(
-            @RequestParam("titulo") String titulo,
-            @RequestParam("autor") String autor,
-            @RequestParam("isbn") String isbn) {
+    @PostMapping
+    public ResponseEntity<Libro> addLibro(@RequestBody Libro libro) {
         try {
-            Libro libro = new Libro(titulo, autor, isbn);
-            servicioLibros.addLibro(libro);
-            return new ResponseEntity<>("Libro agregado correctamente", HttpStatus.CREATED);
+            Libro nuevoLibro = servicioLibros.addLibro(libro);
+            return new ResponseEntity<>(nuevoLibro, HttpStatus.CREATED);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error al agregar el libro: " + e.getMessage(),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @Operation(summary = "Eliminar libro por ID", description = "Elimina un libro específico por su ID")
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteLibro(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteLibro(@PathVariable Long id) {
         try {
             servicioLibros.deleteLibro(id);
-            return new ResponseEntity<>("Libro eliminado correctamente", HttpStatus.OK);
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
-            return new ResponseEntity<>("Error al eliminar el libro: " + e.getMessage(),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
     @Operation(summary = "Actualizar libro por ID", description = "Actualiza un libro existente")
-    @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateLibro(
-            @PathVariable Long id,
-            @RequestParam("titulo") String titulo,
-            @RequestParam("autor") String autor,
-            @RequestParam("isbn") String isbn) {
+    @PutMapping("/{id}")
+    public ResponseEntity<Libro> updateLibro(@PathVariable Long id, @RequestBody Libro libro) {
         try {
-            Libro libro = new Libro(titulo, autor, isbn);
-            servicioLibros.updateLibro(id, libro);
-            return new ResponseEntity<>("Libro actualizado correctamente", HttpStatus.OK);
+            Libro actualizado = servicioLibros.updateLibro(id, libro);
+            return ResponseEntity.ok(actualizado);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error al actualizar el libro: " + e.getMessage(),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 }

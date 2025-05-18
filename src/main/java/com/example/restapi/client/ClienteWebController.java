@@ -392,7 +392,8 @@ public class ClienteWebController {
             model.addAttribute("error", "Error de conexión con la API de ordenadores.");
         }
 
-        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de ordenadores
+        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de
+        // ordenadores
         return cargarAdminHomeConUsuarios(model);
     }
 
@@ -518,6 +519,41 @@ public class ClienteWebController {
                 model.addAttribute("success", "Libro eliminado correctamente.");
             } else {
                 model.addAttribute("error", "Error al eliminar el libro: " + response.getBody());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("error", "Error de conexión con el servidor.");
+        }
+
+        return "redirect:/adminHome";
+    }
+
+    @PostMapping("/update-libro")
+    public String updateLibro(
+            @RequestParam("id") Long id,
+            @RequestParam("titulo") String titulo,
+            @RequestParam("autor") String autor,
+            @RequestParam("isbn") String isbn,
+            Model model) {
+
+        String url = apiBaseUrl + "/api/libros/update/" + id;
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            params.add("titulo", titulo);
+            params.add("autor", autor);
+            params.add("isbn", isbn);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
+
+            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, String.class);
+
+            if (response.getStatusCode().is2xxSuccessful()) {
+                model.addAttribute("success", "Libro actualizado correctamente.");
+            } else {
+                model.addAttribute("error", "Error al actualizar libro: " + response.getBody());
             }
         } catch (Exception e) {
             e.printStackTrace();
