@@ -184,16 +184,16 @@
             <!-- Añadir nuevo ordenador -->
             <div class="user-form">
                <form action="/update-ordenador" method="post">
-    <input type="hidden" name="id" th:value="${ordenador.id}" />
-    <input type="text" name="marca" th:value="${ordenador.marca}" required>
-    <input type="text" name="modelo" th:value="${ordenador.modelo}" required>
-    <input type="text" name="numeroSerie" th:value="${ordenador.numeroSerie}" required>
-    <select name="disponible" required>
-        <option value="true" th:selected="${ordenador.disponible} == true">Disponible</option>
-        <option value="false" th:selected="${ordenador.disponible} == false">No Disponible</option>
-    </select>
-    <button type="submit">Actualizar Ordenador</button>
-</form>
+                <input type="hidden" name="id" th:value="${ordenador.id}" />
+                <input type="text" name="marca" th:value="${ordenador.marca}" required>
+                <input type="text" name="modelo" th:value="${ordenador.modelo}" required>
+                <input type="text" name="numeroSerie" th:value="${ordenador.numeroSerie}" required>
+                <select name="disponible" required>
+                    <option value="true" th:selected="${ordenador.disponible} == true">Disponible</option>
+                    <option value="false" th:selected="${ordenador.disponible} == false">No Disponible</option>
+                    </select>
+                    <button type="submit">Actualizar Ordenador</button>
+                </form>
             </div>
         </div>
 
