@@ -601,24 +601,27 @@ public class ClienteWebController {
     }
 
     // ESPACIOS INDIVIDUALES ADMIN
+    // ESPACIOS INDIVIDUALES ADMIN
     @PostMapping("/add-espacio-individual")
-    public String addEspacioIndividual(@RequestParam("piso") int piso,
-            @RequestParam("numeroAsiento") int numeroAsiento, Model model) {
-        String url = apiBaseUrl + "/api/espacios/add";
+    public String addEspacioIndividual(
+            @RequestParam("piso") int piso,
+            @RequestParam("numeroAsiento") int numeroAsiento,
+            Model model) {
+
+        String url = apiBaseUrl + "/api/Espacios-Individuales/add";
+
         try {
-            // Crear un objeto tipo EspacioIndividual y setear sus valores
-            EspacioIndividual espacioIndividual = new EspacioIndividual();
-            espacioIndividual.setPiso(piso);
-            espacioIndividual.setNumeroAsiento(numeroAsiento);
+            // Enviar como formulario URL encoded (porque el controlador espera
+            // @RequestParam)
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            params.add("piso", String.valueOf(piso));
+            params.add("numeroAsiento", String.valueOf(numeroAsiento));
 
-            // Crear headers con tipo JSON
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-            // Crear entidad con JSON
-            HttpEntity<EspacioIndividual> requestEntity = new HttpEntity<>(espacioIndividual, headers);
+            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
 
-            // Enviar la solicitud
             ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
 
             if (response.getStatusCode() == HttpStatus.CREATED) {
@@ -632,9 +635,8 @@ public class ClienteWebController {
             model.addAttribute("error", "Error de conexión con el servidor.");
         }
 
-        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de
-        // espacios individuales
-        return cargarAdminHomeConUsuarios(model);
+        // Puedes redirigir o recargar modelo según lógica similar a "addLibro"
+        return "redirect:/adminHome";
     }
 
     @PostMapping("/delete-espacio-individual")
