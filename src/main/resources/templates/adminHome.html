@@ -175,6 +175,20 @@
                                 <td th:text="${ordenador.modelo}"></td>
                                 <td th:text="${ordenador.numeroSerie}"></td>
                                 <td th:text="${ordenador.disponible} ? 'Sí' : 'No'"></td>
+                                <!-- Formulario para actualizar ordenador -->
+<td>
+    <form action="/update-ordenador" method="post">
+        <input type="hidden" name="id" th:value="${ordenador.id}" />
+        <input type="hidden" name="numeroSerie" th:value="${ordenador.numeroSerie}" />
+        <input type="text" name="marca" placeholder="Marca" th:value="${ordenador.marca}" required />
+        <input type="text" name="modelo" placeholder="Modelo" th:value="${ordenador.modelo}" required />
+        <label>
+            Disponible:
+            <input type="checkbox" name="disponible" th:checked="${ordenador.disponible}" />
+        </label>
+        <button type="submit" class="btn-update">✏️</button>
+    </form>
+</td>
                                 <td>
                                     <form action="/delete-ordenador" method="post">
                                         <input type="hidden" name="numeroSerie" th:value="${ordenador.numeroSerie}" />
