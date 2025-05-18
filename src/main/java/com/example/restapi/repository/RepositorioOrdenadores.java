@@ -10,9 +10,9 @@ import com.example.restapi.model.Ordenador;
 public interface RepositorioOrdenadores extends JpaRepository<Ordenador, Long> {
     Optional<Ordenador> findById(Long id);
 
-    Optional<Ordenador> findByMarca(String marca);
+    List<Ordenador> findByMarca(String marca);
 
-    Optional<Ordenador> findByModelo(String modelo);
+    List<Ordenador> findByModelo(String modelo);
 
     Optional<Ordenador> findByNumeroSerie(String numeroSerie);
 

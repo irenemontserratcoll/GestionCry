@@ -96,4 +96,22 @@ public class OrdenadorController {
             return "redirect:/adminHome?error=Error+al+borrar";
         }
     }
+
+    @GetMapping("/marca/{marca}")
+    public ResponseEntity<List<Ordenador>> getOrdenadoresByMarca(@PathVariable String marca) {
+        List<Ordenador> ordenadores = servicioOrdenadores.findByMarca(marca);
+        if (ordenadores.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(ordenadores);
+    }
+
+    @GetMapping("/modelo/{modelo}")
+    public ResponseEntity<List<Ordenador>> getOrdenadoresByModelo(@PathVariable String modelo) {
+        List<Ordenador> ordenadores = servicioOrdenadores.findByModelo(modelo);
+        if (ordenadores.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(ordenadores);
+    }
 }
