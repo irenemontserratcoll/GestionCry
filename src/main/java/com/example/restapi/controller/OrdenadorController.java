@@ -57,7 +57,6 @@ public class OrdenadorController {
         return ordenador.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    // Agregar un nuevo ordenador
     @Operation(summary = "Agregar nuevo ordenador", description = "Crea un nuevo ordenador en el sistema")
     @PostMapping("/add")
     public ResponseEntity<String> addOrdenador(
@@ -66,11 +65,17 @@ public class OrdenadorController {
             @RequestParam("numeroSerie") String numeroSerie,
             @RequestParam("disponible") boolean disponible) {
         try {
-            Ordenador ordenador = new Ordenador(marca, modelo, numeroSerie, disponible);
+            Ordenador ordenador = new Ordenador();
+            ordenador.setMarca(marca);
+            ordenador.setModelo(modelo);
+            ordenador.setNumeroSerie(numeroSerie);
+            ordenador.setDisponible(disponible);
+
             servicioOrdenadores.addOrdenador(ordenador);
             return new ResponseEntity<>("Ordenador agregado correctamente", HttpStatus.CREATED);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error al agregar el ordenador: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error al agregar el ordenador: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -82,7 +87,8 @@ public class OrdenadorController {
             servicioOrdenadores.updateOrdenador(id, ordenador);
             return new ResponseEntity<>("Ordenador actualizado correctamente", HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error al actualizar el ordenador: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error al actualizar el ordenador: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -94,7 +100,8 @@ public class OrdenadorController {
             servicioOrdenadores.deleteOrdenador(id);
             return new ResponseEntity<>("Ordenador eliminado correctamente", HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error al eliminar el ordenador: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error al eliminar el ordenador: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
