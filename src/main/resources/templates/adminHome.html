@@ -109,6 +109,7 @@
                                 <!-- Formulario para actualizar libro -->
                                 <td>
                                     <form action="/update-libro" method="post">
+                                        <input type="hidden" name="id" th:value="${libro.id}" />
                                         <input type="hidden" name="isbn" th:value="${libro.isbn}" />
                                         <input type="text" name="titulo" placeholder="Título" th:value="${libro.titulo}" required>
                                         <input type="text" name="autor" placeholder="Autor" th:value="${libro.autor}" required>
@@ -118,7 +119,7 @@
                                 <!-- Botón eliminar libro -->
                                 <td>
                                     <form action="/delete-libro" method="post">
-                                        <input type="hidden" name="isbn" th:value="${libro.isbn}" />
+                                        <input type="hidden" name="id" th:value="${libro.id}" />
                                         <button type="submit" class="btn-delete">🗑️</button>
                                     </form>
                                 </td>
