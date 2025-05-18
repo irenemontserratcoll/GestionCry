@@ -251,8 +251,10 @@
                                 <td>
                                     <form action="/update-espacio-individual" method="post">
                                         <input type="hidden" name="id" th:value="${espacio.id}" />
-                                        <input type="hidden" name="piso" th:value="${espacio.piso}" />
-                                        <input type="hidden" name="numeroAsiento" th:value="${espacio.numeroAsiento}" />
+                                        <input type="text" name="piso" placeholder="Piso"
+                                            th:value="${espacio.piso}" required />
+                                        <input type="text" name="numeroAsiento" placeholder="Número de Asiento"
+                                            th:value="${espacio.numeroAsiento}" required />
                                         <button type="submit" class="btn-update">✏️</button>
                                     </form>
                                 </td>
