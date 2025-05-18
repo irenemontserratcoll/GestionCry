@@ -335,7 +335,7 @@
                                 <span th:text="${sala.numeroPersonas}"></span>
                                 <!-- Formulario para actualizar sala -->
                                 <td>
-                                    <form action="/update-sala" method="post">
+                                    <form action="/update-sala-grupal" method="post">
                                         </label>
                                         Piso:
                                         <input type="number" name="piso" placeholder="Piso" th:value="${sala.piso}"
@@ -352,7 +352,7 @@
                                 </td>
                                 <!-- Botón eliminar sala -->
                                 <td>
-                                    <form action="/delete-sala" method="post">
+                                    <form action="/delete-sala-grupal" method="post">
                                         <input type="hidden" name="piso" th:value="${sala.piso}" />
                                         <input type="hidden" name="numeroSala" th:value="${sala.numeroSala}" />
                                         <button type="submit" class="btn-delete">🗑️</button>
@@ -366,7 +366,7 @@
 
             <!-- Añadir nueva sala grupal -->
             <div class="user-form">
-                <form action="/add-sala" method="post">
+                <form action="/add-sala-grupal" method="post">
                     <input type="number" placeholder="Piso" name="piso" required>
                     <input type="number" placeholder="Número de Sala" name="numeroSala" required>
                     <input type="number" placeholder="Capacidad" name="capacidad" required>
