@@ -337,38 +337,35 @@ public class ClienteWebController {
         return "redirect:/adminHome";
     }
 
-    // ORDENADORES ADMIN
     @PostMapping("/add-ordenador")
     public String addOrdenador(
             @RequestParam("marca") String marca,
             @RequestParam("modelo") String modelo,
             @RequestParam("numeroSerie") String numeroSerie,
-            @RequestParam("disponible") boolean disponible,
+            @RequestParam(value = "disponible", required = false) String disponibleParam,
             Model model) {
 
-        String url = apiBaseUrl + "/api/ordenadores/add";
-        try {
-            Ordenador ordenador = new Ordenador();
-            ordenador.setMarca(marca);
-            ordenador.setModelo(modelo);
-            ordenador.setNumeroSerie(numeroSerie);
-            ordenador.setDisponible(disponible);
+        boolean disponible = disponibleParam != null; // checkbox = null si no está marcado
 
+        Ordenador ordenador = new Ordenador(marca, modelo, numeroSerie, disponible);
+
+        try {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-
             HttpEntity<Ordenador> requestEntity = new HttpEntity<>(ordenador, headers);
-            ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
 
-            if (response.getStatusCode() == HttpStatus.CREATED) {
-                model.addAttribute("success", "Ordenador añadido correctamente.");
+            ResponseEntity<String> response = restTemplate.postForEntity(apiBaseUrl + "/api/ordenadores/add",
+                    requestEntity, String.class);
+
+            if (response.getStatusCode().is2xxSuccessful()) {
+                model.addAttribute("success", "Ordenador agregado correctamente.");
             } else {
-                model.addAttribute("error", "Error al añadir ordenador: " + response.getBody());
+                model.addAttribute("error", "Error al agregar el ordenador: " + response.getBody());
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            model.addAttribute("error", "Error al procesar el ordenador.");
+            model.addAttribute("error", "Error de conexión con la API.");
         }
 
         return "redirect:/adminHome";
