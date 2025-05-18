@@ -644,32 +644,31 @@ public class ClienteWebController {
             @RequestParam("numeroAsiento") int numeroAsiento,
             Model model) {
 
-        String url = apiBaseUrl + "/api/espacios/delete/" + piso + "/" + numeroAsiento; // Endpoint en //
-                                                                                        // EspacioIndividualController
+        String url = apiBaseUrl + "/api/Espacios-Individuales/delete/" + piso + "/" + numeroAsiento;
+
         try {
-            // Crear la entidad HTTP (puede ser null para DELETE)
-            @SuppressWarnings("null")
+            // Crear la entidad HTTP (sin body porque es un DELETE)
             HttpEntity<Void> requestEntity = new HttpEntity<>(null);
 
-            // Enviar la solicitud DELETE al EspacioIndividualController
-            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity,
+            // Ejecutar DELETE
+            ResponseEntity<String> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.DELETE,
+                    requestEntity,
                     String.class);
 
-            // Manejar la respuesta
             if (response.getStatusCode() == HttpStatus.OK) {
                 model.addAttribute("success", "Espacio individual eliminado correctamente.");
             } else {
-                model.addAttribute("error", "Error al eliminar el espacio individual: " + response.getBody());
+                model.addAttribute("error", "Error al eliminar el espacio: " + response.getBody());
             }
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("error", "Error de conexión con el servidor.");
         }
 
-        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de
-        // espacios
-        // individuales
-        return cargarAdminHomeConUsuarios(model);
+        // Redirigir o recargar vista
+        return "redirect:/adminHome";
     }
 
     // RESERVAS RECURSOS
