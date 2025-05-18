@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "recursos_reservables")
-@DiscriminatorColumn(name = "tipo_recurso", discriminatorType = DiscriminatorType.STRING)
 public abstract class RecursoReservable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

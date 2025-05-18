@@ -3,13 +3,10 @@ package com.example.restapi.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "ordenadores") 
-@DiscriminatorValue("ORDENADORES") // Valor del discriminador para este tipo de recurso
-public class Ordenador extends RecursoReservable{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Table(name = "ordenadores")
+@PrimaryKeyJoinColumn(name = "id")
+@DiscriminatorValue("ORDENADORES")
+public class Ordenador extends RecursoReservable {
     private String marca;
     private String modelo;
     private String numeroSerie;
@@ -28,14 +25,6 @@ public class Ordenador extends RecursoReservable{
     }
 
     // Getters y Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getMarca() {
         return marca;
     }
