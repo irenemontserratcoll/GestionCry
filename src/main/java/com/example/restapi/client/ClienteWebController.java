@@ -544,26 +544,22 @@ public class ClienteWebController {
         return "redirect:/adminHome";
     }
 
-    @PostMapping("/delete-espacio-individual")
-    public String deleteEspacioIndividual(@RequestParam("id") Long id, Model model) {
-        String url = apiBaseUrl + "/api/Espacios-Individuales/delete/" + id;
-
+    @PostMapping("/delete-libro")
+    public String deleteLibro(@RequestParam("id") Long id, Model model) {
+        String url = apiBaseUrl + "/api/libros/delete/" + id;
         try {
             HttpEntity<Void> requestEntity = new HttpEntity<>(null);
-            ResponseEntity<String> response = restTemplate.exchange(
-                    url,
-                    HttpMethod.DELETE,
-                    requestEntity,
+            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity,
                     String.class);
 
-            if (response.getStatusCode() == HttpStatus.OK) {
-                model.addAttribute("success", "Espacio eliminado correctamente.");
+            if (response.getStatusCode().is2xxSuccessful()) {
+                model.addAttribute("success", "Libro eliminado correctamente.");
             } else {
-                model.addAttribute("error", "Error al eliminar: " + response.getBody());
+                model.addAttribute("error", "Error al eliminar el libro: " + response.getBody());
             }
         } catch (Exception e) {
             e.printStackTrace();
-            model.addAttribute("error", "Error al conectar con el servidor.");
+            model.addAttribute("error", "Error de conexión con el servidor.");
         }
 
         return "redirect:/adminHome";
@@ -672,6 +668,45 @@ public class ClienteWebController {
         }
 
         // Redirigir o recargar vista
+        return "redirect:/adminHome";
+    }
+
+    @PostMapping("/update-espacio-individual")
+    public String updateEspacioIndividual(
+            @RequestParam("id") Long id,
+            @RequestParam("piso") int piso,
+            @RequestParam("numeroAsiento") int numeroAsiento,
+            Model model) {
+
+        String url = apiBaseUrl + "/api/Espacios-Individuales/update/" + id;
+
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            params.add("piso", String.valueOf(piso));
+            params.add("numeroAsiento", String.valueOf(numeroAsiento));
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
+
+            ResponseEntity<String> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.PUT,
+                    requestEntity,
+                    String.class);
+
+            if (response.getStatusCode().is2xxSuccessful()) {
+                model.addAttribute("success", "Espacio individual actualizado correctamente.");
+            } else {
+                model.addAttribute("error", "Error al actualizar el espacio: " + response.getBody());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("error", "Error de conexión con el servidor.");
+        }
+
         return "redirect:/adminHome";
     }
 

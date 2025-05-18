@@ -249,7 +249,8 @@
                                 <td th:text="${espacio.numeroAsiento}"></td>
                                 <!-- Formulario para actualizar espacio -->
                                 <td>
-                                    <form action="/update-espacio" method="post">
+                                    <form action="/update-espacio-individual" method="post">
+                                        <input type="hidden" name="id" th:value="${espacio.id}" />
                                         <input type="hidden" name="piso" th:value="${espacio.piso}" />
                                         <input type="hidden" name="numeroAsiento" th:value="${espacio.numeroAsiento}" />
                                         <button type="submit" class="btn-update">✏️</button>
@@ -489,6 +490,27 @@
                     }
                 }
             }
+            function filterEspacios() {
+                const input = document.getElementById("searchEspacios");
+                const filter = input.value.toLowerCase();
+                const table = document.querySelector("#espacios-individuales .table-scroll table tbody");
+                const rows = table.getElementsByTagName("tr");
+
+                for (let i = 0; i < rows.length; i++) {
+                    const pisoCell = rows[i].getElementsByTagName("td")[1];
+                    const asientoCell = rows[i].getElementsByTagName("td")[2];
+
+                    const piso = pisoCell ? pisoCell.textContent.toLowerCase() : "";
+                    const asiento = asientoCell ? asientoCell.textContent.toLowerCase() : "";
+
+                    if (piso.includes(filter) || asiento.includes(filter)) {
+                        rows[i].style.display = "";
+                    } else {
+                        rows[i].style.display = "none";
+                    }
+                }
+            }
+
         </script>
 </body>
 
