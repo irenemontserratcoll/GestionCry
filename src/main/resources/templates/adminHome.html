@@ -467,6 +467,33 @@
                     }
                 }
             }
+
+            function filterOrdenadores() {
+                const input = document.getElementById("searchOrdenadores");
+                const filter = input.value.toLowerCase();
+                const table = document.querySelector("#ordenadores .table-scroll table tbody");
+                const rows = table.getElementsByTagName("tr");
+
+                for (let i = 0; i < rows.length; i++) {
+                    const marcaCell = rows[i].getElementsByTagName("td")[1];
+                    const modeloCell = rows[i].getElementsByTagName("td")[2];
+                    const numeroSerieCell = rows[i].getElementsByTagName("td")[3];
+
+                    const marca = marcaCell ? marcaCell.textContent.toLowerCase() : "";
+                    const modelo = modeloCell ? modeloCell.textContent.toLowerCase() : "";
+                    const numeroSerie = numeroSerieCell ? numeroSerieCell.textContent.toLowerCase() : "";
+
+                    if (
+                        marca.indexOf(filter) > -1 ||
+                        modelo.indexOf(filter) > -1 ||
+                        numeroSerie.indexOf(filter) > -1
+                    ) {
+                        rows[i].style.display = "";
+                    } else {
+                        rows[i].style.display = "none";
+                    }
+                }
+            }
         </script>
 </body>
 
