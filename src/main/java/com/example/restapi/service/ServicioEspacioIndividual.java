@@ -43,9 +43,12 @@ public class ServicioEspacioIndividual {
         }
     }
 
-    // Eliminar un espacio por piso y número de asiento
     public void deleteEspacio(int piso, int numeroAsiento) {
         Optional<EspacioIndividual> espacio = espacioRepository.findByPisoAndNumeroAsiento(piso, numeroAsiento);
-        espacio.ifPresent(espacioRepository::delete);
+        if (espacio.isPresent()) {
+            espacioRepository.delete(espacio.get());
+        } else {
+            throw new RuntimeException("El espacio con piso " + piso + " y asiento " + numeroAsiento + " no existe.");
+        }
     }
 }
