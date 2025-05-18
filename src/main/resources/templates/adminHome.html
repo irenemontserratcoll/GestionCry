@@ -114,10 +114,16 @@
                                     <form action="/update-libro" method="post">
                                         <input type="hidden" name="id" th:value="${libro.id}" />
                                         <input type="hidden" name="isbn" th:value="${libro.isbn}" />
-                                        <input type="text" name="titulo" placeholder="Título" th:value="${libro.titulo}"
-                                            required>
-                                        <input type="text" name="autor" placeholder="Autor" th:value="${libro.autor}"
-                                            required>
+                                        </label>
+                                            Título:
+                                            <input type="text" name="titulo" placeholder="Título" 
+                                                th:value="${libro.titulo}" required><br>
+                                        </label>
+                                        </label>
+                                            Autor:
+                                            <input type="text" name="autor" placeholder="Autor" 
+                                                th:value="${libro.autor}" required>
+                                        </label>
                                         <button type="submit" class="btn-update">✏️</button>
                                     </form>
                                 </td>
@@ -181,10 +187,16 @@
                                     <form action="/update-ordenador" method="post">
                                         <input type="hidden" name="id" th:value="${ordenador.id}" />
                                         <input type="hidden" name="numeroSerie" th:value="${ordenador.numeroSerie}" />
-                                        <input type="text" name="marca" placeholder="Marca"
-                                            th:value="${ordenador.marca}" required />
-                                        <input type="text" name="modelo" placeholder="Modelo"
-                                            th:value="${ordenador.modelo}" required />
+                                        </label>
+                                            Marca:
+                                            <input type="text" name="marca" placeholder="Marca"
+                                                th:value="${ordenador.marca}" required /><br>
+                                        </label>
+                                        </label>
+                                            Modelo:
+                                            <input type="text" name="modelo" placeholder="Modelo"
+                                                th:value="${ordenador.modelo}" required />
+                                        </label>
                                         <label>
                                             Disponible:
                                             <input type="checkbox" name="disponible"
@@ -252,10 +264,16 @@
                                 <td>
                                     <form action="/update-espacio-individual" method="post">
                                         <input type="hidden" name="id" th:value="${espacio.id}" />
-                                        <input type="number" name="piso" placeholder="Piso"
-                                            th:value="${espacio.piso}" required />
-                                        <input type="number" name="numeroAsiento" placeholder="Número de Asiento"
-                                            th:value="${espacio.numeroAsiento}" required />
+                                        <label>
+                                            Piso:
+                                            <input type="number" name="piso" placeholder="Piso"
+                                                th:value="${espacio.piso}" required /><br>
+                                        <label>
+                                        <label>
+                                            Número de Asiento:
+                                            <input type="number" name="numeroAsiento" placeholder="Número de Asiento"
+                                                th:value="${espacio.numeroAsiento}" required />
+                                        </label>
                                         <button type="submit" class="btn-update">✏️</button>
                                     </form>
                                 </td>
@@ -317,10 +335,16 @@
                                 <!-- Formulario para actualizar sala -->
                                 <td>
                                     <form action="/update-sala" method="post">
-                                        <input type="number" name="piso" placeholder="Piso"
-                                            th:value="${sala.piso}" required>
-                                        <input type="number" name="numeroSala" placeholder="Número de Sala"
-                                            th:value="${sala.numeroSala}" required>
+                                        </label>
+                                            Piso:
+                                            <input type="number" name="piso" placeholder="Piso"
+                                                th:value="${sala.piso}" required><br>
+                                        </label>    
+                                        </label>
+                                            Número de Sala:
+                                            <input type="number" name="numeroSala" placeholder="Número de Sala"
+                                                th:value="${sala.numeroSala}" required>
+                                        </label>
                                         <input type="hidden" name="capacidad" th:value="${sala.numeroPersonas}" />
                                         <button type="submit" class="btn-update">✏️</button>
                                     </form>
