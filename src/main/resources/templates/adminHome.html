@@ -258,8 +258,7 @@
                                 <!-- Botón eliminar espacio Individual -->
                                 <td>
                                     <form action="/delete-espacio-individual" method="post">
-                                        <input type="hidden" name="piso" th:value="${espacio.piso}" />
-                                        <input type="hidden" name="numeroAsiento" th:value="${espacio.numeroAsiento}" />
+                                        <input type="hidden" name="id" th:value="${espacio.id}" />
                                         <button type="submit" class="btn-delete">🗑️</button>
                                     </form>
                                 </td>

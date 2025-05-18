@@ -2,7 +2,6 @@ package com.example.restapi.model;
 
 import jakarta.persistence.*;
 
-
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "recursos_reservables")
@@ -12,7 +11,11 @@ public abstract class RecursoReservable {
     private Long id;
 
     // Getters y Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-}
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+}

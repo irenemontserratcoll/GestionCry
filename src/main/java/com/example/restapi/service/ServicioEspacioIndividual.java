@@ -52,4 +52,12 @@ public class ServicioEspacioIndividual {
             throw new RuntimeException("Espacio no encontrado");
         }
     }
+
+    public void deleteById(Long id) {
+        if (espacioRepository.existsById(id)) {
+            espacioRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("No existe el espacio con ID: " + id);
+        }
+    }
 }

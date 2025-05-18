@@ -544,22 +544,26 @@ public class ClienteWebController {
         return "redirect:/adminHome";
     }
 
-    @PostMapping("/delete-libro")
-    public String deleteLibro(@RequestParam("id") Long id, Model model) {
-        String url = apiBaseUrl + "/api/libros/delete/" + id;
+    @PostMapping("/delete-espacio-individual")
+    public String deleteEspacioIndividual(@RequestParam("id") Long id, Model model) {
+        String url = apiBaseUrl + "/api/Espacios-Individuales/delete/" + id;
+
         try {
             HttpEntity<Void> requestEntity = new HttpEntity<>(null);
-            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity,
+            ResponseEntity<String> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.DELETE,
+                    requestEntity,
                     String.class);
 
-            if (response.getStatusCode().is2xxSuccessful()) {
-                model.addAttribute("success", "Libro eliminado correctamente.");
+            if (response.getStatusCode() == HttpStatus.OK) {
+                model.addAttribute("success", "Espacio eliminado correctamente.");
             } else {
-                model.addAttribute("error", "Error al eliminar el libro: " + response.getBody());
+                model.addAttribute("error", "Error al eliminar: " + response.getBody());
             }
         } catch (Exception e) {
             e.printStackTrace();
-            model.addAttribute("error", "Error de conexión con el servidor.");
+            model.addAttribute("error", "Error al conectar con el servidor.");
         }
 
         return "redirect:/adminHome";
