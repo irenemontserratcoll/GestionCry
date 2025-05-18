@@ -641,8 +641,13 @@ public class ClienteWebController {
     @PostMapping("/delete-espacio-individual")
     public String deleteEspacioIndividual(@RequestParam("id") Long id, Model model) {
         try {
-            String url = apiBaseUrl + "/api/Espacios-Individuales/" + id; // <- usa mayúsculas igual que en el backend
-            restTemplate.delete(url);
+            String url = apiBaseUrl + "/api/Espacios-Individuales/delete/" + id;
+
+            HttpHeaders headers = new HttpHeaders();
+            HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
+
+            restTemplate.exchange(url, HttpMethod.DELETE, requestEntity, String.class);
+
             model.addAttribute("success", "Espacio eliminado correctamente.");
         } catch (Exception e) {
             e.printStackTrace();
