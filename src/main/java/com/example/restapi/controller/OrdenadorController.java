@@ -86,4 +86,14 @@ public class OrdenadorController {
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PostMapping("/delete-ordenador")
+    public String deleteOrdenadorPorNumeroSerie(@RequestParam String numeroSerie) {
+        try {
+            servicioOrdenadores.deleteByNumeroSerie(numeroSerie);
+            return "redirect:/adminHome?success=Borrado+correcto";
+        } catch (Exception e) {
+            return "redirect:/adminHome?error=Error+al+borrar";
+        }
+    }
 }
