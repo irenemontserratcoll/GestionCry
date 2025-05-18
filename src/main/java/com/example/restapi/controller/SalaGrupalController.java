@@ -88,9 +88,19 @@ public class SalaGrupalController {
     }
 
     @PostMapping("/add-sala-grupal")
-    public ResponseEntity<String> addSalaGrupal(@RequestBody SalaGrupal salaGrupal) {
+    public ResponseEntity<String> addSalaGrupal(@RequestParam("piso") int piso,
+            @RequestParam("numeroSala") int numeroSala,
+            @RequestParam("numeroPersonas") int numeroPersonas) {
         try {
-            servicioSalaGrupo.addSala(salaGrupal); // Agrega la sala
+            // Crea un objeto SalaGrupal con los datos recibidos
+            SalaGrupal salaGrupal = new SalaGrupal();
+            salaGrupal.setPiso(piso);
+            salaGrupal.setNumeroSala(numeroSala);
+            salaGrupal.setNumeroPersonas(numeroPersonas);
+
+            // Llama al servicio para guardar la sala
+            servicioSalaGrupo.addSala(salaGrupal);
+
             return ResponseEntity.ok("Sala grupal agregada exitosamente.");
         } catch (Exception e) {
             e.printStackTrace();

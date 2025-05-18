@@ -472,7 +472,7 @@ public class ClienteWebController {
         }
 
         // Recargar datos del panel de administrador
-        return cargarAdminHomeConUsuarios(model);
+        return "redirect:/adminHome";
     }
 
     @PostMapping("/update-sala-grupal")
