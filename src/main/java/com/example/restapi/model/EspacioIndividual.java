@@ -10,9 +10,10 @@ import jakarta.persistence.Table;
 @Table(name = "espacios_individuales") // Nombre de la tabla en la base de datos
 public class EspacioIndividual extends RecursoReservable {
 
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY) // Genera automáticamente el ID
-    //private Long id; // El tipo de id es Long
+    // @Id
+    // @GeneratedValue(strategy = GenerationType.IDENTITY) // Genera automáticamente
+    // el ID
+    // private Long id; // El tipo de id es Long
 
     @Column(name = "piso", nullable = false) // Columna 'piso', no puede ser nula
     private int piso;
@@ -31,20 +32,21 @@ public class EspacioIndividual extends RecursoReservable {
     }
 
     // Getters y Setters
-    //public Long getId() {
-    //    return id;
-    //}
+    // public Long getId() {
+    // return id;
+    // }
 
-    //public void setId(Long id) {
-    //    this.id = id;
-    //}
+    // public void setId(Long id) {
+    // this.id = id;
+    // }
 
     public int getPiso() {
         return piso;
     }
 
     public void setPiso(int piso) {
-        if (piso <= 0) throw new IllegalArgumentException("El piso debe ser mayor a 0");
+        if (piso <= 0)
+            throw new IllegalArgumentException("El piso debe ser mayor a 0");
         this.piso = piso;
     }
 
@@ -53,7 +55,8 @@ public class EspacioIndividual extends RecursoReservable {
     }
 
     public void setNumeroAsiento(int numeroAsiento) {
-        if (numeroAsiento <= 0) throw new IllegalArgumentException("El número de asiento debe ser mayor a 0");
+        if (numeroAsiento <= 0)
+            throw new IllegalArgumentException("El número de asiento debe ser mayor a 0");
         this.numeroAsiento = numeroAsiento;
     }
 
@@ -64,23 +67,25 @@ public class EspacioIndividual extends RecursoReservable {
     }
 
     @Override
-public boolean equals(Object obj) {
-    if (this == obj) return true;
-    if (obj == null || getClass() != obj.getClass()) return false;
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
 
-    EspacioIndividual espacio = (EspacioIndividual) obj;
+        EspacioIndividual espacio = (EspacioIndividual) obj;
 
-    return getId() != null && getId().equals(espacio.getId()) &&
-           piso == espacio.piso &&
-           numeroAsiento == espacio.numeroAsiento;
-}
+        return getId() != null && getId().equals(espacio.getId()) &&
+                piso == espacio.piso &&
+                numeroAsiento == espacio.numeroAsiento;
+    }
 
-@Override
-public int hashCode() {
-    int result = getId() != null ? getId().hashCode() : 0;
-    result = 31 * result + Integer.hashCode(piso);
-    result = 31 * result + Integer.hashCode(numeroAsiento);
-    return result;
-}
+    @Override
+    public int hashCode() {
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + Integer.hashCode(piso);
+        result = 31 * result + Integer.hashCode(numeroAsiento);
+        return result;
+    }
 
 }

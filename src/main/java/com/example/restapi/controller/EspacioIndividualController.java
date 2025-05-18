@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.restapi.model.EspacioIndividual;
+import com.example.restapi.repository.RepositorioEspacioIndividual;
 import com.example.restapi.service.ServicioEspacioIndividual;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,6 +29,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class EspacioIndividualController {
 
     private final ServicioEspacioIndividual servicioEspacios;
+
+    @Autowired
+    private RepositorioEspacioIndividual repositorioEspacioIndividual;
 
     @Autowired
     public EspacioIndividualController(ServicioEspacioIndividual servicioEspacios) {
@@ -91,13 +95,13 @@ public class EspacioIndividualController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteById(@PathVariable Long id) {
-        try {
-            servicioEspacios.deleteById(id);
-            return new ResponseEntity<>("Eliminado correctamente", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error al eliminar: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    // Método para eliminar espacio individual por ID
+    @DeleteMapping("/api/espacios-individuales/{id}")
+    public ResponseEntity<?> eliminarEspacioIndividual(@PathVariable Long id) {
+        if (!repositorioEspacioIndividual.existsById(id)) {
+            return ResponseEntity.notFound().build();
         }
+        repositorioEspacioIndividual.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 }

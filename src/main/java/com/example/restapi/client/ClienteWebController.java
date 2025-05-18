@@ -639,36 +639,17 @@ public class ClienteWebController {
     }
 
     @PostMapping("/delete-espacio-individual")
-    public String deleteEspacioIndividual(
-            @RequestParam("piso") int piso,
-            @RequestParam("numeroAsiento") int numeroAsiento,
-            Model model) {
-
-        String url = apiBaseUrl + "/api/Espacios-Individuales/delete/" + piso + "/" + numeroAsiento;
-
+    public String deleteEspacioIndividual(@RequestParam("id") Long id, Model model) {
         try {
-            // Crear la entidad HTTP (sin body porque es un DELETE)
-            HttpEntity<Void> requestEntity = new HttpEntity<>(null);
-
-            // Ejecutar DELETE
-            ResponseEntity<String> response = restTemplate.exchange(
-                    url,
-                    HttpMethod.DELETE,
-                    requestEntity,
-                    String.class);
-
-            if (response.getStatusCode() == HttpStatus.OK) {
-                model.addAttribute("success", "Espacio individual eliminado correctamente.");
-            } else {
-                model.addAttribute("error", "Error al eliminar el espacio: " + response.getBody());
-            }
+            String url = apiBaseUrl + "/api/espacios-individuales/" + id;
+            restTemplate.delete(url);
+            model.addAttribute("success", "Espacio eliminado correctamente.");
         } catch (Exception e) {
             e.printStackTrace();
-            model.addAttribute("error", "Error de conexión con el servidor.");
+            model.addAttribute("error", "Error al eliminar el espacio.");
         }
 
-        // Redirigir o recargar vista
-        return "redirect:/adminHome";
+        return "redirect:/adminHome"; // 🔁 asegurarse de redirigir, no devolver vista vacía
     }
 
     @PostMapping("/update-espacio-individual")
