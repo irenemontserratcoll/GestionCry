@@ -114,16 +114,4 @@ public class SalaGrupalController {
 
     }
 
-    @Operation(summary = "Agregar una nueva sala grupal", description = "Crea una nueva sala grupal en el sistema")
-    @PostMapping("/add-sala-grupal")
-    public ResponseEntity<String> addSalaGrupal(@RequestBody SalaGrupal salaGrupal) {
-        try {
-            servicioSalaGrupo.addSala(salaGrupal); // Llama a la lógica del servicio
-            return ResponseEntity.ok("Sala grupal agregada correctamente.");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(500).body("Error al agregar la sala grupal: " + e.getMessage());
-        }
-    }
-
 }

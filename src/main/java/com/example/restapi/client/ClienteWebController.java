@@ -443,34 +443,21 @@ public class ClienteWebController {
             @RequestParam("numeroPersonas") int numeroPersonas,
             Model model) {
 
-        String url = apiBaseUrl + "/api/salas/add";
-
         try {
-            // Enviar como formulario URL encoded (porque el controlador espera
-            // @RequestParam)
-            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-            params.add("piso", String.valueOf(piso));
-            params.add("numeroSala", String.valueOf(numeroSala));
-            params.add("numeroPersonas", String.valueOf(numeroPersonas));
+            // Crear el objeto SalaGrupal
+            SalaGrupal salaGrupal = new SalaGrupal();
+            salaGrupal.setPiso(piso);
+            salaGrupal.setNumeroSala(numeroSala);
+            salaGrupal.setNumeroPersonas(numeroPersonas);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+            // Llamar al servicio para agregar la sala
+            servicioSalaGrupo.addSala(salaGrupal);
 
-            // Crear la entidad de la petición
-            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
-
-            // Hacer la solicitud
-            ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
-
-            if (response.getStatusCode() == HttpStatus.CREATED) {
-                model.addAttribute("success", "Sala grupal añadida correctamente.");
-            } else {
-                model.addAttribute("error", "Error al añadir la sala grupal: " + response.getBody());
-            }
-
+            // Si la sala se añade correctamente, mostrar mensaje de éxito
+            model.addAttribute("success", "Sala grupal añadida correctamente.");
         } catch (Exception e) {
             e.printStackTrace();
-            model.addAttribute("error", "Error de conexión con el servidor.");
+            model.addAttribute("error", "Error al añadir la sala grupal: " + e.getMessage());
         }
 
         // Recargar datos del panel de administrador
