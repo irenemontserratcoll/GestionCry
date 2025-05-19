@@ -443,23 +443,22 @@ public class ClienteWebController {
             @RequestParam("numeroPersonas") int numeroPersonas,
             Model model) {
 
-        String url = apiBaseUrl + "/api/sala-grupal/add";
+        String url = apiBaseUrl + "/api/sala-grupal/add"; // <- URL correcta
 
         try {
-            // Crear el objeto de la sala grupal
-            SalaGrupal salaGrupal = new SalaGrupal(piso, numeroSala, numeroPersonas);
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            params.add("piso", String.valueOf(piso));
+            params.add("numeroSala", String.valueOf(numeroSala));
+            params.add("numeroPersonas", String.valueOf(numeroPersonas));
 
-            // Establecer cabeceras
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-            // Crear la solicitud
-            HttpEntity<SalaGrupal> requestEntity = new HttpEntity<>(salaGrupal, headers);
+            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
 
-            // Hacer la petición
             ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
 
-            if (response.getStatusCode() == HttpStatus.OK) {
+            if (response.getStatusCode() == HttpStatus.CREATED) {
                 model.addAttribute("success", "Sala grupal añadida correctamente.");
             } else {
                 model.addAttribute("error", "Error al añadir la sala grupal: " + response.getBody());
