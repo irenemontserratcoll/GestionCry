@@ -87,26 +87,6 @@ public class SalaGrupalController {
         }
     }
 
-    @PostMapping("/add-sala-grupal")
-    public ResponseEntity<String> addSalaGrupal(@RequestParam("piso") int piso,
-            @RequestParam("numeroSala") int numeroSala,
-            @RequestParam("numeroPersonas") int numeroPersonas) {
-        try {
-            SalaGrupal salaGrupal = new SalaGrupal();
-            salaGrupal.setPiso(piso);
-            salaGrupal.setNumeroSala(numeroSala);
-            salaGrupal.setNumeroPersonas(numeroPersonas);
-
-            // Llama al servicio para guardar la sala
-            servicioSalaGrupo.addSala(salaGrupal);
-
-            return ResponseEntity.ok("Sala grupal agregada exitosamente.");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(500).body("Error al agregar la sala grupal: " + e.getMessage());
-        }
-    }
-
     @PutMapping("/update-sala-grupal/{piso}/{numeroSala}")
     public ResponseEntity<String> updateSalaGrupal(@PathVariable int piso, @PathVariable int numeroSala,
             @RequestBody SalaGrupal salaGrupal) {
@@ -133,4 +113,17 @@ public class SalaGrupalController {
         }
 
     }
+
+    @Operation(summary = "Agregar una nueva sala grupal", description = "Crea una nueva sala grupal en el sistema")
+    @PostMapping("/add-sala-grupal")
+    public ResponseEntity<String> addSalaGrupal(@RequestBody SalaGrupal salaGrupal) {
+        try {
+            servicioSalaGrupo.addSala(salaGrupal); // Llama a la lógica del servicio
+            return ResponseEntity.ok("Sala grupal agregada correctamente.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error al agregar la sala grupal: " + e.getMessage());
+        }
+    }
+
 }

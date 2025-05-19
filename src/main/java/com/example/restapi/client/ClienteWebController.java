@@ -436,7 +436,7 @@ public class ClienteWebController {
     }
 
     // SALAS GRUPALES ADMIN
-    @PostMapping("add-sala-grupal")
+    @PostMapping("/add-sala-grupal")
     public String addSalaGrupal(
             @RequestParam("piso") int piso,
             @RequestParam("numeroSala") int numeroSala,
@@ -446,13 +446,13 @@ public class ClienteWebController {
         String url = apiBaseUrl + "/api/salas/add";
 
         try {
-            // Crear parámetros del formulario
+            // Enviar como formulario URL encoded (porque el controlador espera
+            // @RequestParam)
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             params.add("piso", String.valueOf(piso));
             params.add("numeroSala", String.valueOf(numeroSala));
             params.add("numeroPersonas", String.valueOf(numeroPersonas));
 
-            // Encabezados como formulario
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
