@@ -8,11 +8,12 @@ import jakarta.persistence.Table;
 @Entity
 @DiscriminatorValue("SALAS_GRUPALES")
 @Table(name = "salas_grupales") // Nombre de la tabla en la base de datos
-public class SalaGrupal extends RecursoReservable{
+public class SalaGrupal extends RecursoReservable {
 
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY) // Genera automáticamente el ID
-    //private Long id; // Identificador de tipo Long
+    // @Id
+    // @GeneratedValue(strategy = GenerationType.IDENTITY) // Genera automáticamente
+    // el ID
+    // private Long id; // Identificador de tipo Long
 
     @Column(name = "piso", nullable = false) // Columna 'piso', no puede ser nula
     private int piso;
@@ -35,20 +36,21 @@ public class SalaGrupal extends RecursoReservable{
     }
 
     // Getters y Setters
-    //public Long getId() {
-    //    return id;
-    //}
+    // public Long getId() {
+    // return id;
+    // }
 
-    //public void setId(Long id) {
-    //    this.id = id;
-    //}
+    // public void setId(Long id) {
+    // this.id = id;
+    // }
 
     public int getPiso() {
         return piso;
     }
 
     public void setPiso(int piso) {
-        if (piso <= 0) throw new IllegalArgumentException("El piso debe ser mayor a 0");
+        if (piso <= 0)
+            throw new IllegalArgumentException("El piso debe ser mayor a 0");
         this.piso = piso;
     }
 
@@ -57,7 +59,8 @@ public class SalaGrupal extends RecursoReservable{
     }
 
     public void setNumeroSala(int numeroSala) {
-        if (numeroSala <= 0) throw new IllegalArgumentException("El número de sala debe ser mayor a 0");
+        if (numeroSala <= 0)
+            throw new IllegalArgumentException("El número de sala debe ser mayor a 0");
         this.numeroSala = numeroSala;
     }
 
@@ -66,7 +69,8 @@ public class SalaGrupal extends RecursoReservable{
     }
 
     public void setNumeroPersonas(int numeroPersonas) {
-        if (numeroPersonas <= 0) throw new IllegalArgumentException("El número de personas debe ser mayor a 0");
+        if (numeroPersonas <= 0)
+            throw new IllegalArgumentException("El número de personas debe ser mayor a 0");
         this.numeroPersonas = numeroPersonas;
     }
 
@@ -87,10 +91,19 @@ public class SalaGrupal extends RecursoReservable{
         SalaGrupal sala = (SalaGrupal) obj;
         return getId() != null && getId().equals(sala.getId());
     }
-    
+
     @Override
     public int hashCode() {
         return getId() != null ? getId().hashCode() : 0;
     }
-    
+
+    public void deleteSala(int piso, int numeroSala) {
+        Optional<SalaGrupal> salaGrupal = salaGrupalRepository.findByPisoAndNumeroSala(piso, numeroSala);
+        if (salaGrupal.isPresent()) {
+            salaGrupalRepository.delete(salaGrupal.get());
+        } else {
+            throw new RuntimeException("La sala no existe.");
+        }
+    }
+
 }

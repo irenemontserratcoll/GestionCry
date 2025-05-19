@@ -516,40 +516,24 @@ public class ClienteWebController {
     }
 
     @PostMapping("/delete-sala-grupal")
-    public String deleteSalaGrupal(
-            @RequestParam("piso") int piso,
+    public String deleteSalaGrupal(@RequestParam("piso") int piso,
             @RequestParam("numeroSala") int numeroSala,
             Model model) {
-
-        String url = apiBaseUrl + "/api/salas/delete";
-
         try {
-            // Crear parámetros del formulario
-            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-            params.add("piso", String.valueOf(piso));
-            params.add("numeroSala", String.valueOf(numeroSala));
+            String url = apiBaseUrl + "/api/sala-grupal/" + piso + "/" + numeroSala;
 
-            // Encabezados como formulario
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+            HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
 
-            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
+            restTemplate.exchange(url, HttpMethod.DELETE, requestEntity, String.class);
 
-            // Enviar como POST
-            ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
-
-            if (response.getStatusCode() == HttpStatus.OK) {
-                model.addAttribute("success", "Sala grupal eliminada correctamente.");
-            } else {
-                model.addAttribute("error", "Error al eliminar la sala grupal: " + response.getBody());
-            }
-
+            model.addAttribute("success", "Sala grupal eliminada correctamente.");
         } catch (Exception e) {
             e.printStackTrace();
-            model.addAttribute("error", "Error de conexión con el servidor.");
+            model.addAttribute("error", "Error al eliminar la sala grupal.");
         }
 
-        return cargarAdminHomeConUsuarios(model);
+        return "redirect:/adminHome";
     }
 
     // LIBROS ADMIN
