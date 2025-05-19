@@ -10,7 +10,6 @@ permissions:
   pages: write
   id-token: write
 
-# Permite una implementación concurrente
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -37,7 +36,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'docs/html'  # Ruta de salida de Doxygen (relativa y válida)
+          path: 'docs/html'
+          name: github-pages  # Nombre explícito del artefacto
 
   deploy:
     environment:
@@ -48,6 +48,12 @@ jobs:
     needs: build
 
     steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: ./docs/html
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3
