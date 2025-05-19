@@ -337,6 +337,7 @@ public class ClienteWebController {
         return "redirect:/adminHome";
     }
 
+    // ORDENADORES ADMIN
     @PostMapping("/add-ordenador")
     public String addOrdenador(
             @RequestParam("marca") String marca,
@@ -434,7 +435,8 @@ public class ClienteWebController {
         }
     }
 
-    @PostMapping("/api/sala-grupal/add-sala-grupal")
+    // SALAS GRUPALES ADMIN
+    @PostMapping("add-sala-grupal")
     public String addSalaGrupal(
             @RequestParam("piso") int piso,
             @RequestParam("numeroSala") int numeroSala,
@@ -743,7 +745,7 @@ public class ClienteWebController {
         return "redirect:/adminHome";
     }
 
-    // RESERVAS RECURSOS
+    // RESERVAS RECURSOS ADMIN
     @GetMapping("/api/recursos")
     @ResponseBody
     public ResponseEntity<?> getRecursosPorTipo(@RequestParam String tipo) {
