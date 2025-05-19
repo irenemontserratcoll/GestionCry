@@ -69,11 +69,18 @@ public class SalaGrupalController {
         }
     }
 
-    // Eliminar una sala grupal por piso y número de sala
     @DeleteMapping("/{piso}/{numeroSala}")
     public ResponseEntity<String> deleteSala(@PathVariable int piso, @PathVariable int numeroSala) {
-        servicioSalaGrupo.deleteSala(piso, numeroSala);
-        return ResponseEntity.ok("Sala eliminada exitosamente");
+        try {
+            servicioSalaGrupo.deleteSala(piso, numeroSala);
+            return ResponseEntity.ok("Sala eliminada exitosamente");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Error: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error inesperado: " + e.getMessage());
+        }
     }
 
     @PostMapping("/delete-sala-grupal")
