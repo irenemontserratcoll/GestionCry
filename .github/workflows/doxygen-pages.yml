@@ -2,8 +2,8 @@ name: Deploy Doxygen to GitHub Pages
 
 on:
   push:
-    branches: [ "main", "master" ]  # Ejecutar en push a main o master
-  workflow_dispatch:  # Permitir ejecución manual desde la interfaz de GitHub
+    branches: [ "main", "master" ]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -36,8 +36,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'docs/html'
-          name: github-pages  # Nombre explícito del artefacto
+          path: 'docs/html'  # El directorio generado por Doxygen
 
   deploy:
     environment:
@@ -48,12 +47,6 @@ jobs:
     needs: build
 
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: github-pages
-          path: ./docs/html
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v3
