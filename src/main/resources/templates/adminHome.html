@@ -537,26 +537,26 @@
                     }
                 }
             }
-            function filterSalasGrupales() {
-                const input = document.getElementById("searchSalasGrupales");
-                const filter = input.value.toLowerCase();
-                const table = document.querySelector("#salas-grupales .table-scroll table tbody");
-                const rows = table.getElementsByTagName("tr");
+            function filterSalasTable() {
+        const input = document.getElementById("searchSalas");
+        const filter = input.value.toLowerCase();
+        const table = document.querySelector("#espacios-grupales .table-scroll table tbody");
+        const rows = table.getElementsByTagName("tr");
 
-                for (let i = 0; i < rows.length; i++) {
-                    const pisoCell = rows[i].getElementsByTagName("td")[1]; // 2da columna: Piso
-                    const numeroSalaCell = rows[i].getElementsByTagName("td")[2]; // 3ra columna: Número de Sala
+        for (let i = 0; i < rows.length; i++) {
+            const pisoCell = rows[i].getElementsByTagName("td")[1];
+            const salaCell = rows[i].getElementsByTagName("td")[2];
 
-                    const piso = pisoCell ? pisoCell.textContent.toLowerCase() : "";
-                    const numeroSala = numeroSalaCell ? numeroSalaCell.textContent.toLowerCase() : "";
+            const piso = pisoCell ? pisoCell.textContent.toLowerCase() : "";
+            const sala = salaCell ? salaCell.textContent.toLowerCase() : "";
 
-                    if (piso.includes(filter) || numeroSala.includes(filter)) {
-                        rows[i].style.display = "";
-                    } else {
-                        rows[i].style.display = "none";
-                    }
-                }
+            if (piso.includes(filter) || sala.includes(filter)) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
             }
+        }
+    }
 
         </script>
 </body>
