@@ -335,20 +335,17 @@
                                 <span th:text="${sala.numeroPersonas}"></span>
                                 <!-- Formulario para actualizar sala -->
                                 <td>
-                                    <form action="/update-sala-grupal" method="post">
+                                    <form action="/edit-sala-grupal" method="post">
                                         <input type="hidden" name="id" th:value="${sala.id}" />
-                                        </label>
                                         Piso:
-                                        <input type="number" name="piso" placeholder="Piso" th:value="${sala.piso}"
-                                            required><br>
-                                        </label>
-                                        </label>
+                                        <input type="number" name="piso" th:value="${sala.piso}" required /><br>
                                         Número de Sala:
-                                        <input type="number" name="numeroSala" placeholder="Número de Sala"
-                                            th:value="${sala.numeroSala}" required>
-                                        </label>
-                                        <input type="hidden" name="capacidad" th:value="${sala.numeroPersonas}" />
-                                        <button type="submit" class="btn-update">✏️</button>
+                                        <input type="number" name="numeroSala" th:value="${sala.numeroSala}"
+                                            required /><br>
+                                        Capacidad:
+                                        <input type="number" name="numeroPersonas" th:value="${sala.numeroPersonas}"
+                                            required /><br>
+                                        <button type="submit">✏️</button>
                                     </form>
                                 </td>
                                 <!-- Botón eliminar sala -->
