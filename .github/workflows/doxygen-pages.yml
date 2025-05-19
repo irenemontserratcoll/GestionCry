@@ -31,10 +31,8 @@ jobs:
 
       - name: Generate Doxygen Documentation
         run: |
-          # Asegúrate de que el directorio existe
-          mkdir -p docs
-          # Edita el Doxyfile para usar rutas relativas si es necesario
-          doxygen Doxyfile
+          mkdir -p docs/html
+          doxygen docs/Doxyfile
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
