@@ -436,26 +436,30 @@ public class ClienteWebController {
     }
 
     // SALAS GRUPALES ADMIN
-    @PostMapping("/add-sala-grupal")
+    @PostMapping("add-sala-grupal")
     public String addSalaGrupal(
             @RequestParam("piso") int piso,
             @RequestParam("numeroSala") int numeroSala,
             @RequestParam("numeroPersonas") int numeroPersonas,
             Model model) {
 
-        String url = apiBaseUrl + "/api/sala-grupal/add"; // Endpoint correcto
+        String url = apiBaseUrl + "/api/salas/add";
 
         try {
+            // Crear parámetros del formulario
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             params.add("piso", String.valueOf(piso));
             params.add("numeroSala", String.valueOf(numeroSala));
             params.add("numeroPersonas", String.valueOf(numeroPersonas));
 
+            // Encabezados como formulario
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
+            // Crear la entidad de la petición
             HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
 
+            // Hacer la solicitud
             ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
 
             if (response.getStatusCode() == HttpStatus.CREATED) {
@@ -469,6 +473,7 @@ public class ClienteWebController {
             model.addAttribute("error", "Error de conexión con el servidor.");
         }
 
+        // Recargar datos del panel de administrador
         return "redirect:/adminHome";
     }
 
