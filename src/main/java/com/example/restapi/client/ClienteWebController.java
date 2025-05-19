@@ -434,7 +434,7 @@ public class ClienteWebController {
         }
     }
 
-    @PostMapping("/add-sala-grupal")
+    @PostMapping("/api/sala-grupal/add-sala-grupal")
     public String addSalaGrupal(
             @RequestParam("piso") int piso,
             @RequestParam("numeroSala") int numeroSala,

@@ -92,7 +92,6 @@ public class SalaGrupalController {
             @RequestParam("numeroSala") int numeroSala,
             @RequestParam("numeroPersonas") int numeroPersonas) {
         try {
-            // Crea un objeto SalaGrupal con los datos recibidos
             SalaGrupal salaGrupal = new SalaGrupal();
             salaGrupal.setPiso(piso);
             salaGrupal.setNumeroSala(numeroSala);
