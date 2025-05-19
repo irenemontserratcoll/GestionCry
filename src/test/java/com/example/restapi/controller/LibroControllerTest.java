@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 class LibroControllerTest {
@@ -98,13 +100,17 @@ class LibroControllerTest {
 
     @Test
     void testUpdateLibro_Success() {
-        doNothing().when(servicioLibros).updateLibro(eq(1L), any(Libro.class));
+        Libro libroActualizado = new Libro("Actualizado", "AutorA", "777");
+        libroActualizado.setId(1L); // aseguramos que tenga el ID correcto
+
+        when(servicioLibros.updateLibro(eq(1L), any(Libro.class))).thenReturn(libroActualizado);
 
         ResponseEntity<String> response = libroController.updateLibro(1L, "Actualizado", "AutorA", "777");
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertTrue(response.getBody().contains("actualizado"));
     }
+
 
     @Test
     void testUpdateLibro_Error() {

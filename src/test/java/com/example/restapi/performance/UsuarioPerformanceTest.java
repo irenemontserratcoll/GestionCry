@@ -26,7 +26,7 @@ import java.util.Optional;
 @SpringBootTest
 @ExtendWith(JUnitPerfInterceptor.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class PerformanceTest {
+public class UsuarioPerformanceTest {
 
     @Autowired
     private ServicioUsuarios servicioUsuarios;
