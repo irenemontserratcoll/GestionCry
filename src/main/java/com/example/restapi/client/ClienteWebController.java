@@ -443,24 +443,33 @@ public class ClienteWebController {
             @RequestParam("numeroPersonas") int numeroPersonas,
             Model model) {
 
+        String url = apiBaseUrl + "/api/sala-grupal/add";
+
         try {
-            // Crear el objeto SalaGrupal
-            SalaGrupal salaGrupal = new SalaGrupal();
-            salaGrupal.setPiso(piso);
-            salaGrupal.setNumeroSala(numeroSala);
-            salaGrupal.setNumeroPersonas(numeroPersonas);
+            // Crear el objeto de la sala grupal
+            SalaGrupal salaGrupal = new SalaGrupal(piso, numeroSala, numeroPersonas);
 
-            // Llamar al servicio para agregar la sala
-            servicioSalaGrupo.addSala(salaGrupal);
+            // Establecer cabeceras
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
 
-            // Si la sala se añade correctamente, mostrar mensaje de éxito
-            model.addAttribute("success", "Sala grupal añadida correctamente.");
+            // Crear la solicitud
+            HttpEntity<SalaGrupal> requestEntity = new HttpEntity<>(salaGrupal, headers);
+
+            // Hacer la petición
+            ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
+
+            if (response.getStatusCode() == HttpStatus.OK) {
+                model.addAttribute("success", "Sala grupal añadida correctamente.");
+            } else {
+                model.addAttribute("error", "Error al añadir la sala grupal: " + response.getBody());
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
-            model.addAttribute("error", "Error al añadir la sala grupal: " + e.getMessage());
+            model.addAttribute("error", "Error de conexión con el servidor.");
         }
 
-        // Recargar datos del panel de administrador
         return "redirect:/adminHome";
     }
 
