@@ -41,6 +41,7 @@ public class UsuarioControllerTest {
         verify(servicioUsuarios, times(1)).findAll();
     }
 
+    @SuppressWarnings({ "deprecation", "null" })
     @Test
     public void testAgregarUsuarioExitoso() {
         Usuario nuevoUsuario = crearUsuarioEjemplo();
@@ -53,6 +54,7 @@ public class UsuarioControllerTest {
         verify(servicioUsuarios, times(1)).addUsuario(any(Usuario.class));
     }
 
+    @SuppressWarnings({ "deprecation", "null" })
     @Test
     public void testAgregarUsuarioConCorreoExistente() {
         when(servicioUsuarios.addUsuario(any(Usuario.class)))
@@ -64,6 +66,7 @@ public class UsuarioControllerTest {
         assertTrue(response.getBody().contains("Error al agregar el usuario"));
     }
 
+    @SuppressWarnings({ "deprecation", "null" })
     @Test
     public void testEliminarUsuarioExitoso() {
         doNothing().when(servicioUsuarios).deleteUsuario("carlos@example.com");
@@ -74,6 +77,7 @@ public class UsuarioControllerTest {
         assertTrue(response.getBody().contains("Usuario eliminado correctamente"));
     }
 
+    @SuppressWarnings({ "deprecation", "null" })
     @Test
     public void testEliminarUsuarioConError() {
         doThrow(new RuntimeException("Error al eliminar")).when(servicioUsuarios).deleteUsuario("carlos@example.com");
@@ -84,6 +88,7 @@ public class UsuarioControllerTest {
         assertTrue(response.getBody().contains("Error al eliminar el usuario"));
     }
 
+    @SuppressWarnings({ "deprecation", "null" })
     @Test
     public void testLoginExitoso() {
         Usuario usuario = crearUsuarioEjemplo();
@@ -96,6 +101,7 @@ public class UsuarioControllerTest {
         assertTrue(response.getBody().contains("Inicio de sesión exitoso"));
     }
 
+    @SuppressWarnings({ "deprecation", "null" })
     @Test
     public void testLoginFallido() {
         when(servicioUsuarios.login("carlos@example.com", "password123"))
@@ -107,6 +113,7 @@ public class UsuarioControllerTest {
         assertTrue(response.getBody().contains("Credenciales inválidas"));
     }
 
+    @SuppressWarnings({ "deprecation", "null" })
     @Test
     public void testLoginAdminExitoso() {
         ResponseEntity<String> response = usuarioController.loginAdmin("admin", "admin");
@@ -115,6 +122,7 @@ public class UsuarioControllerTest {
         assertTrue(response.getBody().contains("Inicio de sesión exitoso"));
     }
 
+    @SuppressWarnings({ "deprecation", "null" })
     @Test
     public void testLoginAdminFallido() {
         ResponseEntity<String> response = usuarioController.loginAdmin("admin", "wrongpass");

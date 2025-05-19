@@ -87,6 +87,7 @@ public class OrdenadorController {
         }
     }
 
+    /*
     @PostMapping("/delete-ordenador")
     public String deleteOrdenadorPorNumeroSerie(@RequestParam String numeroSerie) {
         try {
@@ -95,7 +96,18 @@ public class OrdenadorController {
         } catch (Exception e) {
             return "redirect:/adminHome?error=Error+al+borrar";
         }
+    }*/
+
+    @PostMapping("/delete-ordenador")
+    public ResponseEntity<String> deleteOrdenadorPorNumeroSerie(@RequestParam String numeroSerie) {
+        try {
+            servicioOrdenadores.deleteByNumeroSerie(numeroSerie);
+            return ResponseEntity.ok("Ordenador eliminado correctamente");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar el ordenador");
+        }
     }
+
 
     @GetMapping("/marca/{marca}")
     public ResponseEntity<List<Ordenador>> getOrdenadoresByMarca(@PathVariable String marca) {

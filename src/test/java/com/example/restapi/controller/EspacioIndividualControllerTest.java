@@ -80,14 +80,15 @@ public class EspacioIndividualControllerTest {
 
     @Test
     public void testUpdateEspacio() throws Exception {
-        Mockito.doNothing().when(servicioEspacios).updateEspacio(eq(espacio1));
+        Mockito.doNothing().when(servicioEspacios).updateEspacio(any(EspacioIndividual.class));
 
-        mockMvc.perform(put("/api/Espacios-Individuales/update")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"id\":1,\"piso\":2,\"numeroAsiento\":12}"))
+        mockMvc.perform(put("/api/Espacios-Individuales/update/1")
+                .param("piso", "2")
+                .param("numeroAsiento", "12"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Espacio actualizado correctamente"));
     }
+
 
     @Test
     public void testDeleteEspacio() throws Exception {

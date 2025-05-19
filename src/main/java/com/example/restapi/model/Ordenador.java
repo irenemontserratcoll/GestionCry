@@ -1,6 +1,5 @@
 package com.example.restapi.model;
 
-import java.util.List;
 import jakarta.persistence.*;
 
 @Entity

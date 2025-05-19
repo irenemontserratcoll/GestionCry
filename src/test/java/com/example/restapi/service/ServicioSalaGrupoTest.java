@@ -83,17 +83,18 @@ class ServicioSalaGrupoTest {
 
     @Test
     void testUpdateSala_Existente() {
-        SalaGrupal sala = new SalaGrupal();
-        sala.setPiso(1);
-        sala.setNumeroSala(101);
+        SalaGrupal sala = new SalaGrupal(1, 101, 3);
+        sala.setId(1L);
 
-        when(salaGrupalRepository.existsByPisoAndNumeroSala(1, 101)).thenReturn(true);
+        when(salaGrupalRepository.existsById(1L)).thenReturn(true);
         when(salaGrupalRepository.save(sala)).thenReturn(sala);
 
         servicioSalaGrupo.updateSala(sala);
 
         verify(salaGrupalRepository, times(1)).save(sala);
     }
+
+
 
     @Test
     void testUpdateSala_NoExistente() {
@@ -125,8 +126,9 @@ class ServicioSalaGrupoTest {
     void testDeleteSala_NoExistente() {
         when(salaGrupalRepository.findByPisoAndNumeroSala(3, 303)).thenReturn(Optional.empty());
 
-        servicioSalaGrupo.deleteSala(3, 303);
+        assertThrows(RuntimeException.class, () -> servicioSalaGrupo.deleteSala(3, 303));
 
         verify(salaGrupalRepository, never()).delete(any(SalaGrupal.class));
     }
+
 }

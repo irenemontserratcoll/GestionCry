@@ -4,12 +4,12 @@ import com.example.restapi.model.EspacioIndividual;
 import com.example.restapi.repository.RepositorioEspacioIndividual;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.Arrays;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 public class ServicioEspacioIndividualTest {
@@ -83,30 +83,22 @@ public class ServicioEspacioIndividualTest {
 
     @Test
     public void testAddEspacio() {
-        // Simulamos que el repositorio guarda el espacio correctamente
-        doNothing().when(repositorioEspacioIndividual).save(any(EspacioIndividual.class));
-
-        // Llamamos al método del servicio
+        when(repositorioEspacioIndividual.save(any(EspacioIndividual.class))).thenReturn(espacio1);
         servicioEspacioIndividual.addEspacio(espacio1);
-
-        // Verificamos que se haya llamado al repositorio para guardar el espacio
         verify(repositorioEspacioIndividual, times(1)).save(espacio1);
     }
+
 
     @Test
     public void testUpdateEspacio() {
-        // Simulamos que el repositorio encuentra el espacio existente
         when(repositorioEspacioIndividual.findById(espacio1.getId())).thenReturn(Optional.of(espacio1));
-        // Simulamos que el repositorio guarda el espacio actualizado
-        doNothing().when(repositorioEspacioIndividual).save(any(EspacioIndividual.class));
+        when(repositorioEspacioIndividual.save(any(EspacioIndividual.class))).thenReturn(espacio1);
 
-        // Llamamos al método del servicio
         servicioEspacioIndividual.updateEspacio(espacio1);
 
-        // Verificamos que se haya llamado al repositorio para guardar el espacio
-        // actualizado
         verify(repositorioEspacioIndividual, times(1)).save(espacio1);
     }
+
 
     @Test
     public void testUpdateEspacio_notFound() {
