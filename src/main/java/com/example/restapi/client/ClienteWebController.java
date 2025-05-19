@@ -521,7 +521,6 @@ public class ClienteWebController {
             Model model) {
         try {
             String url = apiBaseUrl + "/api/sala-grupal/" + piso + "/" + numeroSala;
-            System.out.println("Intentando eliminar sala grupal en: " + url);
 
             HttpEntity<Void> requestEntity = new HttpEntity<>(null);
             ResponseEntity<String> response = restTemplate.exchange(

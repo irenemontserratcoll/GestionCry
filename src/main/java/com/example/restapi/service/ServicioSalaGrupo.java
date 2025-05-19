@@ -34,10 +34,8 @@ public class ServicioSalaGrupo {
         salaGrupalRepository.save(salaGrupal);
     }
 
-    // Actualizar una sala grupal existente
     public void updateSala(SalaGrupal salaGrupal) {
-        // Verificar si la sala existe antes de actualizar
-        if (salaGrupalRepository.existsByPisoAndNumeroSala(salaGrupal.getPiso(), salaGrupal.getNumeroSala())) {
+        if (salaGrupal.getId() != null && salaGrupalRepository.existsById(salaGrupal.getId())) {
             salaGrupalRepository.save(salaGrupal);
         } else {
             throw new RuntimeException("La sala no existe");
