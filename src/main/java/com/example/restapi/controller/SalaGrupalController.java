@@ -102,7 +102,7 @@ public class SalaGrupalController {
             if (piso != salaGrupal.getPiso() || numeroSala != salaGrupal.getNumeroSala()) {
                 return ResponseEntity.badRequest().body("El piso y el número de sala no coinciden.");
             }
-            servicioSalaGrupo.updateSala(salaGrupal); // Actualiza la sala
+            servicioSalaGrupo.updateSala(salaGrupal);
             return ResponseEntity.ok("Sala grupal actualizada exitosamente.");
         } catch (Exception e) {
             e.printStackTrace();
@@ -139,6 +139,27 @@ public class SalaGrupalController {
         } catch (Exception e) {
             return new ResponseEntity<>("Error al agregar la sala grupal: " + e.getMessage(),
                     HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateSalaGrupalById(@PathVariable Long id, @RequestBody SalaGrupal salaGrupal) {
+        try {
+            Optional<SalaGrupal> existingSala = servicioSalaGrupo.findById(id);
+            if (existingSala.isEmpty()) {
+                return ResponseEntity.status(404).body("La sala no existe.");
+            }
+
+            SalaGrupal salaToUpdate = existingSala.get();
+            salaToUpdate.setPiso(salaGrupal.getPiso());
+            salaToUpdate.setNumeroSala(salaGrupal.getNumeroSala());
+            salaToUpdate.setNumeroPersonas(salaGrupal.getNumeroPersonas());
+
+            servicioSalaGrupo.updateSala(salaToUpdate);
+            return ResponseEntity.ok("Sala grupal actualizada exitosamente.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error al actualizar la sala grupal: " + e.getMessage());
         }
     }
 

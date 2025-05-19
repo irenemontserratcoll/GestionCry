@@ -262,7 +262,7 @@
                                 <td th:text="${espacio.numeroAsiento}"></td>
                                 <!-- Formulario para actualizar espacio -->
                                 <td>
-                                    <form action="/update-espacio-individual" method="post">
+                                    <form action="/edit-sala-grupal" method="post">
                                         <input type="hidden" name="id" th:value="${espacio.id}" />
                                         <label>
                                             Piso:
@@ -336,6 +336,7 @@
                                 <!-- Formulario para actualizar sala -->
                                 <td>
                                     <form action="/update-sala-grupal" method="post">
+                                        <input type="hidden" name="id" th:value="${sala.id}" />
                                         </label>
                                         Piso:
                                         <input type="number" name="piso" placeholder="Piso" th:value="${sala.piso}"

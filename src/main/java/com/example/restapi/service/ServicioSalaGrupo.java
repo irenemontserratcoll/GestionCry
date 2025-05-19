@@ -53,4 +53,8 @@ public class ServicioSalaGrupo {
         }
     }
 
+    public Optional<SalaGrupal> findById(Long id) {
+        return salaGrupalRepository.findById(id);
+    }
+
 }
