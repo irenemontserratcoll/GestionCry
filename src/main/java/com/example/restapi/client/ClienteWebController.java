@@ -443,7 +443,7 @@ public class ClienteWebController {
             @RequestParam("numeroPersonas") int numeroPersonas,
             Model model) {
 
-        String url = apiBaseUrl + "/api/sala-grupal/add"; // <- URL correcta
+        String url = apiBaseUrl + "/api/sala-grupal/add"; // Endpoint correcto
 
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
