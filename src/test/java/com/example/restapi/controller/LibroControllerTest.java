@@ -73,26 +73,32 @@ public class LibroControllerTest {
         assertNull(response.getBody());
     }
 
-    @SuppressWarnings("null")
     @Test
     public void testAddLibro() {
-        doNothing().when(servicioLibros).addLibro(any(Libro.class));
+        // Simulamos que addLibro devuelve un objeto Libro (en lugar de void)
+        Libro libroMock = new Libro("Nuevo Libro", "Nuevo Autor", "NuevoISBN");
+        when(servicioLibros.addLibro(any(Libro.class))).thenReturn(libroMock);
 
-        ResponseEntity<String> response = libroController.addLibro("Nuevo Libro", "Nuevo Autor", "NuevoISBN");
+        ResponseEntity<String> response = libroController.addLibro(
+            "Nuevo Libro", "Nuevo Autor", "NuevoISBN"
+        );
 
-        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertEquals(201, response.getStatusCodeValue());
         assertTrue(response.getBody().contains("Libro agregado correctamente"));
         verify(servicioLibros, times(1)).addLibro(any(Libro.class));
     }
 
-    @SuppressWarnings("null")
     @Test
     public void testUpdateLibro() {
-        doNothing().when(servicioLibros).updateLibro(eq(1L), any(Libro.class));
+        // Simulamos que updateLibro devuelve el libro actualizado
+        Libro actualizado = new Libro("Libro Actualizado", "Autor Actualizado", "ISBNActualizado");
+        when(servicioLibros.updateLibro(eq(1L), any(Libro.class))).thenReturn(actualizado);
 
-        ResponseEntity<String> response = libroController.updateLibro(1L, "Libro Actualizado", "Autor Actualizado", "ISBNActualizado");
+        ResponseEntity<String> response = libroController.updateLibro(
+            1L, "Libro Actualizado", "Autor Actualizado", "ISBNActualizado"
+        );
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(200, response.getStatusCodeValue());
         assertTrue(response.getBody().contains("Libro actualizado correctamente"));
         verify(servicioLibros, times(1)).updateLibro(eq(1L), any(Libro.class));
     }

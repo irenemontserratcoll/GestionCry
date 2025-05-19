@@ -72,14 +72,12 @@ public class OrdenadorControllerTest {
     @SuppressWarnings({ "null", "deprecation" })
     @Test
     public void testAddOrdenador() {
-        Ordenador ordenador = crearOrdenadorEjemplo();
-        doNothing().when(servicioOrdenadores).addOrdenador(any(Ordenador.class));
+        // Simulamos que addOrdenador devuelve un Ordenador
+        Ordenador mockO = new Ordenador("HP", "EliteBook", "ABC123", true);
+        when(servicioOrdenadores.addOrdenador(any(Ordenador.class))).thenReturn(mockO);
 
         ResponseEntity<String> response = ordenadorController.addOrdenador(
-            ordenador.getMarca(),
-            ordenador.getModelo(),
-            ordenador.getNumeroSerie(),
-            ordenador.isDisponible()
+            "HP", "EliteBook", "ABC123", true
         );
 
         assertEquals(201, response.getStatusCodeValue());
@@ -90,19 +88,19 @@ public class OrdenadorControllerTest {
     @SuppressWarnings({ "null", "deprecation" })
     @Test
     public void testUpdateOrdenador() {
-        doNothing().when(servicioOrdenadores).updateOrdenador(eq(1L), any(Ordenador.class));
+        // Simulamos que updateOrdenador devuelve el objeto actualizado
+        Ordenador actualizado = new Ordenador("HP", "EliteBook Updated", "ABC123", false);
+        when(servicioOrdenadores.updateOrdenador(eq(1L), any(Ordenador.class)))
+            .thenReturn(actualizado);
 
         ResponseEntity<String> response = ordenadorController.updateOrdenador(
-            1L,
-            "HP",
-            "EliteBook Updated",
-            "ABC123",
-            false
+            1L, "HP", "EliteBook Updated", "ABC123", false
         );
 
         assertEquals(200, response.getStatusCodeValue());
         assertTrue(response.getBody().contains("Ordenador actualizado correctamente"));
-        verify(servicioOrdenadores, times(1)).updateOrdenador(eq(1L), any(Ordenador.class));
+        verify(servicioOrdenadores, times(1))
+            .updateOrdenador(eq(1L), any(Ordenador.class));
     }
 
     @SuppressWarnings({ "null", "deprecation" })
