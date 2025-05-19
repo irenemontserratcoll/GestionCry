@@ -44,9 +44,13 @@ public class ServicioSalaGrupo {
         }
     }
 
-    // Eliminar una sala grupal por piso y número de sala
     public void deleteSala(int piso, int numeroSala) {
         Optional<SalaGrupal> salaGrupal = salaGrupalRepository.findByPisoAndNumeroSala(piso, numeroSala);
-        salaGrupal.ifPresent(sala -> salaGrupalRepository.delete(sala));
+        if (salaGrupal.isPresent()) {
+            salaGrupalRepository.delete(salaGrupal.get());
+        } else {
+            throw new RuntimeException("La sala no existe.");
+        }
     }
+
 }
