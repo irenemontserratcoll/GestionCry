@@ -33,6 +33,9 @@ jobs:
           mkdir -p docs/html
           doxygen docs/Doxyfile
 
+      - name: Debug Artifact Directory
+        run: ls -lahR docs/html
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

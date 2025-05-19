@@ -92,4 +92,4 @@ Este proyecto ha sido desarrollado por:
 
 ## 📞 Contacto
 
-Si tienes preguntas o sugerencias sobre este proyecto, por favor contacta a través de GitHub abriendo un issue en el repositorio.
+Si tienes preguntas o sugerencias sobre este proyecto, por favor contacta a través de GitHub abriendo un issue en el repositorio..
