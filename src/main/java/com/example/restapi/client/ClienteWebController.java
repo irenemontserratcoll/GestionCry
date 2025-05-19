@@ -443,7 +443,7 @@ public class ClienteWebController {
             @RequestParam("numeroPersonas") int numeroPersonas,
             Model model) {
 
-        String url = apiBaseUrl + "/api/salas/add";
+        String url = apiBaseUrl + "/api/sala-grupal/add";
 
         try {
             // Crear parámetros del formulario
@@ -515,7 +515,8 @@ public class ClienteWebController {
     }
 
     @PostMapping("/delete-sala-grupal")
-    public String deleteSalaGrupal(@RequestParam("piso") int piso,
+    public String deleteSalaGrupal(
+            @RequestParam("piso") int piso,
             @RequestParam("numeroSala") int numeroSala,
             Model model) {
         try {
