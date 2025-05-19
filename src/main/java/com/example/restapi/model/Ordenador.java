@@ -1,5 +1,6 @@
 package com.example.restapi.model;
 
+import java.util.List;
 import jakarta.persistence.*;
 
 @Entity
@@ -56,4 +57,5 @@ public class Ordenador extends RecursoReservable {
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
     }
+
 }

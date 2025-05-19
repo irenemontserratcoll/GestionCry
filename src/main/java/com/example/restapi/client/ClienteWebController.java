@@ -343,32 +343,39 @@ public class ClienteWebController {
             @RequestParam("marca") String marca,
             @RequestParam("modelo") String modelo,
             @RequestParam("numeroSerie") String numeroSerie,
-            @RequestParam("disponible") boolean disponible,
+            @RequestParam(value = "disponible", required = false) String disponibleParam,
             Model model) {
 
+        boolean disponible = disponibleParam != null;
+
         String url = apiBaseUrl + "/api/ordenadores/add";
+
         try {
-            Ordenador ordenador = new Ordenador();
-            ordenador.setMarca(marca);
-            ordenador.setModelo(modelo);
-            ordenador.setNumeroSerie(numeroSerie);
-            ordenador.setDisponible(disponible);
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            params.add("marca", marca);
+            params.add("modelo", modelo);
+            params.add("numeroSerie", numeroSerie);
+            if (disponible) {
+                params.add("disponible", "true"); // checkbox marcado
+            }
+            // Si no está marcado, no añadimos el parámetro (como en el API)
 
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-            HttpEntity<Ordenador> requestEntity = new HttpEntity<>(ordenador, headers);
+            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
+
             ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
 
             if (response.getStatusCode() == HttpStatus.CREATED) {
-                model.addAttribute("success", "Ordenador añadido correctamente.");
+                model.addAttribute("success", "Ordenador agregado correctamente.");
             } else {
-                model.addAttribute("error", "Error al añadir ordenador: " + response.getBody());
+                model.addAttribute("error", "Error al agregar el ordenador: " + response.getBody());
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            model.addAttribute("error", "Error al procesar el ordenador.");
+            model.addAttribute("error", "Error de conexión con la API.");
         }
 
         return "redirect:/adminHome";
@@ -376,11 +383,22 @@ public class ClienteWebController {
 
     @PostMapping("/delete-ordenador")
     public String deleteOrdenador(@RequestParam("numeroSerie") String numeroSerie, Model model) {
-        String url = apiBaseUrl + "/api/ordenadores/delete/" + numeroSerie;
+        String url = apiBaseUrl + "/api/ordenadores/delete-ordenador";
+
         try {
-            HttpEntity<Void> requestEntity = new HttpEntity<>(null);
-            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity,
-                    String.class);
+            // Crear los parámetros del formulario
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            params.add("numeroSerie", numeroSerie);
+
+            // Configurar headers
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+            // Crear la entidad con headers y parámetros
+            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
+
+            // Enviar la petición POST
+            ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
 
             if (response.getStatusCode() == HttpStatus.OK) {
                 model.addAttribute("success", "Ordenador eliminado correctamente.");
@@ -392,34 +410,56 @@ public class ClienteWebController {
             model.addAttribute("error", "Error de conexión con la API de ordenadores.");
         }
 
-        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de ordenadores
+        // Recargar la vista con la lista actualizada de ordenadores y usuarios
         return cargarAdminHomeConUsuarios(model);
     }
 
-    // ESPACIOS GRUPALES ADMIN
-    @PostMapping("/add-sala-grupal")
+    @PostMapping("/update-ordenador")
+    public String updateOrdenador(
+            @RequestParam("id") Long id,
+            @RequestParam("marca") String marca,
+            @RequestParam("modelo") String modelo,
+            @RequestParam("numeroSerie") String numeroSerie,
+            @RequestParam(value = "disponible", required = false) String disponibleParam,
+            Model model) {
+
+        boolean disponible = disponibleParam != null; // checkbox o similar
+
+        Ordenador ordenador = new Ordenador(marca, modelo, numeroSerie, disponible);
+        try {
+            servicioOrdenadores.updateOrdenador(id, ordenador);
+            return "redirect:/adminHome?success=Actualizado+correctamente";
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al actualizar: " + e.getMessage());
+            return "adminHome"; // o la vista que uses
+        }
+    }
+
+    // SALAS GRUPALES ADMIN
+    @PostMapping("add-sala-grupal")
     public String addSalaGrupal(
             @RequestParam("piso") int piso,
             @RequestParam("numeroSala") int numeroSala,
             @RequestParam("numeroPersonas") int numeroPersonas,
             Model model) {
 
-        String url = apiBaseUrl + "/api/salas/add";
+        String url = apiBaseUrl + "/api/sala-grupal/add";
+
         try {
-            // Crear un objeto tipo SalaGrupal y setear sus valores
-            SalaGrupal salaGrupal = new SalaGrupal();
-            salaGrupal.setPiso(piso);
-            salaGrupal.setNumeroSala(numeroSala);
-            salaGrupal.setNumeroPersonas(numeroPersonas);
+            // Crear parámetros del formulario
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            params.add("piso", String.valueOf(piso));
+            params.add("numeroSala", String.valueOf(numeroSala));
+            params.add("numeroPersonas", String.valueOf(numeroPersonas));
 
-            // Crear headers con tipo JSON
+            // Encabezados como formulario
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-            // Crear entidad con JSON
-            HttpEntity<SalaGrupal> requestEntity = new HttpEntity<>(salaGrupal, headers);
+            // Crear la entidad de la petición
+            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
 
-            // Enviar la solicitud
+            // Hacer la solicitud
             ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
 
             if (response.getStatusCode() == HttpStatus.CREATED) {
@@ -433,9 +473,45 @@ public class ClienteWebController {
             model.addAttribute("error", "Error de conexión con el servidor.");
         }
 
-        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de salas
-        // grupales
-        return cargarAdminHomeConUsuarios(model);
+        // Recargar datos del panel de administrador
+        return "redirect:/adminHome";
+    }
+
+    @PostMapping("/edit-sala-grupal")
+    public String editSalaGrupal(
+            @RequestParam("id") Long id,
+            @RequestParam("piso") int piso,
+            @RequestParam("numeroSala") int numeroSala,
+            @RequestParam("numeroPersonas") int numeroPersonas,
+            Model model) {
+
+        String url = apiBaseUrl + "/api/sala-grupal/update/" + id;
+
+        SalaGrupal sala = new SalaGrupal();
+        sala.setId(id);
+        sala.setPiso(piso);
+        sala.setNumeroSala(numeroSala);
+        sala.setNumeroPersonas(numeroPersonas);
+
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Content-Type", "application/json");
+            HttpEntity<SalaGrupal> requestEntity = new HttpEntity<>(sala, headers);
+
+            ResponseEntity<String> response = restTemplate.exchange(
+                    url, HttpMethod.PUT, requestEntity, String.class);
+
+            if (response.getStatusCode().is2xxSuccessful()) {
+                model.addAttribute("success", "Sala grupal editada correctamente.");
+            } else {
+                model.addAttribute("error", "Error al editar la sala: " + response.getBody());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("error", "Error de conexión con el servidor.");
+        }
+
+        return "redirect:/adminHome";
     }
 
     @PostMapping("/delete-sala-grupal")
@@ -443,31 +519,24 @@ public class ClienteWebController {
             @RequestParam("piso") int piso,
             @RequestParam("numeroSala") int numeroSala,
             Model model) {
-
-        String url = apiBaseUrl + "/api/salas/delete/" + piso + "/" + numeroSala; // Endpoint en SalaGrupalController
         try {
-            // Crear la entidad HTTP (puede ser null para DELETE)
-            @SuppressWarnings("null")
+            String url = apiBaseUrl + "/api/sala-grupal/" + piso + "/" + numeroSala;
+
             HttpEntity<Void> requestEntity = new HttpEntity<>(null);
+            ResponseEntity<String> response = restTemplate.exchange(
+                    url, HttpMethod.DELETE, requestEntity, String.class);
 
-            // Enviar la solicitud DELETE al SalaGrupalController
-            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity,
-                    String.class);
-
-            // Manejar la respuesta
-            if (response.getStatusCode() == HttpStatus.OK) {
+            if (response.getStatusCode().is2xxSuccessful()) {
                 model.addAttribute("success", "Sala grupal eliminada correctamente.");
             } else {
                 model.addAttribute("error", "Error al eliminar la sala grupal: " + response.getBody());
             }
         } catch (Exception e) {
             e.printStackTrace();
-            model.addAttribute("error", "Error de conexión con el servidor.");
+            model.addAttribute("error", "Error de conexión con el servidor: " + e.getMessage());
         }
 
-        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de salas
-        // grupales
-        return cargarAdminHomeConUsuarios(model);
+        return "redirect:/adminHome";
     }
 
     // LIBROS ADMIN
@@ -527,25 +596,62 @@ public class ClienteWebController {
         return "redirect:/adminHome";
     }
 
+    @PostMapping("/update-libro")
+    public String updateLibro(
+            @RequestParam("id") Long id,
+            @RequestParam("titulo") String titulo,
+            @RequestParam("autor") String autor,
+            @RequestParam("isbn") String isbn,
+            Model model) {
+
+        String url = apiBaseUrl + "/api/libros/update/" + id;
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            params.add("titulo", titulo);
+            params.add("autor", autor);
+            params.add("isbn", isbn);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
+
+            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, String.class);
+
+            if (response.getStatusCode().is2xxSuccessful()) {
+                model.addAttribute("success", "Libro actualizado correctamente.");
+            } else {
+                model.addAttribute("error", "Error al actualizar libro: " + response.getBody());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("error", "Error de conexión con el servidor.");
+        }
+
+        return "redirect:/adminHome";
+    }
+
     // ESPACIOS INDIVIDUALES ADMIN
     @PostMapping("/add-espacio-individual")
-    public String addEspacioIndividual(@RequestParam("piso") int piso,
-            @RequestParam("numeroAsiento") int numeroAsiento, Model model) {
-        String url = apiBaseUrl + "/api/espacios/add";
+    public String addEspacioIndividual(
+            @RequestParam("piso") int piso,
+            @RequestParam("numeroAsiento") int numeroAsiento,
+            Model model) {
+
+        String url = apiBaseUrl + "/api/Espacios-Individuales/add";
+
         try {
-            // Crear un objeto tipo EspacioIndividual y setear sus valores
-            EspacioIndividual espacioIndividual = new EspacioIndividual();
-            espacioIndividual.setPiso(piso);
-            espacioIndividual.setNumeroAsiento(numeroAsiento);
+            // Enviar como formulario URL encoded (porque el controlador espera
+            // @RequestParam)
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            params.add("piso", String.valueOf(piso));
+            params.add("numeroAsiento", String.valueOf(numeroAsiento));
 
-            // Crear headers con tipo JSON
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-            // Crear entidad con JSON
-            HttpEntity<EspacioIndividual> requestEntity = new HttpEntity<>(espacioIndividual, headers);
+            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
 
-            // Enviar la solicitud
             ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
 
             if (response.getStatusCode() == HttpStatus.CREATED) {
@@ -559,46 +665,69 @@ public class ClienteWebController {
             model.addAttribute("error", "Error de conexión con el servidor.");
         }
 
-        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de
-        // espacios individuales
-        return cargarAdminHomeConUsuarios(model);
+        // Puedes redirigir o recargar modelo según lógica similar a "addLibro"
+        return "redirect:/adminHome";
     }
 
     @PostMapping("/delete-espacio-individual")
-    public String deleteEspacioIndividual(
+    public String deleteEspacioIndividual(@RequestParam("id") Long id, Model model) {
+        try {
+            String url = apiBaseUrl + "/api/Espacios-Individuales/delete/" + id;
+
+            HttpHeaders headers = new HttpHeaders();
+            HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
+
+            restTemplate.exchange(url, HttpMethod.DELETE, requestEntity, String.class);
+
+            model.addAttribute("success", "Espacio eliminado correctamente.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("error", "Error al eliminar el espacio.");
+        }
+
+        return "redirect:/adminHome";
+    }
+
+    @PostMapping("/update-espacio-individual")
+    public String updateEspacioIndividual(
+            @RequestParam("id") Long id,
             @RequestParam("piso") int piso,
             @RequestParam("numeroAsiento") int numeroAsiento,
             Model model) {
 
-        String url = apiBaseUrl + "/api/espacios/delete/" + piso + "/" + numeroAsiento; // Endpoint en //
-                                                                                        // EspacioIndividualController
-        try {
-            // Crear la entidad HTTP (puede ser null para DELETE)
-            @SuppressWarnings("null")
-            HttpEntity<Void> requestEntity = new HttpEntity<>(null);
+        String url = apiBaseUrl + "/api/Espacios-Individuales/update/" + id;
 
-            // Enviar la solicitud DELETE al EspacioIndividualController
-            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity,
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            params.add("piso", String.valueOf(piso));
+            params.add("numeroAsiento", String.valueOf(numeroAsiento));
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
+
+            ResponseEntity<String> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.PUT,
+                    requestEntity,
                     String.class);
 
-            // Manejar la respuesta
-            if (response.getStatusCode() == HttpStatus.OK) {
-                model.addAttribute("success", "Espacio individual eliminado correctamente.");
+            if (response.getStatusCode().is2xxSuccessful()) {
+                model.addAttribute("success", "Espacio individual actualizado correctamente.");
             } else {
-                model.addAttribute("error", "Error al eliminar el espacio individual: " + response.getBody());
+                model.addAttribute("error", "Error al actualizar el espacio: " + response.getBody());
             }
+
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("error", "Error de conexión con el servidor.");
         }
 
-        // Llamar al método cargarAdminHomeConUsuarios para recargar la lista de
-        // espacios
-        // individuales
-        return cargarAdminHomeConUsuarios(model);
+        return "redirect:/adminHome";
     }
 
-    // RESERVAS RECURSOS
+    // RESERVAS RECURSOS ADMIN
     @GetMapping("/api/recursos")
     @ResponseBody
     public ResponseEntity<?> getRecursosPorTipo(@RequestParam String tipo) {

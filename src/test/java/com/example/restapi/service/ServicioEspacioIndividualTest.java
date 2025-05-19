@@ -4,103 +4,154 @@ import com.example.restapi.model.EspacioIndividual;
 import com.example.restapi.repository.RepositorioEspacioIndividual;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mockito;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class ServicioEspacioIndividualTest {
+public class ServicioEspacioIndividualTest {
 
-    @Mock
-    private RepositorioEspacioIndividual espacioRepository;
+    private ServicioEspacioIndividual servicioEspacioIndividual;
 
-    @InjectMocks
-    private ServicioEspacioIndividual servicioEspacio;
+    private RepositorioEspacioIndividual repositorioEspacioIndividual;
+
+    private EspacioIndividual espacio1;
+    private EspacioIndividual espacio2;
 
     @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
+    public void setup() {
+        repositorioEspacioIndividual = mock(RepositorioEspacioIndividual.class);
+        servicioEspacioIndividual = new ServicioEspacioIndividual(repositorioEspacioIndividual);
+
+        espacio1 = new EspacioIndividual(1, 10);
+        espacio1.setId(1L);
+        espacio2 = new EspacioIndividual(2, 15);
+        espacio2.setId(2L);
     }
 
     @Test
-    void testFindAll() {
-        EspacioIndividual espacio1 = new EspacioIndividual(1, 101);
-        EspacioIndividual espacio2 = new EspacioIndividual(2, 202);
-        List<EspacioIndividual> espacios = Arrays.asList(espacio1, espacio2);
+    public void testFindAll() {
+        // Simulamos que el repositorio devuelve una lista con los dos espacios
+        when(repositorioEspacioIndividual.findAll()).thenReturn(Arrays.asList(espacio1, espacio2));
 
-        when(espacioRepository.findAll()).thenReturn(espacios);
+        // Llamamos al método del servicio
+        var espacios = servicioEspacioIndividual.findAll();
 
-        List<EspacioIndividual> resultado = servicioEspacio.findAll();
+        // Verificamos que el resultado sea el esperado
+        assertEquals(2, espacios.size());
+        assertTrue(espacios.contains(espacio1));
+        assertTrue(espacios.contains(espacio2));
 
-        assertEquals(2, resultado.size());
-        verify(espacioRepository, times(1)).findAll();
+        // Verificamos que se haya llamado al repositorio
+        verify(repositorioEspacioIndividual, times(1)).findAll();
     }
 
     @Test
-    void testFindByPisoAndAsiento() {
-        EspacioIndividual espacio = new EspacioIndividual(1, 10);
-        when(espacioRepository.findByPisoAndNumeroAsiento(1, 10)).thenReturn(Optional.of(espacio));
+    public void testFindByPisoAndAsiento_found() {
+        // Simulamos que el repositorio devuelve el espacio con piso 1 y número de
+        // asiento 10
+        when(repositorioEspacioIndividual.findByPisoAndNumeroAsiento(1, 10)).thenReturn(Optional.of(espacio1));
 
-        Optional<EspacioIndividual> resultado = servicioEspacio.findByPisoAndAsiento(1, 10);
+        // Llamamos al método del servicio
+        Optional<EspacioIndividual> resultado = servicioEspacioIndividual.findByPisoAndAsiento(1, 10);
 
+        // Verificamos que el espacio sea encontrado
         assertTrue(resultado.isPresent());
-        assertEquals(1, resultado.get().getPiso());
-        assertEquals(10, resultado.get().getNumeroAsiento());
+        assertEquals(espacio1, resultado.get());
+
+        // Verificamos que se haya llamado al repositorio
+        verify(repositorioEspacioIndividual, times(1)).findByPisoAndNumeroAsiento(1, 10);
     }
 
     @Test
-    void testAddEspacio() {
-        EspacioIndividual espacio = new EspacioIndividual(2, 20);
+    public void testFindByPisoAndAsiento_notFound() {
+        // Simulamos que el repositorio no devuelve nada
+        when(repositorioEspacioIndividual.findByPisoAndNumeroAsiento(3, 20)).thenReturn(Optional.empty());
 
-        servicioEspacio.addEspacio(espacio);
+        // Llamamos al método del servicio
+        Optional<EspacioIndividual> resultado = servicioEspacioIndividual.findByPisoAndAsiento(3, 20);
 
-        verify(espacioRepository, times(1)).save(espacio);
+        // Verificamos que no se encontró el espacio
+        assertFalse(resultado.isPresent());
+
+        // Verificamos que se haya llamado al repositorio
+        verify(repositorioEspacioIndividual, times(1)).findByPisoAndNumeroAsiento(3, 20);
     }
 
     @Test
-    void testUpdateEspacio_Success() {
-        EspacioIndividual espacio = new EspacioIndividual(3, 30);
-        when(espacioRepository.existsByPisoAndNumeroAsiento(3, 30)).thenReturn(true);
+    public void testAddEspacio() {
+        // Simulamos que el repositorio guarda el espacio correctamente
+        doNothing().when(repositorioEspacioIndividual).save(any(EspacioIndividual.class));
 
-        servicioEspacio.updateEspacio(espacio);
+        // Llamamos al método del servicio
+        servicioEspacioIndividual.addEspacio(espacio1);
 
-        verify(espacioRepository, times(1)).save(espacio);
+        // Verificamos que se haya llamado al repositorio para guardar el espacio
+        verify(repositorioEspacioIndividual, times(1)).save(espacio1);
     }
 
     @Test
-    void testUpdateEspacio_Failure() {
-        EspacioIndividual espacio = new EspacioIndividual(4, 40);
-        when(espacioRepository.existsByPisoAndNumeroAsiento(4, 40)).thenReturn(false);
+    public void testUpdateEspacio() {
+        // Simulamos que el repositorio encuentra el espacio existente
+        when(repositorioEspacioIndividual.findById(espacio1.getId())).thenReturn(Optional.of(espacio1));
+        // Simulamos que el repositorio guarda el espacio actualizado
+        doNothing().when(repositorioEspacioIndividual).save(any(EspacioIndividual.class));
 
-        RuntimeException ex = assertThrows(RuntimeException.class, () -> {
-            servicioEspacio.updateEspacio(espacio);
+        // Llamamos al método del servicio
+        servicioEspacioIndividual.updateEspacio(espacio1);
+
+        // Verificamos que se haya llamado al repositorio para guardar el espacio
+        // actualizado
+        verify(repositorioEspacioIndividual, times(1)).save(espacio1);
+    }
+
+    @Test
+    public void testUpdateEspacio_notFound() {
+        // Simulamos que el repositorio no encuentra el espacio con el ID proporcionado
+        when(repositorioEspacioIndividual.findById(espacio1.getId())).thenReturn(Optional.empty());
+
+        // Llamamos al método del servicio y verificamos que lance una excepción
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            servicioEspacioIndividual.updateEspacio(espacio1);
         });
 
-        assertEquals("El espacio no existe", ex.getMessage());
+        // Verificamos el mensaje de la excepción
+        assertEquals("El espacio con ID " + espacio1.getId() + " no existe", exception.getMessage());
+
+        // Verificamos que no se haya llamado al repositorio para guardar
+        verify(repositorioEspacioIndividual, never()).save(any(EspacioIndividual.class));
     }
 
     @Test
-    void testDeleteEspacio_Exists() {
-        EspacioIndividual espacio = new EspacioIndividual(5, 50);
-        when(espacioRepository.findByPisoAndNumeroAsiento(5, 50)).thenReturn(Optional.of(espacio));
+    public void testDeleteEspacio() {
+        // Simulamos que el repositorio existe para el espacio con el ID 1
+        when(repositorioEspacioIndividual.existsById(1L)).thenReturn(true);
+        doNothing().when(repositorioEspacioIndividual).deleteById(1L);
 
-        servicioEspacio.deleteEspacio(5, 50);
+        // Llamamos al método del servicio
+        servicioEspacioIndividual.deleteEspacio(1L);
 
-        verify(espacioRepository, times(1)).delete(espacio);
+        // Verificamos que se haya llamado al repositorio para eliminar el espacio
+        verify(repositorioEspacioIndividual, times(1)).deleteById(1L);
     }
 
     @Test
-    void testDeleteEspacio_NotFound() {
-        when(espacioRepository.findByPisoAndNumeroAsiento(6, 60)).thenReturn(Optional.empty());
+    public void testDeleteEspacio_notFound() {
+        // Simulamos que el repositorio no encuentra el espacio con el ID 1
+        when(repositorioEspacioIndividual.existsById(1L)).thenReturn(false);
 
-        servicioEspacio.deleteEspacio(6, 60);
+        // Llamamos al método del servicio y verificamos que lance una excepción
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            servicioEspacioIndividual.deleteEspacio(1L);
+        });
 
-        verify(espacioRepository, never()).delete(any());
+        // Verificamos el mensaje de la excepción
+        assertEquals("No existe el espacio con ID: 1", exception.getMessage());
+
+        // Verificamos que no se haya llamado al repositorio para eliminar
+        verify(repositorioEspacioIndividual, never()).deleteById(1L);
     }
 }

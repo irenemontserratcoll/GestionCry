@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Gestión Cry</title>
     <link rel="stylesheet" th:href="@{/stylesAdmin.css}">
 </head>
+
 <body>
     <div class="admin-container">
 
@@ -20,7 +22,7 @@
         <img th:src="@{/logo.jpeg}" alt="Logo" class="logo">
         <h2>Administración Cry</h2>
 
-       <!-- MENU HORIZONTAL --> 
+        <!-- MENU HORIZONTAL -->
         <div class="tab-menu">
             <button class="tab active" onclick="showTab('usuarios')">Usuarios</button>
             <button class="tab" onclick="showTab('libros')">Libros</button>
@@ -46,7 +48,7 @@
                         </tr>
                     </thead>
                 </table>
-            
+
                 <div class="table-scroll">
                     <table class="styled-table">
                         <tbody>
@@ -76,94 +78,84 @@
                 </form>
             </div>
         </div>
-        
+
         <!-- SECCION LIBROS -->
-<div id="libros" class="tab-content">
-    <!-- Barra de búsqueda de Libros -->
-    <div class="search-form">
-        <input type="text" id="searchLibros" placeholder="🔍 Buscar por título, autor o ISBN" onkeyup="filterLibros()">
-    </div>
+        <div id="libros" class="tab-content">
+            <!-- Barra de búsqueda de Libros -->
+            <div class="search-form">
+                <input type="text" id="searchLibros" placeholder="🔍 Buscar por título, autor o ISBN"
+                    onkeyup="filterLibros()">
+            </div>
+            <!-- tabla de libros -->
+            <div class="table-wrapper">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>ISBN</th>
+                            <th>Actualizar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                </table>
 
-    <!-- tabla de libros -->
-    <div class="table-wrapper">
-        <table class="styled-table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Título</th>
-                    <th>Autor</th>
-                    <th>ISBN</th>
-                    <th>Actualizar</th>
-                    <th>Eliminar</th>
-                </tr>
-            </thead>
-        </table>
+                <div class="table-scroll">
+                    <table class="styled-table">
+                        <tbody>
+                            <tr th:each="libro, iterStat : ${libros}">
+                                <td th:text="${iterStat.count}"></td>
+                                <td th:text="${libro.titulo}"></td>
+                                <td th:text="${libro.autor}"></td>
+                                <td th:text="${libro.isbn}"></td>
+                                <!-- Formulario para actualizar libro -->
+                                <td>
+                                    <form action="/update-libro" method="post">
+                                        <input type="hidden" name="id" th:value="${libro.id}" />
+                                        <input type="hidden" name="isbn" th:value="${libro.isbn}" />
+                                        </label>
+                                        Título:
+                                        <input type="text" name="titulo" placeholder="Título" th:value="${libro.titulo}"
+                                            required><br>
+                                        </label>
+                                        </label>
+                                        Autor:
+                                        <input type="text" name="autor" placeholder="Autor" th:value="${libro.autor}"
+                                            required>
+                                        </label>
+                                        <button type="submit" class="btn-update">✏️</button>
+                                    </form>
+                                </td>
+                                <!-- Botón eliminar libro -->
+                                <td>
+                                    <form action="/delete-libro" method="post">
+                                        <input type="hidden" name="id" th:value="${libro.id}" />
+                                        <button type="submit" class="btn-delete">🗑️</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-        <div class="table-scroll">
-            <table class="styled-table" id="librosTable">
-                <tbody>
-                    <tr th:each="libro, iterStat : ${libros}">
-                        <td th:text="${iterStat.count}"></td>
-                        <td th:text="${libro.titulo}"></td>
-                        <td th:text="${libro.autor}"></td>
-                        <td th:text="${libro.isbn}"></td>
-                        <!-- Formulario para actualizar libro -->
-                        <td>
-                            <form action="/update-libro" method="post">
-                                <input type="hidden" name="isbn" th:value="${libro.isbn}" />
-                                <input type="text" name="titulo" placeholder="Título" th:value="${libro.titulo}" required>
-                                <input type="text" name="autor" placeholder="Autor" th:value="${libro.autor}" required>
-                                <button type="submit" class="btn-update">✏️</button>
-                            </form>
-                        </td>
-                        <!-- Botón eliminar libro -->
-                        <td>
-                            <form action="/delete-libro" method="post">
-                                <input type="hidden" name="isbn" th:value="${libro.isbn}" />
-                                <button type="submit" class="btn-delete">🗑️</button>
-                            </form>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <!-- Añadir nuevo libro -->
+            <div class="user-form">
+                <form action="/add-libro" method="post">
+                    <input type="text" placeholder="Título" name="titulo" required>
+                    <input type="text" placeholder="Autor" name="autor" required>
+                    <input type="text" placeholder="ISBN" name="isbn" required>
+                    <button type="submit" class="btn-add">Añadir Libro</button>
+                </form>
+            </div>
         </div>
-    </div>
-    
-    <!-- Añadir nuevo libro -->
-    <div class="user-form">
-        <form action="/add-libro" method="post">
-            <input type="text" placeholder="Título" name="titulo" required>
-            <input type="text" placeholder="Autor" name="autor" required>
-            <input type="text" placeholder="ISBN" name="isbn" required>
-            <button type="submit" class="btn-add">Añadir Libro</button>
-        </form>
-    </div>
-</div>
-<script>
-    function libros() {
-      // código para filtrar la tabla
-      let input = document.getElementById("buscador");
-      let filter = input.value.toUpperCase();
-      let table = document.getElementById("tablaLibros");
-      let tr = table.getElementsByTagName("tr");
-      for (let i = 1; i < tr.length; i++) { // empieza en 1 para saltar encabezado
-        let td = tr[i].getElementsByTagName("td")[0];
-        if (td) {
-          let txtValue = td.textContent || td.innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = "";
-          } else {
-            tr[i].style.display = "none";
-          }
-        }
-      }
-    }
-  </script>
 
         <!-- SECCION ORDENADORES -->
         <div id="ordenadores" class="tab-content">
             <div class="search-form">
-                <input type="text" id="searchOrdenadoresInput" placeholder="🔍 Buscar por marca, modelo o número de serie" onkeyup="filterOrdenadoresTable()">
+                <input type="text" id="searchOrdenadoresInput"
+                    placeholder="🔍 Buscar por marca, modelo o número de serie" onkeyup="filterOrdenadoresTable()">
             </div>
 
             <div class="table-wrapper">
@@ -175,6 +167,7 @@
                             <th>Modelo</th>
                             <th>Número de Serie</th>
                             <th>Disponible</th>
+                            <th>Actualizar</th>
                             <th>Eliminar</th>
                         </tr>
                     </thead>
@@ -189,6 +182,29 @@
                                 <td th:text="${ordenador.modelo}"></td>
                                 <td th:text="${ordenador.numeroSerie}"></td>
                                 <td th:text="${ordenador.disponible} ? 'Sí' : 'No'"></td>
+                                <!-- Formulario para actualizar ordenador -->
+                                <td>
+                                    <form action="/update-ordenador" method="post">
+                                        <input type="hidden" name="id" th:value="${ordenador.id}" />
+                                        <input type="hidden" name="numeroSerie" th:value="${ordenador.numeroSerie}" />
+                                        </label>
+                                        Marca:
+                                        <input type="text" name="marca" placeholder="Marca"
+                                            th:value="${ordenador.marca}" required /><br>
+                                        </label>
+                                        </label>
+                                        Modelo:
+                                        <input type="text" name="modelo" placeholder="Modelo"
+                                            th:value="${ordenador.modelo}" required />
+                                        </label>
+                                        <label>
+                                            Disponible:
+                                            <input type="checkbox" name="disponible"
+                                                th:checked="${ordenador.disponible}" />
+                                        </label>
+                                        <button type="submit" class="btn-update">✏️</button>
+                                    </form>
+                                </td>
                                 <td>
                                     <form action="/delete-ordenador" method="post">
                                         <input type="hidden" name="numeroSerie" th:value="${ordenador.numeroSerie}" />
@@ -220,8 +236,9 @@
         <div id="espacios-individuales" class="tab-content">
             <!-- Barra de búsqueda -->
             <div class="search-form">
-                <input type="text" id="searchEspacios" placeholder="🔍 Buscar por piso o número de asiento" onkeyup="filterEspacios()">
-        </div>
+                <input type="text" id="searchEspacios" placeholder="🔍 Buscar por piso o número de asiento"
+                    onkeyup="filterEspacios()">
+            </div>
             <!-- tabla de espacios individuales -->
             <div class="table-wrapper">
                 <table class="styled-table">
@@ -245,17 +262,26 @@
                                 <td th:text="${espacio.numeroAsiento}"></td>
                                 <!-- Formulario para actualizar espacio -->
                                 <td>
-                                    <form action="/update-espacio" method="post">
-                                        <input type="hidden" name="piso" th:value="${espacio.piso}" />
-                                        <input type="hidden" name="numeroAsiento" th:value="${espacio.numeroAsiento}" />
-                                        <button type="submit" class="btn-update">✏️</button>
+                                    <form action="/edit-sala-grupal" method="post">
+                                        <input type="hidden" name="id" th:value="${espacio.id}" />
+                                        <label>
+                                            Piso:
+                                            <input type="number" name="piso" placeholder="Piso"
+                                                th:value="${espacio.piso}" required /><br>
+                                            <label>
+                                                <label>
+                                                    Número de Asiento:
+                                                    <input type="number" name="numeroAsiento"
+                                                        placeholder="Número de Asiento"
+                                                        th:value="${espacio.numeroAsiento}" required />
+                                                </label>
+                                                <button type="submit" class="btn-update">✏️</button>
                                     </form>
                                 </td>
                                 <!-- Botón eliminar espacio Individual -->
                                 <td>
-                                    <form action="/delete-espacio" method="post">
-                                        <input type="hidden" name="piso" th:value="${espacio.piso}" />
-                                        <input type="hidden" name="numeroAsiento" th:value="${espacio.numeroAsiento}" />
+                                    <form action="/delete-espacio-individual" method="post">
+                                        <input type="hidden" name="id" th:value="${espacio.id}" />
                                         <button type="submit" class="btn-delete">🗑️</button>
                                     </form>
                                 </td>
@@ -267,20 +293,21 @@
 
             <!-- Añadir nuevo espacio individual -->
             <div class="user-form">
-                <form action="/add-espacio" method="post">
+                <form action="/add-espacio-individual" method="post">
                     <input type="number" placeholder="Piso" name="piso" required>
                     <input type="number" placeholder="Número de Asiento" name="numeroAsiento" required>
                     <button type="submit" class="btn-add">Añadir Espacio</button>
                 </form>
             </div>
         </div>
-        
+
         <!-- SECCION ESPACIO GRUPAL -->
         <div id="espacios-grupales" class="tab-content">
-            
+
             <!-- Barra de búsqueda -->
             <div class="search-form">
-                <input type="text" id="searchSalas" placeholder="🔍 Buscar por piso o número de sala" onkeyup="filterSalasTable()">
+                <input type="text" id="searchSalas" placeholder="🔍 Buscar por piso o número de sala"
+                    onkeyup="filterSalasTable()">
             </div>
 
             <!-- Tabla de salas grupales -->
@@ -305,19 +332,25 @@
                                 <td th:text="${iterStat.count}"></td>
                                 <td th:text="${sala.piso}"></td>
                                 <td th:text="${sala.numeroSala}"></td>
-                                <span th:text="${sala.numeroPersonas}"></span>
+                                <td th:text="${sala.numeroPersonas}"></td>
                                 <!-- Formulario para actualizar sala -->
                                 <td>
-                                    <form action="/update-sala" method="post">
-                                        <input type="hidden" name="piso" th:value="${sala.piso}" />
-                                        <input type="hidden" name="numeroSala" th:value="${sala.numeroSala}" />
-                                        <input type="number" name="capacidad" placeholder="Capacidad" th:value="${sala.numeroPersonas}" required>
-                                        <button type="submit" class="btn-update">✏️</button>
+                                    <form action="/edit-sala-grupal" method="post">
+                                        <input type="hidden" name="id" th:value="${sala.id}" />
+                                        Piso:
+                                        <input type="number" name="piso" th:value="${sala.piso}" required /><br>
+                                        Número de Sala:
+                                        <input type="number" name="numeroSala" th:value="${sala.numeroSala}"
+                                            required /><br>
+                                        Capacidad:
+                                        <input type="number" name="numeroPersonas" th:value="${sala.numeroPersonas}"
+                                            required /><br>
+                                        <button type="submit">✏️</button>
                                     </form>
                                 </td>
                                 <!-- Botón eliminar sala -->
                                 <td>
-                                    <form action="/delete-sala" method="post">
+                                    <form action="/delete-sala-grupal" method="post">
                                         <input type="hidden" name="piso" th:value="${sala.piso}" />
                                         <input type="hidden" name="numeroSala" th:value="${sala.numeroSala}" />
                                         <button type="submit" class="btn-delete">🗑️</button>
@@ -331,20 +364,20 @@
 
             <!-- Añadir nueva sala grupal -->
             <div class="user-form">
-                <form action="/add-sala" method="post">
+                <form action="/add-sala-grupal" method="post">
                     <input type="number" placeholder="Piso" name="piso" required>
                     <input type="number" placeholder="Número de Sala" name="numeroSala" required>
-                    <input type="number" placeholder="Capacidad" name="capacidad" required>
+                    <input type="number" placeholder="Capacidad" name="numeroPersonas" required>
                     <button type="submit" class="btn-add">Añadir Sala</button>
                 </form>
             </div>
         </div>
-        
+
         <!-- SECCION RESERVAS -->
         <div id="reservas" class="tab-content">
             <div class="table-wrapper">
                 <table class="styled-table">
-                   <thead>
+                    <thead>
                         <tr>
                             <th>#</th>
                             <th>Nombre</th>
@@ -374,7 +407,9 @@
                                 <td th:text="${reserva.libro != null ? reserva.libro.titulo : '-'}"></td>
                                 <td th:text="${reserva.ordenador != null ? reserva.ordenador.modelo : '-'}"></td>
                                 <td th:text="${reserva.salaGrupal != null ? reserva.salaGrupal.numeroSala : '-'}"></td>
-                                <td th:text="${reserva.espacioIndividual != null ? reserva.espacioIndividual.numeroAsiento : '-'}"></td>
+                                <td
+                                    th:text="${reserva.espacioIndividual != null ? reserva.espacioIndividual.numeroAsiento : '-'}">
+                                </td>
                                 <td>
                                     <form th:action="@{/delete-reserva}" method="post"
                                         onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta reserva?');">
@@ -409,34 +444,121 @@
             </div>
         </div>
 
-    <!-- FUNCIONES DE  LA PLANTILLA --> 
-    <script>
-        function showTab(id) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-    
-            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-            event.target.classList.add('active');
-        }
+        <!-- FUNCIONES DE  LA PLANTILLA -->
+        <script>
+            function showTab(id) {
+                document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+                document.getElementById(id).classList.add('active');
 
-        function filterTable() {
-            const input = document.getElementById("searchInput");
-            const filter = input.value.toLowerCase();
-            const table = document.querySelector(".table-scroll table tbody");
-            const rows = table.getElementsByTagName("tr");
+                document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+                event.target.classList.add('active');
+            }
 
-            for (let i = 0; i < rows.length; i++) {
-                const correoCell = rows[i].getElementsByTagName("td")[2];
-                if (correoCell) {
-                    const correo = correoCell.textContent || correoCell.innerText;
-                    if (correo.toLowerCase().indexOf(filter) > -1) {
+            function filterTable() {
+                const input = document.getElementById("searchInput");
+                const filter = input.value.toLowerCase();
+                const table = document.querySelector(".table-scroll table tbody");
+                const rows = table.getElementsByTagName("tr");
+
+                for (let i = 0; i < rows.length; i++) {
+                    const correoCell = rows[i].getElementsByTagName("td")[2];
+                    if (correoCell) {
+                        const correo = correoCell.textContent || correoCell.innerText;
+                        if (correo.toLowerCase().indexOf(filter) > -1) {
+                            rows[i].style.display = "";
+                        } else {
+                            rows[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+            function filterLibros() {
+                const input = document.getElementById("searchLibros");
+                const filter = input.value.toLowerCase();
+                const table = document.querySelector("#libros .table-scroll table tbody");
+                const rows = table.getElementsByTagName("tr");
+
+                for (let i = 0; i < rows.length; i++) {
+                    const tituloCell = rows[i].getElementsByTagName("td")[1];
+                    const autorCell = rows[i].getElementsByTagName("td")[2];
+                    const isbnCell = rows[i].getElementsByTagName("td")[3];
+
+                    const titulo = tituloCell ? tituloCell.textContent.toLowerCase() : "";
+                    const autor = autorCell ? autorCell.textContent.toLowerCase() : "";
+                    const isbn = isbnCell ? isbnCell.textContent.toLowerCase() : "";
+
+                    if (titulo.indexOf(filter) > -1 || autor.indexOf(filter) > -1 || isbn.indexOf(filter) > -1) {
                         rows[i].style.display = "";
                     } else {
                         rows[i].style.display = "none";
                     }
                 }
             }
-        }
-    </script>
+
+            function filterOrdenadoresTable() {
+                const input = document.getElementById("searchOrdenadoresInput"); // id correcto
+                const filter = input.value.toLowerCase();
+
+                // Usamos el id de la tabla
+                const table = document.querySelector("#ordenadoresTable tbody");
+                const rows = table.getElementsByTagName("tr");
+
+                for (let i = 0; i < rows.length; i++) {
+                    const cells = rows[i].getElementsByTagName("td");
+
+                    const marca = cells[1] ? cells[1].textContent.toLowerCase() : "";
+                    const modelo = cells[2] ? cells[2].textContent.toLowerCase() : "";
+                    const numeroSerie = cells[3] ? cells[3].textContent.toLowerCase() : "";
+
+                    if (marca.indexOf(filter) > -1 || modelo.indexOf(filter) > -1 || numeroSerie.indexOf(filter) > -1) {
+                        rows[i].style.display = "";
+                    } else {
+                        rows[i].style.display = "none";
+                    }
+                }
+            }
+            function filterEspacios() {
+                const input = document.getElementById("searchEspacios");
+                const filter = input.value.toLowerCase();
+                const table = document.querySelector("#espacios-individuales .table-scroll table tbody");
+                const rows = table.getElementsByTagName("tr");
+
+                for (let i = 0; i < rows.length; i++) {
+                    const pisoCell = rows[i].getElementsByTagName("td")[1];
+                    const asientoCell = rows[i].getElementsByTagName("td")[2];
+
+                    const piso = pisoCell ? pisoCell.textContent.toLowerCase() : "";
+                    const asiento = asientoCell ? asientoCell.textContent.toLowerCase() : "";
+
+                    if (piso.includes(filter) || asiento.includes(filter)) {
+                        rows[i].style.display = "";
+                    } else {
+                        rows[i].style.display = "none";
+                    }
+                }
+            }
+            function filterSalasGrupales() {
+                const input = document.getElementById("searchSalasGrupales");
+                const filter = input.value.toLowerCase();
+                const table = document.querySelector("#salas-grupales .table-scroll table tbody");
+                const rows = table.getElementsByTagName("tr");
+
+                for (let i = 0; i < rows.length; i++) {
+                    const pisoCell = rows[i].getElementsByTagName("td")[1]; // 2da columna: Piso
+                    const numeroSalaCell = rows[i].getElementsByTagName("td")[2]; // 3ra columna: Número de Sala
+
+                    const piso = pisoCell ? pisoCell.textContent.toLowerCase() : "";
+                    const numeroSala = numeroSalaCell ? numeroSalaCell.textContent.toLowerCase() : "";
+
+                    if (piso.includes(filter) || numeroSala.includes(filter)) {
+                        rows[i].style.display = "";
+                    } else {
+                        rows[i].style.display = "none";
+                    }
+                }
+            }
+
+        </script>
 </body>
+
 </html>

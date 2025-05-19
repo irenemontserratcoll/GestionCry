@@ -34,19 +34,25 @@ public class ServicioSalaGrupo {
         salaGrupalRepository.save(salaGrupal);
     }
 
-    // Actualizar una sala grupal existente
     public void updateSala(SalaGrupal salaGrupal) {
-        // Verificar si la sala existe antes de actualizar
-        if (salaGrupalRepository.existsByPisoAndNumeroSala(salaGrupal.getPiso(), salaGrupal.getNumeroSala())) {
+        if (salaGrupal.getId() != null && salaGrupalRepository.existsById(salaGrupal.getId())) {
             salaGrupalRepository.save(salaGrupal);
         } else {
             throw new RuntimeException("La sala no existe");
         }
     }
 
-    // Eliminar una sala grupal por piso y número de sala
     public void deleteSala(int piso, int numeroSala) {
         Optional<SalaGrupal> salaGrupal = salaGrupalRepository.findByPisoAndNumeroSala(piso, numeroSala);
-        salaGrupal.ifPresent(sala -> salaGrupalRepository.delete(sala));
+        if (salaGrupal.isPresent()) {
+            salaGrupalRepository.delete(salaGrupal.get());
+        } else {
+            throw new RuntimeException("La sala no existe.");
+        }
     }
+
+    public Optional<SalaGrupal> findById(Long id) {
+        return salaGrupalRepository.findById(id);
+    }
+
 }

@@ -9,9 +9,9 @@ import jakarta.persistence.Table;
 @DiscriminatorValue("LIBROS")
 public class Libro extends RecursoReservable {
 
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    //private Long id;
+    // @Id
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // private Long id;
 
     private String titulo;
     private String autor;
@@ -29,13 +29,13 @@ public class Libro extends RecursoReservable {
     }
 
     // Getters and setters
-    //public Long getId() {
-    //    return id;
-    //}
+    // public Long getId() {
+    // return id;
+    // }
 
-    //public void setId(Long id) {
-    //    this.id = id;
-    //}
+    // public void setId(Long id) {
+    // this.id = id;
+    // }
 
     public String getTitulo() {
         return titulo;
@@ -56,6 +56,7 @@ public class Libro extends RecursoReservable {
     public String getIsbn() {
         return isbn;
     }
+
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
