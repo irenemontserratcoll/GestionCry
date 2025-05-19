@@ -97,13 +97,4 @@ public class SalaGrupal extends RecursoReservable {
         return getId() != null ? getId().hashCode() : 0;
     }
 
-    public void deleteSala(int piso, int numeroSala) {
-        Optional<SalaGrupal> salaGrupal = salaGrupalRepository.findByPisoAndNumeroSala(piso, numeroSala);
-        if (salaGrupal.isPresent()) {
-            salaGrupalRepository.delete(salaGrupal.get());
-        } else {
-            throw new RuntimeException("La sala no existe.");
-        }
-    }
-
 }
